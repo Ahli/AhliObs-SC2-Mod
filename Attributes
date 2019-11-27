@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Attributes>
+    <Attribute>
+        <Id Value="1"/>
+        <Type Value="Player"/>
+        <Name Value="Attribute/Name/SkinSet"/>
+        <Availability Value="All"/>
+        <Visibility Value="Host"/>
+        <Access Value="Host"/>
+        <Value>
+            <Id Value="1"/>
+            <Name Value="SkinSet/Name/PlayerSetting"/>
+        </Value>
+        <Value>
+            <Id Value="2"/>
+            <Name Value="Skin/Name/MarineCovertOps"/>
+            <Icon Value="Assets\Textures\ui_gameheart_lobbyracelogos_terran.dds"/>
+        </Value>
+        <Value>
+            <Id Value="3"/>
+            <Name Value="Skin/Name/ZerglingWebby"/>
+            <Icon Value="Assets\Textures\ui_gameheart_lobbyracelogos_zerg.dds"/>
+        </Value>
+        <Value>
+            <Id Value="4"/>
+            <Name Value="Skin/Name/ZealotTaldarim"/>
+            <Icon Value="Assets\Textures\ui_gameheart_lobbyracelogos_protoss.dds"/>
+        </Value>
+        <Value>
+            <Id Value="5"/>
+            <Name Value="Skin/Name/MarineJunker"/>
+            <Icon Value="Assets\Textures\ui_gameheart_lobbyracelogos_terran.dds"/>
+        </Value>
+        <Value>
+            <Id Value="6"/>
+            <Name Value="Skin/Name/ZerglingPrimal"/>
+            <Icon Value="Assets\Textures\ui_gameheart_lobbyracelogos_zerg.dds"/>
+        </Value>
+        <Value>
+            <Id Value="7"/>
+            <Name Value="Skin/Name/ZealotPurifier"/>
+            <Icon Value="Assets\Textures\ui_gameheart_lobbyracelogos_protoss.dds"/>
+        </Value>
+        <Value>
+            <Id Value="8"/>
+            <Name Value="Skin/Name/MarineUmojan"/>
+            <Icon Value="Assets\Textures\ui_gameheart_lobbyracelogos_terran.dds"/>
+        </Value>
+        <Value>
+            <Id Value="9"/>
+            <Name Value="Skin/Name/ZerglingMecha"/>
+            <Icon Value="Assets\Textures\ui_gameheart_lobbyracelogos_zerg.dds"/>
+        </Value>
+        <Value>
+            <Id Value="10"/>
+            <Name Value="Skin/Name/ZealotGolden"/>
+            <Icon Value="Assets\Textures\ui_gameheart_lobbyracelogos_protoss.dds"/>
+        </Value>
+        <Value>
+            <Id Value="11"/>
+            <Name Value="Skin/Name/MarineSilver"/>
+            <Icon Value="Assets\Textures\ui_gameheart_lobbyracelogos_terran.dds"/>
+        </Value>
+        <Value>
+            <Id Value="12"/>
+            <Name Value="Skin/Name/ZerglingRCZ"/>
+            <Icon Value="Assets\Textures\ui_gameheart_lobbyracelogos_zerg.dds"/>
+        </Value>
+        <Value>
+            <Id Value="13"/>
+            <Name Value="Skin/Name/ZealotIhanrii"/>
+            <Icon Value="Assets\Textures\ui_gameheart_lobbyracelogos_protoss.dds"/>
+        </Value>
+        <Value>
+            <Id Value="14"/>
+            <Name Value="Skin/Name/MarineRemastered"/>
+            <Icon Value="Assets\Textures\ui_lobby_randomicon.dds"/>
+        </Value>
+        <Default>
+            <Slot Id="2"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="3"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="4"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="5"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="6"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="7"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="8"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="9"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="10"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="11"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="12"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="13"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="14"/>
+            <Value Id="1"/>
+        </Default>
+        <Default>
+            <Slot Id="1"/>
+            <Value Id="1"/>
+        </Default>
+    </Attribute>
+    <DefaultVariants Value="1"/>
+</Attributes>

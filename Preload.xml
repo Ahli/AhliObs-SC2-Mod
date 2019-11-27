@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Asset path="assets\textures\black.dds" Type="Image"/>
+<Asset path="assets\textures\blank.dds" Type="Image"/>
+<Actor id="SYSTEM_ActorConfig"/>
+<Model id="ScannerSweepModel"/>
+<Model id="PingBonus"/>
+</Preload>
