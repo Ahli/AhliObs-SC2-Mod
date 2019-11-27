@@ -307,7 +307,7 @@ bool libGHLo_gf_LabelsUnitUsesCustomStatusBar (unit lp_unit) {
     // Variable Initialization
 
     // Implementation
-    if (((UnitGetType(lp_unit) == "CyberneticsCore") || (UnitGetType(lp_unit) == "FleetBeacon") || (UnitGetType(lp_unit) == "Forge") || (UnitGetType(lp_unit) == "Gateway") || (UnitGetType(lp_unit) == "Nexus") || (UnitGetType(lp_unit) == "RoboticsBay") || (UnitGetType(lp_unit) == "RoboticsFacility") || (UnitGetType(lp_unit) == "Stargate") || (UnitGetType(lp_unit) == "TemplarArchive") || (UnitGetType(lp_unit) == "TwilightCouncil") || (UnitGetType(lp_unit) == "Armory") || (UnitGetType(lp_unit) == "Barracks") || (UnitGetType(lp_unit) == "CommandCenter") || (UnitGetType(lp_unit) == "EngineeringBay") || (UnitGetType(lp_unit) == "Factory") || (UnitGetType(lp_unit) == "FusionCore") || (UnitGetType(lp_unit) == "GhostAcademy") || (UnitGetType(lp_unit) == "OrbitalCommand") || (UnitGetType(lp_unit) == "PlanetaryFortress") || (UnitGetType(lp_unit) == "Starport") || (UnitGetType(lp_unit) == "TechLab") || (UnitGetType(lp_unit) == "BarracksTechLab") || (UnitGetType(lp_unit) == "FactoryTechLab") || (UnitGetType(lp_unit) == "StarportTechLab") || (UnitGetType(lp_unit) == "BanelingNest") || (UnitGetType(lp_unit) == "EvolutionChamber") || (UnitGetType(lp_unit) == "LurkerDenMP") || (UnitGetType(lp_unit) == "GreaterSpire") || (UnitGetType(lp_unit) == "Hatchery") || (UnitGetType(lp_unit) == "Hive") || (UnitGetType(lp_unit) == "HydraliskDen") || (UnitGetType(lp_unit) == "InfestationPit") || (UnitGetType(lp_unit) == "Lair") || (UnitGetType(lp_unit) == "RoachWarren") || (UnitGetType(lp_unit) == "SpawningPool") || (UnitGetType(lp_unit) == "Spire") || (UnitGetType(lp_unit) == "UltraliskCavern") || (UnitGetType(lp_unit) == "Egg") || (UnitGetType(lp_unit) == "Larva"))) {
+    if (((UnitGetType(lp_unit) == "CyberneticsCore") || (UnitGetType(lp_unit) == "FleetBeacon") || (UnitGetType(lp_unit) == "Forge") || (UnitGetType(lp_unit) == "Gateway") || (UnitGetType(lp_unit) == "Nexus") || (UnitGetType(lp_unit) == "RoboticsBay") || (UnitGetType(lp_unit) == "RoboticsFacility") || (UnitGetType(lp_unit) == "Stargate") || (UnitGetType(lp_unit) == "TemplarArchive") || (UnitGetType(lp_unit) == "TwilightCouncil") || (UnitGetType(lp_unit) == "Armory") || (UnitGetType(lp_unit) == "Barracks") || (UnitGetType(lp_unit) == "CommandCenter") || (UnitGetType(lp_unit) == "EngineeringBay") || (UnitGetType(lp_unit) == "Factory") || (UnitGetType(lp_unit) == "FusionCore") || (UnitGetType(lp_unit) == "GhostAcademy") || (UnitGetType(lp_unit) == "OrbitalCommand") || (UnitGetType(lp_unit) == "PlanetaryFortress") || (UnitGetType(lp_unit) == "Starport") || (UnitGetType(lp_unit) == "TechLab") || (UnitGetType(lp_unit) == "BarracksTechLab") || (UnitGetType(lp_unit) == "FactoryTechLab") || (UnitGetType(lp_unit) == "StarportTechLab") || (UnitGetType(lp_unit) == "BanelingNest") || (UnitGetType(lp_unit) == "EvolutionChamber") || (UnitGetType(lp_unit) == "LurkerDenMP") || (UnitGetType(lp_unit) == "GreaterSpire") || (UnitGetType(lp_unit) == "Hatchery") || (UnitGetType(lp_unit) == "Hive") || (UnitGetType(lp_unit) == "HydraliskDen") || (UnitGetType(lp_unit) == "InfestationPit") || (UnitGetType(lp_unit) == "Lair") || (UnitGetType(lp_unit) == "RoachWarren") || (UnitGetType(lp_unit) == "SpawningPool") || (UnitGetType(lp_unit) == "Spire") || (UnitGetType(lp_unit) == "UltraliskCavern") || (UnitGetType(lp_unit) == "Egg") || (UnitGetType(lp_unit) == "Larva") || (UnitGetType(lp_unit) == "DarkShrine"))) {
         lv_boolean = true;
     }
     else {
@@ -367,7 +367,6 @@ void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
             }
         }
         else {
-            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[(lv_count - 1)], libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_upgradeNotificationsObs);
             if ((lv_count == lv_sLOT_MAX_INDEX1)) {
                 lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], 1, 1);
                 libGHLo_gf_UpgradeNotificationsSetSlotData((lv_count - 1), libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), libGHLo_gf_UpgradeNotificationsUpgradeImage(lv_upgrade), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count]), false)), libGHLo_gf_UpgradeNotificationsUpgradeNeedsToBeVisible(UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1)));
@@ -728,6 +727,9 @@ text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade) {
     else if (auto4FCB9578_val == "NeuralParasite") {
         return StringExternal("Param/Value/lib_GHLo_BA6FB095");
     }
+    else if (auto4FCB9578_val == "MedivacIncreaseSpeedBoost") {
+        return StringExternal("Param/Value/lib_GHLo_F2273ED5");
+    }
     else {
     }
     return StringExternal(CatalogFieldValueGet(c_gameCatalogUpgrade, lp_upgrade, "Name", libGHLo_gv_upgradeNotificationsObsID));
@@ -765,7 +767,7 @@ bool auto_libGHLo_gf_UpgradeNotificationsUpdateThread_TriggerFunc (bool testCond
 
     // Implementation
     while ((libGHLo_gv_upgradeNotifications.lv_slotLastUsed >= 0)) {
-        auto520A35AB_ae = MinI(libGHLo_gv_upgradeNotifications.lv_slotLastUsed, 5);
+        auto520A35AB_ae = libGHLo_gv_upgradeNotifications.lv_slotLastUsed;
         lv_count = 0;
         for ( ; ( (auto520A35AB_ai >= 0 && lv_count <= auto520A35AB_ae) || (auto520A35AB_ai < 0 && lv_count >= auto520A35AB_ae) ) ; lv_count += auto520A35AB_ai ) {
             if (((lv_count > libGHLo_gv_upgradeNotificationsMaxUISlots) || (libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] == libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade)) && (libGHLo_gf_UpgradeNotificationsUpgradeNeedsToBeVisible(UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1)) == true)) {
@@ -1680,152 +1682,6 @@ void libGHLo_gt_UpgradeNotificationsInitialization_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Upgrade Notifications - Research Cancelled
-//--------------------------------------------------------------------------------------------------
-bool libGHLo_gt_UpgradeNotificationsResearchCancelled_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    unit lv_facility;
-    int lv_slot;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_facility = EventUnit();
-    lv_slot = libGHLo_gf_UpgradeNotificationsFacilitySlot(lv_facility);
-
-    // Conditions
-    if (testConds) {
-        if (!((libGHLo_gv_upgradeNotifications.lv_active == true))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots) && (DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot], libGHLo_gv_upgradeNotificationsObsID) == true)) {
-        libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade;
-        TimerStart(libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot], 5.0, false, c_timeGame);
-        if ((UnitIsAlive(lv_facility) == false)) {
-            libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_9266D633"));
-        }
-        else {
-            libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_DFAF5FF3"));
-        }
-    }
-    else {
-        libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade(libGHLo_gf_UpgradeNotificationsFacilitySlot(lv_facility));
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libGHLo_gt_UpgradeNotificationsResearchCancelled_Init () {
-    libGHLo_gt_UpgradeNotificationsResearchCancelled = TriggerCreate("libGHLo_gt_UpgradeNotificationsResearchCancelled_Func");
-    TriggerAddEventUnitResearchProgress(libGHLo_gt_UpgradeNotificationsResearchCancelled, null, c_unitProgressStageCancel);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Upgrade Notifications - Research Completed
-//--------------------------------------------------------------------------------------------------
-bool libGHLo_gt_UpgradeNotificationsResearchCompleted_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    unit lv_facility;
-    int lv_slot;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_facility = EventUnit();
-    lv_slot = libGHLo_gf_UpgradeNotificationsFacilitySlot(lv_facility);
-
-    // Conditions
-    if (testConds) {
-        if (!((libGHLo_gv_upgradeNotifications.lv_active == true))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
-        libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade;
-        libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_76FE8CD8"));
-        libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], libGHLo_gv_upgradeNotificationsVisibleTime, libGHLo_gv_upgradeNotificationsObs);
-        TimerStart(libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot], 5.0, false, c_timeGame);
-    }
-    else {
-        libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade(libGHLo_gf_UpgradeNotificationsFacilitySlot(lv_facility));
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libGHLo_gt_UpgradeNotificationsResearchCompleted_Init () {
-    libGHLo_gt_UpgradeNotificationsResearchCompleted = TriggerCreate("libGHLo_gt_UpgradeNotificationsResearchCompleted_Func");
-    TriggerAddEventUnitResearchProgress(libGHLo_gt_UpgradeNotificationsResearchCompleted, null, c_unitProgressStageComplete);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Upgrade Notifications - Research Started
-//--------------------------------------------------------------------------------------------------
-bool libGHLo_gt_UpgradeNotificationsResearchStarted_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_slot;
-    unit lv_facility;
-    string lv_upgrade;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_facility = EventUnit();
-    lv_upgrade = libNtve_gf_TriggeringProgressUpgrade();
-
-    // Conditions
-    if (testConds) {
-        if (!((libGHLo_gv_upgradeNotifications.lv_active == true))) {
-            return false;
-        }
-
-        if (!((UnitIsAlive(EventUnit()) == true))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    libGHLo_gv_upgradeNotifications.lv_slotLastUsed += 1;
-    lv_slot = libGHLo_gv_upgradeNotifications.lv_slotLastUsed;
-    libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_slot] = lv_facility;
-    if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
-        libGHLo_gf_UpgradeNotificationsSetSlotData(lv_slot, libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), libGHLo_gf_UpgradeNotificationsUpgradeImage(lv_upgrade), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(lv_facility), false)), false);
-        if ((libGHLo_gv_upgradeNotifications.lv_updateThreadRunning == false)) {
-            libGHLo_gv_upgradeNotifications.lv_updateThreadRunning = true;
-            libGHLo_gf_UpgradeNotificationsUpdateThread();
-        }
-
-        libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], StringToText(""), libGHLo_gv_upgradeNotificationsObs);
-        DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_slot], libGHLo_gv_upgradeNotificationsObs, true);
-        DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], libGHLo_gv_upgradeNotificationsObs, false);
-        libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
-        libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], 0.0, libGHLo_gv_upgradeNotificationsObs);
-    }
-
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libGHLo_gt_UpgradeNotificationsResearchStarted_Init () {
-    libGHLo_gt_UpgradeNotificationsResearchStarted = TriggerCreate("libGHLo_gt_UpgradeNotificationsResearchStarted_Func");
-    TriggerAddEventUnitResearchProgress(libGHLo_gt_UpgradeNotificationsResearchStarted, null, c_unitProgressStageStart);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Upgrade Notifications - Destruction Timer Runs Out
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Func (bool testConds, bool runActions) {
@@ -1865,6 +1721,161 @@ bool libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Func (bool testConds
 void libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Init () {
     libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut = TriggerCreate("libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Func");
     TriggerAddEventTimer(libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut, null);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Upgrade Notifications - Research Cancelled
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_UpgradeNotificationsResearchCancelled_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_facility;
+    int lv_slot;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_facility = EventUnit();
+
+    // Conditions
+    if (testConds) {
+        if (!((libGHLo_gv_upgradeNotifications.lv_active == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_slot = libGHLo_gf_UpgradeNotificationsFacilitySlot(lv_facility);
+    if ((lv_slot >= 0)) {
+        if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots) && (DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot], libGHLo_gv_upgradeNotificationsObsID) == true)) {
+            libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade;
+            TimerStart(libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot], 5.0, false, c_timeGame);
+            if ((UnitIsAlive(lv_facility) == false)) {
+                libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_9266D633"));
+            }
+            else {
+                libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_DFAF5FF3"));
+            }
+        }
+        else {
+            libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade(lv_slot);
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_UpgradeNotificationsResearchCancelled_Init () {
+    libGHLo_gt_UpgradeNotificationsResearchCancelled = TriggerCreate("libGHLo_gt_UpgradeNotificationsResearchCancelled_Func");
+    TriggerAddEventUnitResearchProgress(libGHLo_gt_UpgradeNotificationsResearchCancelled, null, c_unitProgressStageCancel);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Upgrade Notifications - Research Completed
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_UpgradeNotificationsResearchCompleted_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_facility;
+    int lv_slot;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_facility = EventUnit();
+
+    // Conditions
+    if (testConds) {
+        if (!((libGHLo_gv_upgradeNotifications.lv_active == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_slot = libGHLo_gf_UpgradeNotificationsFacilitySlot(lv_facility);
+    if ((lv_slot >= 0)) {
+        if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
+            libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade;
+            libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_76FE8CD8"));
+            libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], libGHLo_gv_upgradeNotificationsVisibleTime, libGHLo_gv_upgradeNotificationsObs);
+            TimerStart(libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot], 5.0, false, c_timeGame);
+        }
+        else {
+            libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade(lv_slot);
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_UpgradeNotificationsResearchCompleted_Init () {
+    libGHLo_gt_UpgradeNotificationsResearchCompleted = TriggerCreate("libGHLo_gt_UpgradeNotificationsResearchCompleted_Func");
+    TriggerAddEventUnitResearchProgress(libGHLo_gt_UpgradeNotificationsResearchCompleted, null, c_unitProgressStageComplete);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Upgrade Notifications - Research Started
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_UpgradeNotificationsResearchStarted_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_slot;
+    unit lv_facility;
+    string lv_upgrade;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_facility = EventUnit();
+    lv_upgrade = libNtve_gf_TriggeringProgressUpgrade();
+
+    // Conditions
+    if (testConds) {
+        if (!((libGHLo_gv_upgradeNotifications.lv_active == true))) {
+            return false;
+        }
+
+        if (!((UnitIsAlive(EventUnit()) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libGHLo_gv_upgradeNotifications.lv_slotLastUsed < 100)) {
+        libGHLo_gv_upgradeNotifications.lv_slotLastUsed += 1;
+        lv_slot = libGHLo_gv_upgradeNotifications.lv_slotLastUsed;
+        libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_slot] = lv_facility;
+        if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
+            libGHLo_gf_UpgradeNotificationsSetSlotData(lv_slot, libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), libGHLo_gf_UpgradeNotificationsUpgradeImage(lv_upgrade), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(lv_facility), false)), false);
+            if ((libGHLo_gv_upgradeNotifications.lv_updateThreadRunning == false)) {
+                libGHLo_gv_upgradeNotifications.lv_updateThreadRunning = true;
+                libGHLo_gf_UpgradeNotificationsUpdateThread();
+            }
+
+            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], StringToText(""), libGHLo_gv_upgradeNotificationsObs);
+            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_slot], libGHLo_gv_upgradeNotificationsObs, true);
+            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], libGHLo_gv_upgradeNotificationsObs, false);
+            libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
+            libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], 0.0, libGHLo_gv_upgradeNotificationsObs);
+        }
+
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_UpgradeNotificationsResearchStarted_Init () {
+    libGHLo_gt_UpgradeNotificationsResearchStarted = TriggerCreate("libGHLo_gt_UpgradeNotificationsResearchStarted_Func");
+    TriggerAddEventUnitResearchProgress(libGHLo_gt_UpgradeNotificationsResearchStarted, null, c_unitProgressStageStart);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1946,7 +1957,7 @@ bool libGHLo_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
         libNtve_gf_SetDialogItemText(lv_timeLabel[lv_slot], StringToText(""), libGHLo_gv_workersKilledNotificationsObs);
         libNtve_gf_SetDialogItemColor(lv_panel[lv_slot], Color(100,100,100), libGHLo_gv_workersKilledNotificationsObs);
     }
-    if ((PlayerGroupCount(PlayerGroupActive()) == 2)) {
+    if (((PlayerGroupCount(PlayerGroupActive()) >= 1) && (PlayerGroupCount(PlayerGroupActive()) <= 4))) {
         libGHLo_gv_workersKilledNotifications.lv_active = true;
         autoA9BD4D01_g = PlayerGroupActive();
         autoA9BD4D01_var = -1;
@@ -1969,69 +1980,6 @@ bool libGHLo_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
 void libGHLo_gt_WorkersKilledNotificationsInitialization_Init () {
     libGHLo_gt_WorkersKilledNotificationsInitialization = TriggerCreate("libGHLo_gt_WorkersKilledNotificationsInitialization_Func");
     TriggerAddEventMapInit(libGHLo_gt_WorkersKilledNotificationsInitialization);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Workers Killed Notifications - Worker Killed
-//--------------------------------------------------------------------------------------------------
-bool libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_player;
-    unit lv_triggeringUnit;
-    unit lv_killingUnit;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_player = EventPlayer();
-    lv_triggeringUnit = EventUnit();
-    lv_killingUnit = libNtve_gf_KillingUnit();
-
-    // Conditions
-    if (testConds) {
-        if (!((libGHLo_gv_workersKilledNotifications.lv_active == true))) {
-            return false;
-        }
-
-        if (!((EventUnitDamageDeathCheck(c_deathTypeRemove) == false))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if (((UnitTestState(EventUnit(), c_unitStateHallucination) == false) && ((UnitGetType(EventUnit()) == "Probe") || (UnitGetType(EventUnit()) == "Drone") || (UnitGetType(EventUnit()) == "DroneBurrowed") || (UnitGetType(EventUnit()) == "SCV")))) {
-        if ((libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_player] == libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible)) {
-            libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_player] = (libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_player] + 1);
-            libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemTimeLabel[lv_player], (StringExternal("Param/Value/lib_GHLo_820A721C") + (IntToText(libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_player]) + StringExternal("Param/Value/lib_GHLo_8818296C"))), libGHLo_gv_workersKilledNotificationsObs);
-        }
-        else {
-            libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_player] = 1;
-            libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemTimeLabel[lv_player], (StringExternal("Param/Value/lib_GHLo_2B160C29") + (IntToText(libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_player]) + StringExternal("Param/Value/lib_GHLo_E6F62A49"))), libGHLo_gv_workersKilledNotificationsObs);
-        }
-        libNtve_gf_SetDialogItemImage(libGHLo_gv_workersKilledNotifications.lv_itemIcon[lv_player], (CatalogFieldValueGet(c_gameCatalogActor, UnitGetType(lv_triggeringUnit), "UnitIcon", c_playerAny)), libGHLo_gv_workersKilledNotificationsObs);
-        if ((UnitIsValid(libNtve_gf_KillingUnit()) == true)) {
-            libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemBackground[lv_player], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(lv_killingUnit), false)), libGHLo_gv_workersKilledNotificationsObs);
-        }
-
-        libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemWorkerColor[lv_player], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(lv_triggeringUnit), false)), libGHLo_gv_workersKilledNotificationsObs);
-        libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_player] = libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible;
-        if ((libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_player] > 1)) {
-            DialogControlSetVisible(libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_player], libGHLo_gv_workersKilledNotificationsObs, true);
-        }
-
-        TimerStart(libGHLo_gv_workersKilledNotifications.lv_timerDestruction[lv_player], libGHLo_gv_workersKilledNotificationsVisibleTime, false, c_timeReal);
-    }
-
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Init () {
-    libGHLo_gt_WorkersKilledNotificationsWorkerKilled = TriggerCreate("libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Func");
-    TriggerAddEventUnitDied(libGHLo_gt_WorkersKilledNotificationsWorkerKilled, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2075,6 +2023,69 @@ bool libGHLo_gt_WorkersKilledNotificationsTimerRunsOut_Func (bool testConds, boo
 void libGHLo_gt_WorkersKilledNotificationsTimerRunsOut_Init () {
     libGHLo_gt_WorkersKilledNotificationsTimerRunsOut = TriggerCreate("libGHLo_gt_WorkersKilledNotificationsTimerRunsOut_Func");
     TriggerAddEventTimer(libGHLo_gt_WorkersKilledNotificationsTimerRunsOut, null);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Workers Killed Notifications - Worker Killed
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    unit lv_triggeringUnit;
+    unit lv_killingUnit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+    lv_triggeringUnit = EventUnit();
+    lv_killingUnit = libNtve_gf_KillingUnit();
+
+    // Conditions
+    if (testConds) {
+        if (!((libGHLo_gv_workersKilledNotifications.lv_active == true))) {
+            return false;
+        }
+
+        if (!((EventUnitDamageDeathCheck(c_deathTypeRemove) == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitTestState(EventUnit(), c_unitStateHallucination) == false) && ((UnitGetType(EventUnit()) == "Probe") || (UnitGetType(EventUnit()) == "Drone") || (UnitGetType(EventUnit()) == "DroneBurrowed") || (UnitGetType(EventUnit()) == "SCV")))) {
+        if ((libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_player] == libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible)) {
+            libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_player] = (libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_player] + 1);
+        }
+        else {
+            libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_player] = 1;
+        }
+        libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemTimeLabel[lv_player], IntToText(libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_player]), libGHLo_gv_workersKilledNotificationsObs);
+        libNtve_gf_SetDialogItemImage(libGHLo_gv_workersKilledNotifications.lv_itemIcon[lv_player], (CatalogFieldValueGet(c_gameCatalogActor, UnitGetType(lv_triggeringUnit), "UnitIcon", c_playerAny)), libGHLo_gv_workersKilledNotificationsObs);
+        if ((UnitIsValid(libNtve_gf_KillingUnit()) == true)) {
+            libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemBackground[lv_player], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(lv_killingUnit), false)), libGHLo_gv_workersKilledNotificationsObs);
+        }
+
+        libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemWorkerColor[lv_player], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(lv_triggeringUnit), false)), libGHLo_gv_workersKilledNotificationsObs);
+        libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_player] = libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible;
+        if ((libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_player] > 1)) {
+            DialogControlSetVisible(libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_player], libGHLo_gv_workersKilledNotificationsObs, true);
+            DialogControlSendAnimationEvent(libGHLo_gv_workersKilledNotifications.lv_itemTimeLabel[lv_player], libGHLo_gv_workersKilledNotificationsObs, "textUpdated");
+        }
+
+        TimerStart(libGHLo_gv_workersKilledNotifications.lv_timerDestruction[lv_player], libGHLo_gv_workersKilledNotificationsVisibleTime, false, c_timeReal);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Init () {
+    libGHLo_gt_WorkersKilledNotificationsWorkerKilled = TriggerCreate("libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Func");
+    TriggerAddEventUnitDied(libGHLo_gt_WorkersKilledNotificationsWorkerKilled, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2138,13 +2149,13 @@ void libGHLo_InitTriggers () {
     libGHLo_gt_LabelsResearchStopped_Init();
     libGHLo_gt_LabelsReactorDestroyed_Init();
     libGHLo_gt_UpgradeNotificationsInitialization_Init();
+    libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Init();
     libGHLo_gt_UpgradeNotificationsResearchCancelled_Init();
     libGHLo_gt_UpgradeNotificationsResearchCompleted_Init();
     libGHLo_gt_UpgradeNotificationsResearchStarted_Init();
-    libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Init();
     libGHLo_gt_WorkersKilledNotificationsInitialization_Init();
-    libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Init();
     libGHLo_gt_WorkersKilledNotificationsTimerRunsOut_Init();
+    libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Init();
     libGHLo_gt_MapNotificationsDrop_Init();
     libGHLo_gt_MapNotificationsScannerSweep_Init();
 }

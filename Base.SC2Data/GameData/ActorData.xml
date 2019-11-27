@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="us-ascii"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Catalog>
     <CActorUnit id="DroneBurrowed" parent="GenericUnitStandard">
         <EditorCategories value=""/>
@@ -332,6 +332,14 @@
     <CActorUnit id="UltraliskCavern">
         <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatus"/>
         <CustomUnitStatusOffset value="0,100"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
+    </CActorUnit>
+    <!--                                                                                         -->
+    <!-- Dark Shrine ........................................................................... -->
+    <!--                                                                                         -->
+    <CActorUnit id="DarkShrine">
+        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatus"/>
+        <CustomUnitStatusOffset value="0,135"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
 </Catalog>

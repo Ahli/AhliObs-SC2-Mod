@@ -4,20 +4,23 @@
         <Value>ExtensionMod</Value>
     </Flags>
     <Dependencies>
-        <Value>bnet:Swarm (Mod)/0.0/999,file:Mods/Swarm.SC2Mod</Value>
+        <Value>bnet:Balance Multi (Mod)/0.0/999,file:Mods/BalanceMulti.SC2Mod</Value>
     </Dependencies>
     <Screenshot>
         <File>
-            <Value>Labels.jpg</Value>
-            <Value>UpgradeNotifications.jpg</Value>
-            <Value>WorkersKilledNotifications.jpg</Value>
+            <Value>HSC XX.png</Value>
+            <Value>HSC XX.png</Value>
+            <Value>HSC XX.png</Value>
+            <Value>HSC XX.png</Value>
         </File>
         <CaptionId>
+            <Value>3</Value>
             <Value>1</Value>
             <Value>2</Value>
             <Value>4</Value>
         </CaptionId>
         <Flags>
+            <Value> </Value>
             <Value> </Value>
             <Value> </Value>
             <Value> </Value>

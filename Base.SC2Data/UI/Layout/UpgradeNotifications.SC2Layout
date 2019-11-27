@@ -63,6 +63,7 @@
                 <RenderPriority val="501"/>
                 <Text val="TimerType"/>
                 <IgnoreParentColor val="true"/>
+                <Options val="NoWrapping | ScaleToPreventTruncation"/>
             </Frame>
 
             <Frame type="Label" name="TimerStatus">
@@ -75,6 +76,7 @@
                 <RenderPriority val="501"/>
                 <Text val="Status"/>
                 <IgnoreParentColor val="true"/>
+                <Options val="NoWrapping | ScaleToPreventTruncation"/>
             </Frame>
 
             <Frame type="Label" name="TimerCountdown">
