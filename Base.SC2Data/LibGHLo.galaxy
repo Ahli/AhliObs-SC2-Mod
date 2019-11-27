@@ -1552,6 +1552,7 @@ bool libGHLo_gt_LabelsReactorDestroyed_Func (bool testConds, bool runActions) {
     string lv_unitType;
     int lv_unitTag;
     playergroup lv_obsGroup;
+    string lv_slot1unitType;
 
     // Automatic Variable Declarations
     unitgroup auto00CB1734_g;
@@ -1562,6 +1563,7 @@ bool libGHLo_gt_LabelsReactorDestroyed_Func (bool testConds, bool runActions) {
     lv_unitType = UnitGetType(lv_unit);
     lv_unitTag = UnitGetTag(lv_unit);
     lv_obsGroup = libGHLo_gv_labelsObs;
+    lv_slot1unitType = "";
 
     // Conditions
     if (testConds) {
@@ -1587,13 +1589,17 @@ bool libGHLo_gt_LabelsReactorDestroyed_Func (bool testConds, bool runActions) {
         lv_unitType = UnitGetType(lv_unit);
         if (((lv_unitType == "Barracks") || (lv_unitType == "Factory") || (lv_unitType == "Starport")) && (libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lv_unit, 1, 1) != "")) {
             lv_unitTag = UnitGetTag(lv_unit);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + IntToString(lv_unitTag))), lv_obsGroup, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + IntToString(lv_unitTag))), lv_obsGroup, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + IntToString(lv_unitTag))), lv_obsGroup, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + IntToString(lv_unitTag))), lv_obsGroup, false);
-            libNtve_gf_SetDialogItemImage(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + IntToString(lv_unitTag))), (CatalogFieldValueGet(c_gameCatalogActor, (DataTableGetString(true, (IntToString(lv_unitTag) + "-slot1"))), "UnitIcon", c_playerAny)), PlayerGroupAll());
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + IntToString(lv_unitTag))), lv_obsGroup, true);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + IntToString(lv_unitTag))), lv_obsGroup, true);
+            lv_slot1unitType = DataTableGetString(true, (IntToString(lv_unitTag) + "-slot1"));
+            if ((lv_slot1unitType != "")) {
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + IntToString(lv_unitTag))), lv_obsGroup, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + IntToString(lv_unitTag))), lv_obsGroup, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + IntToString(lv_unitTag))), lv_obsGroup, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + IntToString(lv_unitTag))), lv_obsGroup, false);
+                libNtve_gf_SetDialogItemImage(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + IntToString(lv_unitTag))), (CatalogFieldValueGet(c_gameCatalogActor, (lv_slot1unitType), "UnitIcon", c_playerAny)), PlayerGroupAll());
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + IntToString(lv_unitTag))), lv_obsGroup, true);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + IntToString(lv_unitTag))), lv_obsGroup, true);
+            }
+
         }
 
     }

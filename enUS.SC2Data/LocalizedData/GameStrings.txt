@@ -14,6 +14,7 @@ DocInfo/HowToPlayBasic00=To get a custom interface, make sure to go into your ga
 DocInfo/HowToPlayBasic01=To see stronger team colors go into your gameplay options and adjust your team color intensity option!
 DocInfo/HowToPlayBasic02=To get team and league logos, make sure to put a Logos.SC2Mod file in your Documents/Starcraft II directory!
 DocInfo/Name=HomeStoryCup XX
+DocInfo/PatchNote001=- fixed production tags becoming visible with a blue unit icon when a reactor was destroyed while the player is supply-blocked
 DocInfo/Screenshot01=Icons over buildings which show what they are training or researching while their status bar is displayed.
 DocInfo/Screenshot02=Upgrade notifications that alert you when they are completing, complete, cancelled or denied.
 DocInfo/Screenshot03=Extension Mod for Homestory Cup XX

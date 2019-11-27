@@ -26,4 +26,15 @@
             <Value> </Value>
         </Flags>
     </Screenshot>
+    <PatchNote>
+        <Version>
+            <Value>1.1</Value>
+        </Version>
+        <Date>
+            <Value>11/21/2019</Value>
+        </Date>
+        <Notes>
+            <Value>1</Value>
+        </Notes>
+    </PatchNote>
 </DocInfo>
