@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CModel id="GameHeartPlayerCameraModel">
+        <Model value="Assets\UI\Feedback\Hud_FOV\Hud_FOV.m3"/>
+    </CModel>
+</Catalog>

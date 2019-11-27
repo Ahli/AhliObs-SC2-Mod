@@ -1,7 +1,7 @@
 include "TriggerLibs/natives"
 
 //--------------------------------------------------------------------------------------------------
-// Library: WCS GameHeart
+// Library: WCS GameHeart Fix
 //--------------------------------------------------------------------------------------------------
 // Preset Declarations
 const int libGHLo_ge_GraphStyle_Comparative = 0;
@@ -53,6 +53,8 @@ struct libGHLo_gs_Labels {
     int lv_iconSizeEgg;
     int lv_iconSizeTechLab;
     string[17] lv_colorStrings;
+    int lv_iconOffsetEgg;
+    int lv_iconOffsetTechLab;
 };
 
 struct libGHLo_gs_UpgradeNotifications {
@@ -91,6 +93,13 @@ struct libGHLo_gs_MapNotifications {
     timer lv_mostRecentTimer;
 };
 
+struct libGHLo_gs_MinimapFrustum {
+    int[3] lv_ping;
+    bool lv_active;
+    int lv_playerOne;
+    int lv_playerTwo;
+};
+
 // Variable Declarations
 libGHLo_gs_GraphsGeneral libGHLo_gv_graphsGeneral;
 libGHLo_gs_GraphsData[6] libGHLo_gv_graphsData;
@@ -104,6 +113,8 @@ libGHLo_gs_WorkersKilledNotifications libGHLo_gv_workersKilledNotifications;
 playergroup libGHLo_gv_workersKilledNotificationsObs;
 libGHLo_gs_MapNotifications libGHLo_gv_mapNotifications;
 playergroup libGHLo_gv_mapNotificationObs;
+libGHLo_gs_MinimapFrustum libGHLo_gv_minimapFrustum;
+playergroup libGHLo_gv_minimapFrustumObs;
 
 // Function Declarations
 void libGHLo_gf_ApplySkinSet (string lp_skinSet, int lp_player);
@@ -125,6 +136,7 @@ void libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne (int lp_slot)
 void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_slotB);
 void libGHLo_gf_UpgradeNotificationsUpdateProgressData (int lp_slot);
 bool libGHLo_gf_MapNotificationsCheckFullHealth (unit lp_transportunit);
+void libGHLo_gf_RegisterCameraMoveEvent (trigger lp_trigger, int lp_playerId, int lp_cameraMoveReason);
 
 // Trigger Declarations
 trigger libGHLo_gt_GameHeartInitialization;
@@ -147,6 +159,8 @@ trigger libGHLo_gt_WorkersKilledNotificationsTimerRunsOut;
 trigger libGHLo_gt_WorkersKilledNotificationsWorkerKilled;
 trigger libGHLo_gt_MapNotificationsDrop;
 trigger libGHLo_gt_MapNotificationsScannerSweep;
+trigger libGHLo_gt_MinimapFrustumInitialization;
+trigger libGHLo_gt_MinimapFrustumPlayerCameraMoved;
 
 // Library Initialization
 void libGHLo_InitVariables ();

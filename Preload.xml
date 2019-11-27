@@ -3,6 +3,10 @@
 <Asset path="assets\textures\black.dds" Type="Image"/>
 <Asset path="assets\textures\blank.dds" Type="Image"/>
 <Actor id="SYSTEM_ActorConfig"/>
+<Effect id="BattlecruiserAttackTrackerUnitSet"/>
+<Effect id="BattlecruiserAttackTrackerDP"/>
+<Effect id="BattlecruiserChasingRB"/>
 <Model id="ScannerSweepModel"/>
 <Model id="PingBonus"/>
+<Model id="GameHeartPlayerCameraModel"/>
 </Preload>

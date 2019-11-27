@@ -76,6 +76,7 @@
             <RenderPriority val="504"/>
             <Text val="8"/>
             <IgnoreParentColor val="true"/>
+            <Options val="NoWrapping | ScaleToPreventTruncation"/>
         </Frame>
     </Frame>
 

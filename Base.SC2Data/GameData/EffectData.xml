@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
+    <!-- Fix for PTR -->
     <CEffectSet id="YoinkSet">
         <EffectArray index="0" value=""/>
     </CEffectSet>
+    <!-- Fix for PTR -->
     <CEffectLaunchMissile id="RavenScramblerMissileLM">
         <ImpactEffect value=""/>
     </CEffectLaunchMissile>
