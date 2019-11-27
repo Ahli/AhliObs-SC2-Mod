@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectSet id="YoinkSet">
+        <EffectArray index="0" value=""/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="RavenScramblerMissileLM">
+        <ImpactEffect value=""/>
+    </CEffectLaunchMissile>
+</Catalog>

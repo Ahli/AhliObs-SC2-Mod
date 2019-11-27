@@ -29,12 +29,18 @@
     <PatchNote>
         <Version>
             <Value>1.1</Value>
+            <Value>1.2</Value>
+            <Value>1.3</Value>
         </Version>
         <Date>
             <Value>11/21/2019</Value>
+            <Value>11/23/2019</Value>
+            <Value>11/24/2019</Value>
         </Date>
         <Notes>
             <Value>1</Value>
+            <Value>2</Value>
+            <Value>3</Value>
         </Notes>
     </PatchNote>
 </DocInfo>
