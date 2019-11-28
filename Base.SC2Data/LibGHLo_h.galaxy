@@ -101,14 +101,16 @@ struct libGHLo_gs_MinimapFrustum {
 };
 
 // Variable Declarations
+playergroup libGHLo_gv_all_Players;
+playergroup libGHLo_gv_initial_Active_Players;
 libGHLo_gs_GraphsGeneral libGHLo_gv_graphsGeneral;
 libGHLo_gs_GraphsData[6] libGHLo_gv_graphsData;
 playergroup libGHLo_gv_graphsObs;
 libGHLo_gs_Labels libGHLo_gv_labels;
 playergroup libGHLo_gv_labelsObs;
 libGHLo_gs_UpgradeNotifications libGHLo_gv_upgradeNotifications;
-playergroup libGHLo_gv_upgradeNotificationsObs;
 int libGHLo_gv_upgradeNotificationsObsID;
+playergroup libGHLo_gv_upgradeNotificationsObs;
 libGHLo_gs_WorkersKilledNotifications libGHLo_gv_workersKilledNotifications;
 playergroup libGHLo_gv_workersKilledNotificationsObs;
 libGHLo_gs_MapNotifications libGHLo_gv_mapNotifications;
@@ -122,8 +124,8 @@ string libGHLo_gf_PlayerSkinSet (int lp_player);
 void libGHLo_gf_GraphsDefineGraph (int lp_iD, text lp_title, string lp_string, string lp_scoreType, int lp_style, fixed lp_minimumValue, fixed lp_rangeBase, fixed lp_rangeIncrement);
 void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graph);
 void libGHLo_gf_GraphsUpdateDataComparative (int lp_graph);
-bool libGHLo_gf_LabelsUnitUsesCustomStatusBar (unit lp_unit);
-int libGHLo_gf_LabelsUnitIconSize (unit lp_productionUnit);
+bool libGHLo_gf_LabelsUnitUsesCustomStatusBar (string lp_unitType);
+int libGHLo_gf_LabelsUnitIconSize (string lp_productionUnitType);
 void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot);
 int libGHLo_gf_UpgradeNotificationsFacilitySlot (unit lp_facility);
 string libGHLo_gf_UpgradeNotificationsUpgradeImage (string lp_upgrade);
