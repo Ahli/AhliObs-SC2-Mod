@@ -80,7 +80,7 @@ struct libGHLo_gs_WorkersKilledNotifications {
     int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemBackground;
     int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemWorkerColor;
     int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemIcon;
-    int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemTimeLabel;
+    int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemCountLabel;
     timer[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_timerDestruction;
     int lv_slotLastUsed;
 };

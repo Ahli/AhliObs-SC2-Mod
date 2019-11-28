@@ -14,9 +14,9 @@ void libFixD_InitLibraries () {
 
 // Triggers
 //--------------------------------------------------------------------------------------------------
-// Trigger: Battlecruiser Attack
+// Trigger: Battlecruiser ExecuteAttackAbil
 //--------------------------------------------------------------------------------------------------
-bool libFixD_gt_BattlecruiserAttack_Func (bool testConds, bool runActions) {
+bool libFixD_gt_BattlecruiserExecuteAttackAbil_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_caster;
     unit lv_target;
@@ -57,15 +57,15 @@ bool libFixD_gt_BattlecruiserAttack_Func (bool testConds, bool runActions) {
 }
 
 //--------------------------------------------------------------------------------------------------
-void libFixD_gt_BattlecruiserAttack_Init () {
-    libFixD_gt_BattlecruiserAttack = TriggerCreate("libFixD_gt_BattlecruiserAttack_Func");
-    TriggerAddEventUnitAbility(libFixD_gt_BattlecruiserAttack, null, AbilityCommand("BattlecruiserAttack", 0), c_unitAbilStageExecute, false);
+void libFixD_gt_BattlecruiserExecuteAttackAbil_Init () {
+    libFixD_gt_BattlecruiserExecuteAttackAbil = TriggerCreate("libFixD_gt_BattlecruiserExecuteAttackAbil_Func");
+    TriggerAddEventUnitAbility(libFixD_gt_BattlecruiserExecuteAttackAbil, null, AbilityCommand("BattlecruiserAttack", 0), c_unitAbilStageExecute, false);
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Battlecruiser Attack Repeat
+// Trigger: Battlecruiser PatrolOrderIssued
 //--------------------------------------------------------------------------------------------------
-bool libFixD_gt_BattlecruiserAttackRepeat_Func (bool testConds, bool runActions) {
+bool libFixD_gt_BattlecruiserPatrolOrderIssued_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_caster;
     unit lv_target;
@@ -73,52 +73,6 @@ bool libFixD_gt_BattlecruiserAttackRepeat_Func (bool testConds, bool runActions)
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_caster = EventUnit();
-    lv_target = OrderGetTargetUnit(EventUnitOrder());
-    lv_order = EventUnitOrder();
-
-    // Conditions
-    if (testConds) {
-        if (!((UnitIsAlive(lv_target) == true))) {
-            return false;
-        }
-
-        if (!((OrderGetFlag(lv_order, c_cmdUser) == true))) {
-            return false;
-        }
-
-        if (!((OrderGetFlag(lv_order, c_cmdQueued) == false))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    UnitCreateEffectUnit(lv_caster, "BattlecruiserAttackTrackerUnitSet", lv_target);
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libFixD_gt_BattlecruiserAttackRepeat_Init () {
-    libFixD_gt_BattlecruiserAttackRepeat = TriggerCreate("libFixD_gt_BattlecruiserAttackRepeat_Func");
-    TriggerAddEventUnitOrder(libFixD_gt_BattlecruiserAttackRepeat, null, AbilityCommand("BattlecruiserAttack", 0));
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Battlecruiser Attack Scan
-//--------------------------------------------------------------------------------------------------
-bool libFixD_gt_BattlecruiserAttackScan_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    unit lv_caster;
-    unit lv_target;
-    order lv_order;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_caster = EventUnit();
     lv_target = OrderGetTargetUnit(EventUnitOrder());
     lv_order = EventUnitOrder();
 
@@ -142,28 +96,75 @@ bool libFixD_gt_BattlecruiserAttackScan_Func (bool testConds, bool runActions) {
         return true;
     }
 
+    lv_caster = EventUnit();
     UnitCreateEffectUnit(lv_caster, "BattlecruiserAttackTrackerDP", lv_caster);
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void libFixD_gt_BattlecruiserAttackScan_Init () {
-    libFixD_gt_BattlecruiserAttackScan = TriggerCreate("libFixD_gt_BattlecruiserAttackScan_Func");
-    TriggerAddEventUnitOrder(libFixD_gt_BattlecruiserAttackScan, null, AbilityCommand("BattlecruiserAttack", 0));
-    TriggerAddEventUnitOrder(libFixD_gt_BattlecruiserAttackScan, null, AbilityCommand("BattlecruiserMove", 1));
+void libFixD_gt_BattlecruiserPatrolOrderIssued_Init () {
+    libFixD_gt_BattlecruiserPatrolOrderIssued = TriggerCreate("libFixD_gt_BattlecruiserPatrolOrderIssued_Func");
+    TriggerAddEventUnitOrder(libFixD_gt_BattlecruiserPatrolOrderIssued, null, AbilityCommand("BattlecruiserMove", 1));
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Battlecruiser Attack Stop
+// Trigger: Battlecruiser AttackOrderIssued
 //--------------------------------------------------------------------------------------------------
-bool libFixD_gt_BattlecruiserAttackStop_Func (bool testConds, bool runActions) {
+bool libFixD_gt_BattlecruiserAttackOrderIssued_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_caster;
+    unit lv_target;
+    bool lv_targetIsAlive;
+    order lv_triggeringOrder;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_triggeringOrder = EventUnitOrder();
+
+    // Conditions
+    if (testConds) {
+        if (!(((OrderGetFlag(lv_triggeringOrder, c_cmdUser) == true) && (OrderGetFlag(lv_triggeringOrder, c_cmdQueued) == false)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_caster = EventUnit();
+    lv_target = OrderGetTargetUnit(lv_triggeringOrder);
+    lv_targetIsAlive = UnitIsAlive(lv_target);
+    if ((lv_targetIsAlive == true)) {
+        UnitCreateEffectUnit(lv_caster, "BattlecruiserAttackTrackerUnitSet", lv_target);
+    }
+    else {
+        UnitCreateEffectUnit(lv_caster, "BattlecruiserAttackTrackerDP", lv_caster);
+    }
+    if (((lv_targetIsAlive == false) || (OrderGetAbilityCommand(lv_triggeringOrder) != AbilityCommand("BattlecruiserAttack", 0)))) {
+        UnitCreateEffectUnit(lv_caster, "BattlecruiserChasingRB", lv_caster);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFixD_gt_BattlecruiserAttackOrderIssued_Init () {
+    libFixD_gt_BattlecruiserAttackOrderIssued = TriggerCreate("libFixD_gt_BattlecruiserAttackOrderIssued_Func");
+    TriggerAddEventUnitOrder(libFixD_gt_BattlecruiserAttackOrderIssued, null, AbilityCommand("BattlecruiserAttack", 0));
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Battlecruiser StopOrderIssued
+//--------------------------------------------------------------------------------------------------
+bool libFixD_gt_BattlecruiserStopOrderIssued_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_caster;
     order lv_order;
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_caster = EventUnit();
     lv_order = EventUnitOrder();
 
     // Conditions
@@ -182,27 +183,34 @@ bool libFixD_gt_BattlecruiserAttackStop_Func (bool testConds, bool runActions) {
         return true;
     }
 
+    lv_caster = EventUnit();
     UnitCreateEffectUnit(lv_caster, "BattlecruiserAttackTrackerDP", lv_caster);
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void libFixD_gt_BattlecruiserAttackStop_Init () {
-    libFixD_gt_BattlecruiserAttackStop = TriggerCreate("libFixD_gt_BattlecruiserAttackStop_Func");
-    TriggerAddEventUnitOrder(libFixD_gt_BattlecruiserAttackStop, null, AbilityCommand("BattlecruiserStop", 0));
+void libFixD_gt_BattlecruiserStopOrderIssued_Init () {
+    libFixD_gt_BattlecruiserStopOrderIssued = TriggerCreate("libFixD_gt_BattlecruiserStopOrderIssued_Func");
+    TriggerAddEventUnitOrder(libFixD_gt_BattlecruiserStopOrderIssued, null, AbilityCommand("BattlecruiserStop", 0));
 }
 
 //--------------------------------------------------------------------------------------------------
 // Trigger: Battlecruiser Attack Ability Used - Optimized
 //--------------------------------------------------------------------------------------------------
 bool libFixD_gt_BattlecruiserAttackAbilityUsedOptimized_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_caster;
+
     // Automatic Variable Declarations
+    // Variable Initialization
+    lv_caster = EventUnit();
+
     // Actions
     if (!runActions) {
         return true;
     }
 
-    UnitCreateEffectUnit(EventUnit(), "BattlecruiserAttackTrackerDP", EventUnit());
+    UnitCreateEffectUnit(lv_caster, "BattlecruiserAttackTrackerDP", lv_caster);
     return true;
 }
 
@@ -219,17 +227,16 @@ void libFixD_gt_BattlecruiserAttackAbilityUsedOptimized_Init () {
 //--------------------------------------------------------------------------------------------------
 bool libFixD_gt_BattlecruiserAttackChaseInterruptedOptimized_Func (bool testConds, bool runActions) {
     // Variable Declarations
+    unit lv_caster;
     order lv_order;
-    unit lv_target;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_order = EventUnitOrder();
-    lv_target = OrderGetTargetUnit(lv_order);
 
     // Conditions
     if (testConds) {
-        if (!(((OrderGetAbilityCommand(lv_order) != AbilityCommand("BattlecruiserAttack", 0)) || (UnitIsAlive(lv_target) == false)))) {
+        if (!(((OrderGetAbilityCommand(lv_order) != AbilityCommand("BattlecruiserAttack", 0)) || (UnitIsAlive(OrderGetTargetUnit(lv_order)) == false)))) {
             return false;
         }
 
@@ -247,14 +254,14 @@ bool libFixD_gt_BattlecruiserAttackChaseInterruptedOptimized_Func (bool testCond
         return true;
     }
 
-    UnitCreateEffectUnit(EventUnit(), "BattlecruiserChasingRB", EventUnit());
+    lv_caster = EventUnit();
+    UnitCreateEffectUnit(lv_caster, "BattlecruiserChasingRB", lv_caster);
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libFixD_gt_BattlecruiserAttackChaseInterruptedOptimized_Init () {
     libFixD_gt_BattlecruiserAttackChaseInterruptedOptimized = TriggerCreate("libFixD_gt_BattlecruiserAttackChaseInterruptedOptimized_Func");
-    TriggerAddEventUnitOrder(libFixD_gt_BattlecruiserAttackChaseInterruptedOptimized, null, AbilityCommand("BattlecruiserAttack", 0));
     TriggerAddEventUnitOrder(libFixD_gt_BattlecruiserAttackChaseInterruptedOptimized, null, AbilityCommand("BattlecruiserMove", 2));
     TriggerAddEventUnitOrder(libFixD_gt_BattlecruiserAttackChaseInterruptedOptimized, null, AbilityCommand("BattlecruiserMove", 0));
     TriggerAddEventUnitOrder(libFixD_gt_BattlecruiserAttackChaseInterruptedOptimized, null, AbilityCommand("BattlecruiserMove", 1));
@@ -284,10 +291,10 @@ void libFixD_gt_PingPanelInitialize_Init () {
 }
 
 void libFixD_InitTriggers () {
-    libFixD_gt_BattlecruiserAttack_Init();
-    libFixD_gt_BattlecruiserAttackRepeat_Init();
-    libFixD_gt_BattlecruiserAttackScan_Init();
-    libFixD_gt_BattlecruiserAttackStop_Init();
+    libFixD_gt_BattlecruiserExecuteAttackAbil_Init();
+    libFixD_gt_BattlecruiserPatrolOrderIssued_Init();
+    libFixD_gt_BattlecruiserAttackOrderIssued_Init();
+    libFixD_gt_BattlecruiserStopOrderIssued_Init();
     libFixD_gt_BattlecruiserAttackAbilityUsedOptimized_Init();
     libFixD_gt_BattlecruiserAttackChaseInterruptedOptimized_Init();
     libFixD_gt_PingPanelInitialize_Init();

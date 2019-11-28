@@ -4,10 +4,10 @@ include "TriggerLibs/natives"
 // Library: Void Multi Performance Fix
 //--------------------------------------------------------------------------------------------------
 // Trigger Declarations
-trigger libFixD_gt_BattlecruiserAttack;
-trigger libFixD_gt_BattlecruiserAttackRepeat;
-trigger libFixD_gt_BattlecruiserAttackScan;
-trigger libFixD_gt_BattlecruiserAttackStop;
+trigger libFixD_gt_BattlecruiserExecuteAttackAbil;
+trigger libFixD_gt_BattlecruiserPatrolOrderIssued;
+trigger libFixD_gt_BattlecruiserAttackOrderIssued;
+trigger libFixD_gt_BattlecruiserStopOrderIssued;
 trigger libFixD_gt_BattlecruiserAttackAbilityUsedOptimized;
 trigger libFixD_gt_BattlecruiserAttackChaseInterruptedOptimized;
 trigger libFixD_gt_PingPanelInitialize;
