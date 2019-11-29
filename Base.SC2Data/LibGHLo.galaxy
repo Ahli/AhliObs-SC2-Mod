@@ -166,6 +166,54 @@ string libGHLo_gf_PlayerSkinSet (int lp_player) {
     return UserDataGetString("SC2SkinSets", (lv_attribute), "SkinSet", 1);
 }
 
+void libGHLo_gf_RegisterCameraMoveEvent (trigger lp_trigger, int lp_playerId, int lp_cameraMoveReason) {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerAddEventCameraMove(lp_trigger, lp_playerId, lp_cameraMoveReason);
+}
+
+void libGHLo_gf_RegisterPeriodicEvent (trigger lp_trigger, fixed lp_interval, int lp_time) {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerAddEventTimePeriodic(lp_trigger, lp_interval, lp_time);
+}
+
+void libGHLo_gf_RegisterTimerRunsOutEvent (trigger lp_trigger, timer lp_timer) {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerAddEventTimer(lp_trigger, lp_timer);
+}
+
+void libGHLo_gf_RegisterUnitCreatedEvent (trigger lp_trigger, unit lp_unit, string lp_ability, string lp_behavior) {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerAddEventUnitCreated(lp_trigger,UnitRefFromUnit(lp_unit),lp_ability,lp_behavior);
+}
+
+void libGHLo_gf_RegisterUnitTrainingProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage) {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerAddEventUnitTrainProgress(lp_trigger,UnitRefFromUnit(lp_unit),lp_progressStage);
+}
+
+void libGHLo_gf_RegisterUnitArmingProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage) {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerAddEventUnitArmMagazineProgress(lp_trigger,UnitRefFromUnit(lp_unit),lp_progressStage);
+}
+
+void libGHLo_gf_RegisterUnitResearchProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage) {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerAddEventUnitResearchProgress(lp_trigger,UnitRefFromUnit(lp_unit),lp_progressStage);
+}
+
+void libGHLo_gf_RegisterUnitDiesEvent (trigger lp_trigger, unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerAddEventUnitDied(lp_trigger,UnitRefFromUnit(lp_unit));
+}
+
 void libGHLo_gf_GraphsDefineGraph (int lp_iD, text lp_title, string lp_string, string lp_scoreType, int lp_style, fixed lp_minimumValue, fixed lp_rangeBase, fixed lp_rangeIncrement) {
     // Variable Declarations
     int lv_graph;
@@ -189,10 +237,7 @@ void libGHLo_gf_GraphsDefineGraph (int lp_iD, text lp_title, string lp_string, s
     libGHLo_gv_graphsData[lv_graph].lv_rangeBase = lp_rangeBase;
     libGHLo_gv_graphsData[lv_graph].lv_rangeIncrement = lp_rangeIncrement;
     DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/GraphContainer/" + lp_string));
-    if ((libGHLo_gv_graphsGeneral.lv_active == false)) {
-        DialogControlSetEnabled(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-    }
-
+    DialogControlSetEnabled(DialogControlLastCreated(), libGHLo_gv_all_Players, true);
     DialogControlHookupStandard(c_triggerControlTypeGraphFrame, ("UIContainer/FullscreenUpperContainer/GraphContainer/" + lp_string + "/Graph/GraphFrame"));
     libGHLo_gv_graphsData[lv_graph].lv_graph = DialogControlLastCreated();
     DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/GraphContainer/" + lp_string + "/Graph/Title"));
@@ -368,7 +413,7 @@ void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
         else {
             if ((lv_count == lv_sLOT_MAX_INDEX1)) {
                 lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], 1, 1);
-                libGHLo_gf_UpgradeNotificationsSetSlotData(lv_count1, libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), libGHLo_gf_UpgradeNotificationsUpgradeImage(lv_upgrade), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count]), false)), libGHLo_gf_UpgradeNotificationsUpgradeNeedsToBeVisible(UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1)));
+                libGHLo_gf_UpgradeNotificationsSetSlotData(lv_count1, libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), libGHLo_gf_UpgradeNotificationsUpgradeImage(lv_upgrade), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count]), false)), (UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1) <= libGHLo_gv_upgradeNotificationsVisibleTime));
                 libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count1] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
                 libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], StringToText(""), libGHLo_gv_upgradeNotificationsObs);
                 DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libGHLo_gv_upgradeNotificationsObs, true);
@@ -737,11 +782,7 @@ text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade) {
 bool libGHLo_gf_UpgradeNotificationsUpgradeNeedsToBeVisible (fixed lp_remainingTime) {
     // Automatic Variable Declarations
     // Implementation
-    if ((lp_remainingTime <= libGHLo_gv_upgradeNotificationsVisibleTime)) {
-        return true;
-    }
-
-    return false;
+    return (lp_remainingTime <= libGHLo_gv_upgradeNotificationsVisibleTime);
 }
 
 trigger auto_libGHLo_gf_UpgradeNotificationsUpdateThread_Trigger = null;
@@ -769,7 +810,7 @@ bool auto_libGHLo_gf_UpgradeNotificationsUpdateThread_TriggerFunc (bool testCond
         auto520A35AB_ae = libGHLo_gv_upgradeNotifications.lv_slotLastUsed;
         lv_count = 0;
         for ( ; ( (auto520A35AB_ai >= 0 && lv_count <= auto520A35AB_ae) || (auto520A35AB_ai < 0 && lv_count >= auto520A35AB_ae) ) ; lv_count += auto520A35AB_ai ) {
-            if (((lv_count > libGHLo_gv_upgradeNotificationsMaxUISlots) || (libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] == libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade)) && (libGHLo_gf_UpgradeNotificationsUpgradeNeedsToBeVisible(UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1)) == true)) {
+            if (((lv_count > libGHLo_gv_upgradeNotificationsMaxUISlots) || (libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] == libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade)) && ((UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1) <= libGHLo_gv_upgradeNotificationsVisibleTime) == true)) {
                 if ((lv_count <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
                     DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_count], libGHLo_gv_upgradeNotificationsObs, true);
                     libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] = libGHLo_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade;
@@ -953,12 +994,6 @@ bool libGHLo_gf_MapNotificationsCheckFullHealth (unit lp_transportunit) {
     return true;
 }
 
-void libGHLo_gf_RegisterCameraMoveEvent (trigger lp_trigger, int lp_playerId, int lp_cameraMoveReason) {
-    // Automatic Variable Declarations
-    // Implementation
-    TriggerAddEventCameraMove(lp_trigger, lp_playerId, lp_cameraMoveReason);
-}
-
 // Triggers
 //--------------------------------------------------------------------------------------------------
 // Trigger: GameHeart - Initialization
@@ -1024,11 +1059,7 @@ bool libGHLo_gt_GraphsInitialization_Func (bool testConds, bool runActions) {
 
     if ((PlayerGroupCount(libGHLo_gv_initial_Active_Players) == 2) && (PlayerGroupCount(GameAttributePlayersForTeam(1)) == 1) && (PlayerGroupCount(GameAttributePlayersForTeam(2)) == 1)) {
         libGHLo_gv_graphsGeneral.lv_active = true;
-    }
-    else {
-        TriggerEnable(libGHLo_gt_GraphsTimer, false);
-    }
-    if ((libGHLo_gv_graphsGeneral.lv_active == true)) {
+        libGHLo_gf_RegisterPeriodicEvent(libGHLo_gt_GraphsTimer, 1.0, c_timeReal);
         lv_playerfromTeam1 = PlayerGroupPlayer(GameAttributePlayersForTeam(1), 1);
         lv_playerfromTeam2 = PlayerGroupPlayer(GameAttributePlayersForTeam(2), 1);
         lv_xofStartLocationTeam1 = PointGetX(PlayerStartLocation(lv_playerfromTeam1));
@@ -1057,12 +1088,14 @@ bool libGHLo_gt_GraphsInitialization_Func (bool testConds, bool runActions) {
             libGHLo_gv_graphsGeneral.lv_playerRight = lv_playerfromTeam1;
             libGHLo_gv_graphsGeneral.lv_teamRight = 1;
         }
+        DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/GraphContainer");
+        libGHLo_gv_graphsGeneral.lv_container = DialogControlLastCreated();
+        libGHLo_gf_GraphsDefineGraph(1, StringExternal("Param/Value/lib_GHLo_8058A929"), "IncomeGraph", "ResourceCollectionRate", libGHLo_ge_GraphStyle_Differential, 350.0, 400.0, 200.0);
+        libGHLo_gf_GraphsDefineGraph(2, StringExternal("Param/Value/lib_GHLo_31D21183"), "ArmySizeGraph", "FoodUsedArmy", libGHLo_ge_GraphStyle_Comparative, 40.0, 50.0, 50.0);
     }
-
-    DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/GraphContainer");
-    libGHLo_gv_graphsGeneral.lv_container = DialogControlLastCreated();
-    libGHLo_gf_GraphsDefineGraph(1, StringExternal("Param/Value/lib_GHLo_8058A929"), "IncomeGraph", "ResourceCollectionRate", libGHLo_ge_GraphStyle_Differential, 350.0, 400.0, 200.0);
-    libGHLo_gf_GraphsDefineGraph(2, StringExternal("Param/Value/lib_GHLo_31D21183"), "ArmySizeGraph", "FoodUsedArmy", libGHLo_ge_GraphStyle_Comparative, 40.0, 50.0, 50.0);
+    else {
+        return false;
+    }
     return true;
 }
 
@@ -1135,7 +1168,6 @@ bool libGHLo_gt_GraphsTimer_Func (bool testConds, bool runActions) {
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_GraphsTimer_Init () {
     libGHLo_gt_GraphsTimer = TriggerCreate("libGHLo_gt_GraphsTimer_Func");
-    TriggerAddEventTimePeriodic(libGHLo_gt_GraphsTimer, 1.0, c_timeReal);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1156,60 +1188,76 @@ bool libGHLo_gt_LabelsInitialization_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    autoDC4E681F_g = libGHLo_gv_all_Players;
-    autoDC4E681F_var = -1;
-    while (true) {
-        autoDC4E681F_var = PlayerGroupNextPlayer(autoDC4E681F_g, autoDC4E681F_var);
-        if (autoDC4E681F_var < 0) { break; }
-        lv_playerColor = PlayerGetColorIndex(autoDC4E681F_var, false);
-        if ((lv_playerColor == 0)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "white";
+    if ((UserDataGetInt("GameHeartSettings", "Labels (Units)", "Value", 1) == 1)) {
+        autoDC4E681F_g = libGHLo_gv_all_Players;
+        autoDC4E681F_var = -1;
+        while (true) {
+            autoDC4E681F_var = PlayerGroupNextPlayer(autoDC4E681F_g, autoDC4E681F_var);
+            if (autoDC4E681F_var < 0) { break; }
+            lv_playerColor = PlayerGetColorIndex(autoDC4E681F_var, false);
+            if ((lv_playerColor == 0)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "white";
+            }
+            else if ((lv_playerColor == 1)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "red";
+            }
+            else if ((lv_playerColor == 2)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "blue";
+            }
+            else if ((lv_playerColor == 3)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "teal";
+            }
+            else if ((lv_playerColor == 4)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "purple";
+            }
+            else if ((lv_playerColor == 5)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "yellow";
+            }
+            else if ((lv_playerColor == 6)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "orange";
+            }
+            else if ((lv_playerColor == 7)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "green";
+            }
+            else if ((lv_playerColor == 8)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "lightpink";
+            }
+            else if ((lv_playerColor == 9)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "violet";
+            }
+            else if ((lv_playerColor == 10)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "lightgrey";
+            }
+            else if ((lv_playerColor == 11)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "darkgreen";
+            }
+            else if ((lv_playerColor == 12)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "brown";
+            }
+            else if ((lv_playerColor == 13)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "lightgreen";
+            }
+            else if ((lv_playerColor == 14)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "darkgrey";
+            }
+            else if ((lv_playerColor == 15)) {
+                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "pink";
+            }
         }
-        else if ((lv_playerColor == 1)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "red";
-        }
-        else if ((lv_playerColor == 2)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "blue";
-        }
-        else if ((lv_playerColor == 3)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "teal";
-        }
-        else if ((lv_playerColor == 4)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "purple";
-        }
-        else if ((lv_playerColor == 5)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "yellow";
-        }
-        else if ((lv_playerColor == 6)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "orange";
-        }
-        else if ((lv_playerColor == 7)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "green";
-        }
-        else if ((lv_playerColor == 8)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "lightpink";
-        }
-        else if ((lv_playerColor == 9)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "violet";
-        }
-        else if ((lv_playerColor == 10)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "lightgrey";
-        }
-        else if ((lv_playerColor == 11)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "darkgreen";
-        }
-        else if ((lv_playerColor == 12)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "brown";
-        }
-        else if ((lv_playerColor == 13)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "lightgreen";
-        }
-        else if ((lv_playerColor == 14)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "darkgrey";
-        }
-        else if ((lv_playerColor == 15)) {
-            libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "pink";
-        }
+        libGHLo_gf_RegisterUnitCreatedEvent(libGHLo_gt_LabelsUnitCreated, null, null, null);
+        libGHLo_gf_RegisterUnitTrainingProgressEvent(libGHLo_gt_LabelsUnitTrainingStarted, null, c_unitProgressStageStart);
+        libGHLo_gf_RegisterUnitArmingProgressEvent(libGHLo_gt_LabelsUnitTrainingStarted, null, c_unitProgressStageStart);
+        libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_LabelsResearchStarted, null, c_unitProgressStageStart);
+        libGHLo_gf_RegisterUnitTrainingProgressEvent(libGHLo_gt_LabelsUnitTrainingStopped, null, c_unitProgressStageComplete);
+        libGHLo_gf_RegisterUnitTrainingProgressEvent(libGHLo_gt_LabelsUnitTrainingStopped, null, c_unitProgressStageCancel);
+        libGHLo_gf_RegisterUnitArmingProgressEvent(libGHLo_gt_LabelsUnitTrainingStopped, null, c_unitProgressStageComplete);
+        libGHLo_gf_RegisterUnitArmingProgressEvent(libGHLo_gt_LabelsUnitTrainingStopped, null, c_unitProgressStageCancel);
+        libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_LabelsResearchStopped, null, c_unitProgressStageComplete);
+        libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_LabelsResearchStopped, null, c_unitProgressStageCancel);
+        libGHLo_gf_RegisterUnitDiesEvent(libGHLo_gt_LabelsReactorDestroyed, null);
+    }
+    else {
+        return false;
     }
     return true;
 }
@@ -1225,12 +1273,12 @@ void libGHLo_gt_LabelsInitialization_Init () {
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_LabelsUnitCreated_Func (bool testConds, bool runActions) {
     // Variable Declarations
-    unit lv_unit;
     int lv_size;
     int lv_bGSize;
     string lv_unitTagString;
     string lv_colorAccentImage;
     string lv_unitType;
+    unit lv_unit;
     int lv_unitOwner;
 
     // Automatic Variable Declarations
@@ -1238,80 +1286,79 @@ bool libGHLo_gt_LabelsUnitCreated_Func (bool testConds, bool runActions) {
     lv_unit = EventUnitCreatedUnit();
     lv_unitOwner = UnitGetOwner(lv_unit);
 
-    // Conditions
-    if (testConds) {
-        if (!((UnitFilterMatch(lv_unit, lv_unitOwner, UnitFilter(0, 0, (1 << c_targetFilterMissile), 0)) == true))) {
-            return false;
-        }
-    }
-
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_unitType = UnitGetType(lv_unit);
-    if ((libGHLo_gf_LabelsUnitUsesCustomStatusBar(lv_unitType) == true)) {
-        lv_size = libGHLo_gf_LabelsUnitIconSize(lv_unitType);
-        lv_bGSize = FixedToInt((lv_size * 1.2));
-        lv_unitTagString = IntToString(UnitGetTag(lv_unit));
-        lv_colorAccentImage = (("color_accents\\gh-btn-" + libGHLo_gv_labels.lv_colorStrings[lv_unitOwner] + ".dds"));
-        DataTableSetString(true, (lv_unitTagString + "-slot1"), "");
-        DataTableSetString(true, (lv_unitTagString + "-slot2"), "");
-        DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon1\\IconBG", lv_unit);
-        libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), lv_colorAccentImage, libGHLo_gv_all_Players);
-        DialogControlSetSize(DialogControlLastCreated(), libGHLo_gv_all_Players, lv_bGSize, lv_bGSize);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-        libNtve_gf_SaveDataTableValueDialogItem(true, ("IconBG1-" + lv_unitTagString), DialogControlLastCreated());
-        DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon2\\IconBG", lv_unit);
-        libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), lv_colorAccentImage, libGHLo_gv_all_Players);
-        DialogControlSetSize(DialogControlLastCreated(), libGHLo_gv_all_Players, lv_bGSize, lv_bGSize);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-        libNtve_gf_SaveDataTableValueDialogItem(true, ("IconBG2-" + lv_unitTagString), DialogControlLastCreated());
-        DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon3\\IconBG", lv_unit);
-        libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), lv_colorAccentImage, libGHLo_gv_all_Players);
-        DialogControlSetSize(DialogControlLastCreated(), libGHLo_gv_all_Players, lv_bGSize, lv_bGSize);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-        libNtve_gf_SaveDataTableValueDialogItem(true, ("IconBG3-" + lv_unitTagString), DialogControlLastCreated());
-        DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon1\\Icon", lv_unit);
-        libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), "Assets\\Textures\\blank.dds", libGHLo_gv_all_Players);
-        DialogControlSetSize(DialogControlLastCreated(), libGHLo_gv_all_Players, lv_size, lv_size);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-        libNtve_gf_SaveDataTableValueDialogItem(true, ("Icon1-" + lv_unitTagString), DialogControlLastCreated());
-        if ((lv_unitType == "Larva")) {
-            DialogControlSetPosition(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_all_Players, c_anchorTopLeft, libGHLo_gv_labels.lv_iconOffsetEgg, libGHLo_gv_labels.lv_iconOffsetEgg);
+    if ((UnitFilterMatch(lv_unit, lv_unitOwner, UnitFilter(0, 0, (1 << c_targetFilterMissile), 0)) == true)) {
+        lv_unitType = UnitGetType(lv_unit);
+        if ((libGHLo_gf_LabelsUnitUsesCustomStatusBar(lv_unitType) == true)) {
+            lv_size = libGHLo_gf_LabelsUnitIconSize(lv_unitType);
+            lv_bGSize = FixedToInt((lv_size * 1.2));
+            lv_unitTagString = IntToString(UnitGetTag(lv_unit));
+            lv_colorAccentImage = (("color_accents\\gh-btn-" + libGHLo_gv_labels.lv_colorStrings[lv_unitOwner] + ".dds"));
+            DataTableSetString(true, (lv_unitTagString + "-slot1"), "");
+            DataTableSetString(true, (lv_unitTagString + "-slot2"), "");
+            DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon1\\IconBG", lv_unit);
+            libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), lv_colorAccentImage, libGHLo_gv_all_Players);
+            DialogControlSetSize(DialogControlLastCreated(), libGHLo_gv_all_Players, lv_bGSize, lv_bGSize);
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+            libNtve_gf_SaveDataTableValueDialogItem(true, ("IconBG1-" + lv_unitTagString), DialogControlLastCreated());
+            DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon2\\IconBG", lv_unit);
+            libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), lv_colorAccentImage, libGHLo_gv_all_Players);
+            DialogControlSetSize(DialogControlLastCreated(), libGHLo_gv_all_Players, lv_bGSize, lv_bGSize);
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+            libNtve_gf_SaveDataTableValueDialogItem(true, ("IconBG2-" + lv_unitTagString), DialogControlLastCreated());
+            DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon3\\IconBG", lv_unit);
+            libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), lv_colorAccentImage, libGHLo_gv_all_Players);
+            DialogControlSetSize(DialogControlLastCreated(), libGHLo_gv_all_Players, lv_bGSize, lv_bGSize);
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+            libNtve_gf_SaveDataTableValueDialogItem(true, ("IconBG3-" + lv_unitTagString), DialogControlLastCreated());
+            DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon1\\Icon", lv_unit);
+            libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), "Assets\\Textures\\blank.dds", libGHLo_gv_all_Players);
+            DialogControlSetSize(DialogControlLastCreated(), libGHLo_gv_all_Players, lv_size, lv_size);
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+            libNtve_gf_SaveDataTableValueDialogItem(true, ("Icon1-" + lv_unitTagString), DialogControlLastCreated());
+            if ((lv_unitType == "Larva")) {
+                DialogControlSetPosition(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_all_Players, c_anchorTopLeft, libGHLo_gv_labels.lv_iconOffsetEgg, libGHLo_gv_labels.lv_iconOffsetEgg);
+            }
+            else {
+                if (((lv_unitType == "TechLab") || (lv_unitType == "BarracksTechLab") || (lv_unitType == "FactoryTechLab") || (lv_unitType == "StarportTechLab"))) {
+                    DialogControlSetPosition(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_all_Players, c_anchorTopLeft, libGHLo_gv_labels.lv_iconOffsetTechLab, libGHLo_gv_labels.lv_iconOffsetTechLab);
+                }
+
+            }
+            DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon2\\Icon", lv_unit);
+            libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), "Assets\\Textures\\blank.dds", libGHLo_gv_all_Players);
+            DialogControlSetSize(DialogControlLastCreated(), libGHLo_gv_all_Players, lv_size, lv_size);
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+            libNtve_gf_SaveDataTableValueDialogItem(true, ("Icon2-" + lv_unitTagString), DialogControlLastCreated());
+            DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon3\\Icon", lv_unit);
+            libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), "Assets\\Textures\\blank.dds", libGHLo_gv_all_Players);
+            DialogControlSetSize(DialogControlLastCreated(), libGHLo_gv_all_Players, lv_size, lv_size);
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+            libNtve_gf_SaveDataTableValueDialogItem(true, ("Icon3-" + lv_unitTagString), DialogControlLastCreated());
         }
         else {
-            if (((lv_unitType == "TechLab") || (lv_unitType == "BarracksTechLab") || (lv_unitType == "FactoryTechLab") || (lv_unitType == "StarportTechLab"))) {
-                DialogControlSetPosition(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_all_Players, c_anchorTopLeft, libGHLo_gv_labels.lv_iconOffsetTechLab, libGHLo_gv_labels.lv_iconOffsetTechLab);
-            }
-
+            return false;
         }
-        DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon2\\Icon", lv_unit);
-        libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), "Assets\\Textures\\blank.dds", libGHLo_gv_all_Players);
-        DialogControlSetSize(DialogControlLastCreated(), libGHLo_gv_all_Players, lv_size, lv_size);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-        libNtve_gf_SaveDataTableValueDialogItem(true, ("Icon2-" + lv_unitTagString), DialogControlLastCreated());
-        DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon3\\Icon", lv_unit);
-        libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), "Assets\\Textures\\blank.dds", libGHLo_gv_all_Players);
-        DialogControlSetSize(DialogControlLastCreated(), libGHLo_gv_all_Players, lv_size, lv_size);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-        libNtve_gf_SaveDataTableValueDialogItem(true, ("Icon3-" + lv_unitTagString), DialogControlLastCreated());
     }
-
+    else {
+        return false;
+    }
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_LabelsUnitCreated_Init () {
     libGHLo_gt_LabelsUnitCreated = TriggerCreate("libGHLo_gt_LabelsUnitCreated_Func");
-    TriggerAddEventUnitCreated(libGHLo_gt_LabelsUnitCreated, null, null, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1329,55 +1376,58 @@ bool libGHLo_gt_LabelsUnitTrainingStarted_Func (bool testConds, bool runActions)
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_unit = EventUnit();
-    lv_traineeType = libNtve_gf_TriggeringProgressUnitType();
     lv_dialogItem = c_invalidDialogControlId;
-
-    // Conditions
-    if (testConds) {
-        if (!(((UserDataGetInt("GameHeartSettings", "Labels (Units)", "Value", 1) == 1) && (lv_traineeType != "Broodling") && (lv_traineeType != "BroodlingEscort") && (lv_traineeType != "Interceptor") && (lv_traineeType != "Baneling")))) {
-            return false;
-        }
-    }
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_unitTagString = IntToString(UnitGetTag(lv_unit));
-    lv_unitTagStringSlot1 = (lv_unitTagString + "-slot1");
-    lv_unitTagStringSlot2 = (lv_unitTagString + "-slot2");
-    if ((DataTableGetString(true, lv_unitTagStringSlot1) == "")) {
-        DataTableSetString(true, lv_unitTagStringSlot1, (lv_traineeType));
-        if ((DataTableGetString(true, lv_unitTagStringSlot2) == "")) {
-            lv_activeTags = 1;
+    if ((UserDataGetInt("GameHeartSettings", "Labels (Units)", "Value", 1) == 1)) {
+        lv_traineeType = libNtve_gf_TriggeringProgressUnitType();
+        if ((lv_traineeType != "Broodling") && (lv_traineeType != "BroodlingEscort") && (lv_traineeType != "Interceptor") && (lv_traineeType != "Baneling")) {
+            lv_unit = EventUnit();
+            lv_unitTagString = IntToString(UnitGetTag(lv_unit));
+            lv_unitTagStringSlot1 = (lv_unitTagString + "-slot1");
+            lv_unitTagStringSlot2 = (lv_unitTagString + "-slot2");
+            if ((DataTableGetString(true, lv_unitTagStringSlot1) == "")) {
+                DataTableSetString(true, lv_unitTagStringSlot1, (lv_traineeType));
+                if ((DataTableGetString(true, lv_unitTagStringSlot2) == "")) {
+                    lv_activeTags = 1;
+                }
+                else {
+                    lv_activeTags = 2;
+                }
+            }
+            else {
+                DataTableSetString(true, lv_unitTagStringSlot2, (lv_traineeType));
+                lv_activeTags = 2;
+            }
+            if ((lv_traineeType != "Zergling") && (lv_activeTags == 2)) {
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+                lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + lv_unitTagString));
+                libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (DataTableGetString(true, lv_unitTagStringSlot1)), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
+                DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+                lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + lv_unitTagString));
+                libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (DataTableGetString(true, lv_unitTagStringSlot2)), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
+                DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+            }
+            else {
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+                lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString));
+                libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (DataTableGetString(true, lv_unitTagStringSlot1)), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
+                DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+            }
         }
         else {
-            lv_activeTags = 2;
+            return false;
         }
     }
     else {
-        DataTableSetString(true, lv_unitTagStringSlot2, (lv_traineeType));
-        lv_activeTags = 2;
-    }
-    if ((lv_traineeType != "Zergling") && (lv_activeTags == 2)) {
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
-        lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + lv_unitTagString));
-        libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (DataTableGetString(true, lv_unitTagStringSlot1)), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
-        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
-        lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + lv_unitTagString));
-        libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (DataTableGetString(true, lv_unitTagStringSlot2)), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
-        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
-    }
-    else {
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
-        lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString));
-        libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (DataTableGetString(true, lv_unitTagStringSlot1)), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
-        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+        return false;
     }
     return true;
 }
@@ -1385,8 +1435,6 @@ bool libGHLo_gt_LabelsUnitTrainingStarted_Func (bool testConds, bool runActions)
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_LabelsUnitTrainingStarted_Init () {
     libGHLo_gt_LabelsUnitTrainingStarted = TriggerCreate("libGHLo_gt_LabelsUnitTrainingStarted_Func");
-    TriggerAddEventUnitTrainProgress(libGHLo_gt_LabelsUnitTrainingStarted, null, c_unitProgressStageStart);
-    TriggerAddEventUnitArmMagazineProgress(libGHLo_gt_LabelsUnitTrainingStarted, null, c_unitProgressStageStart);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1400,33 +1448,30 @@ bool libGHLo_gt_LabelsResearchStarted_Func (bool testConds, bool runActions) {
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_research = libNtve_gf_TriggeringProgressUpgrade();
     lv_dialogItem = c_invalidDialogControlId;
-
-    // Conditions
-    if (testConds) {
-        if (!((UserDataGetInt("GameHeartSettings", "Labels (Research)", "Value", 1) == 1))) {
-            return false;
-        }
-    }
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_unitTagString = IntToString(UnitGetTag(EventUnit()));
-    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
-    lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString));
-    libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_research, "Icon", c_playerAny)), libGHLo_gv_all_Players);
-    DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+    if ((UserDataGetInt("GameHeartSettings", "Labels (Research)", "Value", 1) == 1)) {
+        lv_research = libNtve_gf_TriggeringProgressUpgrade();
+        lv_unitTagString = IntToString(UnitGetTag(EventUnit()));
+        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+        lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString));
+        libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_research, "Icon", c_playerAny)), libGHLo_gv_all_Players);
+        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+    }
+    else {
+        return false;
+    }
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_LabelsResearchStarted_Init () {
     libGHLo_gt_LabelsResearchStarted = TriggerCreate("libGHLo_gt_LabelsResearchStarted_Func");
-    TriggerAddEventUnitResearchProgress(libGHLo_gt_LabelsResearchStarted, null, c_unitProgressStageStart);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1443,65 +1488,68 @@ bool libGHLo_gt_LabelsUnitTrainingStopped_Func (bool testConds, bool runActions)
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_traineeType = libNtve_gf_TriggeringProgressUnitType();
-
-    // Conditions
-    if (testConds) {
-        if (!(((UserDataGetInt("GameHeartSettings", "Labels (Units)", "Value", 1) == 1) && (lv_traineeType != "Baneling") && (lv_traineeType != "Interceptor") && (lv_traineeType != "BroodlingEscort") && (lv_traineeType != "Broodling")))) {
-            return false;
-        }
-    }
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_unitTagString = IntToString(UnitGetTag(EventUnit()));
-    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-    lv_unitTagStringSlot1 = (lv_unitTagString + "-slot1");
-    lv_unitTagStringSlot2 = (lv_unitTagString + "-slot2");
-    lv_savedTypeSlot1 = DataTableGetString(true, lv_unitTagStringSlot1);
-    lv_savedTypeSlot2 = DataTableGetString(true, lv_unitTagStringSlot2);
-    if ((lv_savedTypeSlot1 == (lv_traineeType)) && (lv_savedTypeSlot2 == "")) {
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DataTableSetString(true, lv_unitTagStringSlot1, "");
+    if ((UserDataGetInt("GameHeartSettings", "Labels (Units)", "Value", 1) == 1)) {
+        lv_traineeType = libNtve_gf_TriggeringProgressUnitType();
+        if ((lv_traineeType != "Baneling") && (lv_traineeType != "Interceptor") && (lv_traineeType != "BroodlingEscort") && (lv_traineeType != "Broodling")) {
+            lv_unitTagString = IntToString(UnitGetTag(EventUnit()));
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+            lv_unitTagStringSlot1 = (lv_unitTagString + "-slot1");
+            lv_unitTagStringSlot2 = (lv_unitTagString + "-slot2");
+            lv_savedTypeSlot1 = DataTableGetString(true, lv_unitTagStringSlot1);
+            lv_savedTypeSlot2 = DataTableGetString(true, lv_unitTagStringSlot2);
+            if ((lv_savedTypeSlot1 == (lv_traineeType)) && (lv_savedTypeSlot2 == "")) {
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DataTableSetString(true, lv_unitTagStringSlot1, "");
+            }
+            else if ((lv_savedTypeSlot2 == (lv_traineeType)) && (lv_savedTypeSlot1 == "")) {
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DataTableSetString(true, lv_unitTagStringSlot2, "");
+            }
+            else if ((lv_savedTypeSlot1 == (lv_traineeType)) && (lv_savedTypeSlot2 != "")) {
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                libNtve_gf_SetDialogItemImage(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), (CatalogFieldValueGet(c_gameCatalogActor, (DataTableGetString(true, (lv_unitTagString + "-slot2"))), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+                DataTableSetString(true, lv_unitTagStringSlot1, lv_savedTypeSlot2);
+                DataTableSetString(true, lv_unitTagStringSlot2, "");
+            }
+            else if ((lv_savedTypeSlot2 == (lv_traineeType)) && (lv_savedTypeSlot1 != "")) {
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                libNtve_gf_SetDialogItemImage(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), (CatalogFieldValueGet(c_gameCatalogActor, (DataTableGetString(true, (lv_unitTagString + "-slot1"))), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+                DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+                DataTableSetString(true, lv_unitTagStringSlot2, "");
+            }
+        }
+        else {
+            return false;
+        }
     }
-    else if ((lv_savedTypeSlot2 == (lv_traineeType)) && (lv_savedTypeSlot1 == "")) {
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DataTableSetString(true, lv_unitTagStringSlot2, "");
-    }
-    else if ((lv_savedTypeSlot1 == (lv_traineeType)) && (lv_savedTypeSlot2 != "")) {
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        libNtve_gf_SetDialogItemImage(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), (CatalogFieldValueGet(c_gameCatalogActor, (DataTableGetString(true, (lv_unitTagString + "-slot2"))), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
-        DataTableSetString(true, lv_unitTagStringSlot1, lv_savedTypeSlot2);
-        DataTableSetString(true, lv_unitTagStringSlot2, "");
-    }
-    else if ((lv_savedTypeSlot2 == (lv_traineeType)) && (lv_savedTypeSlot1 != "")) {
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-        libNtve_gf_SetDialogItemImage(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), (CatalogFieldValueGet(c_gameCatalogActor, (DataTableGetString(true, (lv_unitTagString + "-slot1"))), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
-        DataTableSetString(true, lv_unitTagStringSlot2, "");
+    else {
+        return false;
     }
     return true;
 }
@@ -1509,10 +1557,6 @@ bool libGHLo_gt_LabelsUnitTrainingStopped_Func (bool testConds, bool runActions)
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_LabelsUnitTrainingStopped_Init () {
     libGHLo_gt_LabelsUnitTrainingStopped = TriggerCreate("libGHLo_gt_LabelsUnitTrainingStopped_Func");
-    TriggerAddEventUnitTrainProgress(libGHLo_gt_LabelsUnitTrainingStopped, null, c_unitProgressStageComplete);
-    TriggerAddEventUnitTrainProgress(libGHLo_gt_LabelsUnitTrainingStopped, null, c_unitProgressStageCancel);
-    TriggerAddEventUnitArmMagazineProgress(libGHLo_gt_LabelsUnitTrainingStopped, null, c_unitProgressStageComplete);
-    TriggerAddEventUnitArmMagazineProgress(libGHLo_gt_LabelsUnitTrainingStopped, null, c_unitProgressStageCancel);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1525,29 +1569,25 @@ bool libGHLo_gt_LabelsResearchStopped_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Variable Initialization
 
-    // Conditions
-    if (testConds) {
-        if (!((UserDataGetInt("GameHeartSettings", "Labels (Research)", "Value", 1) == 1))) {
-            return false;
-        }
-    }
-
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_unitTagString = IntToString(UnitGetTag(EventUnit()));
-    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+    if ((UserDataGetInt("GameHeartSettings", "Labels (Research)", "Value", 1) == 1)) {
+        lv_unitTagString = IntToString(UnitGetTag(EventUnit()));
+        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+    }
+    else {
+        return false;
+    }
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_LabelsResearchStopped_Init () {
     libGHLo_gt_LabelsResearchStopped = TriggerCreate("libGHLo_gt_LabelsResearchStopped_Func");
-    TriggerAddEventUnitResearchProgress(libGHLo_gt_LabelsResearchStopped, null, c_unitProgressStageCancel);
-    TriggerAddEventUnitResearchProgress(libGHLo_gt_LabelsResearchStopped, null, c_unitProgressStageComplete);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1566,55 +1606,54 @@ bool libGHLo_gt_LabelsReactorDestroyed_Func (bool testConds, bool runActions) {
     int auto00CB1734_u;
 
     // Variable Initialization
-    lv_unit = EventUnit();
     lv_dialogItem = c_invalidDialogControlId;
-
-    // Conditions
-    if (testConds) {
-        if (!((UserDataGetInt("GameHeartSettings", "Labels (Units)", "Value", 1) == 1))) {
-            return false;
-        }
-    }
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_unitType = UnitGetType(lv_unit);
-    if (((lv_unitType == "BarracksReactor") || (lv_unitType == "FactoryReactor") || (lv_unitType == "StarportReactor"))) {
-        auto00CB1734_g = UnitGroup(null, EventPlayer(), RegionCircle(PointWithOffset(UnitGetPosition(lv_unit), -2.5, 0.5), 0.1), UnitFilter((1 << c_targetFilterGround) | (1 << c_targetFilterStructure), 0, 0, (1 << (c_targetFilterDead - 32))), 0);
-        auto00CB1734_u = UnitGroupCount(auto00CB1734_g, c_unitCountAll);
-        for (;; auto00CB1734_u -= 1) {
-            lv_unit = UnitGroupUnitFromEnd(auto00CB1734_g, auto00CB1734_u);
-            if (lv_unit == null) { break; }
-            lv_unitType = UnitGetType(lv_unit);
-            if (((lv_unitType == "Barracks") || (lv_unitType == "Factory") || (lv_unitType == "Starport")) && (libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lv_unit, 1, 1) != "")) {
-                lv_unitTagString = IntToString(UnitGetTag(lv_unit));
-                lv_slot1unitType = DataTableGetString(true, (lv_unitTagString + "-slot1"));
-                if ((lv_slot1unitType != "")) {
-                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
-                    lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString));
-                    libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_slot1unitType), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
-                    DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+    if ((UserDataGetInt("GameHeartSettings", "Labels (Units)", "Value", 1) == 1)) {
+        lv_unit = EventUnit();
+        lv_unitType = UnitGetType(lv_unit);
+        if (((lv_unitType == "BarracksReactor") || (lv_unitType == "FactoryReactor") || (lv_unitType == "StarportReactor"))) {
+            auto00CB1734_g = UnitGroup(null, UnitGetOwner(lv_unit), RegionCircle(PointWithOffset(UnitGetPosition(lv_unit), -2.5, 0.5), 0.1), UnitFilter((1 << c_targetFilterGround) | (1 << c_targetFilterStructure), 0, 0, (1 << (c_targetFilterDead - 32))), 0);
+            auto00CB1734_u = UnitGroupCount(auto00CB1734_g, c_unitCountAll);
+            for (;; auto00CB1734_u -= 1) {
+                lv_unit = UnitGroupUnitFromEnd(auto00CB1734_g, auto00CB1734_u);
+                if (lv_unit == null) { break; }
+                lv_unitType = UnitGetType(lv_unit);
+                if (((lv_unitType == "Barracks") || (lv_unitType == "Factory") || (lv_unitType == "Starport")) && (libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lv_unit, 1, 1) != "")) {
+                    lv_unitTagString = IntToString(UnitGetTag(lv_unit));
+                    lv_slot1unitType = DataTableGetString(true, (lv_unitTagString + "-slot1"));
+                    if ((lv_slot1unitType != "")) {
+                        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon2-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon3-" + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+                        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, ("IconBG1-" + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+                        lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, ("Icon1-" + lv_unitTagString));
+                        libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_slot1unitType), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
+                        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+                    }
+
                 }
 
             }
-
+        }
+        else {
+            return false;
         }
     }
-
+    else {
+        return false;
+    }
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_LabelsReactorDestroyed_Init () {
     libGHLo_gt_LabelsReactorDestroyed = TriggerCreate("libGHLo_gt_LabelsReactorDestroyed_Func");
-    TriggerAddEventUnitDied(libGHLo_gt_LabelsReactorDestroyed, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1631,20 +1670,17 @@ bool libGHLo_gt_UpgradeNotificationsInitialization_Func (bool testConds, bool ru
 
     // Variable Initialization
 
-    // Conditions
-    if (testConds) {
-        if (!((UserDataGetInt("GameHeartSettings", "Notifications (Upgrades)", "Value", 1) == 1))) {
-            return false;
-        }
-    }
-
     // Actions
     if (!runActions) {
         return true;
     }
 
-    if ((PlayerGroupCount(libGHLo_gv_initial_Active_Players) == 2)) {
+    if ((UserDataGetInt("GameHeartSettings", "Notifications (Upgrades)", "Value", 1) == 1) && (PlayerGroupCount(libGHLo_gv_initial_Active_Players) == 2)) {
         libGHLo_gv_upgradeNotifications.lv_active = true;
+        libGHLo_gf_RegisterTimerRunsOutEvent(libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut, null);
+        libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_UpgradeNotificationsResearchCancelled, null, c_unitProgressStageCancel);
+        libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_UpgradeNotificationsResearchCompleted, null, c_unitProgressStageComplete);
+        libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_UpgradeNotificationsResearchStarted, null, c_unitProgressStageStart);
         lv_slot = 0;
         for ( ; ( (auto69B01FF3_ai >= 0 && lv_slot <= auto69B01FF3_ae) || (auto69B01FF3_ai < 0 && lv_slot >= auto69B01FF3_ae) ) ; lv_slot += auto69B01FF3_ai ) {
             lv_slotStr = IntToString(lv_slot);
@@ -1684,7 +1720,9 @@ bool libGHLo_gt_UpgradeNotificationsInitialization_Func (bool testConds, bool ru
             libNtve_gf_SetDialogItemColor(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot], Color(100,100,100), libGHLo_gv_upgradeNotificationsObs);
         }
     }
-
+    else {
+        return false;
+    }
     return true;
 }
 
@@ -1707,35 +1745,31 @@ bool libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Func (bool testConds
     const int autoB0493DF3_ai = 1;
 
     // Variable Initialization
-    lv_timer = EventTimer();
-
-    // Conditions
-    if (testConds) {
-        if (!((libGHLo_gv_upgradeNotifications.lv_active == true))) {
-            return false;
-        }
-    }
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_slot = 0;
-    for ( ; ( (autoB0493DF3_ai >= 0 && lv_slot <= autoB0493DF3_ae) || (autoB0493DF3_ai < 0 && lv_slot >= autoB0493DF3_ae) ) ; lv_slot += autoB0493DF3_ai ) {
-        if ((lv_timer == libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot])) {
-            libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade(lv_slot);
-            return true;
-        }
+    if ((libGHLo_gv_upgradeNotifications.lv_active == true)) {
+        lv_timer = EventTimer();
+        lv_slot = 0;
+        for ( ; ( (autoB0493DF3_ai >= 0 && lv_slot <= autoB0493DF3_ae) || (autoB0493DF3_ai < 0 && lv_slot >= autoB0493DF3_ae) ) ; lv_slot += autoB0493DF3_ai ) {
+            if ((lv_timer == libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot])) {
+                libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade(lv_slot);
+                return true;
+            }
 
+        }
     }
+
+    return false;
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Init () {
     libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut = TriggerCreate("libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Func");
-    TriggerAddEventTimer(libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1748,44 +1782,41 @@ bool libGHLo_gt_UpgradeNotificationsResearchCancelled_Func (bool testConds, bool
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_facility = EventUnit();
-
-    // Conditions
-    if (testConds) {
-        if (!((libGHLo_gv_upgradeNotifications.lv_active == true))) {
-            return false;
-        }
-    }
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_slot = libGHLo_gf_UpgradeNotificationsFacilitySlot(lv_facility);
-    if ((lv_slot >= 0)) {
-        if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots) && (DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot], libGHLo_gv_upgradeNotificationsObsID) == true)) {
-            libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade;
-            TimerStart(libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot], 5.0, false, c_timeGame);
-            if ((UnitIsAlive(lv_facility) == false)) {
-                libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_9266D633"));
+    if ((libGHLo_gv_upgradeNotifications.lv_active == true)) {
+        lv_facility = EventUnit();
+        lv_slot = libGHLo_gf_UpgradeNotificationsFacilitySlot(lv_facility);
+        if ((lv_slot >= 0)) {
+            if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots) && (DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot], libGHLo_gv_upgradeNotificationsObsID) == true)) {
+                libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade;
+                TimerStart(libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot], 5.0, false, c_timeGame);
+                if ((UnitIsAlive(lv_facility) == false)) {
+                    libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_9266D633"));
+                }
+                else {
+                    libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_DFAF5FF3"));
+                }
             }
             else {
-                libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_DFAF5FF3"));
+                libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade(lv_slot);
             }
+            return true;
         }
-        else {
-            libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade(lv_slot);
-        }
+
     }
 
+    return false;
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_UpgradeNotificationsResearchCancelled_Init () {
     libGHLo_gt_UpgradeNotificationsResearchCancelled = TriggerCreate("libGHLo_gt_UpgradeNotificationsResearchCancelled_Func");
-    TriggerAddEventUnitResearchProgress(libGHLo_gt_UpgradeNotificationsResearchCancelled, null, c_unitProgressStageCancel);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1798,40 +1829,37 @@ bool libGHLo_gt_UpgradeNotificationsResearchCompleted_Func (bool testConds, bool
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_facility = EventUnit();
-
-    // Conditions
-    if (testConds) {
-        if (!((libGHLo_gv_upgradeNotifications.lv_active == true))) {
-            return false;
-        }
-    }
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_slot = libGHLo_gf_UpgradeNotificationsFacilitySlot(lv_facility);
-    if ((lv_slot >= 0)) {
-        if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
-            libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade;
-            libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_76FE8CD8"));
-            libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], libGHLo_gv_upgradeNotificationsVisibleTime, libGHLo_gv_upgradeNotificationsObs);
-            TimerStart(libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot], 5.0, false, c_timeGame);
+    if ((libGHLo_gv_upgradeNotifications.lv_active == true)) {
+        lv_facility = EventUnit();
+        lv_slot = libGHLo_gf_UpgradeNotificationsFacilitySlot(lv_facility);
+        if ((lv_slot >= 0)) {
+            if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
+                libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade;
+                libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_76FE8CD8"));
+                libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], libGHLo_gv_upgradeNotificationsVisibleTime, libGHLo_gv_upgradeNotificationsObs);
+                TimerStart(libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot], 5.0, false, c_timeGame);
+            }
+            else {
+                libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade(lv_slot);
+            }
+            return true;
         }
-        else {
-            libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade(lv_slot);
-        }
+
     }
 
+    return false;
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_UpgradeNotificationsResearchCompleted_Init () {
     libGHLo_gt_UpgradeNotificationsResearchCompleted = TriggerCreate("libGHLo_gt_UpgradeNotificationsResearchCompleted_Func");
-    TriggerAddEventUnitResearchProgress(libGHLo_gt_UpgradeNotificationsResearchCompleted, null, c_unitProgressStageComplete);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1845,52 +1873,49 @@ bool libGHLo_gt_UpgradeNotificationsResearchStarted_Func (bool testConds, bool r
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_facility = EventUnit();
-    lv_upgrade = libNtve_gf_TriggeringProgressUpgrade();
-
-    // Conditions
-    if (testConds) {
-        if (!((libGHLo_gv_upgradeNotifications.lv_active == true))) {
-            return false;
-        }
-
-        if (!((UnitIsAlive(lv_facility) == true))) {
-            return false;
-        }
-    }
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    if ((libGHLo_gv_upgradeNotifications.lv_slotLastUsed < 100)) {
-        libGHLo_gv_upgradeNotifications.lv_slotLastUsed += 1;
+    if ((libGHLo_gv_upgradeNotifications.lv_active == true)) {
         lv_slot = libGHLo_gv_upgradeNotifications.lv_slotLastUsed;
-        libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_slot] = lv_facility;
-        if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
-            libGHLo_gf_UpgradeNotificationsSetSlotData(lv_slot, libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), libGHLo_gf_UpgradeNotificationsUpgradeImage(lv_upgrade), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(lv_facility), false)), false);
-            if ((libGHLo_gv_upgradeNotifications.lv_updateThreadRunning == false)) {
-                libGHLo_gv_upgradeNotifications.lv_updateThreadRunning = true;
-                libGHLo_gf_UpgradeNotificationsUpdateThread();
+        if ((lv_slot < 100)) {
+            lv_facility = EventUnit();
+            if ((UnitIsAlive(lv_facility) == true)) {
+                lv_slot += 1;
+                libGHLo_gv_upgradeNotifications.lv_slotLastUsed = lv_slot;
+                libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_slot] = lv_facility;
+                if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
+                    lv_upgrade = libNtve_gf_TriggeringProgressUpgrade();
+                    libGHLo_gf_UpgradeNotificationsSetSlotData(lv_slot, libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), libGHLo_gf_UpgradeNotificationsUpgradeImage(lv_upgrade), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(EventPlayer(), false)), false);
+                    if ((libGHLo_gv_upgradeNotifications.lv_updateThreadRunning == false)) {
+                        libGHLo_gv_upgradeNotifications.lv_updateThreadRunning = true;
+                        libGHLo_gf_UpgradeNotificationsUpdateThread();
+                    }
+
+                    libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], StringToText(""), libGHLo_gv_upgradeNotificationsObs);
+                    DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_slot], libGHLo_gv_upgradeNotificationsObs, true);
+                    DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], libGHLo_gv_upgradeNotificationsObs, false);
+                    libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
+                    libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], 0.0, libGHLo_gv_upgradeNotificationsObs);
+                }
+
+                return false;
             }
 
-            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], StringToText(""), libGHLo_gv_upgradeNotificationsObs);
-            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_slot], libGHLo_gv_upgradeNotificationsObs, true);
-            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], libGHLo_gv_upgradeNotificationsObs, false);
-            libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
-            libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], 0.0, libGHLo_gv_upgradeNotificationsObs);
         }
 
     }
 
+    return false;
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_UpgradeNotificationsResearchStarted_Init () {
     libGHLo_gt_UpgradeNotificationsResearchStarted = TriggerCreate("libGHLo_gt_UpgradeNotificationsResearchStarted_Func");
-    TriggerAddEventUnitResearchProgress(libGHLo_gt_UpgradeNotificationsResearchStarted, null, c_unitProgressStageStart);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1907,7 +1932,7 @@ bool libGHLo_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
     int[4] lv_icon;
     int[4] lv_workerColor;
     int[4] lv_background;
-    string lv_str;
+    string lv_slotStr;
 
     // Automatic Variable Declarations
     const int autoE2BFA55A_ae = 3;
@@ -1932,65 +1957,65 @@ bool libGHLo_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
         lv_background[init_i] = c_invalidDialogControlId;
     }
 
-    // Conditions
-    if (testConds) {
-        if (!((UserDataGetInt("GameHeartSettings", "Notifications (Workers Killed)", "Value", 1) == 1))) {
-            return false;
-        }
-    }
-
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_slot = 0;
-    for ( ; ( (autoE2BFA55A_ai >= 0 && lv_slot <= autoE2BFA55A_ae) || (autoE2BFA55A_ai < 0 && lv_slot >= autoE2BFA55A_ae) ) ; lv_slot += autoE2BFA55A_ai ) {
-        lv_str = IntToString(lv_slot);
-        DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + lv_str));
-        lv_panel[lv_slot] = DialogControlLastCreated();
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_str + "/WorkerCount")));
-        lv_timeLabel[lv_slot] = DialogControlLastCreated();
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_str + "/WorkerType")));
-        lv_icon[lv_slot] = DialogControlLastCreated();
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_str + "/WorkerColor")));
-        lv_workerColor[lv_slot] = DialogControlLastCreated();
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_str + "/WorkerBackground")));
-        lv_background[lv_slot] = DialogControlLastCreated();
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-        libNtve_gf_SetDialogItemText(lv_timeLabel[lv_slot], StringToText(""), libGHLo_gv_workersKilledNotificationsObs);
-        libNtve_gf_SetDialogItemColor(lv_panel[lv_slot], Color(100,100,100), libGHLo_gv_workersKilledNotificationsObs);
-    }
-    lv_slot = PlayerGroupCount(libGHLo_gv_initial_Active_Players);
-    if (((lv_slot >= 1) && (lv_slot <= 4))) {
-        libGHLo_gv_workersKilledNotifications.lv_active = true;
-        autoA9BD4D01_g = libGHLo_gv_initial_Active_Players;
-        autoA9BD4D01_var = -1;
-        while (true) {
-            autoA9BD4D01_var = PlayerGroupNextPlayer(autoA9BD4D01_g, autoA9BD4D01_var);
-            if (autoA9BD4D01_var < 0) { break; }
-            libGHLo_gv_workersKilledNotifications.lv_itemPanel[autoA9BD4D01_var] = lv_panel[lv_count];
-            libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[autoA9BD4D01_var] = lv_timeLabel[lv_count];
-            libGHLo_gv_workersKilledNotifications.lv_itemIcon[autoA9BD4D01_var] = lv_icon[lv_count];
-            libGHLo_gv_workersKilledNotifications.lv_itemWorkerColor[autoA9BD4D01_var] = lv_workerColor[lv_count];
-            libGHLo_gv_workersKilledNotifications.lv_itemBackground[autoA9BD4D01_var] = lv_background[lv_count];
-            lv_count += 1;
+    if ((UserDataGetInt("GameHeartSettings", "Notifications (Workers Killed)", "Value", 1) == 1)) {
+        lv_slot = PlayerGroupCount(libGHLo_gv_initial_Active_Players);
+        if (((lv_slot >= 1) && (lv_slot <= 4))) {
+            libGHLo_gv_workersKilledNotifications.lv_active = true;
+            lv_slot = 0;
+            for ( ; ( (autoE2BFA55A_ai >= 0 && lv_slot <= autoE2BFA55A_ae) || (autoE2BFA55A_ai < 0 && lv_slot >= autoE2BFA55A_ae) ) ; lv_slot += autoE2BFA55A_ai ) {
+                lv_slotStr = IntToString(lv_slot);
+                DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + lv_slotStr));
+                lv_panel[lv_slot] = DialogControlLastCreated();
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+                DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+                DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerCount")));
+                lv_timeLabel[lv_slot] = DialogControlLastCreated();
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
+                DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+                DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerType")));
+                lv_icon[lv_slot] = DialogControlLastCreated();
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
+                DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+                DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerColor")));
+                lv_workerColor[lv_slot] = DialogControlLastCreated();
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
+                DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+                DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerBackground")));
+                lv_background[lv_slot] = DialogControlLastCreated();
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
+                DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+                libNtve_gf_SetDialogItemText(lv_timeLabel[lv_slot], StringToText(""), libGHLo_gv_workersKilledNotificationsObs);
+                libNtve_gf_SetDialogItemColor(lv_panel[lv_slot], Color(100,100,100), libGHLo_gv_workersKilledNotificationsObs);
+            }
+            autoA9BD4D01_g = libGHLo_gv_initial_Active_Players;
+            autoA9BD4D01_var = -1;
+            while (true) {
+                autoA9BD4D01_var = PlayerGroupNextPlayer(autoA9BD4D01_g, autoA9BD4D01_var);
+                if (autoA9BD4D01_var < 0) { break; }
+                libGHLo_gv_workersKilledNotifications.lv_itemPanel[autoA9BD4D01_var] = lv_panel[lv_count];
+                libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[autoA9BD4D01_var] = lv_timeLabel[lv_count];
+                libGHLo_gv_workersKilledNotifications.lv_itemIcon[autoA9BD4D01_var] = lv_icon[lv_count];
+                libGHLo_gv_workersKilledNotifications.lv_itemWorkerColor[autoA9BD4D01_var] = lv_workerColor[lv_count];
+                libGHLo_gv_workersKilledNotifications.lv_itemBackground[autoA9BD4D01_var] = lv_background[lv_count];
+                lv_count += 1;
+            }
+            libGHLo_gf_RegisterTimerRunsOutEvent(libGHLo_gt_WorkersKilledNotificationsTimerRunsOut, null);
+            libGHLo_gf_RegisterUnitDiesEvent(libGHLo_gt_WorkersKilledNotificationsWorkerKilled, null);
+            return true;
         }
+
     }
 
+    return false;
     return true;
 }
 
@@ -2014,35 +2039,31 @@ bool libGHLo_gt_WorkersKilledNotificationsTimerRunsOut_Func (bool testConds, boo
 
     // Variable Initialization
 
-    // Conditions
-    if (testConds) {
-        if (!((libGHLo_gv_workersKilledNotifications.lv_active == true))) {
-            return false;
-        }
-    }
-
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_timer = EventTimer();
-    lv_slot = 0;
-    for ( ; ( (autoA8D51FBB_ai >= 0 && lv_slot <= autoA8D51FBB_ae) || (autoA8D51FBB_ai < 0 && lv_slot >= autoA8D51FBB_ae) ) ; lv_slot += autoA8D51FBB_ai ) {
-        if ((lv_timer == libGHLo_gv_workersKilledNotifications.lv_timerDestruction[lv_slot])) {
-            libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_WorkersKilledNotificationsSlotStatus_Hidden;
-            DialogControlSetVisible(libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_slot], libGHLo_gv_all_Players, false);
-            return true;
-        }
+    if ((libGHLo_gv_workersKilledNotifications.lv_active == true)) {
+        lv_timer = EventTimer();
+        lv_slot = 0;
+        for ( ; ( (autoA8D51FBB_ai >= 0 && lv_slot <= autoA8D51FBB_ae) || (autoA8D51FBB_ai < 0 && lv_slot >= autoA8D51FBB_ae) ) ; lv_slot += autoA8D51FBB_ai ) {
+            if ((lv_timer == libGHLo_gv_workersKilledNotifications.lv_timerDestruction[lv_slot])) {
+                libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_WorkersKilledNotificationsSlotStatus_Hidden;
+                DialogControlSetVisible(libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_slot], libGHLo_gv_all_Players, false);
+                return true;
+            }
 
+        }
     }
+
+    return false;
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_WorkersKilledNotificationsTimerRunsOut_Init () {
     libGHLo_gt_WorkersKilledNotificationsTimerRunsOut = TriggerCreate("libGHLo_gt_WorkersKilledNotificationsTimerRunsOut_Func");
-    TriggerAddEventTimer(libGHLo_gt_WorkersKilledNotificationsTimerRunsOut, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2057,53 +2078,53 @@ bool libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Func (bool testConds, boo
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_deadUnit = EventUnit();
-
-    // Conditions
-    if (testConds) {
-        if (!(((libGHLo_gv_workersKilledNotifications.lv_active == true) && (EventUnitDamageDeathCheck(c_deathTypeRemove) == false) && (UnitTestState(EventUnit(), c_unitStateHallucination) == false)))) {
-            return false;
-        }
-    }
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_unitType = UnitGetType(lv_deadUnit);
-    lv_deadUnitOwner = EventPlayer();
-    lv_killingUnit = libNtve_gf_KillingUnit();
-    if (((lv_unitType == "Drone") || (lv_unitType == "Probe") || (lv_unitType == "SCV") || (lv_unitType == "DroneBurrowed")) && (libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_deadUnitOwner] != c_invalidDialogControlId)) {
-        if ((libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_deadUnitOwner] == libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible)) {
-            libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] = (libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] + 1);
-        }
-        else {
-            libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] = 1;
-        }
-        libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[lv_deadUnitOwner], IntToText(libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner]), libGHLo_gv_workersKilledNotificationsObs);
-        libNtve_gf_SetDialogItemImage(libGHLo_gv_workersKilledNotifications.lv_itemIcon[lv_deadUnitOwner], (CatalogFieldValueGet(c_gameCatalogActor, lv_unitType, "UnitIcon", c_playerAny)), libGHLo_gv_workersKilledNotificationsObs);
-        if ((UnitIsValid(libNtve_gf_KillingUnit()) == true)) {
-            libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemBackground[lv_deadUnitOwner], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(lv_killingUnit), false)), libGHLo_gv_workersKilledNotificationsObs);
+    if ((libGHLo_gv_workersKilledNotifications.lv_active == true) && (EventUnitDamageDeathCheck(c_deathTypeRemove) == false)) {
+        lv_deadUnit = EventUnit();
+        if ((UnitTestState(lv_deadUnit, c_unitStateHallucination) == false)) {
+            lv_unitType = UnitGetType(lv_deadUnit);
+            lv_deadUnitOwner = UnitGetOwner(lv_deadUnit);
+            lv_killingUnit = libNtve_gf_KillingUnit();
+            if (((lv_unitType == "Drone") || (lv_unitType == "Probe") || (lv_unitType == "SCV") || (lv_unitType == "DroneBurrowed")) && (libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_deadUnitOwner] != c_invalidDialogControlId)) {
+                if ((libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_deadUnitOwner] == libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible)) {
+                    libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] = (libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] + 1);
+                }
+                else {
+                    libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] = 1;
+                }
+                libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[lv_deadUnitOwner], IntToText(libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner]), libGHLo_gv_workersKilledNotificationsObs);
+                libNtve_gf_SetDialogItemImage(libGHLo_gv_workersKilledNotifications.lv_itemIcon[lv_deadUnitOwner], (CatalogFieldValueGet(c_gameCatalogActor, lv_unitType, "UnitIcon", c_playerAny)), libGHLo_gv_workersKilledNotificationsObs);
+                if ((UnitIsValid(libNtve_gf_KillingUnit()) == true)) {
+                    libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemBackground[lv_deadUnitOwner], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(lv_killingUnit), false)), libGHLo_gv_workersKilledNotificationsObs);
+                }
+
+                libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemWorkerColor[lv_deadUnitOwner], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv_deadUnitOwner, false)), libGHLo_gv_workersKilledNotificationsObs);
+                libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_deadUnitOwner] = libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible;
+                if ((libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] > 1)) {
+                    DialogControlSetVisible(libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_deadUnitOwner], libGHLo_gv_workersKilledNotificationsObs, true);
+                    DialogControlSendAnimationEvent(libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[lv_deadUnitOwner], libGHLo_gv_workersKilledNotificationsObs, "textUpdated");
+                }
+
+                TimerStart(libGHLo_gv_workersKilledNotifications.lv_timerDestruction[lv_deadUnitOwner], libGHLo_gv_workersKilledNotificationsVisibleTime, false, c_timeReal);
+                return true;
+            }
+
         }
 
-        libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemWorkerColor[lv_deadUnitOwner], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv_deadUnitOwner, false)), libGHLo_gv_workersKilledNotificationsObs);
-        libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_deadUnitOwner] = libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible;
-        if ((libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] > 1)) {
-            DialogControlSetVisible(libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_deadUnitOwner], libGHLo_gv_workersKilledNotificationsObs, true);
-            DialogControlSendAnimationEvent(libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[lv_deadUnitOwner], libGHLo_gv_workersKilledNotificationsObs, "textUpdated");
-        }
-
-        TimerStart(libGHLo_gv_workersKilledNotifications.lv_timerDestruction[lv_deadUnitOwner], libGHLo_gv_workersKilledNotificationsVisibleTime, false, c_timeReal);
     }
 
+    return false;
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Init () {
     libGHLo_gt_WorkersKilledNotificationsWorkerKilled = TriggerCreate("libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Func");
-    TriggerAddEventUnitDied(libGHLo_gt_WorkersKilledNotificationsWorkerKilled, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2111,29 +2132,32 @@ void libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Init () {
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_MapNotificationsDrop_Func (bool testConds, bool runActions) {
     // Variable Declarations
+    point lv_position;
     unit lv_unit;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_unit = EventUnit();
 
-    // Conditions
-    if (testConds) {
-        if (!(((UnitCargoValue(lv_unit, c_unitCargoSpaceUsed) == UnitCargoValue(lv_unit, c_unitCargoSpaceTotal)) && (UnitTypeTestAttribute(UnitGetType(lv_unit), c_unitAttributeStructure) == false) && (libGHLo_gf_MapNotificationsCheckFullHealth(lv_unit) == true) && ((libGHLo_gv_mapNotifications.lv_mostRecentPingLocation == null) || (DistanceBetweenPoints(libGHLo_gv_mapNotifications.lv_mostRecentPingLocation, UnitGetPosition(lv_unit)) > libGHLo_gv_mapNotifications.lv_minimumPickupSpacing) || (TimerGetElapsed(libGHLo_gv_mapNotifications.lv_mostRecentTimer) >= libGHLo_gv_mapNotifications.lv_pingDuration))))) {
-            return false;
-        }
-    }
-
     // Actions
     if (!runActions) {
         return true;
     }
 
-    libNtve_gf_CreatePingFacingAngle(libGHLo_gv_mapNotificationObs, "PingBonus", UnitGetPosition(lv_unit), Color(100.00, 100.00, 0.00), libGHLo_gv_mapNotifications.lv_pingDuration, -90.0);
-    PingSetObserver(PingLastCreated(), true);
-    PingSetUnit(PingLastCreated(), lv_unit);
-    libGHLo_gv_mapNotifications.lv_mostRecentPingLocation = PingGetPosition(PingLastCreated());
-    TimerStart(libGHLo_gv_mapNotifications.lv_mostRecentTimer, libGHLo_gv_mapNotifications.lv_pingDuration, false, c_timeGame);
+    if ((UnitCargoValue(lv_unit, c_unitCargoSpaceUsed) == UnitCargoValue(lv_unit, c_unitCargoSpaceTotal)) && (UnitTypeTestAttribute(UnitGetType(lv_unit), c_unitAttributeStructure) == false) && (libGHLo_gf_MapNotificationsCheckFullHealth(lv_unit) == true)) {
+        lv_position = UnitGetPosition(lv_unit);
+        if (((libGHLo_gv_mapNotifications.lv_mostRecentPingLocation == null) || (TimerGetElapsed(libGHLo_gv_mapNotifications.lv_mostRecentTimer) >= libGHLo_gv_mapNotifications.lv_pingDuration) || (DistanceBetweenPoints(libGHLo_gv_mapNotifications.lv_mostRecentPingLocation, lv_position) > libGHLo_gv_mapNotifications.lv_minimumPickupSpacing))) {
+            libNtve_gf_CreatePingFacingAngle(libGHLo_gv_mapNotificationObs, "PingBonus", UnitGetPosition(lv_unit), Color(100.00, 100.00, 0.00), libGHLo_gv_mapNotifications.lv_pingDuration, -90.0);
+            PingSetObserver(PingLastCreated(), true);
+            PingSetUnit(PingLastCreated(), lv_unit);
+            libGHLo_gv_mapNotifications.lv_mostRecentPingLocation = PingGetPosition(PingLastCreated());
+            TimerStart(libGHLo_gv_mapNotifications.lv_mostRecentTimer, libGHLo_gv_mapNotifications.lv_pingDuration, false, c_timeGame);
+            return true;
+        }
+
+    }
+
+    return false;
     return true;
 }
 
@@ -2173,6 +2197,7 @@ bool libGHLo_gt_MinimapFrustumInitialization_Func (bool testConds, bool runActio
     const fixed lv_baseScale = 0.5;
     const fixed lv_baseMapSize = 108.0;
     fixed lv_mapScale;
+    bool lv_isActive;
 
     // Automatic Variable Declarations
     // Variable Initialization
@@ -2183,12 +2208,12 @@ bool libGHLo_gt_MinimapFrustumInitialization_Func (bool testConds, bool runActio
     }
 
     if ((PlayerGroupCount(PlayerGroupActive()) == 2) && (PlayerGroupCount(GameAttributePlayersForTeam(1)) == 1) && (PlayerGroupCount(GameAttributePlayersForTeam(2)) == 1)) {
-        libGHLo_gv_minimapFrustum.lv_active = true;
         libGHLo_gv_minimapFrustum.lv_playerOne = PlayerGroupPlayer(GameAttributePlayersForTeam(1), 1);
         libGHLo_gv_minimapFrustum.lv_playerTwo = PlayerGroupPlayer(GameAttributePlayersForTeam(2), 1);
         lv_mapScale = (lv_baseMapSize / MaxF(libNtve_gf_WidthOfRegion(RegionPlayableMap()), libNtve_gf_HeightOfRegion(RegionPlayableMap())));
         lv_mapScale = (lv_mapScale * lv_baseScale);
         if ((PlayerType(libGHLo_gv_minimapFrustum.lv_playerOne) == c_playerTypeUser)) {
+            lv_isActive = true;
             libNtve_gf_CreatePingFacingAngle(libGHLo_gv_minimapFrustumObs, "GameHeartPlayerCameraModel", CameraGetTarget(libGHLo_gv_minimapFrustum.lv_playerOne), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(libGHLo_gv_minimapFrustum.lv_playerOne, false)), 0.0, 270.0);
             PingSetScale(PingLastCreated(), lv_mapScale);
             libGHLo_gv_minimapFrustum.lv_ping[0] = PingLastCreated();
@@ -2196,14 +2221,22 @@ bool libGHLo_gt_MinimapFrustumInitialization_Func (bool testConds, bool runActio
         }
 
         if ((PlayerType(libGHLo_gv_minimapFrustum.lv_playerTwo) == c_playerTypeUser)) {
+            lv_isActive = true;
             libNtve_gf_CreatePingFacingAngle(libGHLo_gv_minimapFrustumObs, "GameHeartPlayerCameraModel", CameraGetTarget(libGHLo_gv_minimapFrustum.lv_playerTwo), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(libGHLo_gv_minimapFrustum.lv_playerTwo, false)), 0.0, 270.0);
             PingSetScale(PingLastCreated(), lv_mapScale);
             libGHLo_gv_minimapFrustum.lv_ping[1] = PingLastCreated();
             libGHLo_gf_RegisterCameraMoveEvent(libGHLo_gt_MinimapFrustumPlayerCameraMoved, libGHLo_gv_minimapFrustum.lv_playerTwo, c_cameraMoveReasonAny);
         }
 
-    }
+        libGHLo_gv_minimapFrustum.lv_active = lv_isActive;
+        if ((lv_isActive == false)) {
+            return false;
+        }
 
+    }
+    else {
+        return false;
+    }
     return true;
 }
 

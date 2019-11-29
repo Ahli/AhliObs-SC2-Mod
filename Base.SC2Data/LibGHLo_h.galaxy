@@ -121,6 +121,14 @@ playergroup libGHLo_gv_minimapFrustumObs;
 // Function Declarations
 void libGHLo_gf_ApplySkinSet (string lp_skinSet, int lp_player);
 string libGHLo_gf_PlayerSkinSet (int lp_player);
+void libGHLo_gf_RegisterCameraMoveEvent (trigger lp_trigger, int lp_playerId, int lp_cameraMoveReason);
+void libGHLo_gf_RegisterPeriodicEvent (trigger lp_trigger, fixed lp_interval, int lp_time);
+void libGHLo_gf_RegisterTimerRunsOutEvent (trigger lp_trigger, timer lp_timer);
+void libGHLo_gf_RegisterUnitCreatedEvent (trigger lp_trigger, unit lp_unit, string lp_ability, string lp_behavior);
+void libGHLo_gf_RegisterUnitTrainingProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage);
+void libGHLo_gf_RegisterUnitArmingProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage);
+void libGHLo_gf_RegisterUnitResearchProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage);
+void libGHLo_gf_RegisterUnitDiesEvent (trigger lp_trigger, unit lp_unit);
 void libGHLo_gf_GraphsDefineGraph (int lp_iD, text lp_title, string lp_string, string lp_scoreType, int lp_style, fixed lp_minimumValue, fixed lp_rangeBase, fixed lp_rangeIncrement);
 void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graph);
 void libGHLo_gf_GraphsUpdateDataComparative (int lp_graph);
@@ -138,7 +146,6 @@ void libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne (int lp_slot)
 void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_slotB);
 void libGHLo_gf_UpgradeNotificationsUpdateProgressData (int lp_slot);
 bool libGHLo_gf_MapNotificationsCheckFullHealth (unit lp_transportunit);
-void libGHLo_gf_RegisterCameraMoveEvent (trigger lp_trigger, int lp_playerId, int lp_cameraMoveReason);
 
 // Trigger Declarations
 trigger libGHLo_gt_GameHeartInitialization;

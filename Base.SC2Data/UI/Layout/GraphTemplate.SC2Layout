@@ -610,7 +610,7 @@
             
             <Frame type="PlayerFrame" name="PlayerColorLeft">
                 <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-                <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>        
+                <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
                 <Width val="100"/>
                 <Height val="100"/>
                 <Handle val="GraphPlayerColorLeft"/>
@@ -637,7 +637,7 @@
             
             <Frame type="PlayerFrame" name="PlayerColorRight">
                 <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-                <Anchor side="Left" relative="$parent/PlayerColorLeft" pos="Max" offset="0"/>        
+                <Anchor side="Left" relative="$parent/PlayerColorLeft" pos="Max" offset="0"/>
                 <Width val="100"/>
                 <Height val="100"/>
                 <Handle val="GraphPlayerColorRight"/>
@@ -666,11 +666,12 @@
             <Frame type="ToggleControl" name="IncomeGraph">
                 <Anchor relative="$parent"/>
                 <Visible val="false"/>
-                <AcceptsMouse val="false"/>1
+                <AcceptsMouse val="false"/>
                 <Shortcut val="NumPad1"/>
                 <ShortcutEnabledForParticipants val="false"/>
                 <ShortcutEnabledForObservers val="true"/>
                 <LinkedModalFrame val="$parent/ArmySizeGraph"/>
+                <Enabled val="false"/>
                 
                 <Frame type="Frame" name="Graph" template="GraphTemplate/DifferentialGraphTemplate"/>
             </Frame>

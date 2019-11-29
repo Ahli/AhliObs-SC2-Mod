@@ -74,16 +74,29 @@ DocInfo/PatchNote057=GameHeart Optimizations:
 DocInfo/PatchNote058=- production label check filters missiles faster (trigger runs 30% faster on average)
 DocInfo/PatchNote059=- all players and active players function calls were replaced by a variable
 DocInfo/PatchNote060=- more trigger optimizations
+DocInfo/PatchNote061=GameHeart Optimizations:
+DocInfo/PatchNote062=- events are now only registered, if the feature is enabled and can function
+DocInfo/PatchNote063=- less code is executed for disabled features
+DocInfo/PatchNote064=
+DocInfo/PatchNote065=Multiplayer Fix Optimizations:
+DocInfo/PatchNote066=- improved performance of Battlecruiser triggers
+DocInfo/PatchNote067=- - patrol and stop orders of Battlecruisers will only spawn 1 thread instead of 2 per unit
+DocInfo/PatchNote068=- - rearranged conditions and eliminated superfluous ones
+DocInfo/PatchNote069=- - use lazy initialization in code while maintaining profiler's failed condition statistics
 DocInfo/Screenshot01=Icons over buildings which show what they are training or researching while their status bar is displayed.
 DocInfo/Screenshot02=Upgrade notifications that alert you when they are completing, complete, cancelled or denied.
 DocInfo/Screenshot03=Extension Mod for Homestory Cup XX
 DocInfo/Screenshot04=Workers killed notifications that alert you how many workers were lost in the last engagement for a player.
+Param/Value/lib_FixD_2A4652F5=cmd not attack = 
 Param/Value/lib_FixD_517DA3C7=interrupt chase - 
+Param/Value/lib_FixD_5534BF8F=target alive = 
+Param/Value/lib_FixD_6D1CD590=directly issued = 
 Param/Value/lib_FixD_820A991C=ability used - 
 Param/Value/lib_FixD_9F6D1C4A=interrupt chase - 
 Param/Value/lib_FixD_C278811E=interrupt chase - 
 Param/Value/lib_FixD_D0C65A64=ability used - 
 Param/Value/lib_FixD_D7DF34B5=ability used - 
+Param/Value/lib_FixD_F1CCDC39=queue enabled = 
 Param/Value/lib_GHLo_02FAA83E=Gravitic Drive
 Param/Value/lib_GHLo_034F71BF=Melee Attacks Level 1
 Param/Value/lib_GHLo_0650DD4D=Ventral Sacs
@@ -179,7 +192,7 @@ Param/Value/lib_GHLo_D9A2B952=Pathogen Glands
 Param/Value/lib_GHLo_DC405726=Behemoth Reactor
 Param/Value/lib_GHLo_DDD73466=Vehicle Weapons Level 3
 Param/Value/lib_GHLo_DE31BCE5=Air Weapons Level 1
-Param/Value/lib_GHLo_DFAF5FF3=Cancelled
+Param/Value/lib_GHLo_DFAF5FF3=Canceled
 Param/Value/lib_GHLo_E15F370F=Ghost-Personal Cloaking
 Param/Value/lib_GHLo_E219DB63=Vehicle Weapons Level 1
 Param/Value/lib_GHLo_E2743571=Ground Weapons Level 3
