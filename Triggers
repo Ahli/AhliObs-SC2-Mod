@@ -32481,7 +32481,10 @@
             <Value Type="Param" Library="GHLo" Id="8E8AAC35"/>
         </Element>
         <Element Type="Param" Id="8E8AAC35">
-            <Preset Type="PresetValue" Library="Ntve" Id="9FFEB7D2"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="B935A5BF"/>
+        </Element>
+        <Element Type="FunctionCall" Id="B935A5BF">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000193"/>
         </Element>
         <Element Type="Variable" Id="B6CE4EC9">
             <VariableType>

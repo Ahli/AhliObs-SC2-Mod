@@ -91,6 +91,7 @@ void libGHLo_InitVariables () {
     libGHLo_gv_mapNotifications.lv_minimumPickupSpacing = 10.0;
     libGHLo_gv_mapNotifications.lv_scannerSweepDuration = (StringToFixed(CatalogFieldValueGet(c_gameCatalogEffect, "ScannerSweep", "ExpireDelay", c_playerAny)) / GameGetSpeed());
     libGHLo_gv_mapNotifications.lv_pingDuration = 8.0;
+    libGHLo_gv_mapNotifications.lv_mostRecentTimer = TimerCreate();
     libGHLo_gv_mapNotificationObs = PlayerGroupSingle(CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny));
     for (init_i1 = 0; init_i1 <= 2; init_i1 += 1) {
         libGHLo_gv_minimapFrustum.lv_ping[init_i1] = c_invalidPingId;
