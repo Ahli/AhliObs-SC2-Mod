@@ -1681,6 +1681,10 @@ bool libGHLo_gt_UpgradeNotificationsInitialization_Func (bool testConds, bool ru
         libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_UpgradeNotificationsResearchCancelled, null, c_unitProgressStageCancel);
         libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_UpgradeNotificationsResearchCompleted, null, c_unitProgressStageComplete);
         libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_UpgradeNotificationsResearchStarted, null, c_unitProgressStageStart);
+        DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/TimerNotificationPanel");
+        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_upgradeNotificationsObs, true);
+        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         lv_slot = 0;
         for ( ; ( (auto69B01FF3_ai >= 0 && lv_slot <= auto69B01FF3_ae) || (auto69B01FF3_ai < 0 && lv_slot >= auto69B01FF3_ae) ) ; lv_slot += auto69B01FF3_ai ) {
             lv_slotStr = IntToString(lv_slot);
@@ -1963,9 +1967,13 @@ bool libGHLo_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
     }
 
     if ((UserDataGetInt("GameHeartSettings", "Notifications (Workers Killed)", "Value", 1) == 1)) {
-        lv_slot = PlayerGroupCount(libGHLo_gv_initial_Active_Players);
-        if (((lv_slot >= 1) && (lv_slot <= 4))) {
+        lv_count = PlayerGroupCount(libGHLo_gv_initial_Active_Players);
+        if (((lv_count >= 1) && (lv_count <= 4))) {
             libGHLo_gv_workersKilledNotifications.lv_active = true;
+            DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/WorkerNotificationPanel");
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             lv_slot = 0;
             for ( ; ( (autoE2BFA55A_ai >= 0 && lv_slot <= autoE2BFA55A_ae) || (autoE2BFA55A_ai < 0 && lv_slot >= autoE2BFA55A_ae) ) ; lv_slot += autoE2BFA55A_ai ) {
                 lv_slotStr = IntToString(lv_slot);
@@ -1996,6 +2004,7 @@ bool libGHLo_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
                 libNtve_gf_SetDialogItemText(lv_timeLabel[lv_slot], StringToText(""), libGHLo_gv_workersKilledNotificationsObs);
                 libNtve_gf_SetDialogItemColor(lv_panel[lv_slot], Color(100,100,100), libGHLo_gv_workersKilledNotificationsObs);
             }
+            lv_count = 0;
             autoA9BD4D01_g = libGHLo_gv_initial_Active_Players;
             autoA9BD4D01_var = -1;
             while (true) {

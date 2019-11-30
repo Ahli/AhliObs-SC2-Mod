@@ -9,10 +9,8 @@
             <Comment>
                 How to disable the default Void Multi dependency:
                 Data Module -&gt; Gameplay settings -&gt; remove
-                
                 This was the entry:
                 &lt;TriggerLibs Id=&quot;VdMp&quot; IncludePath=&quot;TriggerLibs/VoidMultiLib&quot;/&gt;
-                
                 After removing it:
                 -&gt; The Void Multi library won&apos;t load anymore, so all costly trigger events are never registered!
                 -&gt; All Void Multi triggers need to be provided!
@@ -19466,6 +19464,11 @@
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="837FA825"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="BC2257C0"/>
             <FunctionCall Type="Comment" Library="GHLo" Id="B5F69AC6"/>
+            <FunctionCall Type="Comment" Library="GHLo" Id="1C4C6F8D"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="4AD42848"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="4B1389A6"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="A77F1A10"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="37A26FF8"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="69B01FF3"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="B4D22D6F"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="2C74ABC6"/>
@@ -19590,6 +19593,88 @@
                 init UI
             </Comment>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+        </Element>
+        <Element Type="Comment" Id="1C4C6F8D">
+            <Comment>
+                make panel visible
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+        </Element>
+        <Element Type="FunctionCall" Id="4AD42848">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="CC29332F"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="5585A3FE"/>
+            <Parameter Type="Param" Library="GHLo" Id="A23F7760"/>
+        </Element>
+        <Element Type="Param" Id="5585A3FE">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="06C1424C"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="67A829E2"/>
+        </Element>
+        <Element Type="Param" Id="A23F7760">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="AEF92396"/>
+            <Value>UIContainer/FullscreenUpperContainer/TimerNotificationPanel</Value>
+            <ValueType Type="string"/>
+        </Element>
+        <Element Type="FunctionCall" Id="4B1389A6">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="3DCB955E"/>
+            <Parameter Type="Param" Library="GHLo" Id="16A8212D"/>
+            <Parameter Type="Param" Library="GHLo" Id="01F5C2B8"/>
+        </Element>
+        <Element Type="Param" Id="3DCB955E">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="3E0FD909"/>
+        </Element>
+        <Element Type="FunctionCall" Id="3E0FD909">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="Param" Id="16A8212D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
+            <Variable Type="Variable" Library="GHLo" Id="35514AC2"/>
+        </Element>
+        <Element Type="Param" Id="01F5C2B8">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000121"/>
+        </Element>
+        <Element Type="FunctionCall" Id="A77F1A10">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="B548299C"/>
+            <Parameter Type="Param" Library="GHLo" Id="F670C36B"/>
+            <Parameter Type="Param" Library="GHLo" Id="F2A79629"/>
+        </Element>
+        <Element Type="Param" Id="B548299C">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="FA8637B0"/>
+        </Element>
+        <Element Type="FunctionCall" Id="FA8637B0">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="Param" Id="F670C36B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
+            <Variable Type="Variable" Library="GHLo" Id="94CCCFEB"/>
+        </Element>
+        <Element Type="Param" Id="F2A79629">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000120"/>
+        </Element>
+        <Element Type="FunctionCall" Id="37A26FF8">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="EED3AF00"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="F7984092"/>
+            <Parameter Type="Param" Library="GHLo" Id="352D673E"/>
+        </Element>
+        <Element Type="Param" Id="F7984092">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="22617857"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="155F4E15"/>
+        </Element>
+        <Element Type="FunctionCall" Id="155F4E15">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="Param" Id="352D673E">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="07012039"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="AE93A3CC"/>
         </Element>
         <Element Type="FunctionCall" Id="69B01FF3">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="66474248"/>
@@ -28927,7 +29012,7 @@
         </Element>
         <Element Type="Param" Id="C3EB028A">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="GHLo" Id="5D8ACE13"/>
+            <Variable Type="Variable" Library="GHLo" Id="5471A498"/>
         </Element>
         <Element Type="Param" Id="7F5AB8E3">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
@@ -28945,8 +29030,14 @@
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="850C7101"/>
+            <FunctionCall Type="Comment" Library="GHLo" Id="D1015D68"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="7A324E73"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="1ACE90A4"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="4AD5F82B"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="05C0FBD9"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="E2BFA55A"/>
             <FunctionCall Type="Comment" Library="GHLo" Id="E0FAA85D"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="68BDC287"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="A9BD4D01"/>
             <FunctionCall Type="Comment" Library="GHLo" Id="C95DBB34"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="F0BFED0E"/>
@@ -28974,6 +29065,88 @@
             <Value>true</Value>
             <ValueType Type="bool"/>
         </Element>
+        <Element Type="Comment" Id="D1015D68">
+            <Comment>
+                make panel visible
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+        </Element>
+        <Element Type="FunctionCall" Id="7A324E73">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="CC29332F"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="5718C33C"/>
+            <Parameter Type="Param" Library="GHLo" Id="4924EE52"/>
+        </Element>
+        <Element Type="Param" Id="5718C33C">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="06C1424C"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="67A829E2"/>
+        </Element>
+        <Element Type="Param" Id="4924EE52">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="AEF92396"/>
+            <Value>UIContainer/FullscreenUpperContainer/WorkerNotificationPanel</Value>
+            <ValueType Type="string"/>
+        </Element>
+        <Element Type="FunctionCall" Id="1ACE90A4">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="06BA79D6"/>
+            <Parameter Type="Param" Library="GHLo" Id="334134E6"/>
+            <Parameter Type="Param" Library="GHLo" Id="D77789AB"/>
+        </Element>
+        <Element Type="Param" Id="06BA79D6">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="305ED437"/>
+        </Element>
+        <Element Type="FunctionCall" Id="305ED437">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="Param" Id="334134E6">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
+            <Variable Type="Variable" Library="GHLo" Id="35514AC2"/>
+        </Element>
+        <Element Type="Param" Id="D77789AB">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000121"/>
+        </Element>
+        <Element Type="FunctionCall" Id="4AD5F82B">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="45C4114E"/>
+            <Parameter Type="Param" Library="GHLo" Id="C5803B76"/>
+            <Parameter Type="Param" Library="GHLo" Id="318F9489"/>
+        </Element>
+        <Element Type="Param" Id="45C4114E">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="AD466056"/>
+        </Element>
+        <Element Type="FunctionCall" Id="AD466056">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="Param" Id="C5803B76">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
+            <Variable Type="Variable" Library="GHLo" Id="441B7400"/>
+        </Element>
+        <Element Type="Param" Id="318F9489">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000120"/>
+        </Element>
+        <Element Type="FunctionCall" Id="05C0FBD9">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="EED3AF00"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="8BEE3FC8"/>
+            <Parameter Type="Param" Library="GHLo" Id="20238688"/>
+        </Element>
+        <Element Type="Param" Id="8BEE3FC8">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="22617857"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="E3D69829"/>
+        </Element>
+        <Element Type="FunctionCall" Id="E3D69829">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="Param" Id="20238688">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="07012039"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="AE93A3CC"/>
+        </Element>
         <Element Type="FunctionCall" Id="E2BFA55A">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="66474248"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
@@ -28981,8 +29154,8 @@
             <Parameter Type="Param" Library="GHLo" Id="BBB4745D"/>
             <Parameter Type="Param" Library="GHLo" Id="018FC3C9"/>
             <Parameter Type="Param" Library="GHLo" Id="C0441A7A"/>
-            <FunctionCall Type="Comment" Library="GHLo" Id="578912C6"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="1E9630C0"/>
+            <FunctionCall Type="Comment" Library="GHLo" Id="578912C6"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="7C6E7836"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="BCDE46C4"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="06BE2C3B"/>
@@ -29029,12 +29202,6 @@
             <ParameterDef Type="ParamDef" Library="Ntve" Id="8CB41668"/>
             <Variable Type="Variable" Library="GHLo" Id="5D8ACE13"/>
         </Element>
-        <Element Type="Comment" Id="578912C6">
-            <Comment>
-                Hook up and hide all the UI elements to variables so we can dynamically change them (only on initialization)
-            </Comment>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="DAF49931"/>
-        </Element>
         <Element Type="FunctionCall" Id="1E9630C0">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="DAF49931"/>
@@ -29056,6 +29223,12 @@
         <Element Type="Param" Id="9264FB84">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="00000002"/>
             <Variable Type="Variable" Library="GHLo" Id="5D8ACE13"/>
+        </Element>
+        <Element Type="Comment" Id="578912C6">
+            <Comment>
+                Hook up and hide all the UI elements to variables so we can dynamically change them (only on initialization)
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="DAF49931"/>
         </Element>
         <Element Type="FunctionCall" Id="7C6E7836">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="CC29332F"/>
@@ -29693,6 +29866,21 @@
             </Comment>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
         </Element>
+        <Element Type="FunctionCall" Id="68BDC287">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="ABA28EE5"/>
+            <Parameter Type="Param" Library="GHLo" Id="2E5484F1"/>
+        </Element>
+        <Element Type="Param" Id="ABA28EE5">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="GHLo" Id="5471A498"/>
+        </Element>
+        <Element Type="Param" Id="2E5484F1">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
         <Element Type="FunctionCall" Id="A9BD4D01">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="5084725D"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
@@ -29941,7 +30129,7 @@
         </Element>
         <Element Type="Param" Id="9FE9A89D">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="6342B1C3"/>
-            <Variable Type="Variable" Library="GHLo" Id="5D8ACE13"/>
+            <Variable Type="Variable" Library="GHLo" Id="5471A498"/>
         </Element>
         <Element Type="FunctionCall" Id="AB2D0740">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>

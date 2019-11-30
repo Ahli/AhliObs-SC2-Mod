@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
-    <Constant name="WholePanelVisible" val="true"/>
     <Constant name="Height" val="92"/>
     <Constant name="PanelHeight" val="386"/>
     <Constant name="PanelVerticalOffset" val="400"/>
@@ -89,7 +88,7 @@
             <Width val="#Width"/>
             <Height val="#PanelHeight"/>
             <CollapseLayout val="true"/>
-            <Visible val="#WholePanelVisible"/>
+            <Visible val="false"/>
             <AcceptsMouse val="false"/>
             <RenderPriority val="0"/>
 
