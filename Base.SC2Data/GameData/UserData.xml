@@ -39,6 +39,14 @@
                 <Field Id="Description"/>
             </Text>
         </Instances>
+        <Instances Id="Minimap Frustum">
+            <Int>
+                <Field Id="Value"/>
+            </Int>
+            <Text Text="UserData/GameHeartSettings/Minimap Frustum_Description">
+                <Field Id="Description"/>
+            </Text>
+        </Instances>
     </CUser>
     <CUser id="SC2SkinSets">
         <Fields Id="SkinSet" Type="String" EditorColumn="1"/>

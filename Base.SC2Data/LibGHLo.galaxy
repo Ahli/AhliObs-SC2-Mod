@@ -2217,7 +2217,7 @@ bool libGHLo_gt_MinimapFrustumInitialization_Func (bool testConds, bool runActio
         return true;
     }
 
-    if ((PlayerGroupCount(PlayerGroupActive()) == 2) && (PlayerGroupCount(GameAttributePlayersForTeam(1)) == 1) && (PlayerGroupCount(GameAttributePlayersForTeam(2)) == 1)) {
+    if ((UserDataGetInt("GameHeartSettings", "Minimap Frustum", "Value", 1) == 1) && (PlayerGroupCount(PlayerGroupActive()) == 2) && (PlayerGroupCount(GameAttributePlayersForTeam(1)) == 1) && (PlayerGroupCount(GameAttributePlayersForTeam(2)) == 1)) {
         libGHLo_gv_minimapFrustum.lv_playerOne = PlayerGroupPlayer(GameAttributePlayersForTeam(1), 1);
         libGHLo_gv_minimapFrustum.lv_playerTwo = PlayerGroupPlayer(GameAttributePlayersForTeam(2), 1);
         lv_mapScale = (lv_baseMapSize / MaxF(libNtve_gf_WidthOfRegion(RegionPlayableMap()), libNtve_gf_HeightOfRegion(RegionPlayableMap())));

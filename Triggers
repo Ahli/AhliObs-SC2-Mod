@@ -32595,6 +32595,7 @@
         </Element>
         <Element Type="FunctionCall" Id="E122B896">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="84FBF011"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="88919E17"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="FBBEB38E"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="380046DF"/>
@@ -32609,6 +32610,56 @@
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="0B804C08"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="E49EF38A"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="E193D021"/>
+        </Element>
+        <Element Type="FunctionCall" Id="84FBF011">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="GHLo" Id="B479D55F"/>
+            <Parameter Type="Param" Library="GHLo" Id="DD31A268"/>
+            <Parameter Type="Param" Library="GHLo" Id="75C2DC1B"/>
+        </Element>
+        <Element Type="Param" Id="B479D55F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="D5B9732E"/>
+        </Element>
+        <Element Type="FunctionCall" Id="D5B9732E">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="1B79DE77"/>
+            <Parameter Type="Param" Library="GHLo" Id="3C8CE129"/>
+            <Parameter Type="Param" Library="GHLo" Id="DA980BE8"/>
+            <Parameter Type="Param" Library="GHLo" Id="6DC73516"/>
+            <Parameter Type="Param" Library="GHLo" Id="4A29F761"/>
+        </Element>
+        <Element Type="Param" Id="3C8CE129">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ECEA677C"/>
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="DA980BE8">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="A65030BE"/>
+            <Value>GameHeartSettings</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="User"/>
+        </Element>
+        <Element Type="Param" Id="6DC73516">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="F33ACFAA"/>
+            <Value>Minimap Frustum</Value>
+            <ValueType Type="userinstance"/>
+            <ValueContext Value="GameHeartSettings"/>
+        </Element>
+        <Element Type="Param" Id="4A29F761">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="344B79F1"/>
+            <Value>Value</Value>
+            <ValueType Type="userfield"/>
+            <ValueContext Value="GameHeartSettings"/>
+        </Element>
+        <Element Type="Param" Id="DD31A268">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="75C2DC1B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>1</Value>
+            <ValueType Type="int"/>
         </Element>
         <Element Type="FunctionCall" Id="88919E17">
             <FunctionDef Type="FunctionDef" Library="GHLo" Id="01F23C90"/>
