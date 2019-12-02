@@ -20040,7 +20040,24 @@
         </Element>
         <Element Type="Param" Id="EF8BC16B">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="C25E6187"/>
-            <Variable Type="Variable" Library="GHLo" Id="218C97F8"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="CA551F53"/>
+        </Element>
+        <Element Type="FunctionCall" Id="CA551F53">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="7AE49F4E"/>
+            <Parameter Type="Param" Library="GHLo" Id="6E548A85"/>
+            <Parameter Type="Param" Library="GHLo" Id="D981AD54"/>
+        </Element>
+        <Element Type="Param" Id="6E548A85">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="1999B4BF"/>
+            <Variable Type="Variable" Library="GHLo" Id="BDC15522"/>
+        </Element>
+        <Element Type="Param" Id="D981AD54">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="96CEED49"/>
+            <Variable Type="Variable" Library="GHLo" Id="896CE23D"/>
+            <StructMember Type="Param" Library="GHLo" Id="F0AB2F72"/>
+        </Element>
+        <Element Type="Param" Id="F0AB2F72">
+            <Variable Type="Variable" Library="GHLo" Id="50E58992"/>
         </Element>
         <Element Type="Param" Id="3760412D">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="F3144A4A"/>
@@ -21439,8 +21456,7 @@
         </Element>
         <Element Type="Param" Id="471FD9C3">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
-            <Value>100</Value>
-            <ValueType Type="int"/>
+            <Variable Type="Variable" Library="GHLo" Id="BDC15522"/>
         </Element>
         <Element Type="FunctionCall" Id="BE796086">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
@@ -27880,6 +27896,7 @@
             <Item Type="Structure" Library="GHLo" Id="3292D553"/>
             <Item Type="Variable" Library="GHLo" Id="896CE23D"/>
             <Item Type="Variable" Library="GHLo" Id="218C97F8"/>
+            <Item Type="Variable" Library="GHLo" Id="BDC15522"/>
             <Item Type="Variable" Library="GHLo" Id="DE4EF750"/>
             <Item Type="Variable" Library="GHLo" Id="4BCA2C4E"/>
             <Item Type="Variable" Library="GHLo" Id="94CCCFEB"/>
@@ -28021,7 +28038,7 @@
         <Element Type="Variable" Id="C764E4A6">
             <VariableType>
                 <Type Value="unit"/>
-                <ArraySize Dim="0" Value="100"/>
+                <ArraySize Dim="0" Type="Variable" Library="GHLo" Id="BDC15522"/>
             </VariableType>
             <Value Type="Param" Library="GHLo" Id="2E407E60"/>
         </Element>
@@ -28053,6 +28070,17 @@
         </Element>
         <Element Type="Param" Id="188A0DD6">
             <Value>50</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Variable" Id="BDC15522">
+            <VariableType>
+                <Type Value="int"/>
+                <Constant/>
+            </VariableType>
+            <Value Type="Param" Library="GHLo" Id="1FDF1DDE"/>
+        </Element>
+        <Element Type="Param" Id="1FDF1DDE">
+            <Value>100</Value>
             <ValueType Type="int"/>
         </Element>
         <Element Type="Variable" Id="DE4EF750">

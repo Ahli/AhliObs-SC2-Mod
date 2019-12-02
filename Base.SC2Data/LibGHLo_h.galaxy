@@ -24,6 +24,7 @@ const string libGHLo_gv_labelsIcon1 = "Icon1-";
 const string libGHLo_gv_labelsIcon2 = "Icon2-";
 const string libGHLo_gv_labelsIcon3 = "Icon3-";
 const int libGHLo_gv_upgradeNotificationsMaxUISlots = 50;
+const int libGHLo_gv_upgradeNotificationsMaxFacilitySlots = 100;
 const fixed libGHLo_gv_upgradeNotificationsVisibleTime = 15.0;
 const int libGHLo_gv_workersKilledNotificationsMaxUISlots = 15;
 const fixed libGHLo_gv_workersKilledNotificationsVisibleTime = 20.0;
@@ -71,7 +72,7 @@ struct libGHLo_gs_UpgradeNotifications {
     int[libGHLo_gv_upgradeNotificationsMaxUISlots + 1] lv_itemTimerLabel;
     timer[libGHLo_gv_upgradeNotificationsMaxUISlots + 1] lv_timerDestruction;
     int[libGHLo_gv_upgradeNotificationsMaxUISlots + 1] lv_slotStatus;
-    unit[101] lv_slotFacility;
+    unit[libGHLo_gv_upgradeNotificationsMaxFacilitySlots + 1] lv_slotFacility;
     int lv_slotLastUsed;
 };
 
@@ -137,7 +138,7 @@ void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graph);
 void libGHLo_gf_GraphsUpdateDataComparative (int lp_graph);
 bool libGHLo_gf_LabelsUnitUsesCustomStatusBar (string lp_unitType);
 void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot);
-int libGHLo_gf_UpgradeNotificationsFacilitySlot (unit lp_facility);
+int libGHLo_gf_UpgradeNotificationsSearchFacilitySlot (unit lp_facility);
 string libGHLo_gf_UpgradeNotificationsUpgradeImage (string lp_upgrade);
 text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade);
 bool libGHLo_gf_UpgradeNotificationsUpgradeNeedsToBeVisible (fixed lp_remainingTime);

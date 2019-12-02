@@ -421,7 +421,7 @@ void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
     libGHLo_gv_upgradeNotifications.lv_slotLastUsed -= 1;
 }
 
-int libGHLo_gf_UpgradeNotificationsFacilitySlot (unit lp_facility) {
+int libGHLo_gf_UpgradeNotificationsSearchFacilitySlot (unit lp_facility) {
     // Variable Declarations
     int lv_count;
 
@@ -1735,7 +1735,7 @@ bool libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Func (bool testConds
     timer lv_timer;
 
     // Automatic Variable Declarations
-    const int autoB0493DF3_ae = libGHLo_gv_upgradeNotificationsMaxUISlots;
+    int autoB0493DF3_ae;
     const int autoB0493DF3_ai = 1;
 
     // Variable Initialization
@@ -1747,6 +1747,7 @@ bool libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Func (bool testConds
 
     if ((libGHLo_gv_upgradeNotifications.lv_active == true)) {
         lv_timer = EventTimer();
+        autoB0493DF3_ae = MinI(libGHLo_gv_upgradeNotifications.lv_slotLastUsed, libGHLo_gv_upgradeNotificationsMaxFacilitySlots);
         lv_slot = 0;
         for ( ; ( (autoB0493DF3_ai >= 0 && lv_slot <= autoB0493DF3_ae) || (autoB0493DF3_ai < 0 && lv_slot >= autoB0493DF3_ae) ) ; lv_slot += autoB0493DF3_ai ) {
             if ((lv_timer == libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot])) {
@@ -1784,7 +1785,7 @@ bool libGHLo_gt_UpgradeNotificationsResearchCancelled_Func (bool testConds, bool
 
     if ((libGHLo_gv_upgradeNotifications.lv_active == true)) {
         lv_facility = EventUnit();
-        lv_slot = libGHLo_gf_UpgradeNotificationsFacilitySlot(lv_facility);
+        lv_slot = libGHLo_gf_UpgradeNotificationsSearchFacilitySlot(lv_facility);
         if ((lv_slot >= 0)) {
             if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots) && (DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot], libGHLo_gv_upgradeNotificationsObsID) == true)) {
                 libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade;
@@ -1831,7 +1832,7 @@ bool libGHLo_gt_UpgradeNotificationsResearchCompleted_Func (bool testConds, bool
 
     if ((libGHLo_gv_upgradeNotifications.lv_active == true)) {
         lv_facility = EventUnit();
-        lv_slot = libGHLo_gf_UpgradeNotificationsFacilitySlot(lv_facility);
+        lv_slot = libGHLo_gf_UpgradeNotificationsSearchFacilitySlot(lv_facility);
         if ((lv_slot >= 0)) {
             if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
                 libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade;
@@ -1875,7 +1876,7 @@ bool libGHLo_gt_UpgradeNotificationsResearchStarted_Func (bool testConds, bool r
 
     if ((libGHLo_gv_upgradeNotifications.lv_active == true)) {
         lv_slot = libGHLo_gv_upgradeNotifications.lv_slotLastUsed;
-        if ((lv_slot < 100)) {
+        if ((lv_slot < libGHLo_gv_upgradeNotificationsMaxFacilitySlots)) {
             lv_facility = EventUnit();
             if ((UnitIsAlive(lv_facility) == true)) {
                 lv_slot += 1;
