@@ -13195,6 +13195,7 @@
         <Element Type="FunctionCall" Id="23BAD9C3">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="04DBAF0A"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="2397CD59"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="F92D8288"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="B407241A"/>
@@ -13203,6 +13204,72 @@
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="0B1D9956"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="A15F53DB"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="9F4D86F6"/>
+        </Element>
+        <Element Type="FunctionCall" Id="04DBAF0A">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005"/>
+            <FunctionCall Type="Comment" Library="GHLo" Id="1F3FBD30"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="F2F7ACD1"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="71C76F79"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="F226CF5D"/>
+        </Element>
+        <Element Type="Comment" Id="1F3FBD30">
+            <Comment>
+                do not save the 2nd Zergling into the data table
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+        </Element>
+        <Element Type="FunctionCall" Id="F2F7ACD1">
+            <FunctionDef Type="FunctionDef" Library="GHLo" Id="01F23C90"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+        </Element>
+        <Element Type="FunctionCall" Id="71C76F79">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="GHLo" Id="EDCA2F54"/>
+            <Parameter Type="Param" Library="GHLo" Id="1BC2A607"/>
+            <Parameter Type="Param" Library="GHLo" Id="76857ABC"/>
+        </Element>
+        <Element Type="Param" Id="EDCA2F54">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="GHLo" Id="39FBBE18"/>
+        </Element>
+        <Element Type="Param" Id="1BC2A607">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="76857ABC">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>Zergling</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Unit"/>
+        </Element>
+        <Element Type="FunctionCall" Id="F226CF5D">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="GHLo" Id="BB1D425B"/>
+            <Parameter Type="Param" Library="GHLo" Id="65B52ADF"/>
+            <Parameter Type="Param" Library="GHLo" Id="AC1DD721"/>
+        </Element>
+        <Element Type="Param" Id="BB1D425B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="GHLo" Id="F84ED5AA"/>
+        </Element>
+        <Element Type="Param" Id="65B52ADF">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="AC1DD721">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="70DD5414"/>
+        </Element>
+        <Element Type="FunctionCall" Id="70DD5414">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E4B86923"/>
+            <Parameter Type="Param" Library="GHLo" Id="2F29C9DF"/>
+        </Element>
+        <Element Type="Param" Id="2F29C9DF">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="711D5A26"/>
+            <Variable Type="Variable" Library="GHLo" Id="39FBBE18"/>
         </Element>
         <Element Type="FunctionCall" Id="2397CD59">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
@@ -13422,7 +13489,6 @@
         <Element Type="FunctionCall" Id="62941F6C">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="71C76F79"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="F1A62B6D"/>
             <FunctionCall Type="Comment" Library="GHLo" Id="437223FD"/>
             <FunctionCall Type="Comment" Library="GHLo" Id="D54AB9F7"/>
@@ -13441,27 +13507,6 @@
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="A547E771"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="D851ABB7"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="E0D24CB0"/>
-        </Element>
-        <Element Type="FunctionCall" Id="71C76F79">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
-            <Parameter Type="Param" Library="GHLo" Id="EDCA2F54"/>
-            <Parameter Type="Param" Library="GHLo" Id="1BC2A607"/>
-            <Parameter Type="Param" Library="GHLo" Id="76857ABC"/>
-        </Element>
-        <Element Type="Param" Id="EDCA2F54">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
-            <Variable Type="Variable" Library="GHLo" Id="39FBBE18"/>
-        </Element>
-        <Element Type="Param" Id="1BC2A607">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="500677B2"/>
-        </Element>
-        <Element Type="Param" Id="76857ABC">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
-            <Value>Zergling</Value>
-            <ValueType Type="gamelink"/>
-            <ValueGameType Type="Unit"/>
         </Element>
         <Element Type="FunctionCall" Id="F1A62B6D">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>

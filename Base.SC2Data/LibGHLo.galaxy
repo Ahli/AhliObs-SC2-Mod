@@ -1391,11 +1391,15 @@ bool libGHLo_gt_LabelsUnitTrainingStarted_Func (bool testConds, bool runActions)
                 }
             }
             else {
+                if ((lv_traineeType == "Zergling") && (lv_savedTypeSlot1 == (lv_traineeType))) {
+                    return false;
+                }
+
                 DataTableSetString(true, lv_unitTagStringSlot2, (lv_traineeType));
                 lv_savedTypeSlot2 = (lv_traineeType);
                 lv_activeTags = 2;
             }
-            if ((lv_traineeType != "Zergling") && (lv_activeTags == 2)) {
+            if ((lv_activeTags == 2)) {
                 DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
                 DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
                 DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString)), libGHLo_gv_labelsObs, true);
