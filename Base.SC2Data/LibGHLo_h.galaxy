@@ -145,7 +145,7 @@ bool libGHLo_gf_UpgradeNotificationsUpgradeNeedsToBeVisible (fixed lp_remainingT
 void libGHLo_gf_UpgradeNotificationsUpdateThread ();
 void libGHLo_gf_UpgradeNotificationsSetStatusLabel (int lp_slot, text lp_status);
 void libGHLo_gf_UpgradeNotificationsSetSlotData (int lp_slot, text lp_name, string lp_icon, color lp_color, bool lp_visible);
-void libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne (int lp_slot);
+int libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne (int lp_minUncheckedSlot, int lp_slot);
 void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_slotB);
 void libGHLo_gf_UpgradeNotificationsUpdateProgressData (int lp_slot);
 bool libGHLo_gf_MapNotificationsCheckFullHealth (unit lp_transportunit);

@@ -396,6 +396,7 @@ void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
         }
         else {
             if ((lv_count == lv_sLOT_MAX_INDEX1)) {
+                lv_count1 = (lv_count - 1);
                 lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], 1, 1);
                 libGHLo_gf_UpgradeNotificationsSetSlotData(lv_count1, libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), libGHLo_gf_UpgradeNotificationsUpgradeImage(lv_upgrade), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count]), false)), (UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1) <= libGHLo_gv_upgradeNotificationsVisibleTime));
                 libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count1] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
@@ -435,7 +436,7 @@ int libGHLo_gf_UpgradeNotificationsSearchFacilitySlot (unit lp_facility) {
     autoF6314835_ae = libGHLo_gv_upgradeNotifications.lv_slotLastUsed;
     lv_count = 0;
     for ( ; ( (autoF6314835_ai >= 0 && lv_count <= autoF6314835_ae) || (autoF6314835_ai < 0 && lv_count >= autoF6314835_ae) ) ; lv_count += autoF6314835_ai ) {
-        if ((libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count] == lp_facility) && ((libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] == libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade) || (libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] == libGHLo_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade))) {
+        if ((libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count] == lp_facility) && ((lv_count > libGHLo_gv_upgradeNotificationsMaxUISlots) || (libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] == libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade) || (libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] == libGHLo_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade))) {
             return lv_count;
         }
 
@@ -781,7 +782,8 @@ void libGHLo_gf_UpgradeNotificationsUpdateThread () {
 
 bool auto_libGHLo_gf_UpgradeNotificationsUpdateThread_TriggerFunc (bool testConds, bool runActions) {
     // Variable Declarations
-    int lv_count;
+    int lv_slot;
+    int lv_swapTarget;
 
     // Automatic Variable Declarations
     int auto520A35AB_ae;
@@ -792,23 +794,35 @@ bool auto_libGHLo_gf_UpgradeNotificationsUpdateThread_TriggerFunc (bool testCond
     // Implementation
     while ((libGHLo_gv_upgradeNotifications.lv_slotLastUsed >= 0)) {
         auto520A35AB_ae = libGHLo_gv_upgradeNotifications.lv_slotLastUsed;
-        lv_count = 0;
-        for ( ; ( (auto520A35AB_ai >= 0 && lv_count <= auto520A35AB_ae) || (auto520A35AB_ai < 0 && lv_count >= auto520A35AB_ae) ) ; lv_count += auto520A35AB_ai ) {
-            if (((lv_count > libGHLo_gv_upgradeNotificationsMaxUISlots) || (libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] == libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade)) && ((UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1) <= libGHLo_gv_upgradeNotificationsVisibleTime) == true)) {
-                if ((lv_count <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
-                    DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_count], libGHLo_gv_upgradeNotificationsObs, true);
-                    libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] = libGHLo_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade;
+        lv_slot = 0;
+        for ( ; ( (auto520A35AB_ai >= 0 && lv_slot <= auto520A35AB_ae) || (auto520A35AB_ai < 0 && lv_slot >= auto520A35AB_ae) ) ; lv_slot += auto520A35AB_ai ) {
+            if (((lv_slot > libGHLo_gv_upgradeNotificationsMaxUISlots) || (libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] == libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade)) && ((UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_slot], c_unitQueueTimeRemaining, 1) <= libGHLo_gv_upgradeNotificationsVisibleTime) == true)) {
+                if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
+                    DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot], libGHLo_gv_upgradeNotificationsObs, true);
+                    libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade;
                 }
 
-                libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne(lv_count);
+                if ((lv_slot > 0) && (lv_slot > (lv_swapTarget + 1))) {
+                    lv_swapTarget = libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne((lv_swapTarget + 1), lv_slot);
+                    if ((lv_swapTarget >= 0)) {
+                        if ((lv_swapTarget <= libGHLo_gv_upgradeNotificationsMaxUISlots) && (lv_slot > libGHLo_gv_upgradeNotificationsMaxUISlots)) {
+                            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_swapTarget], libGHLo_gv_upgradeNotificationsObs, true);
+                            libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_swapTarget] = libGHLo_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade;
+                        }
+
+                    }
+
+                }
+
             }
 
-            if ((libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] == libGHLo_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade)) {
-                libGHLo_gf_UpgradeNotificationsUpdateProgressData(lv_count);
+            if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots) && (libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] == libGHLo_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade)) {
+                libGHLo_gf_UpgradeNotificationsUpdateProgressData(lv_slot);
             }
 
         }
         Wait(0.0625, c_timeGame);
+        lv_swapTarget = 0;
         Wait(0.0, c_timeGame);
     }
     libGHLo_gv_upgradeNotifications.lv_updateThreadRunning = false;
@@ -832,26 +846,27 @@ void libGHLo_gf_UpgradeNotificationsSetSlotData (int lp_slot, text lp_name, stri
     DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slot], libGHLo_gv_upgradeNotificationsObs, lp_visible);
 }
 
-void libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne (int lp_slot) {
+int libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne (int lp_minUncheckedSlot, int lp_slot) {
     // Variable Declarations
     int lv_count;
 
     // Automatic Variable Declarations
-    int auto7A4B696F_ae;
-    const int auto7A4B696F_ai = 1;
+    int auto5043F64A_ae;
+    const int auto5043F64A_ai = 1;
 
     // Variable Initialization
 
     // Implementation
-    auto7A4B696F_ae = (lp_slot - 1);
-    lv_count = 0;
-    for ( ; ( (auto7A4B696F_ai >= 0 && lv_count <= auto7A4B696F_ae) || (auto7A4B696F_ai < 0 && lv_count >= auto7A4B696F_ae) ) ; lv_count += auto7A4B696F_ai ) {
-        if ((libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] == libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade)) {
+    auto5043F64A_ae = (lp_slot - 1);
+    lv_count = lp_minUncheckedSlot;
+    for ( ; ( (auto5043F64A_ai >= 0 && lv_count <= auto5043F64A_ae) || (auto5043F64A_ai < 0 && lv_count >= auto5043F64A_ae) ) ; lv_count += auto5043F64A_ai ) {
+        if (((lv_count > libGHLo_gv_upgradeNotificationsMaxUISlots) || (libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] == libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade) || (libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count] == libGHLo_ge_UpgradeNotificationsSlotStatus_NoUpgrade))) {
             libGHLo_gf_UpgradeNotificationsSwapSlotInformation(lv_count, lp_slot);
-            return ;
+            return lv_count;
         }
 
     }
+    return -1;
 }
 
 void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_slotB) {
@@ -868,6 +883,7 @@ void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_sl
     fixed[2] lv_value;
     timer[2] lv_timer;
     unit lv_facility;
+    string lv_upgrade;
 
     // Automatic Variable Declarations
     // Variable Initialization
@@ -897,6 +913,11 @@ void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_sl
         lv_timer[0] = libGHLo_gv_upgradeNotifications.lv_timerDestruction[lp_slotA];
     }
     else {
+        lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(libGHLo_gv_upgradeNotifications.lv_slotFacility[lp_slotA], 1, 1);
+        lv_status[0] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
+        lv_name[0] = libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade);
+        lv_icon[0] = libGHLo_gf_UpgradeNotificationsUpgradeImage(lv_upgrade);
+        lv_color[0] = libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(libGHLo_gv_upgradeNotifications.lv_slotFacility[lp_slotA]), false));
         lv_timer[0] = TimerCreate();
     }
     if ((lp_slotB <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
@@ -911,6 +932,11 @@ void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_sl
         lv_timer[1] = libGHLo_gv_upgradeNotifications.lv_timerDestruction[lp_slotB];
     }
     else {
+        lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(libGHLo_gv_upgradeNotifications.lv_slotFacility[lp_slotB], 1, 1);
+        lv_status[1] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
+        lv_name[1] = libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade);
+        lv_icon[1] = libGHLo_gf_UpgradeNotificationsUpgradeImage(lv_upgrade);
+        lv_color[1] = libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(libGHLo_gv_upgradeNotifications.lv_slotFacility[lp_slotB]), false));
         lv_timer[1] = TimerCreate();
     }
     if ((lp_slotA <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
@@ -1751,7 +1777,7 @@ bool libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Func (bool testConds
 
     if ((libGHLo_gv_upgradeNotifications.lv_active == true)) {
         lv_timer = EventTimer();
-        autoB0493DF3_ae = MinI(libGHLo_gv_upgradeNotifications.lv_slotLastUsed, libGHLo_gv_upgradeNotificationsMaxFacilitySlots);
+        autoB0493DF3_ae = MinI(libGHLo_gv_upgradeNotifications.lv_slotLastUsed, libGHLo_gv_upgradeNotificationsMaxUISlots);
         lv_slot = 0;
         for ( ; ( (autoB0493DF3_ai >= 0 && lv_slot <= autoB0493DF3_ae) || (autoB0493DF3_ai < 0 && lv_slot >= autoB0493DF3_ae) ) ; lv_slot += autoB0493DF3_ai ) {
             if ((lv_timer == libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot])) {
@@ -1791,7 +1817,7 @@ bool libGHLo_gt_UpgradeNotificationsResearchCancelled_Func (bool testConds, bool
         lv_facility = EventUnit();
         lv_slot = libGHLo_gf_UpgradeNotificationsSearchFacilitySlot(lv_facility);
         if ((lv_slot >= 0)) {
-            if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots) && (DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot], libGHLo_gv_upgradeNotificationsObsID) == true)) {
+            if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
                 libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade;
                 TimerStart(libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot], 5.0, false, c_timeGame);
                 if ((UnitIsAlive(lv_facility) == false)) {
@@ -1899,6 +1925,7 @@ bool libGHLo_gt_UpgradeNotificationsResearchStarted_Func (bool testConds, bool r
                     DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], libGHLo_gv_upgradeNotificationsObs, false);
                     libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
                     libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], 0.0, libGHLo_gv_upgradeNotificationsObs);
+                    return true;
                 }
 
                 return false;
