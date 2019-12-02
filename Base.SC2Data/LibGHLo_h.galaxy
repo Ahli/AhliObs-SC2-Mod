@@ -15,6 +15,14 @@ const int libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible = 1;
 
 // Constants
 const int libGHLo_gv_graphsTotalNodes = 100;
+const string libGHLo_gv_labelsSlot1 = "-slot1";
+const string libGHLo_gv_labelsSlot2 = "-slot2";
+const string libGHLo_gv_labelsIconBG1 = "IconBG1-";
+const string libGHLo_gv_labelsIconBG2 = "IconBG2-";
+const string libGHLo_gv_labelsIconBG3 = "IconBG3-";
+const string libGHLo_gv_labelsIcon1 = "Icon1-";
+const string libGHLo_gv_labelsIcon2 = "Icon2-";
+const string libGHLo_gv_labelsIcon3 = "Icon3-";
 const int libGHLo_gv_upgradeNotificationsMaxUISlots = 50;
 const fixed libGHLo_gv_upgradeNotificationsVisibleTime = 15.0;
 const int libGHLo_gv_workersKilledNotificationsMaxUISlots = 15;
@@ -49,12 +57,7 @@ struct libGHLo_gs_GraphsData {
 };
 
 struct libGHLo_gs_Labels {
-    int lv_iconSize;
-    int lv_iconSizeEgg;
-    int lv_iconSizeTechLab;
-    string[17] lv_colorStrings;
-    int lv_iconOffsetEgg;
-    int lv_iconOffsetTechLab;
+    string[16] lv_colorStrings;
 };
 
 struct libGHLo_gs_UpgradeNotifications {
@@ -133,7 +136,6 @@ void libGHLo_gf_GraphsDefineGraph (int lp_iD, text lp_title, string lp_string, s
 void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graph);
 void libGHLo_gf_GraphsUpdateDataComparative (int lp_graph);
 bool libGHLo_gf_LabelsUnitUsesCustomStatusBar (string lp_unitType);
-int libGHLo_gf_LabelsUnitIconSize (string lp_productionUnitType);
 void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot);
 int libGHLo_gf_UpgradeNotificationsFacilitySlot (unit lp_facility);
 string libGHLo_gf_UpgradeNotificationsUpgradeImage (string lp_upgrade);

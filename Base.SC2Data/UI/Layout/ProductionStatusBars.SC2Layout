@@ -50,4 +50,58 @@
             <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
         </Frame>
     </Frame>
+
+    <Frame type="UnitStatusFrame" name="ProductionStatusSingle">
+        <Height val="60"/>
+        <Width val="130"/>
+        <RenderType val="HDR"/>
+        
+        <Frame type="Frame" name="AttachPointFrame">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="30"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="65"/>
+            <Height val="0"/>
+            <Width val="0"/>
+        </Frame>
+
+        <Frame type="Frame" name="StatusIcon1" template="ProductionStatusBars/UnitIconTemplate">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+        </Frame>
+    </Frame>
+
+    <Frame type="UnitStatusFrame" name="ProductionStatusEgg" template="ProductionStatusBars/ProductionStatusSingle">
+        <Frame type="Frame" name="StatusIcon1">
+
+            <Frame type="Image" name="IconBG">
+                <Height val="41"/>
+                <Width val="41"/>
+            </Frame>
+
+            <Frame type="Image" name="Icon">
+                <Anchor side="Top" relative="$parent" pos="Min" offset="3"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="3"/>
+                <Height val="35"/>
+                <Width val="35"/>
+            </Frame>
+        </Frame>
+    </Frame>
+
+    <Frame type="UnitStatusFrame" name="ProductionStatusTechLab" template="ProductionStatusBars/ProductionStatusSingle">
+        <Frame type="Frame" name="StatusIcon1">
+
+            <Frame type="Image" name="IconBG">
+                <Height val="53"/>
+                <Width val="53"/>
+            </Frame>
+
+            <Frame type="Image" name="Icon">
+                <Anchor side="Top" relative="$parent" pos="Min" offset="4"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="4"/>
+                <Height val="45"/>
+                <Width val="45"/>
+            </Frame>
+        </Frame>
+    </Frame>
+
 </Desc>
