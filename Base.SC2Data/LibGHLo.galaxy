@@ -385,13 +385,12 @@ void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
             lv_count1 = (lv_count - 1);
             libGHLo_gf_UpgradeNotificationsSetSlotData(lv_count1, libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemName[lv_count], libGHLo_gv_upgradeNotificationsObsID), (libNtve_gf_DialogItemImage(libGHLo_gv_upgradeNotifications.lv_itemIcon[lv_count], libGHLo_gv_upgradeNotificationsObsID)), libNtve_gf_DialogItemColor(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_count], libGHLo_gv_upgradeNotificationsObsID), DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_count], libGHLo_gv_upgradeNotificationsObsID));
             libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_count1] = libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_count];
-            libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_count1], libNtve_gf_DialogItemValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_all_Players);
-            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_all_Players);
+            libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_count1], libNtve_gf_DialogItemValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_upgradeNotificationsObs);
             libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count1] = libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count];
-            if ((TimerGetElapsed(libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_count1]) <= 0.0)) {
-                libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], StringToText(""), libGHLo_gv_all_Players);
-                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libGHLo_gv_all_Players, true);
-                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libGHLo_gv_all_Players, false);
+            if ((libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count1] == libGHLo_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade)) {
+                libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_upgradeNotificationsObs);
+                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libGHLo_gv_upgradeNotificationsObs, true);
+                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libGHLo_gv_upgradeNotificationsObs, false);
             }
             else {
                 libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_upgradeNotificationsObs);

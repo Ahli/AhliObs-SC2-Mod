@@ -131,7 +131,6 @@ Param/Value/lib_GHLo_1F979E83=Infantry Armor Level 2
 Param/Value/lib_GHLo_20A7437D=Ship Plating Level 1
 Param/Value/lib_GHLo_21DF5A4C=Psionic Storm
 Param/Value/lib_GHLo_25348DDA=Banshee-Cloaking Field
-Param/Value/lib_GHLo_25850838=
 Param/Value/lib_GHLo_25E0C402=</s>
 Param/Value/lib_GHLo_28BC4DAB=.
 Param/Value/lib_GHLo_29F77874=Infantry Armor Level 1
