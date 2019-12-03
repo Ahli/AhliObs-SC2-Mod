@@ -59,6 +59,7 @@ struct libGHLo_gs_GraphsData {
 
 struct libGHLo_gs_Labels {
     string[16] lv_colorStrings;
+    bool lv_active;
 };
 
 struct libGHLo_gs_UpgradeNotifications {
@@ -74,6 +75,7 @@ struct libGHLo_gs_UpgradeNotifications {
     int[libGHLo_gv_upgradeNotificationsMaxUISlots + 1] lv_slotStatus;
     unit[libGHLo_gv_upgradeNotificationsMaxFacilitySlots + 1] lv_slotFacility;
     int lv_slotLastUsed;
+    int lv_slotLastClearedInputForUpdateThread;
 };
 
 struct libGHLo_gs_WorkersKilledNotifications {
@@ -133,6 +135,7 @@ void libGHLo_gf_RegisterUnitTrainingProgressEvent (trigger lp_trigger, unit lp_u
 void libGHLo_gf_RegisterUnitArmingProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage);
 void libGHLo_gf_RegisterUnitResearchProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage);
 void libGHLo_gf_RegisterUnitDiesEvent (trigger lp_trigger, unit lp_unit);
+void libGHLo_gf_RegisterPlayerLeavesEvent (trigger lp_trigger, int lp_player, int lp_gameResult);
 void libGHLo_gf_GraphsDefineGraph (int lp_iD, text lp_title, string lp_string, string lp_scoreType, int lp_style, fixed lp_minimumValue, fixed lp_rangeBase, fixed lp_rangeIncrement);
 void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graph);
 void libGHLo_gf_GraphsUpdateDataComparative (int lp_graph);
@@ -173,6 +176,7 @@ trigger libGHLo_gt_MapNotificationsDrop;
 trigger libGHLo_gt_MapNotificationsScannerSweep;
 trigger libGHLo_gt_MinimapFrustumInitialization;
 trigger libGHLo_gt_MinimapFrustumPlayerCameraMoved;
+trigger libGHLo_gt_MinimapFrustumPlayerLeaves;
 
 // Library Initialization
 void libGHLo_InitVariables ();
