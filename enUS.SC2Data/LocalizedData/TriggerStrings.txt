@@ -351,6 +351,7 @@ Variable/Name/lib_GHLo_ACA18CBD=savedTypeSlot1
 Variable/Name/lib_GHLo_AD67C98B=UnitTagString
 Variable/Name/lib_GHLo_ADDBACE2=dialogItem
 Variable/Name/lib_GHLo_ADFD93B2=UnitOwner
+Variable/Name/lib_GHLo_B1BD85E5=visible
 Variable/Name/lib_GHLo_B35D1586=Count
 Variable/Name/lib_GHLo_B5772218=isActive
 Variable/Name/lib_GHLo_B6B8B8D5=Workers Killed Notifications - Visible Time

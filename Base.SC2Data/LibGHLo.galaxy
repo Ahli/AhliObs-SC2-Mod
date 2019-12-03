@@ -369,6 +369,7 @@ void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
     string lv_upgrade;
     int lv_sLOT_MAX_INDEX1;
     int lv_count1;
+    bool lv_visible;
 
     // Automatic Variable Declarations
     int auto85411229_ae;
@@ -387,14 +388,12 @@ void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
             libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_count1] = libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_count];
             libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_count1], libNtve_gf_DialogItemValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_upgradeNotificationsObs);
             libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count1] = libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count];
-            if ((libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count1] == libGHLo_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade)) {
-                libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_upgradeNotificationsObs);
-                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libGHLo_gv_upgradeNotificationsObs, true);
-                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libGHLo_gv_upgradeNotificationsObs, false);
-            }
-            else {
-                libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_upgradeNotificationsObs);
-            }
+            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_upgradeNotificationsObs);
+            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_upgradeNotificationsObs);
+            lv_visible = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count], libGHLo_gv_upgradeNotificationsObsID);
+            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libGHLo_gv_upgradeNotificationsObs, lv_visible);
+            lv_visible = !(lv_visible);
+            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libGHLo_gv_upgradeNotificationsObs, lv_visible);
         }
         else {
             if ((lv_count == lv_sLOT_MAX_INDEX1)) {
@@ -1909,7 +1908,6 @@ bool libGHLo_gt_UpgradeNotificationsResearchStarted_Func (bool testConds, bool r
                 return true;
             }
 
-            return false;
         }
 
     }
