@@ -125,7 +125,6 @@ Param/Value/lib_GHLo_E89E063F=充气甲壳
 Param/Value/lib_GHLo_E8B9CA49=骨板
 Param/Value/lib_GHLo_EA9C7477=
 Param/Value/lib_GHLo_EE405ACD=代谢加速
-Param/Value/lib_GHLo_F2273ED5=Rapid Reignition System
 Param/Value/lib_GHLo_F2858873=舰船钢板等级2
 Param/Value/lib_GHLo_F302BCF7=攻城科技
 Param/Value/lib_GHLo_F459DB2F=神经胶原重组

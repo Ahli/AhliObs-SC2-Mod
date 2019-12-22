@@ -4,8 +4,4 @@
         <EditorCategories value="Race:Terran,UpgradeType:Talents"/>
         <LeaderAlias value=""/>
     </CUpgrade>
-    <!-- Fix buggy VoidMulti data -->
-    <CUpgrade id="MicrobialShroud">
-        <LeaderAlias value="MicrobialShroud"/>
-    </CUpgrade>
 </Catalog>

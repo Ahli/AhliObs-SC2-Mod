@@ -125,7 +125,6 @@ Param/Value/lib_GHLo_E89E063F=Carapaça pneumática
 Param/Value/lib_GHLo_E8B9CA49=Revestimento Quitinoso
 Param/Value/lib_GHLo_EA9C7477=
 Param/Value/lib_GHLo_EE405ACD=Aceleração metabólica
-Param/Value/lib_GHLo_F2273ED5=Rapid Reignition System
 Param/Value/lib_GHLo_F2858873=Revestimento aeroespacial nível 2
 Param/Value/lib_GHLo_F302BCF7=Tecnologia de cerco
 Param/Value/lib_GHLo_F459DB2F=Reconstituição Glial

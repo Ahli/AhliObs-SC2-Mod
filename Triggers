@@ -24623,7 +24623,6 @@
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="20AF5F29"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="DF87120D"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="E6152797"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="B362E81C"/>
         </Element>
         <Element Type="Param" Id="2F43BB8C">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="B4ACF12A"/>
@@ -24854,26 +24853,6 @@
             <Parameter Type="Param" Library="GHLo" Id="BA6FB095"/>
         </Element>
         <Element Type="Param" Id="BA6FB095">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000488"/>
-            <ValueType Type="text"/>
-        </Element>
-        <Element Type="FunctionCall" Id="B362E81C">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="3A1227AB"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="AD43BC93"/>
-            <Parameter Type="Param" Library="GHLo" Id="46A9037D"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="10C511C8"/>
-        </Element>
-        <Element Type="Param" Id="46A9037D">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="9A8F1093"/>
-            <Value>MedivacIncreaseSpeedBoost</Value>
-            <ValueType Type="string"/>
-        </Element>
-        <Element Type="FunctionCall" Id="10C511C8">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000097"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="363CE97C"/>
-            <Parameter Type="Param" Library="GHLo" Id="F2273ED5"/>
-        </Element>
-        <Element Type="Param" Id="F2273ED5">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="00000488"/>
             <ValueType Type="text"/>
         </Element>

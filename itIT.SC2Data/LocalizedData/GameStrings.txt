@@ -125,7 +125,6 @@ Param/Value/lib_GHLo_E89E063F=Carapace pneumatico
 Param/Value/lib_GHLo_E8B9CA49=Rivestimento chitinoso
 Param/Value/lib_GHLo_EA9C7477=
 Param/Value/lib_GHLo_EE405ACD=Incremento metabolico
-Param/Value/lib_GHLo_F2273ED5=Rapid Reignition System
 Param/Value/lib_GHLo_F2858873=Blindatura navi livello 2
 Param/Value/lib_GHLo_F302BCF7=Tecnologia d'assedio
 Param/Value/lib_GHLo_F459DB2F=Ricostruzione neurale

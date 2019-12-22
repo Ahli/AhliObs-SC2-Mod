@@ -125,7 +125,6 @@ Param/Value/lib_GHLo_E89E063F=기낭 갑피
 Param/Value/lib_GHLo_E8B9CA49=키틴질 장갑
 Param/Value/lib_GHLo_EA9C7477=
 Param/Value/lib_GHLo_EE405ACD=대사 촉진
-Param/Value/lib_GHLo_F2273ED5=Rapid Reignition System
 Param/Value/lib_GHLo_F2858873=우주선 장갑 3단계
 Param/Value/lib_GHLo_F302BCF7=공성 기술
 Param/Value/lib_GHLo_F459DB2F=신경 재구성

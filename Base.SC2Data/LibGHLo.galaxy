@@ -757,9 +757,6 @@ text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade) {
     else if (auto4FCB9578_val == "NeuralParasite") {
         return StringExternal("Param/Value/lib_GHLo_BA6FB095");
     }
-    else if (auto4FCB9578_val == "MedivacIncreaseSpeedBoost") {
-        return StringExternal("Param/Value/lib_GHLo_F2273ED5");
-    }
     else {
     }
     return StringExternal(CatalogFieldValueGet(c_gameCatalogUpgrade, lp_upgrade, "Name", libGHLo_gv_upgradeNotificationsObsID));
