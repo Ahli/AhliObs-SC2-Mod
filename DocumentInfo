@@ -4,7 +4,7 @@
         <Value>ExtensionMod</Value>
     </Flags>
     <Dependencies>
-        <Value>bnet:Void Multi (Mod)/0.0/999,file:Mods/VoidMulti.SC2Mod</Value>
+        <Value>bnet:Balance Multi (Mod)/0.0/999,file:Mods/BalanceMulti.SC2Mod</Value>
     </Dependencies>
     <Screenshot>
         <File>
@@ -36,6 +36,7 @@
             <Value>1.5</Value>
             <Value>1.6</Value>
             <Value>1.7</Value>
+            <Value>1.8</Value>
         </Version>
         <Date>
             <Value>11/21/2019</Value>
@@ -46,6 +47,7 @@
             <Value>11/28/2019</Value>
             <Value>12/3/2019</Value>
             <Value>2/19/2020</Value>
+            <Value>4/28/2020</Value>
         </Date>
         <Notes>
             <Value>1,31</Value>
@@ -56,6 +58,7 @@
             <Value>46,47,48,49,50,51,52,53,54,55,56,57,58,59,60</Value>
             <Value>61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82</Value>
             <Value>83,84,85</Value>
+            <Value>86,87</Value>
         </Notes>
     </PatchNote>
 </DocInfo>
