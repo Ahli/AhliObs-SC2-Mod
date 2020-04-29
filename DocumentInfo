@@ -37,6 +37,7 @@
             <Value>1.6</Value>
             <Value>1.7</Value>
             <Value>1.8</Value>
+            <Value>1.9</Value>
         </Version>
         <Date>
             <Value>11/21/2019</Value>
@@ -48,6 +49,7 @@
             <Value>12/3/2019</Value>
             <Value>2/19/2020</Value>
             <Value>4/28/2020</Value>
+            <Value>4/29/2020</Value>
         </Date>
         <Notes>
             <Value>1,31</Value>
@@ -59,6 +61,7 @@
             <Value>61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82</Value>
             <Value>83,84,85</Value>
             <Value>86,87</Value>
+            <Value>88,89</Value>
         </Notes>
     </PatchNote>
 </DocInfo>
