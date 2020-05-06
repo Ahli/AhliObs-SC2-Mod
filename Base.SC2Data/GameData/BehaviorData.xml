@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Catalog>
-    <CBehaviorBuff id="WidowMineBurrowedCloakingBehavior">
-        <DisableValidatorArray index="0" value="NotHaveArmory"/>
-        <DisableValidatorArray index="1" value="WidowMineAttackOnCooldown"/>
-    </CBehaviorBuff>
-</Catalog>
