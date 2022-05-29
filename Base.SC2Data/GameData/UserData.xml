@@ -40,9 +40,6 @@
             </Text>
         </Instances>
         <Instances Id="Minimap Frustum">
-            <Int>
-                <Field Id="Value"/>
-            </Int>
             <Text Text="UserData/GameHeartSettings/Minimap Frustum_Description">
                 <Field Id="Description"/>
             </Text>
