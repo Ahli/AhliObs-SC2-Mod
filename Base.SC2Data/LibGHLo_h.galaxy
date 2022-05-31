@@ -155,6 +155,10 @@ bool libGHLo_gf_MapNotificationsCheckFullHealth (unit lp_transportunit);
 
 // Trigger Declarations
 trigger libGHLo_gt_GameHeartInitialization;
+trigger libGHLo_gt_ArchonMergeSaveResourceOffset;
+trigger libGHLo_gt_ArchonDuplicatedTemplarsDied;
+trigger libGHLo_gt_OverlordTransportMorphCompleted;
+trigger libGHLo_gt_OverseerFromOverlordTransportDied;
 trigger libGHLo_gt_GraphsInitialization;
 trigger libGHLo_gt_GraphsTimer;
 trigger libGHLo_gt_LabelsInitialization;

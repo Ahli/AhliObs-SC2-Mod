@@ -1042,6 +1042,7 @@ bool libGHLo_gt_GameHeartInitialization_Func (bool testConds, bool runActions) {
         PlayerSetAlliance(auto200383C7_var, c_allianceIdControl, lv_observer, true);
         PlayerSetAlliance(auto200383C7_var, c_allianceIdVision, lv_observer, true);
         libNtve_gf_SetUpgradeLevelForPlayer(auto200383C7_var, "GameHeartActive", 1);
+        PlayerScoreValueSetFromInt(auto200383C7_var, "PlayerId", auto200383C7_var);
     }
     return true;
 }
@@ -1050,6 +1051,151 @@ bool libGHLo_gt_GameHeartInitialization_Func (bool testConds, bool runActions) {
 void libGHLo_gt_GameHeartInitialization_Init () {
     libGHLo_gt_GameHeartInitialization = TriggerCreate("libGHLo_gt_GameHeartInitialization_Func");
     TriggerAddEventMapInit(libGHLo_gt_GameHeartInitialization);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ArchonMergeSaveResourceOffset
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ArchonMergeSaveResourceOffset_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_unitSurvivor;
+
+    // Automatic Variable Declarations
+    unitgroup auto20B24E7C_g;
+    int auto20B24E7C_u;
+    unitgroup auto90AFA8AE_g;
+    int auto90AFA8AE_u;
+
+    // Variable Initialization
+    lv_unitSurvivor = EventUnit();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGetType(EventUnitTargetUnit()) == "HighTemplar")) {
+        if ((UnitGetType(lv_unitSurvivor) == "HighTemplar")) {
+            Wait(0.0, c_timeGame);
+            auto90AFA8AE_g = UnitGroupSearch("Archon", EventPlayer(), UnitGetPosition(EventUnitTargetUnit()), 0.0, UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+            auto90AFA8AE_u = UnitGroupCount(auto90AFA8AE_g, c_unitCountAll);
+            for (;; auto90AFA8AE_u -= 1) {
+                lv_unitSurvivor = UnitGroupUnitFromEnd(auto90AFA8AE_g, auto90AFA8AE_u);
+                if (lv_unitSurvivor == null) { break; }
+                if ((UnitHasBehavior2(lv_unitSurvivor, "AHLI_fixUnitLostResourcesOfArchonHTHT") == false) && (UnitHasBehavior2(lv_unitSurvivor, "AHLI_fixUnitLostResourcesOfArchonDTDT") == false)) {
+                    UnitBehaviorAdd(lv_unitSurvivor, "AHLI_fixUnitLostResourcesOfArchonHTHT", lv_unitSurvivor, 1);
+                    return true;
+                }
+
+            }
+        }
+
+    }
+    else {
+        if ((UnitGetType(lv_unitSurvivor) == "DarkTemplar")) {
+            Wait(0.0, c_timeGame);
+            auto20B24E7C_g = UnitGroupSearch("Archon", EventPlayer(), UnitGetPosition(EventUnitTargetUnit()), 0.0, UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+            auto20B24E7C_u = UnitGroupCount(auto20B24E7C_g, c_unitCountAll);
+            for (;; auto20B24E7C_u -= 1) {
+                lv_unitSurvivor = UnitGroupUnitFromEnd(auto20B24E7C_g, auto20B24E7C_u);
+                if (lv_unitSurvivor == null) { break; }
+                if ((UnitHasBehavior2(lv_unitSurvivor, "AHLI_fixUnitLostResourcesOfArchonHTHT") == false) && (UnitHasBehavior2(lv_unitSurvivor, "AHLI_fixUnitLostResourcesOfArchonDTDT") == false)) {
+                    UnitBehaviorAdd(lv_unitSurvivor, "AHLI_fixUnitLostResourcesOfArchonDTDT", lv_unitSurvivor, 1);
+                    return true;
+                }
+
+            }
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ArchonMergeSaveResourceOffset_Init () {
+    libGHLo_gt_ArchonMergeSaveResourceOffset = TriggerCreate("libGHLo_gt_ArchonMergeSaveResourceOffset_Func");
+    TriggerAddEventUnitAbility(libGHLo_gt_ArchonMergeSaveResourceOffset, null, AbilityCommand("ArchonWarp", 1), c_unitAbilStageCancel, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ArchonDuplicatedTemplarsDied
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ArchonDuplicatedTemplarsDied_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_unitOwner;
+    string lv_unitType;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_unitOwner = EventPlayerEffectUsedUnitOwner(c_effectPlayerSource);
+    lv_unitType = "HighTemplar";
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventPlayerEffectUsed() == "AHLI_ArchonDTDTDies")) {
+        lv_unitType = "DarkTemplar";
+    }
+
+    PlayerScoreValueSetFromInt(lv_unitOwner, "MineralsLostArmy", (PlayerScoreValueGetAsInt(lv_unitOwner, "MineralsLostArmy") + ((CatalogFieldValueGetAsInt(c_gameCatalogUnit, lv_unitType, "CostResource[" + IntToString(0) + "]", lv_unitOwner) * 2) - CatalogFieldValueGetAsInt(c_gameCatalogUnit, "Archon", "CostResource[" + IntToString(0) + "]", lv_unitOwner))));
+    PlayerScoreValueSetFromInt(lv_unitOwner, "VespeneLostArmy", (PlayerScoreValueGetAsInt(lv_unitOwner, "VespeneLostArmy") + ((CatalogFieldValueGetAsInt(c_gameCatalogUnit, lv_unitType, "CostResource[" + IntToString(1) + "]", lv_unitOwner) * 2) - CatalogFieldValueGetAsInt(c_gameCatalogUnit, "Archon", "CostResource[" + IntToString(1) + "]", lv_unitOwner))));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ArchonDuplicatedTemplarsDied_Init () {
+    libGHLo_gt_ArchonDuplicatedTemplarsDied = TriggerCreate("libGHLo_gt_ArchonDuplicatedTemplarsDied_Func");
+    TriggerAddEventPlayerEffectUsed(libGHLo_gt_ArchonDuplicatedTemplarsDied, c_playerAny, "AHLI_ArchonHTHTDies");
+    TriggerAddEventPlayerEffectUsed(libGHLo_gt_ArchonDuplicatedTemplarsDied, c_playerAny, "AHLI_ArchonDTDTDies");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: OverlordTransportMorphCompleted
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_OverlordTransportMorphCompleted_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitBehaviorAdd(EventUnit(), "AHLI_fixUnitLostResourcesOfOverlordTransport", EventUnit(), 1);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_OverlordTransportMorphCompleted_Init () {
+    libGHLo_gt_OverlordTransportMorphCompleted = TriggerCreate("libGHLo_gt_OverlordTransportMorphCompleted_Func");
+    TriggerAddEventUnitAbility(libGHLo_gt_OverlordTransportMorphCompleted, null, AbilityCommand("MorphToTransportOverlord", 0), c_unitAbilStageComplete, true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: OverseerFromOverlordTransportDied
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_OverseerFromOverlordTransportDied_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_unitOwner;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_unitOwner = EventPlayerEffectUsedUnitOwner(c_effectPlayerSource);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    PlayerScoreValueSetFromInt(lv_unitOwner, "MineralsLostArmy", (PlayerScoreValueGetAsInt(lv_unitOwner, "MineralsLostArmy") + CatalogFieldValueGetAsInt(c_gameCatalogAbil, "MorphToTransportOverlord", "Cost.Resource[" + IntToString(0) + "]", lv_unitOwner)));
+    PlayerScoreValueSetFromInt(lv_unitOwner, "VespeneLostArmy", (PlayerScoreValueGetAsInt(lv_unitOwner, "VespeneLostArmy") + CatalogFieldValueGetAsInt(c_gameCatalogAbil, "MorphToTransportOverlord", "Cost.Resource[" + IntToString(1) + "]", lv_unitOwner)));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_OverseerFromOverlordTransportDied_Init () {
+    libGHLo_gt_OverseerFromOverlordTransportDied = TriggerCreate("libGHLo_gt_OverseerFromOverlordTransportDied_Func");
+    TriggerAddEventPlayerEffectUsed(libGHLo_gt_OverseerFromOverlordTransportDied, c_playerAny, "AHLI_OverlordTransportDies");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2318,6 +2464,10 @@ void libGHLo_gt_MinimapFrustumPlayerLeaves_Init () {
 
 void libGHLo_InitTriggers () {
     libGHLo_gt_GameHeartInitialization_Init();
+    libGHLo_gt_ArchonMergeSaveResourceOffset_Init();
+    libGHLo_gt_ArchonDuplicatedTemplarsDied_Init();
+    libGHLo_gt_OverlordTransportMorphCompleted_Init();
+    libGHLo_gt_OverseerFromOverlordTransportDied_Init();
     libGHLo_gt_GraphsInitialization_Init();
     libGHLo_gt_GraphsTimer_Init();
     libGHLo_gt_LabelsInitialization_Init();
