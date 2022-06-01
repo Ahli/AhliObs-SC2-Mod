@@ -97,6 +97,38 @@ void libGHLo_InitVariables () {
 
 // Presets
 // Functions
+void libGHLo_gf_ObserverUiAssistSetPlayerIdScore (int lp_player) {
+    // Automatic Variable Declarations
+    // Implementation
+    PlayerScoreValueSetFromInt(lp_player, "PlayerId", lp_player);
+}
+
+void libGHLo_gf_ObserverUiAssistSetPlayerStatusScore (int lp_player, int lp_status) {
+    // Automatic Variable Declarations
+    int autoD1011202_val;
+
+    // Implementation
+    autoD1011202_val = lp_status;
+    if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_Playing) {
+        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 1);
+    }
+    else if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_LeftGameinDefeat) {
+        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 4);
+    }
+    else if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_LeftGameinVictory) {
+        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 2);
+    }
+    else if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_LeftGameinTie) {
+        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 3);
+    }
+    else if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_DroppedbeforeMapInitialization) {
+        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 5);
+    }
+    else {
+        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 0);
+    }
+}
+
 void libGHLo_gf_ApplySkinSet (string lp_skinSet, int lp_player) {
     // Variable Declarations
     string lv_itSkinPack;
@@ -1042,7 +1074,6 @@ bool libGHLo_gt_GameHeartInitialization_Func (bool testConds, bool runActions) {
         PlayerSetAlliance(auto200383C7_var, c_allianceIdControl, lv_observer, true);
         PlayerSetAlliance(auto200383C7_var, c_allianceIdVision, lv_observer, true);
         libNtve_gf_SetUpgradeLevelForPlayer(auto200383C7_var, "GameHeartActive", 1);
-        PlayerScoreValueSetFromInt(auto200383C7_var, "PlayerId", auto200383C7_var);
     }
     return true;
 }
@@ -1051,6 +1082,104 @@ bool libGHLo_gt_GameHeartInitialization_Func (bool testConds, bool runActions) {
 void libGHLo_gt_GameHeartInitialization_Init () {
     libGHLo_gt_GameHeartInitialization = TriggerCreate("libGHLo_gt_GameHeartInitialization_Func");
     TriggerAddEventMapInit(libGHLo_gt_GameHeartInitialization);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ObserverUiAssist - Initialization
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ObserverUiAssistInitialization_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup autoC0965509_g;
+    int autoC0965509_var;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoC0965509_g = libGHLo_gv_initial_Active_Players;
+    autoC0965509_var = -1;
+    while (true) {
+        autoC0965509_var = PlayerGroupNextPlayer(autoC0965509_g, autoC0965509_var);
+        if (autoC0965509_var < 0) { break; }
+        libGHLo_gf_ObserverUiAssistSetPlayerIdScore(autoC0965509_var);
+        if ((PlayerStatus(autoC0965509_var) == c_playerStatusActive)) {
+            libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(autoC0965509_var, libGHLo_ge_PlayerStatusScoreValue_Playing);
+        }
+        else {
+            if ((PlayerStatus(autoC0965509_var) == c_playerStatusLeft) && (PlayerScoreValueGetAsInt(autoC0965509_var, "PlayerStatus") == 0)) {
+                libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(autoC0965509_var, libGHLo_ge_PlayerStatusScoreValue_LeftGameinDefeat);
+            }
+
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ObserverUiAssistInitialization_Init () {
+    libGHLo_gt_ObserverUiAssistInitialization = TriggerCreate("libGHLo_gt_ObserverUiAssistInitialization_Func");
+    TriggerAddEventMapInit(libGHLo_gt_ObserverUiAssistInitialization);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ObserverUiAssist - PlayerLeavesGameDefeat
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(EventPlayer(), libGHLo_ge_PlayerStatusScoreValue_LeftGameinDefeat);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat_Init () {
+    libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat = TriggerCreate("libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat_Func");
+    TriggerAddEventPlayerLeft(libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat, c_playerAny, c_gameResultDefeat);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ObserverUiAssist - PlayerLeavesGameTie
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(EventPlayer(), libGHLo_ge_PlayerStatusScoreValue_LeftGameinTie);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie_Init () {
+    libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie = TriggerCreate("libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie_Func");
+    TriggerAddEventPlayerLeft(libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie, c_playerAny, c_gameResultDefeat);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ObserverUiAssist - PlayerLeavesGameVictory
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(EventPlayer(), libGHLo_ge_PlayerStatusScoreValue_LeftGameinVictory);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory_Init () {
+    libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory = TriggerCreate("libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory_Func");
+    TriggerAddEventPlayerLeft(libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory, c_playerAny, c_gameResultDefeat);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2464,6 +2593,10 @@ void libGHLo_gt_MinimapFrustumPlayerLeaves_Init () {
 
 void libGHLo_InitTriggers () {
     libGHLo_gt_GameHeartInitialization_Init();
+    libGHLo_gt_ObserverUiAssistInitialization_Init();
+    libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat_Init();
+    libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie_Init();
+    libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory_Init();
     libGHLo_gt_ArchonMergeSaveResourceOffset_Init();
     libGHLo_gt_ArchonDuplicatedTemplarsDied_Init();
     libGHLo_gt_OverlordTransportMorphCompleted_Init();
