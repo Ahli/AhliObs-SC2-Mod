@@ -3,4 +3,22 @@
     <CUnit id="KD8Charge">
         <LeaderAlias value=""/>
     </CUnit>
+    <CUnit id="BarracksReactor">
+        <LeaderAlias value="Reactor"/>
+    </CUnit>
+    <CUnit id="BarracksTechLab">
+        <LeaderAlias value="TechLab"/>
+    </CUnit>
+    <CUnit id="FactoryReactor">
+        <LeaderAlias value="Reactor"/>
+    </CUnit>
+    <CUnit id="FactoryTechLab">
+        <LeaderAlias value="TechLab"/>
+    </CUnit>
+    <CUnit id="StarportReactor">
+        <LeaderAlias value="Reactor"/>
+    </CUnit>
+    <CUnit id="StarportTechLab">
+        <LeaderAlias value="TechLab"/>
+    </CUnit>
 </Catalog>
