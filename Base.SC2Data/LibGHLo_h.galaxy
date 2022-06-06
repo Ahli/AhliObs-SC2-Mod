@@ -116,7 +116,7 @@ struct libGHLo_gs_MinimapFrustum {
 playergroup libGHLo_gv_all_Players;
 playergroup libGHLo_gv_initial_Active_Players;
 libGHLo_gs_GraphsGeneral libGHLo_gv_graphsGeneral;
-libGHLo_gs_GraphsData[6] libGHLo_gv_graphsData;
+libGHLo_gs_GraphsData[5] libGHLo_gv_graphsData;
 playergroup libGHLo_gv_graphsObs;
 libGHLo_gs_Labels libGHLo_gv_labels;
 playergroup libGHLo_gv_labelsObs;

@@ -131,6 +131,8 @@ Param/Value/lib_GHLo_FF134713=Traslazione
 Param/Value/lib_GHLo_28BC4DAB=.
 Param/Value/lib_GHLo_97202C9A=<s val="TimerDecimals">
 Param/Value/lib_GHLo_25E0C402=</s>
+Param/Value/lib_GHLo_0DD54D0A=RESOURCES LOST
+Param/Value/lib_GHLo_572C86BD=RESOURCES GATHERED
 UI/Graphs/CurrentTime=ATTUALE
 UI/Graphs/Minus10Minutes=-10 MIN
 UI/Graphs/Minus5Minutes=-5 MIN

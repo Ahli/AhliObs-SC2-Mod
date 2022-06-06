@@ -671,7 +671,8 @@
                 <ShortcutEnabledForParticipants val="false"/>
                 <ShortcutEnabledForObservers val="true"/>
                 <LinkedModalFrame val="$parent/ArmySizeGraph"/>
-                <Enabled val="false"/>
+                <LinkedModalFrame val="$parent/ResourcesLostDiffGraph"/>
+                <LinkedModalFrame val="$parent/ResourcesGatheredGraph"/>
                 
                 <Frame type="Frame" name="Graph" template="GraphTemplate/DifferentialGraphTemplate"/>
             </Frame>
@@ -685,6 +686,36 @@
                 <ShortcutEnabledForParticipants val="false"/>
                 <ShortcutEnabledForObservers val="true"/>
                 <LinkedModalFrame val="$parent/IncomeGraph"/>
+                <LinkedModalFrame val="$parent/ResourcesLostDiffGraph"/>
+                <LinkedModalFrame val="$parent/ResourcesGatheredGraph"/>
+                
+                <Frame type="Frame" name="Graph" template="GraphTemplate/ComparativeGraphTemplate"/>
+            </Frame>
+
+            <Frame type="ToggleControl" name="ResourcesLostDiffGraph">
+                <Anchor relative="$parent"/>
+                <Visible val="false"/>
+                <AcceptsMouse val="false"/>
+                <Shortcut val="NumPad3"/>
+                <ShortcutEnabledForParticipants val="false"/>
+                <ShortcutEnabledForObservers val="true"/>
+                <LinkedModalFrame val="$parent/ArmySizeGraph"/>
+                <LinkedModalFrame val="$parent/IncomeGraph"/>
+                <LinkedModalFrame val="$parent/ResourcesGatheredGraph"/>
+                
+                <Frame type="Frame" name="Graph" template="GraphTemplate/DifferentialGraphTemplate"/>
+            </Frame>
+
+            <Frame type="ToggleControl" name="ResourcesGatheredGraph">
+                <Anchor relative="$parent"/>
+                <Visible val="false"/>
+                <AcceptsMouse val="false"/>
+                <Shortcut val="NumPad4"/>
+                <ShortcutEnabledForParticipants val="false"/>
+                <ShortcutEnabledForObservers val="true"/>
+                <LinkedModalFrame val="$parent/ArmySizeGraph"/>
+                <LinkedModalFrame val="$parent/IncomeGraph"/>
+                <LinkedModalFrame val="$parent/ResourcesLostDiffGraph"/>
                 
                 <Frame type="Frame" name="Graph" template="GraphTemplate/ComparativeGraphTemplate"/>
             </Frame>

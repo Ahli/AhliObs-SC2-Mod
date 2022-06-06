@@ -7084,6 +7084,8 @@
             <FunctionCall Type="Comment" Library="GHLo" Id="7C916B52"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="8A8BDE37"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="AE596CF0"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="281BD147"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="DB607AAC"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="2F345F27"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="6D8467CB"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="28FDB278"/>
@@ -7886,6 +7888,108 @@
             <Value>50.0</Value>
             <ValueType Type="fixed"/>
         </Element>
+        <Element Type="FunctionCall" Id="281BD147">
+            <FunctionDef Type="FunctionDef" Library="GHLo" Id="373EC389"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="6E4724F3"/>
+            <Parameter Type="Param" Library="GHLo" Id="0DD54D0A"/>
+            <Parameter Type="Param" Library="GHLo" Id="F711E9E0"/>
+            <Parameter Type="Param" Library="GHLo" Id="6A52B9D7"/>
+            <Parameter Type="Param" Library="GHLo" Id="A7E10DF6"/>
+            <Parameter Type="Param" Library="GHLo" Id="AEEAA3FF"/>
+            <Parameter Type="Param" Library="GHLo" Id="F133131E"/>
+            <Parameter Type="Param" Library="GHLo" Id="791836A4"/>
+        </Element>
+        <Element Type="Param" Id="6E4724F3">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="F224CABF"/>
+            <Value>3</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="0DD54D0A">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="501F6C4F"/>
+            <ValueType Type="text"/>
+        </Element>
+        <Element Type="Param" Id="F711E9E0">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="E365F464"/>
+            <Value>ResourcesLostDiffGraph</Value>
+            <ValueType Type="string"/>
+        </Element>
+        <Element Type="Param" Id="6A52B9D7">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="50DCD733"/>
+            <Value>ResourcesLostUnits</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="ScoreValue"/>
+        </Element>
+        <Element Type="Param" Id="A7E10DF6">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="F0AAF7F3"/>
+            <Value>100.0</Value>
+            <ValueType Type="fixed"/>
+        </Element>
+        <Element Type="Param" Id="AEEAA3FF">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="92B374AF"/>
+            <Preset Type="PresetValue" Library="GHLo" Id="1E4072AE"/>
+        </Element>
+        <Element Type="Param" Id="F133131E">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="D3A2A0F9"/>
+            <Value>50.0</Value>
+            <ValueType Type="fixed"/>
+        </Element>
+        <Element Type="Param" Id="791836A4">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="67AC533C"/>
+            <Value>50.0</Value>
+            <ValueType Type="fixed"/>
+        </Element>
+        <Element Type="FunctionCall" Id="DB607AAC">
+            <FunctionDef Type="FunctionDef" Library="GHLo" Id="373EC389"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="983A801A"/>
+            <Parameter Type="Param" Library="GHLo" Id="572C86BD"/>
+            <Parameter Type="Param" Library="GHLo" Id="89991185"/>
+            <Parameter Type="Param" Library="GHLo" Id="F3743220"/>
+            <Parameter Type="Param" Library="GHLo" Id="98D164A5"/>
+            <Parameter Type="Param" Library="GHLo" Id="BC3376B4"/>
+            <Parameter Type="Param" Library="GHLo" Id="5C635E5C"/>
+            <Parameter Type="Param" Library="GHLo" Id="AFE78FBB"/>
+        </Element>
+        <Element Type="Param" Id="983A801A">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="F224CABF"/>
+            <Value>4</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="572C86BD">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="501F6C4F"/>
+            <ValueType Type="text"/>
+        </Element>
+        <Element Type="Param" Id="89991185">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="E365F464"/>
+            <Value>ResourcesGatheredGraph</Value>
+            <ValueType Type="string"/>
+        </Element>
+        <Element Type="Param" Id="F3743220">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="50DCD733"/>
+            <Value>ResourcesGathered</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="ScoreValue"/>
+        </Element>
+        <Element Type="Param" Id="98D164A5">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="F0AAF7F3"/>
+            <Value>10000.0</Value>
+            <ValueType Type="fixed"/>
+        </Element>
+        <Element Type="Param" Id="BC3376B4">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="92B374AF"/>
+            <Preset Type="PresetValue" Library="GHLo" Id="A822012D"/>
+        </Element>
+        <Element Type="Param" Id="5C635E5C">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="D3A2A0F9"/>
+            <Value>1000.0</Value>
+            <ValueType Type="fixed"/>
+        </Element>
+        <Element Type="Param" Id="AFE78FBB">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="67AC533C"/>
+            <Value>1000.0</Value>
+            <ValueType Type="fixed"/>
+        </Element>
         <Element Type="FunctionCall" Id="2F345F27">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
@@ -7989,10 +8093,8 @@
             <ValueType Type="int"/>
         </Element>
         <Element Type="Trigger" Id="EDA8BD69">
-            <Variable Type="Variable" Library="GHLo" Id="BCBD32EF"/>
             <Variable Type="Variable" Library="GHLo" Id="233D7AC1"/>
             <Variable Type="Variable" Library="GHLo" Id="842F0BBA"/>
-            <Variable Type="Variable" Library="GHLo" Id="F80A7749"/>
             <Event Type="Comment" Library="GHLo" Id="1CB4B7CC"/>
             <Event Type="FunctionCall" Library="GHLo" Id="8C1A6CA6"/>
             <Action Type="Comment" Library="GHLo" Id="CD7880AE"/>
@@ -8003,16 +8105,6 @@
             <Action Type="FunctionCall" Library="GHLo" Id="2CE2B256"/>
             <Action Type="Comment" Library="GHLo" Id="D1090680"/>
             <Action Type="FunctionCall" Library="GHLo" Id="7052165B"/>
-        </Element>
-        <Element Type="Variable" Id="BCBD32EF">
-            <VariableType>
-                <Type Value="int"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="63D343D9"/>
-        </Element>
-        <Element Type="Param" Id="63D343D9">
-            <Value>0</Value>
-            <ValueType Type="int"/>
         </Element>
         <Element Type="Variable" Id="233D7AC1">
             <VariableType>
@@ -8031,16 +8123,6 @@
             <Value Type="Param" Library="GHLo" Id="290B95AC"/>
         </Element>
         <Element Type="Param" Id="290B95AC">
-            <Value>0</Value>
-            <ValueType Type="int"/>
-        </Element>
-        <Element Type="Variable" Id="F80A7749">
-            <VariableType>
-                <Type Value="int"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="8BB67581"/>
-        </Element>
-        <Element Type="Param" Id="8BB67581">
             <Value>0</Value>
             <ValueType Type="int"/>
         </Element>
@@ -8604,9 +8686,6 @@
             <Parameter Type="ParamDef" Library="GHLo" Id="D3A2A0F9"/>
             <Parameter Type="ParamDef" Library="GHLo" Id="67AC533C"/>
             <Variable Type="Variable" Library="GHLo" Id="39D8B8ED"/>
-            <Variable Type="Variable" Library="GHLo" Id="9D7AD5A6"/>
-            <Variable Type="Variable" Library="GHLo" Id="6A853DEC"/>
-            <Variable Type="Variable" Library="GHLo" Id="91649096"/>
             <Variable Type="Variable" Library="GHLo" Id="5647FACB"/>
             <FunctionCall Type="Comment" Library="GHLo" Id="83893138"/>
             <FunctionCall Type="Comment" Library="GHLo" Id="77EE39C0"/>
@@ -8711,36 +8790,6 @@
         </Element>
         <Element Type="Param" Id="15B3CB69">
             <Parameter Type="ParamDef" Library="GHLo" Id="F224CABF"/>
-        </Element>
-        <Element Type="Variable" Id="9D7AD5A6">
-            <VariableType>
-                <Type Value="int"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="406D7547"/>
-        </Element>
-        <Element Type="Param" Id="406D7547">
-            <Value>0</Value>
-            <ValueType Type="int"/>
-        </Element>
-        <Element Type="Variable" Id="6A853DEC">
-            <VariableType>
-                <Type Value="int"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="C18AA130"/>
-        </Element>
-        <Element Type="Param" Id="C18AA130">
-            <Value>0</Value>
-            <ValueType Type="int"/>
-        </Element>
-        <Element Type="Variable" Id="91649096">
-            <VariableType>
-                <Type Value="int"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="7D9CD53D"/>
-        </Element>
-        <Element Type="Param" Id="7D9CD53D">
-            <Value>0</Value>
-            <ValueType Type="int"/>
         </Element>
         <Element Type="Variable" Id="5647FACB">
             <VariableType>
@@ -9184,12 +9233,10 @@
         <Element Type="FunctionDef" Id="A5A3F768">
             <FlagAction/>
             <Parameter Type="ParamDef" Library="GHLo" Id="2BB6C5A4"/>
-            <Variable Type="Variable" Library="GHLo" Id="C73B5265"/>
             <Variable Type="Variable" Library="GHLo" Id="0BD9F6EC"/>
             <Variable Type="Variable" Library="GHLo" Id="51191434"/>
             <Variable Type="Variable" Library="GHLo" Id="45184CAF"/>
             <Variable Type="Variable" Library="GHLo" Id="BB27BE69"/>
-            <Variable Type="Variable" Library="GHLo" Id="E706E311"/>
             <Variable Type="Variable" Library="GHLo" Id="51D1999A"/>
             <FunctionCall Type="Comment" Library="GHLo" Id="7310DA2B"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="826A55D7"/>
@@ -9219,16 +9266,6 @@
             <Default Type="Param" Library="GHLo" Id="7C9C76AD"/>
         </Element>
         <Element Type="Param" Id="7C9C76AD">
-            <Value>0</Value>
-            <ValueType Type="int"/>
-        </Element>
-        <Element Type="Variable" Id="C73B5265">
-            <VariableType>
-                <Type Value="int"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="F083521D"/>
-        </Element>
-        <Element Type="Param" Id="F083521D">
             <Value>0</Value>
             <ValueType Type="int"/>
         </Element>
@@ -9271,16 +9308,6 @@
             <Value Type="Param" Library="GHLo" Id="9748077F"/>
         </Element>
         <Element Type="Param" Id="9748077F">
-            <Value>0</Value>
-            <ValueType Type="int"/>
-        </Element>
-        <Element Type="Variable" Id="E706E311">
-            <VariableType>
-                <Type Value="int"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="F7045B01"/>
-        </Element>
-        <Element Type="Param" Id="F7045B01">
             <Value>0</Value>
             <ValueType Type="int"/>
         </Element>
@@ -10721,11 +10748,8 @@
         <Element Type="FunctionDef" Id="3D56BFB8">
             <FlagAction/>
             <Parameter Type="ParamDef" Library="GHLo" Id="0514FDBC"/>
-            <Variable Type="Variable" Library="GHLo" Id="BB68A7D4"/>
-            <Variable Type="Variable" Library="GHLo" Id="A4758EA8"/>
             <Variable Type="Variable" Library="GHLo" Id="8C8864C0"/>
             <Variable Type="Variable" Library="GHLo" Id="45A2FB54"/>
-            <Variable Type="Variable" Library="GHLo" Id="16B6264C"/>
             <Variable Type="Variable" Library="GHLo" Id="EDB2D75B"/>
             <FunctionCall Type="Comment" Library="GHLo" Id="A024D82D"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="2C209F5F"/>
@@ -10748,26 +10772,6 @@
             <Value>0</Value>
             <ValueType Type="int"/>
         </Element>
-        <Element Type="Variable" Id="BB68A7D4">
-            <VariableType>
-                <Type Value="int"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="D26E2E10"/>
-        </Element>
-        <Element Type="Param" Id="D26E2E10">
-            <Value>0</Value>
-            <ValueType Type="int"/>
-        </Element>
-        <Element Type="Variable" Id="A4758EA8">
-            <VariableType>
-                <Type Value="int"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="D2F717E8"/>
-        </Element>
-        <Element Type="Param" Id="D2F717E8">
-            <Value>0</Value>
-            <ValueType Type="int"/>
-        </Element>
         <Element Type="Variable" Id="8C8864C0">
             <VariableType>
                 <Type Value="int"/>
@@ -10786,17 +10790,6 @@
             <Value Type="Param" Library="GHLo" Id="D5A52A47"/>
         </Element>
         <Element Type="Param" Id="D5A52A47">
-            <Value>0</Value>
-            <ValueType Type="int"/>
-        </Element>
-        <Element Type="Variable" Id="16B6264C">
-            <VariableType>
-                <Type Value="int"/>
-                <ArraySize Dim="0" Value="2"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="F78B9877"/>
-        </Element>
-        <Element Type="Param" Id="F78B9877">
             <Value>0</Value>
             <ValueType Type="int"/>
         </Element>
@@ -11799,7 +11792,7 @@
             <VariableType>
                 <Type Value="struct"/>
                 <TypeElement Type="Structure" Library="GHLo" Id="FD41E3E6"/>
-                <ArraySize Dim="0" Value="5"/>
+                <ArraySize Dim="0" Value="4"/>
             </VariableType>
         </Element>
         <Element Type="Variable" Id="39ACF67D">

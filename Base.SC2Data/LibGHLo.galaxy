@@ -27,7 +27,7 @@ void libGHLo_InitVariables () {
     libGHLo_gv_initial_Active_Players = PlayerGroupActive();
     libGHLo_gv_graphsGeneral.lv_intervals = 6;
     libGHLo_gv_graphsGeneral.lv_container = c_invalidDialogControlId;
-    for (init_i = 0; init_i <= 5; init_i += 1) {
+    for (init_i = 0; init_i <= 4; init_i += 1) {
         libGHLo_gv_graphsData[init_i].lv_graph = c_invalidDialogControlId;
         libGHLo_gv_graphsData[init_i].lv_title = c_invalidDialogControlId;
     }
@@ -248,9 +248,6 @@ void libGHLo_gf_RegisterPlayerLeavesEvent (trigger lp_trigger, int lp_player, in
 void libGHLo_gf_GraphsDefineGraph (int lp_iD, text lp_title, string lp_string, string lp_scoreType, int lp_style, fixed lp_minimumValue, fixed lp_rangeBase, fixed lp_rangeIncrement) {
     // Variable Declarations
     int lv_graph;
-    int lv_bar;
-    int lv_timeLabel;
-    int lv_valueLabel;
     int lv_count;
 
     // Automatic Variable Declarations
@@ -283,12 +280,10 @@ void libGHLo_gf_GraphsDefineGraph (int lp_iD, text lp_title, string lp_string, s
 
 void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graph) {
     // Variable Declarations
-    int lv_bar;
     int lv_difference;
     int lv_count;
     int[3] lv_teamTotal;
     int[3] lv_teamAverage;
-    int lv_maxValue;
     fixed lv_differential;
 
     // Automatic Variable Declarations
@@ -348,11 +343,8 @@ void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graph) {
 
 void libGHLo_gf_GraphsUpdateDataComparative (int lp_graph) {
     // Variable Declarations
-    int lv_bar;
-    int lv_difference;
     int lv_count;
     int[3] lv_teamTotal;
-    int[3] lv_teamAverage;
     fixed lv_maxValue;
 
     // Automatic Variable Declarations
@@ -1380,6 +1372,8 @@ bool libGHLo_gt_GraphsInitialization_Func (bool testConds, bool runActions) {
         libGHLo_gv_graphsGeneral.lv_container = DialogControlLastCreated();
         libGHLo_gf_GraphsDefineGraph(1, StringExternal("Param/Value/lib_GHLo_8058A929"), "IncomeGraph", "ResourceCollectionRate", libGHLo_ge_GraphStyle_Differential, 350.0, 400.0, 200.0);
         libGHLo_gf_GraphsDefineGraph(2, StringExternal("Param/Value/lib_GHLo_31D21183"), "ArmySizeGraph", "FoodUsedArmy", libGHLo_ge_GraphStyle_Comparative, 40.0, 50.0, 50.0);
+        libGHLo_gf_GraphsDefineGraph(3, StringExternal("Param/Value/lib_GHLo_0DD54D0A"), "ResourcesLostDiffGraph", "ResourcesLostUnits", libGHLo_ge_GraphStyle_Differential, 100.0, 50.0, 50.0);
+        libGHLo_gf_GraphsDefineGraph(4, StringExternal("Param/Value/lib_GHLo_572C86BD"), "ResourcesGatheredGraph", "ResourcesGathered", libGHLo_ge_GraphStyle_Comparative, 10000.0, 1000.0, 1000.0);
     }
     else {
         return false;
@@ -1398,10 +1392,8 @@ void libGHLo_gt_GraphsInitialization_Init () {
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_GraphsTimer_Func (bool testConds, bool runActions) {
     // Variable Declarations
-    int lv_bar;
     int lv_graph;
     int lv_count;
-    int lv_count2;
 
     // Automatic Variable Declarations
     int auto2CE2B256_ae;
