@@ -25,17 +25,17 @@ void libGHLo_InitVariables () {
 
     libGHLo_gv_all_Players = PlayerGroupAll();
     libGHLo_gv_initial_Active_Players = PlayerGroupActive();
+    libGHLo_gv_obsID = CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny);
+    libGHLo_gv_obs = PlayerGroupSingle(libGHLo_gv_obsID);
     libGHLo_gv_graphsGeneral.lv_intervals = 6;
     libGHLo_gv_graphsGeneral.lv_container = c_invalidDialogControlId;
     for (init_i = 0; init_i <= 4; init_i += 1) {
         libGHLo_gv_graphsData[init_i].lv_graph = c_invalidDialogControlId;
         libGHLo_gv_graphsData[init_i].lv_title = c_invalidDialogControlId;
     }
-    libGHLo_gv_graphsObs = PlayerGroupSingle(CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny));
     for (init_i1 = 0; init_i1 <= 15; init_i1 += 1) {
         libGHLo_gv_labels.lv_colorStrings[init_i1] = "";
     }
-    libGHLo_gv_labelsObs = PlayerGroupSingle(CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny));
     for (init_i1 = 0; init_i1 <= libGHLo_gv_upgradeNotificationsMaxUISlots; init_i1 += 1) {
         libGHLo_gv_upgradeNotifications.lv_itemIcon[init_i1] = c_invalidDialogControlId;
     }
@@ -62,8 +62,6 @@ void libGHLo_InitVariables () {
     }
     libGHLo_gv_upgradeNotifications.lv_slotLastUsed = -1;
     libGHLo_gv_upgradeNotifications.lv_slotLastClearedInputForUpdateThread = -1;
-    libGHLo_gv_upgradeNotificationsObsID = CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny);
-    libGHLo_gv_upgradeNotificationsObs = PlayerGroupSingle(libGHLo_gv_upgradeNotificationsObsID);
     for (init_i1 = 0; init_i1 <= libGHLo_gv_workersKilledNotificationsMaxUISlots; init_i1 += 1) {
         libGHLo_gv_workersKilledNotifications.lv_itemPanel[init_i1] = c_invalidDialogControlId;
     }
@@ -83,16 +81,13 @@ void libGHLo_InitVariables () {
         libGHLo_gv_workersKilledNotifications.lv_timerDestruction[init_i1] = TimerCreate();
     }
     libGHLo_gv_workersKilledNotifications.lv_slotLastUsed = -1;
-    libGHLo_gv_workersKilledNotificationsObs = PlayerGroupSingle(CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny));
     libGHLo_gv_mapNotifications.lv_minimumPickupSpacing = 10.0;
     libGHLo_gv_mapNotifications.lv_scannerSweepDuration = (StringToFixed(CatalogFieldValueGet(c_gameCatalogEffect, "ScannerSweep", "ExpireDelay", c_playerAny)) / GameGetSpeed());
     libGHLo_gv_mapNotifications.lv_pingDuration = 8.0;
     libGHLo_gv_mapNotifications.lv_mostRecentTimer = TimerCreate();
-    libGHLo_gv_mapNotificationObs = PlayerGroupSingle(CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny));
     for (init_i1 = 0; init_i1 <= 2; init_i1 += 1) {
         libGHLo_gv_minimapFrustum.lv_ping[init_i1] = c_invalidPingId;
     }
-    libGHLo_gv_minimapFrustumObs = PlayerGroupSingle(CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny));
 }
 
 // Presets
@@ -408,16 +403,16 @@ void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
     for ( ; ( (auto85411229_ai >= 0 && lv_count <= auto85411229_ae) || (auto85411229_ai < 0 && lv_count >= auto85411229_ae) ) ; lv_count += auto85411229_ai ) {
         if ((lv_count <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
             lv_count1 = (lv_count - 1);
-            libGHLo_gf_UpgradeNotificationsSetSlotData(lv_count1, libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemName[lv_count], libGHLo_gv_upgradeNotificationsObsID), (libNtve_gf_DialogItemImage(libGHLo_gv_upgradeNotifications.lv_itemIcon[lv_count], libGHLo_gv_upgradeNotificationsObsID)), libNtve_gf_DialogItemColor(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_count], libGHLo_gv_upgradeNotificationsObsID), DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_count], libGHLo_gv_upgradeNotificationsObsID));
+            libGHLo_gf_UpgradeNotificationsSetSlotData(lv_count1, libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemName[lv_count], libGHLo_gv_obsID), (libNtve_gf_DialogItemImage(libGHLo_gv_upgradeNotifications.lv_itemIcon[lv_count], libGHLo_gv_obsID)), libNtve_gf_DialogItemColor(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_count], libGHLo_gv_obsID), DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_count], libGHLo_gv_obsID));
             libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_count1] = libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_count];
-            libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_count1], libNtve_gf_DialogItemValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_upgradeNotificationsObs);
+            libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_count1], libNtve_gf_DialogItemValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_count], libGHLo_gv_obsID), libGHLo_gv_obs);
             libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count1] = libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count];
-            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_upgradeNotificationsObs);
-            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count], libGHLo_gv_upgradeNotificationsObsID), libGHLo_gv_upgradeNotificationsObs);
-            lv_visible = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count], libGHLo_gv_upgradeNotificationsObsID);
-            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libGHLo_gv_upgradeNotificationsObs, lv_visible);
+            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count], libGHLo_gv_obsID), libGHLo_gv_obs);
+            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count], libGHLo_gv_obsID), libGHLo_gv_obs);
+            lv_visible = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count], libGHLo_gv_obsID);
+            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libGHLo_gv_obs, lv_visible);
             lv_visible = !(lv_visible);
-            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libGHLo_gv_upgradeNotificationsObs, lv_visible);
+            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libGHLo_gv_obs, lv_visible);
         }
         else {
             if ((lv_count == lv_sLOT_MAX_INDEX1)) {
@@ -425,9 +420,9 @@ void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
                 lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], 1, 1);
                 libGHLo_gf_UpgradeNotificationsSetSlotData(lv_count1, libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), libGHLo_gf_UpgradeNotificationsUpgradeImage(lv_upgrade), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count]), false)), (UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1) <= libGHLo_gv_upgradeNotificationsVisibleTime));
                 libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count1] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
-                libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], StringToText(""), libGHLo_gv_upgradeNotificationsObs);
-                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libGHLo_gv_upgradeNotificationsObs, true);
-                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libGHLo_gv_upgradeNotificationsObs, false);
+                libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], StringToText(""), libGHLo_gv_obs);
+                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libGHLo_gv_obs, true);
+                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], libGHLo_gv_obs, false);
                 libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_count1] = TimerCreate();
             }
 
@@ -438,9 +433,9 @@ void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
     if ((libGHLo_gv_upgradeNotifications.lv_slotLastUsed <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
         libGHLo_gf_UpgradeNotificationsSetSlotData(libGHLo_gv_upgradeNotifications.lv_slotLastUsed, StringToText(""), "Assets\\Textures\\black.dds", Color(100.00, 100.00, 100.00), false);
         libGHLo_gv_upgradeNotifications.lv_slotStatus[libGHLo_gv_upgradeNotifications.lv_slotLastUsed] = libGHLo_ge_UpgradeNotificationsSlotStatus_NoUpgrade;
-        libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[libGHLo_gv_upgradeNotifications.lv_slotLastUsed], StringToText(""), libGHLo_gv_upgradeNotificationsObs);
-        libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[libGHLo_gv_upgradeNotifications.lv_slotLastUsed], 0.0, libGHLo_gv_upgradeNotificationsObs);
-        libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[libGHLo_gv_upgradeNotifications.lv_slotLastUsed], StringToText(""), libGHLo_gv_upgradeNotificationsObs);
+        libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[libGHLo_gv_upgradeNotifications.lv_slotLastUsed], StringToText(""), libGHLo_gv_obs);
+        libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[libGHLo_gv_upgradeNotifications.lv_slotLastUsed], 0.0, libGHLo_gv_obs);
+        libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[libGHLo_gv_upgradeNotifications.lv_slotLastUsed], StringToText(""), libGHLo_gv_obs);
         libGHLo_gv_upgradeNotifications.lv_timerDestruction[libGHLo_gv_upgradeNotifications.lv_slotLastUsed] = TimerCreate();
     }
 
@@ -472,7 +467,7 @@ int libGHLo_gf_UpgradeNotificationsSearchFacilitySlot (unit lp_facility) {
 string libGHLo_gf_UpgradeNotificationsUpgradeImage (string lp_upgrade) {
     // Automatic Variable Declarations
     // Implementation
-    return (CatalogFieldValueGet(c_gameCatalogUpgrade, lp_upgrade, "Icon", libGHLo_gv_upgradeNotificationsObsID));
+    return (CatalogFieldValueGet(c_gameCatalogUpgrade, lp_upgrade, "Icon", libGHLo_gv_obsID));
 }
 
 text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade) {
@@ -783,7 +778,7 @@ text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade) {
     }
     else {
     }
-    return StringExternal(CatalogFieldValueGet(c_gameCatalogUpgrade, lp_upgrade, "Name", libGHLo_gv_upgradeNotificationsObsID));
+    return StringExternal(CatalogFieldValueGet(c_gameCatalogUpgrade, lp_upgrade, "Name", libGHLo_gv_obsID));
 }
 
 bool libGHLo_gf_UpgradeNotificationsUpgradeNeedsToBeVisible (fixed lp_remainingTime) {
@@ -821,7 +816,7 @@ bool auto_libGHLo_gf_UpgradeNotificationsUpdateThread_TriggerFunc (bool testCond
         for ( ; ( (auto520A35AB_ai >= 0 && lv_slot <= auto520A35AB_ae) || (auto520A35AB_ai < 0 && lv_slot >= auto520A35AB_ae) ) ; lv_slot += auto520A35AB_ai ) {
             if (((lv_slot > libGHLo_gv_upgradeNotificationsMaxUISlots) || (libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] == libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade)) && ((UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_slot], c_unitQueueTimeRemaining, 1) <= libGHLo_gv_upgradeNotificationsVisibleTime) == true)) {
                 if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
-                    DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot], libGHLo_gv_upgradeNotificationsObs, true);
+                    DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot], libGHLo_gv_obs, true);
                     libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade;
                 }
 
@@ -829,7 +824,7 @@ bool auto_libGHLo_gf_UpgradeNotificationsUpdateThread_TriggerFunc (bool testCond
                     lv_swapTarget = libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne((lv_swapTarget + 1), lv_slot);
                     if ((lv_swapTarget >= 0)) {
                         if ((lv_swapTarget <= libGHLo_gv_upgradeNotificationsMaxUISlots) && (lv_slot > libGHLo_gv_upgradeNotificationsMaxUISlots)) {
-                            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_swapTarget], libGHLo_gv_upgradeNotificationsObs, true);
+                            DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_swapTarget], libGHLo_gv_obs, true);
                             libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_swapTarget] = libGHLo_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade;
                         }
 
@@ -859,18 +854,18 @@ bool auto_libGHLo_gf_UpgradeNotificationsUpdateThread_TriggerFunc (bool testCond
 void libGHLo_gf_UpgradeNotificationsSetStatusLabel (int lp_slot, text lp_status) {
     // Automatic Variable Declarations
     // Implementation
-    DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slot], libGHLo_gv_upgradeNotificationsObs, false);
-    DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lp_slot], libGHLo_gv_upgradeNotificationsObs, true);
-    libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lp_slot], lp_status, libGHLo_gv_upgradeNotificationsObs);
+    DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slot], libGHLo_gv_obs, false);
+    DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lp_slot], libGHLo_gv_obs, true);
+    libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lp_slot], lp_status, libGHLo_gv_obs);
 }
 
 void libGHLo_gf_UpgradeNotificationsSetSlotData (int lp_slot, text lp_name, string lp_icon, color lp_color, bool lp_visible) {
     // Automatic Variable Declarations
     // Implementation
-    libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemName[lp_slot], lp_name, libGHLo_gv_upgradeNotificationsObs);
-    libNtve_gf_SetDialogItemColor(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slot], lp_color, libGHLo_gv_upgradeNotificationsObs);
-    libNtve_gf_SetDialogItemImage(libGHLo_gv_upgradeNotifications.lv_itemIcon[lp_slot], lp_icon, libGHLo_gv_upgradeNotificationsObs);
-    DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slot], libGHLo_gv_upgradeNotificationsObs, lp_visible);
+    libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemName[lp_slot], lp_name, libGHLo_gv_obs);
+    libNtve_gf_SetDialogItemColor(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slot], lp_color, libGHLo_gv_obs);
+    libNtve_gf_SetDialogItemImage(libGHLo_gv_upgradeNotifications.lv_itemIcon[lp_slot], lp_icon, libGHLo_gv_obs);
+    DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slot], libGHLo_gv_obs, lp_visible);
 }
 
 int libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne (int lp_minUncheckedSlot, int lp_slot) {
@@ -930,13 +925,13 @@ void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_sl
     // Implementation
     if ((lp_slotA <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
         lv_status[0] = libGHLo_gv_upgradeNotifications.lv_slotStatus[lp_slotA];
-        lv_panelVisibility[0] = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slotA], libGHLo_gv_upgradeNotificationsObsID);
-        lv_timerLabelVisibility[0] = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slotA], libGHLo_gv_upgradeNotificationsObsID);
-        lv_statusLabelVisibility[0] = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lp_slotA], libGHLo_gv_upgradeNotificationsObsID);
-        lv_name[0] = libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemName[lp_slotA], libGHLo_gv_upgradeNotificationsObsID);
-        lv_icon[0] = (libNtve_gf_DialogItemImage(libGHLo_gv_upgradeNotifications.lv_itemIcon[lp_slotA], libGHLo_gv_upgradeNotificationsObsID));
-        lv_color[0] = libNtve_gf_DialogItemColor(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slotA], libGHLo_gv_upgradeNotificationsObsID);
-        lv_value[0] = libNtve_gf_DialogItemValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lp_slotA], libGHLo_gv_upgradeNotificationsObsID);
+        lv_panelVisibility[0] = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slotA], libGHLo_gv_obsID);
+        lv_timerLabelVisibility[0] = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slotA], libGHLo_gv_obsID);
+        lv_statusLabelVisibility[0] = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lp_slotA], libGHLo_gv_obsID);
+        lv_name[0] = libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemName[lp_slotA], libGHLo_gv_obsID);
+        lv_icon[0] = (libNtve_gf_DialogItemImage(libGHLo_gv_upgradeNotifications.lv_itemIcon[lp_slotA], libGHLo_gv_obsID));
+        lv_color[0] = libNtve_gf_DialogItemColor(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slotA], libGHLo_gv_obsID);
+        lv_value[0] = libNtve_gf_DialogItemValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lp_slotA], libGHLo_gv_obsID);
         lv_timer[0] = libGHLo_gv_upgradeNotifications.lv_timerDestruction[lp_slotA];
     }
     else {
@@ -949,13 +944,13 @@ void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_sl
     }
     if ((lp_slotB <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
         lv_status[1] = libGHLo_gv_upgradeNotifications.lv_slotStatus[lp_slotB];
-        lv_panelVisibility[1] = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slotB], libGHLo_gv_upgradeNotificationsObsID);
-        lv_timerLabelVisibility[1] = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slotB], libGHLo_gv_upgradeNotificationsObsID);
-        lv_statusLabelVisibility[1] = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lp_slotB], libGHLo_gv_upgradeNotificationsObsID);
-        lv_name[1] = libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemName[lp_slotB], libGHLo_gv_upgradeNotificationsObsID);
-        lv_icon[1] = (libNtve_gf_DialogItemImage(libGHLo_gv_upgradeNotifications.lv_itemIcon[lp_slotB], libGHLo_gv_upgradeNotificationsObsID));
-        lv_color[1] = libNtve_gf_DialogItemColor(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slotB], libGHLo_gv_upgradeNotificationsObsID);
-        lv_value[1] = libNtve_gf_DialogItemValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lp_slotB], libGHLo_gv_upgradeNotificationsObsID);
+        lv_panelVisibility[1] = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slotB], libGHLo_gv_obsID);
+        lv_timerLabelVisibility[1] = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slotB], libGHLo_gv_obsID);
+        lv_statusLabelVisibility[1] = DialogControlIsVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lp_slotB], libGHLo_gv_obsID);
+        lv_name[1] = libNtve_gf_DialogItemText(libGHLo_gv_upgradeNotifications.lv_itemName[lp_slotB], libGHLo_gv_obsID);
+        lv_icon[1] = (libNtve_gf_DialogItemImage(libGHLo_gv_upgradeNotifications.lv_itemIcon[lp_slotB], libGHLo_gv_obsID));
+        lv_color[1] = libNtve_gf_DialogItemColor(libGHLo_gv_upgradeNotifications.lv_itemPanel[lp_slotB], libGHLo_gv_obsID);
+        lv_value[1] = libNtve_gf_DialogItemValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lp_slotB], libGHLo_gv_obsID);
         lv_timer[1] = libGHLo_gv_upgradeNotifications.lv_timerDestruction[lp_slotB];
     }
     else {
@@ -969,19 +964,19 @@ void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_sl
     if ((lp_slotA <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
         libGHLo_gv_upgradeNotifications.lv_slotStatus[lp_slotA] = lv_status[1];
         libGHLo_gf_UpgradeNotificationsSetSlotData(lp_slotA, lv_name[1], lv_icon[1], lv_color[1], lv_panelVisibility[1]);
-        libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lp_slotA], lv_value[1], libGHLo_gv_upgradeNotificationsObs);
+        libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lp_slotA], lv_value[1], libGHLo_gv_obs);
         libGHLo_gv_upgradeNotifications.lv_timerDestruction[lp_slotA] = lv_timer[1];
-        DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lp_slotA], libGHLo_gv_upgradeNotificationsObs, lv_statusLabelVisibility[1]);
-        DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slotA], libGHLo_gv_upgradeNotificationsObs, lv_timerLabelVisibility[1]);
+        DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lp_slotA], libGHLo_gv_obs, lv_statusLabelVisibility[1]);
+        DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slotA], libGHLo_gv_obs, lv_timerLabelVisibility[1]);
     }
 
     if ((lp_slotB <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
         libGHLo_gv_upgradeNotifications.lv_slotStatus[lp_slotB] = lv_status[0];
         libGHLo_gf_UpgradeNotificationsSetSlotData(lp_slotB, lv_name[0], lv_icon[0], lv_color[0], lv_panelVisibility[0]);
-        libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lp_slotB], lv_value[0], libGHLo_gv_upgradeNotificationsObs);
+        libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lp_slotB], lv_value[0], libGHLo_gv_obs);
         libGHLo_gv_upgradeNotifications.lv_timerDestruction[lp_slotB] = lv_timer[0];
-        DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lp_slotB], libGHLo_gv_upgradeNotificationsObs, lv_statusLabelVisibility[0]);
-        DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slotB], libGHLo_gv_upgradeNotificationsObs, lv_timerLabelVisibility[0]);
+        DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lp_slotB], libGHLo_gv_obs, lv_statusLabelVisibility[0]);
+        DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slotB], libGHLo_gv_obs, lv_timerLabelVisibility[0]);
     }
 
     lv_facility = libGHLo_gv_upgradeNotifications.lv_slotFacility[lp_slotA];
@@ -1003,8 +998,8 @@ void libGHLo_gf_UpgradeNotificationsUpdateProgressData (int lp_slot) {
     lv_remainingMilliseconds = TruncI(((lv_remainingTime - lv_remainingSeconds) * 10.0));
 
     // Implementation
-    libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lp_slot], (libGHLo_gv_upgradeNotificationsVisibleTime - lv_remainingTime), libGHLo_gv_upgradeNotificationsObs);
-    libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slot], (IntToText(lv_remainingSeconds) + (StringExternal("Param/Value/lib_GHLo_28BC4DAB") + (((StringExternal("Param/Value/lib_GHLo_97202C9A") + lv_extraZero) + IntToText(lv_remainingMilliseconds)) + StringExternal("Param/Value/lib_GHLo_25E0C402")))), libGHLo_gv_upgradeNotificationsObs);
+    libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lp_slot], (libGHLo_gv_upgradeNotificationsVisibleTime - lv_remainingTime), libGHLo_gv_obs);
+    libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slot], (IntToText(lv_remainingSeconds) + (StringExternal("Param/Value/lib_GHLo_28BC4DAB") + (((StringExternal("Param/Value/lib_GHLo_97202C9A") + lv_extraZero) + IntToText(lv_remainingMilliseconds)) + StringExternal("Param/Value/lib_GHLo_25E0C402")))), libGHLo_gv_obs);
 }
 
 bool libGHLo_gf_MapNotificationsCheckFullHealth (unit lp_transportunit) {
@@ -1696,22 +1691,22 @@ bool libGHLo_gt_LabelsUnitTrainingStarted_Func (bool testConds, bool runActions)
             lv_activeTags = 2;
         }
         if ((lv_activeTags == 2)) {
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString)), libGHLo_gv_obs, true);
             lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon2 + lv_unitTagString));
             libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot1), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
-            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString)), libGHLo_gv_obs, true);
             lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString));
             libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot2), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
-            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
         }
         else {
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, true);
             lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString));
             libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot1), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
-            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
         }
     }
     else {
@@ -1745,10 +1740,10 @@ bool libGHLo_gt_LabelsResearchStarted_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, true);
     lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString));
     libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_research, "Icon", c_playerAny)), libGHLo_gv_all_Players);
-    DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+    DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
     return true;
 }
 
@@ -1787,40 +1782,40 @@ bool libGHLo_gt_LabelsUnitTrainingStopped_Func (bool testConds, bool runActions)
         lv_savedTypeSlot1 = DataTableGetString(true, lv_unitTagStringSlot1);
         lv_savedTypeSlot2 = DataTableGetString(true, lv_unitTagStringSlot2);
         if ((lv_savedTypeSlot1 == (lv_traineeType)) && (lv_savedTypeSlot2 == "")) {
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString)), libGHLo_gv_obs, false);
             DataTableSetString(true, lv_unitTagStringSlot1, "");
         }
         else if ((lv_savedTypeSlot2 == (lv_traineeType)) && (lv_savedTypeSlot1 == "")) {
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon2 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon2 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString)), libGHLo_gv_obs, false);
             DataTableSetString(true, lv_unitTagStringSlot2, "");
         }
         else if ((lv_savedTypeSlot1 == (lv_traineeType)) && (lv_savedTypeSlot2 != "")) {
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon2 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon2 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, true);
             lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString));
             libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot2), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
-            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
             DataTableSetString(true, lv_unitTagStringSlot1, lv_savedTypeSlot2);
             DataTableSetString(true, lv_unitTagStringSlot2, "");
         }
         else if ((lv_savedTypeSlot2 == (lv_traineeType)) && (lv_savedTypeSlot1 != "")) {
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon2 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon2 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString)), libGHLo_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, true);
             lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString));
             libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot1), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
-            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
             DataTableSetString(true, lv_unitTagStringSlot2, "");
         }
     }
@@ -1851,8 +1846,8 @@ bool libGHLo_gt_LabelsResearchStopped_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
+    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, false);
+    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString)), libGHLo_gv_obs, false);
     return true;
 }
 
@@ -1897,14 +1892,14 @@ bool libGHLo_gt_LabelsReactorDestroyed_Func (bool testConds, bool runActions) {
                 lv_unitTagString = IntToString(UnitGetTag(lv_unit));
                 lv_slot1unitType = DataTableGetString(true, (lv_unitTagString + libGHLo_gv_labelsSlot1));
                 if ((lv_slot1unitType != "")) {
-                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon2 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString)), libGHLo_gv_labelsObs, false);
-                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_labelsObs, true);
+                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString)), libGHLo_gv_obs, false);
+                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon2 + lv_unitTagString)), libGHLo_gv_obs, false);
+                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString)), libGHLo_gv_obs, false);
+                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString)), libGHLo_gv_obs, false);
+                    DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, true);
                     lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString));
                     libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_slot1unitType), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
-                    DialogControlSetVisible(lv_dialogItem, libGHLo_gv_labelsObs, true);
+                    DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
                 }
 
             }
@@ -1951,7 +1946,7 @@ bool libGHLo_gt_UpgradeNotificationsInitialization_Func (bool testConds, bool ru
         libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_UpgradeNotificationsResearchStarted, null, c_unitProgressStageStart);
         DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/TimerNotificationPanel");
         DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_upgradeNotificationsObs, true);
+        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
         DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         lv_slot = 0;
         for ( ; ( (auto69B01FF3_ai >= 0 && lv_slot <= auto69B01FF3_ae) || (auto69B01FF3_ai < 0 && lv_slot >= auto69B01FF3_ae) ) ; lv_slot += auto69B01FF3_ai ) {
@@ -1963,33 +1958,33 @@ bool libGHLo_gt_UpgradeNotificationsInitialization_Func (bool testConds, bool ru
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/TimerWindow/TimerStatus")));
             libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_upgradeNotificationsObs, true);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlHookupStandard(c_triggerControlTypeProgressBar, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/TimerWindow/TimerBar")));
             libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_upgradeNotificationsObs, true);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/TimerWindow/TimerCountdown")));
             libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_upgradeNotificationsObs, true);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/TimerWindow/TimerIcon")));
             libGHLo_gv_upgradeNotifications.lv_itemIcon[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_upgradeNotificationsObs, true);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/TimerWindow/TimerType")));
             libGHLo_gv_upgradeNotifications.lv_itemName[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_upgradeNotificationsObs, true);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-            libNtve_gf_SetDialogItemMaximumValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], libGHLo_gv_upgradeNotificationsVisibleTime, libGHLo_gv_upgradeNotificationsObs);
-            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_slot], StringToText(""), libGHLo_gv_upgradeNotificationsObs);
-            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemName[lv_slot], StringToText(""), libGHLo_gv_upgradeNotificationsObs);
-            libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), "Assets\\Textures\\black.dds", libGHLo_gv_upgradeNotificationsObs);
-            libNtve_gf_SetDialogItemColor(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot], Color(100,100,100), libGHLo_gv_upgradeNotificationsObs);
+            libNtve_gf_SetDialogItemMaximumValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], libGHLo_gv_upgradeNotificationsVisibleTime, libGHLo_gv_obs);
+            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_slot], StringToText(""), libGHLo_gv_obs);
+            libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemName[lv_slot], StringToText(""), libGHLo_gv_obs);
+            libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), "Assets\\Textures\\black.dds", libGHLo_gv_obs);
+            libNtve_gf_SetDialogItemColor(libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot], Color(100,100,100), libGHLo_gv_obs);
         }
     }
     else {
@@ -2114,7 +2109,7 @@ bool libGHLo_gt_UpgradeNotificationsResearchCompleted_Func (bool testConds, bool
         if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
             libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade;
             libGHLo_gf_UpgradeNotificationsSetStatusLabel(lv_slot, StringExternal("Param/Value/lib_GHLo_76FE8CD8"));
-            libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], libGHLo_gv_upgradeNotificationsVisibleTime, libGHLo_gv_upgradeNotificationsObs);
+            libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], libGHLo_gv_upgradeNotificationsVisibleTime, libGHLo_gv_obs);
             TimerStart(libGHLo_gv_upgradeNotifications.lv_timerDestruction[lv_slot], 5.0, false, c_timeGame);
         }
         else {
@@ -2164,11 +2159,11 @@ bool libGHLo_gt_UpgradeNotificationsResearchStarted_Func (bool testConds, bool r
                     libGHLo_gf_UpgradeNotificationsUpdateThread();
                 }
 
-                libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], StringToText(""), libGHLo_gv_upgradeNotificationsObs);
-                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_slot], libGHLo_gv_upgradeNotificationsObs, true);
-                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], libGHLo_gv_upgradeNotificationsObs, false);
+                libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], StringToText(""), libGHLo_gv_obs);
+                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_slot], libGHLo_gv_obs, true);
+                DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot], libGHLo_gv_obs, false);
                 libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
-                libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], 0.0, libGHLo_gv_upgradeNotificationsObs);
+                libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_upgradeNotifications.lv_itemProgressBar[lv_slot], 0.0, libGHLo_gv_obs);
                 return true;
             }
 
@@ -2235,7 +2230,7 @@ bool libGHLo_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
             libGHLo_gv_workersKilledNotifications.lv_active = true;
             DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/WorkerNotificationPanel");
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             lv_slot = 0;
             for ( ; ( (autoE2BFA55A_ai >= 0 && lv_slot <= autoE2BFA55A_ae) || (autoE2BFA55A_ai < 0 && lv_slot >= autoE2BFA55A_ae) ) ; lv_slot += autoE2BFA55A_ai ) {
@@ -2247,25 +2242,25 @@ bool libGHLo_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
                 DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerCount")));
                 lv_timeLabel[lv_slot] = DialogControlLastCreated();
                 DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
                 DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
                 DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerType")));
                 lv_icon[lv_slot] = DialogControlLastCreated();
                 DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
                 DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
                 DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerColor")));
                 lv_workerColor[lv_slot] = DialogControlLastCreated();
                 DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
                 DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
                 DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerBackground")));
                 lv_background[lv_slot] = DialogControlLastCreated();
                 DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_workersKilledNotificationsObs, true);
+                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
                 DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-                libNtve_gf_SetDialogItemText(lv_timeLabel[lv_slot], StringToText(""), libGHLo_gv_workersKilledNotificationsObs);
-                libNtve_gf_SetDialogItemColor(lv_panel[lv_slot], Color(100,100,100), libGHLo_gv_workersKilledNotificationsObs);
+                libNtve_gf_SetDialogItemText(lv_timeLabel[lv_slot], StringToText(""), libGHLo_gv_obs);
+                libNtve_gf_SetDialogItemColor(lv_panel[lv_slot], Color(100,100,100), libGHLo_gv_obs);
             }
             lv_count = 0;
             autoA9BD4D01_g = libGHLo_gv_initial_Active_Players;
@@ -2369,17 +2364,17 @@ bool libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Func (bool testConds, boo
                 else {
                     libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] = 1;
                 }
-                libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[lv_deadUnitOwner], IntToText(libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner]), libGHLo_gv_workersKilledNotificationsObs);
-                libNtve_gf_SetDialogItemImage(libGHLo_gv_workersKilledNotifications.lv_itemIcon[lv_deadUnitOwner], (CatalogFieldValueGet(c_gameCatalogActor, lv_unitType, "UnitIcon", c_playerAny)), libGHLo_gv_workersKilledNotificationsObs);
+                libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[lv_deadUnitOwner], IntToText(libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner]), libGHLo_gv_obs);
+                libNtve_gf_SetDialogItemImage(libGHLo_gv_workersKilledNotifications.lv_itemIcon[lv_deadUnitOwner], (CatalogFieldValueGet(c_gameCatalogActor, lv_unitType, "UnitIcon", c_playerAny)), libGHLo_gv_obs);
                 if ((UnitIsValid(libNtve_gf_KillingUnit()) == true)) {
-                    libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemBackground[lv_deadUnitOwner], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(lv_killingUnit), false)), libGHLo_gv_workersKilledNotificationsObs);
+                    libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemBackground[lv_deadUnitOwner], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(lv_killingUnit), false)), libGHLo_gv_obs);
                 }
 
-                libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemWorkerColor[lv_deadUnitOwner], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv_deadUnitOwner, false)), libGHLo_gv_workersKilledNotificationsObs);
+                libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemWorkerColor[lv_deadUnitOwner], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv_deadUnitOwner, false)), libGHLo_gv_obs);
                 libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_deadUnitOwner] = libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible;
                 if ((libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] > 1)) {
-                    DialogControlSetVisible(libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_deadUnitOwner], libGHLo_gv_workersKilledNotificationsObs, true);
-                    DialogControlSendAnimationEvent(libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[lv_deadUnitOwner], libGHLo_gv_workersKilledNotificationsObs, "textUpdated");
+                    DialogControlSetVisible(libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_deadUnitOwner], libGHLo_gv_obs, true);
+                    DialogControlSendAnimationEvent(libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[lv_deadUnitOwner], libGHLo_gv_obs, "textUpdated");
                 }
 
                 TimerStart(libGHLo_gv_workersKilledNotifications.lv_timerDestruction[lv_deadUnitOwner], libGHLo_gv_workersKilledNotificationsVisibleTime, false, c_timeReal);
@@ -2419,7 +2414,7 @@ bool libGHLo_gt_MapNotificationsDrop_Func (bool testConds, bool runActions) {
     if ((UnitCargoValue(lv_unit, c_unitCargoSpaceUsed) == UnitCargoValue(lv_unit, c_unitCargoSpaceTotal)) && (UnitTypeTestAttribute(UnitGetType(lv_unit), c_unitAttributeStructure) == false) && (libGHLo_gf_MapNotificationsCheckFullHealth(lv_unit) == true)) {
         lv_position = UnitGetPosition(lv_unit);
         if (((libGHLo_gv_mapNotifications.lv_mostRecentPingLocation == null) || (TimerGetElapsed(libGHLo_gv_mapNotifications.lv_mostRecentTimer) >= libGHLo_gv_mapNotifications.lv_pingDuration) || (DistanceBetweenPoints(libGHLo_gv_mapNotifications.lv_mostRecentPingLocation, lv_position) > libGHLo_gv_mapNotifications.lv_minimumPickupSpacing))) {
-            libNtve_gf_CreatePingFacingAngle(libGHLo_gv_mapNotificationObs, "PingBonus", UnitGetPosition(lv_unit), Color(100.00, 100.00, 0.00), libGHLo_gv_mapNotifications.lv_pingDuration, -90.0);
+            libNtve_gf_CreatePingFacingAngle(libGHLo_gv_obs, "PingBonus", UnitGetPosition(lv_unit), Color(100.00, 100.00, 0.00), libGHLo_gv_mapNotifications.lv_pingDuration, -90.0);
             PingSetObserver(PingLastCreated(), true);
             PingSetUnit(PingLastCreated(), lv_unit);
             libGHLo_gv_mapNotifications.lv_mostRecentPingLocation = PingGetPosition(PingLastCreated());
@@ -2449,7 +2444,7 @@ bool libGHLo_gt_MapNotificationsScannerSweep_Func (bool testConds, bool runActio
         return true;
     }
 
-    libNtve_gf_CreatePingFacingAngle(libGHLo_gv_mapNotificationObs, "ScannerSweepModel", EventUnitTargetPoint(), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(EventPlayer(), false)), libGHLo_gv_mapNotifications.lv_scannerSweepDuration, 0.0);
+    libNtve_gf_CreatePingFacingAngle(libGHLo_gv_obs, "ScannerSweepModel", EventUnitTargetPoint(), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(EventPlayer(), false)), libGHLo_gv_mapNotifications.lv_scannerSweepDuration, 0.0);
     PingSetObserver(PingLastCreated(), true);
     PingSetScale(PingLastCreated(), 0.035);
     return true;
@@ -2486,7 +2481,7 @@ bool libGHLo_gt_MinimapFrustumInitialization_Func (bool testConds, bool runActio
         lv_mapScale = (lv_mapScale * lv_baseScale);
         if ((PlayerType(libGHLo_gv_minimapFrustum.lv_playerOne) == c_playerTypeUser)) {
             lv_isActive = true;
-            libNtve_gf_CreatePingFacingAngle(libGHLo_gv_minimapFrustumObs, "GameHeartPlayerCameraModel", CameraGetTarget(libGHLo_gv_minimapFrustum.lv_playerOne), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(libGHLo_gv_minimapFrustum.lv_playerOne, false)), 0.0, 270.0);
+            libNtve_gf_CreatePingFacingAngle(libGHLo_gv_obs, "GameHeartPlayerCameraModel", CameraGetTarget(libGHLo_gv_minimapFrustum.lv_playerOne), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(libGHLo_gv_minimapFrustum.lv_playerOne, false)), 0.0, 270.0);
             PingSetScale(PingLastCreated(), lv_mapScale);
             libGHLo_gv_minimapFrustum.lv_ping[0] = PingLastCreated();
             libGHLo_gf_RegisterCameraMoveEvent(libGHLo_gt_MinimapFrustumPlayerCameraMoved, libGHLo_gv_minimapFrustum.lv_playerOne, c_cameraMoveReasonAny);
@@ -2494,7 +2489,7 @@ bool libGHLo_gt_MinimapFrustumInitialization_Func (bool testConds, bool runActio
 
         if ((PlayerType(libGHLo_gv_minimapFrustum.lv_playerTwo) == c_playerTypeUser)) {
             lv_isActive = true;
-            libNtve_gf_CreatePingFacingAngle(libGHLo_gv_minimapFrustumObs, "GameHeartPlayerCameraModel", CameraGetTarget(libGHLo_gv_minimapFrustum.lv_playerTwo), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(libGHLo_gv_minimapFrustum.lv_playerTwo, false)), 0.0, 270.0);
+            libNtve_gf_CreatePingFacingAngle(libGHLo_gv_obs, "GameHeartPlayerCameraModel", CameraGetTarget(libGHLo_gv_minimapFrustum.lv_playerTwo), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(libGHLo_gv_minimapFrustum.lv_playerTwo, false)), 0.0, 270.0);
             PingSetScale(PingLastCreated(), lv_mapScale);
             libGHLo_gv_minimapFrustum.lv_ping[1] = PingLastCreated();
             libGHLo_gf_RegisterCameraMoveEvent(libGHLo_gt_MinimapFrustumPlayerCameraMoved, libGHLo_gv_minimapFrustum.lv_playerTwo, c_cameraMoveReasonAny);

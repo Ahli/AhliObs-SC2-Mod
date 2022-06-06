@@ -115,20 +115,15 @@ struct libGHLo_gs_MinimapFrustum {
 // Variable Declarations
 playergroup libGHLo_gv_all_Players;
 playergroup libGHLo_gv_initial_Active_Players;
+int libGHLo_gv_obsID;
+playergroup libGHLo_gv_obs;
 libGHLo_gs_GraphsGeneral libGHLo_gv_graphsGeneral;
 libGHLo_gs_GraphsData[5] libGHLo_gv_graphsData;
-playergroup libGHLo_gv_graphsObs;
 libGHLo_gs_Labels libGHLo_gv_labels;
-playergroup libGHLo_gv_labelsObs;
 libGHLo_gs_UpgradeNotifications libGHLo_gv_upgradeNotifications;
-int libGHLo_gv_upgradeNotificationsObsID;
-playergroup libGHLo_gv_upgradeNotificationsObs;
 libGHLo_gs_WorkersKilledNotifications libGHLo_gv_workersKilledNotifications;
-playergroup libGHLo_gv_workersKilledNotificationsObs;
 libGHLo_gs_MapNotifications libGHLo_gv_mapNotifications;
-playergroup libGHLo_gv_mapNotificationObs;
 libGHLo_gs_MinimapFrustum libGHLo_gv_minimapFrustum;
-playergroup libGHLo_gv_minimapFrustumObs;
 
 // Function Declarations
 void libGHLo_gf_ObserverUiAssistSetPlayerIdScore (int lp_player);
