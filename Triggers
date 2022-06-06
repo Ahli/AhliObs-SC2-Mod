@@ -2531,7 +2531,6 @@
             <Action Type="FunctionCall" Library="FixD" Id="AFC14E60"/>
             <Action Type="FunctionCall" Library="FixD" Id="4E4F92AB"/>
             <Action Type="FunctionCall" Library="FixD" Id="3B87EE6C"/>
-            <Action Type="FunctionCall" Library="FixD" Id="C4E70D65"/>
         </Element>
         <Element Type="Variable" Id="3F2FC459">
             <Identifier>caster</Identifier>
@@ -2722,6 +2721,8 @@
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
             <FunctionCall Type="Comment" Library="FixD" Id="BC0233D5"/>
             <FunctionCall Type="FunctionCall" Library="FixD" Id="C9CA5471"/>
+            <FunctionCall Type="Comment" Library="FixD" Id="9E57813A"/>
+            <FunctionCall Type="FunctionCall" Library="FixD" Id="2B019D85"/>
             <FunctionCall Type="FunctionCall" Library="FixD" Id="2C44F5EA"/>
             <FunctionCall Type="Comment" Library="FixD" Id="D96B10E5"/>
             <FunctionCall Type="FunctionCall" Library="FixD" Id="9B4B7285"/>
@@ -2754,6 +2755,40 @@
         </Element>
         <Element Type="Param" Id="F0EB5ED3">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="88375332"/>
+            <Variable Type="Variable" Library="FixD" Id="3F2FC459"/>
+        </Element>
+        <Element Type="Comment" Id="9E57813A">
+            <Comment>
+                Attack Chase Interrupted
+                        (Unit type of caster) == Battlecruiser
+                        Or
+                            Conditions
+                                (Ability command for triggeringOrder) !=  Attack
+                                (target is alive) == False
+                        (Was directly issued by the user is enabled for triggeringOrder) == True
+                        (Queue After Existing Orders is enabled for triggeringOrder) == False
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005"/>
+        </Element>
+        <Element Type="FunctionCall" Id="2B019D85">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="73C0339B"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005"/>
+            <Parameter Type="Param" Library="FixD" Id="24FE5650"/>
+            <Parameter Type="Param" Library="FixD" Id="77577670"/>
+            <Parameter Type="Param" Library="FixD" Id="E649DCC8"/>
+        </Element>
+        <Element Type="Param" Id="24FE5650">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="9A7F392A"/>
+            <Value>BattlecruiserChasingRB</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Effect"/>
+        </Element>
+        <Element Type="Param" Id="77577670">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="88375332"/>
+            <Variable Type="Variable" Library="FixD" Id="3F2FC459"/>
+        </Element>
+        <Element Type="Param" Id="E649DCC8">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="2BB8CB05"/>
             <Variable Type="Variable" Library="FixD" Id="3F2FC459"/>
         </Element>
         <Element Type="FunctionCall" Id="2C44F5EA">
@@ -2805,66 +2840,6 @@
         <Element Type="Param" Id="FE98F915">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="88375332"/>
             <Variable Type="Variable" Library="FixD" Id="AD8989ED"/>
-        </Element>
-        <Element Type="FunctionCall" Id="C4E70D65">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
-            <FunctionCall Type="FunctionCall" Library="FixD" Id="32733FEF"/>
-            <FunctionCall Type="Comment" Library="FixD" Id="9E57813A"/>
-            <FunctionCall Type="FunctionCall" Library="FixD" Id="2B019D85"/>
-        </Element>
-        <Element Type="FunctionCall" Id="32733FEF">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
-            <Parameter Type="Param" Library="FixD" Id="72B10455"/>
-            <Parameter Type="Param" Library="FixD" Id="A8AE59D0"/>
-            <Parameter Type="Param" Library="FixD" Id="AA814CE7"/>
-        </Element>
-        <Element Type="Param" Id="72B10455">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
-            <Variable Type="Variable" Library="FixD" Id="B250706F"/>
-        </Element>
-        <Element Type="Param" Id="A8AE59D0">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
-        </Element>
-        <Element Type="Param" Id="AA814CE7">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
-            <Value>false</Value>
-            <ValueType Type="bool"/>
-        </Element>
-        <Element Type="Comment" Id="9E57813A">
-            <Comment>
-                Attack Chase Interrupted
-                        (Unit type of caster) == Battlecruiser
-                        Or
-                            Conditions
-                                (Ability command for triggeringOrder) !=  Attack
-                                (target is alive) == False
-                        (Was directly issued by the user is enabled for triggeringOrder) == True
-                        (Queue After Existing Orders is enabled for triggeringOrder) == False
-            </Comment>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-        </Element>
-        <Element Type="FunctionCall" Id="2B019D85">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="73C0339B"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="FixD" Id="24FE5650"/>
-            <Parameter Type="Param" Library="FixD" Id="77577670"/>
-            <Parameter Type="Param" Library="FixD" Id="E649DCC8"/>
-        </Element>
-        <Element Type="Param" Id="24FE5650">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="9A7F392A"/>
-            <Value>BattlecruiserChasingRB</Value>
-            <ValueType Type="gamelink"/>
-            <ValueGameType Type="Effect"/>
-        </Element>
-        <Element Type="Param" Id="77577670">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="88375332"/>
-            <Variable Type="Variable" Library="FixD" Id="3F2FC459"/>
-        </Element>
-        <Element Type="Param" Id="E649DCC8">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="2BB8CB05"/>
-            <Variable Type="Variable" Library="FixD" Id="3F2FC459"/>
         </Element>
         <Element Type="Trigger" Id="76DC0E90">
             <Variable Type="Variable" Library="FixD" Id="DD6949A0"/>

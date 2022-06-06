@@ -129,11 +129,8 @@ bool libFixD_gt_BattlecruiserAttackOrderIssued_Func (bool testConds, bool runAct
     }
     else {
         UnitCreateEffectUnit(lv_caster, "BattlecruiserAttackTrackerDP", lv_caster);
-    }
-    if ((lv_targetIsAlive == false)) {
         UnitCreateEffectUnit(lv_caster, "BattlecruiserChasingRB", lv_caster);
     }
-
     return true;
 }
 
