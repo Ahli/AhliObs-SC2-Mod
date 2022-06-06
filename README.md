@@ -3,6 +3,7 @@
 A StarCraft II extension mod implementing WCS GameHeart with bug fixes and performance improvements.
 Available on Americas, Europe and Korean servers.
 
+![Find HomeStoryCup XX extension mod](https://pbs.twimg.com/media/FUlMat4WQAItXQm?format=jpg&name=medium)
 
 
 ### All Changes compared to WCS GameHeart 1.25/Americas
