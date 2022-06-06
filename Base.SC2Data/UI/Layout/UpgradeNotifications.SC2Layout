@@ -10,7 +10,6 @@
     <Constant name="ProgressWidth" val="150"/>
     <Constant name="ProgressHeight" val="15"/>
 
-    <!-- Toggle WholePanelVisible to "FALSE" before publishing! -->
     <Frame type="Frame" name="TimerFrameTemplate">
         <Height val="#Height"/>
         <Width val="#Width"/>
@@ -19,7 +18,6 @@
         <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
         <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
 
-        <!-- Toggle Visible to "FALSE" before publishing! -->
         <Frame type="Image" name="TimerWindow">
             <Texture val="MIT/ghbackground.dds"/>
             <TextureType val="Normal"/>
@@ -94,14 +92,12 @@
 
     <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
 
-        <!-- Toggle timers -->
         <Frame type="ToggleControl" name="TimerNotificationPanel">
             <Anchor side="Top" relative="$parent" pos="Min" offset="#PanelVerticalOffset"/>
             <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
             <Width val="#Width"/>
             <Height val="#PanelHeight"/>
             <CollapseLayout val="true"/>
-            <Visible val="false"/>
             <AcceptsMouse val="false"/>
             <RenderPriority val="0"/>
 

@@ -17,9 +17,7 @@
         <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
         <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
         <Alpha val="#Alpha"/>
-        <Visible val="true"/>
 
-        <!-- Toggle Visible to "FALSE" before publishing! -->
         <Frame type="Image" name="WorkerBackground">
             <Texture val="MIT/ghleftbackground.dds"/>
             <TextureType val="Normal"/>
@@ -81,14 +79,12 @@
 
     <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
 
-        <!-- Toggle workers -->
         <Frame type="ToggleControl" name="WorkerNotificationPanel">
             <Anchor side="Top" relative="$parent" pos="Min" offset="#PanelVerticalOffset"/>
             <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
             <Width val="#Width"/>
             <Height val="#PanelHeight"/>
             <CollapseLayout val="true"/>
-            <Visible val="false"/>
             <AcceptsMouse val="false"/>
             <RenderPriority val="0"/>
 
