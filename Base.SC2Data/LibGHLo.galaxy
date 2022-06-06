@@ -1031,35 +1031,27 @@ bool libGHLo_gf_MapNotificationsCheckFullHealth (unit lp_transportunit) {
 // Trigger: GameHeart - Initialization
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_GameHeartInitialization_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_observer;
-    playergroup lv_observerGroup;
-
     // Automatic Variable Declarations
     playergroup auto200383C7_g;
     int auto200383C7_var;
-
-    // Variable Initialization
-    lv_observer = CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny);
-    lv_observerGroup = PlayerGroupSingle(lv_observer);
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    UIUnitColorStyleOverride(lv_observerGroup, c_unitColorStyleNormal);
+    UIUnitColorStyleOverride(libGHLo_gv_obs, c_unitColorStyleNormal);
     auto200383C7_g = libGHLo_gv_initial_Active_Players;
     auto200383C7_var = -1;
     while (true) {
         auto200383C7_var = PlayerGroupNextPlayer(auto200383C7_g, auto200383C7_var);
         if (auto200383C7_var < 0) { break; }
         libGHLo_gf_ApplySkinSet(libGHLo_gf_PlayerSkinSet(auto200383C7_var), auto200383C7_var);
-        libNtve_gf_SetAllianceOneWay(lv_observer, auto200383C7_var, libNtve_ge_AllianceSetting_Neutral);
-        PlayerSetAlliance(auto200383C7_var, c_allianceIdDefeat, lv_observer, true);
-        PlayerSetAlliance(auto200383C7_var, c_allianceIdPassive, lv_observer, true);
-        PlayerSetAlliance(auto200383C7_var, c_allianceIdControl, lv_observer, true);
-        PlayerSetAlliance(auto200383C7_var, c_allianceIdVision, lv_observer, true);
+        libNtve_gf_SetAllianceOneWay(libGHLo_gv_obsID, auto200383C7_var, libNtve_ge_AllianceSetting_Neutral);
+        PlayerSetAlliance(auto200383C7_var, c_allianceIdDefeat, libGHLo_gv_obsID, true);
+        PlayerSetAlliance(auto200383C7_var, c_allianceIdPassive, libGHLo_gv_obsID, true);
+        PlayerSetAlliance(auto200383C7_var, c_allianceIdControl, libGHLo_gv_obsID, true);
+        PlayerSetAlliance(auto200383C7_var, c_allianceIdVision, libGHLo_gv_obsID, true);
         libNtve_gf_SetUpgradeLevelForPlayer(auto200383C7_var, "GameHeartActive", 1);
     }
     return true;
