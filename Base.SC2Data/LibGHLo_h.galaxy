@@ -158,6 +158,7 @@ bool libGHLo_gf_MapNotificationsCheckFullHealth (unit lp_transportunit);
 
 // Trigger Declarations
 trigger libGHLo_gt_GameHeartInitialization;
+trigger libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers;
 trigger libGHLo_gt_ObserverUiAssistInitialization;
 trigger libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat;
 trigger libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie;

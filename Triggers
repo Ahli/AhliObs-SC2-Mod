@@ -4013,6 +4013,7 @@
             <Item Type="Variable" Library="GHLo" Id="4BCA2C4E"/>
             <Item Type="Variable" Library="GHLo" Id="94CCCFEB"/>
             <Item Type="Trigger" Library="GHLo" Id="D98B8C63"/>
+            <Item Type="Trigger" Library="GHLo" Id="ACB26A37"/>
             <Item Type="Category" Library="GHLo" Id="EFF136AA"/>
             <Item Type="Category" Library="GHLo" Id="6FADEF80"/>
             <Item Type="Category" Library="GHLo" Id="0AFF93BA"/>
@@ -4543,6 +4544,355 @@
         <Element Type="Param" Id="AD107862">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="10968B1B"/>
             <Variable Type="Variable" Library="GHLo" Id="6E46A71E"/>
+        </Element>
+        <Element Type="Trigger" Id="ACB26A37">
+            <Variable Type="Variable" Library="GHLo" Id="AC4B3C9D"/>
+            <Event Type="Comment" Library="GHLo" Id="60742FEE"/>
+            <Event Type="FunctionCall" Library="GHLo" Id="D43D8D7F"/>
+            <Event Type="FunctionCall" Library="GHLo" Id="A75BA230"/>
+            <Event Type="FunctionCall" Library="GHLo" Id="4D9A0BB9"/>
+            <Event Type="FunctionCall" Library="GHLo" Id="D5CBACBF"/>
+            <Event Type="FunctionCall" Library="GHLo" Id="D9D6F5BA"/>
+            <Event Type="FunctionCall" Library="GHLo" Id="3E0F2E04"/>
+            <Event Type="FunctionCall" Library="GHLo" Id="BAE72F9E"/>
+            <Event Type="FunctionCall" Library="GHLo" Id="206F2DAD"/>
+            <Event Type="FunctionCall" Library="GHLo" Id="DF8F56EB"/>
+            <Condition Type="FunctionCall" Library="GHLo" Id="0A5473AB"/>
+            <Action Type="FunctionCall" Library="GHLo" Id="FD95A7B6"/>
+        </Element>
+        <Element Type="Variable" Id="AC4B3C9D">
+            <VariableType>
+                <Type Value="preset"/>
+                <TypeElement Type="Preset" Library="Ntve" Id="CFE3DD1C"/>
+            </VariableType>
+            <Value Type="Param" Library="GHLo" Id="12DB2152"/>
+        </Element>
+        <Element Type="Param" Id="12DB2152">
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="24023092"/>
+        </Element>
+        <Element Type="FunctionCall" Id="24023092">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="A7BB52AE"/>
+            <Parameter Type="Param" Library="GHLo" Id="F63AC6A5"/>
+        </Element>
+        <Element Type="Param" Id="F63AC6A5">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00CB7424"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="F4389CC9"/>
+        </Element>
+        <Element Type="FunctionCall" Id="F4389CC9">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000053"/>
+        </Element>
+        <Element Type="Comment" Id="60742FEE">
+            <Comment>
+                yes, these are all different
+            </Comment>
+        </Element>
+        <Element Type="FunctionCall" Id="D43D8D7F">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="D00F9D6F"/>
+            <Parameter Type="Param" Library="GHLo" Id="99ACD560"/>
+            <Parameter Type="Param" Library="GHLo" Id="C1893255"/>
+            <Parameter Type="Param" Library="GHLo" Id="6F166136"/>
+            <Parameter Type="Param" Library="GHLo" Id="BB2AECFA"/>
+        </Element>
+        <Element Type="Param" Id="99ACD560">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="EE631277"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78"/>
+        </Element>
+        <Element Type="Param" Id="C1893255">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="BB4C37B6"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000262"/>
+        </Element>
+        <Element Type="Param" Id="6F166136">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ACC52290"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="8DA1FC37"/>
+        </Element>
+        <Element Type="Param" Id="BB2AECFA">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3F2584C8"/>
+            <Value>MorphToCollapsibleRockTowerDebris</Value>
+            <ValueType Type="abilcmd"/>
+        </Element>
+        <Element Type="FunctionCall" Id="A75BA230">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="D00F9D6F"/>
+            <Parameter Type="Param" Library="GHLo" Id="8F0CD13D"/>
+            <Parameter Type="Param" Library="GHLo" Id="0789A987"/>
+            <Parameter Type="Param" Library="GHLo" Id="6BE01B51"/>
+            <Parameter Type="Param" Library="GHLo" Id="B0678778"/>
+        </Element>
+        <Element Type="Param" Id="8F0CD13D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="EE631277"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78"/>
+        </Element>
+        <Element Type="Param" Id="0789A987">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="BB4C37B6"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000262"/>
+        </Element>
+        <Element Type="Param" Id="6BE01B51">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ACC52290"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="8DA1FC37"/>
+        </Element>
+        <Element Type="Param" Id="B0678778">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3F2584C8"/>
+            <Value>MorphToCollapsibleRockTowerDebrisRampLeft</Value>
+            <ValueType Type="abilcmd"/>
+        </Element>
+        <Element Type="FunctionCall" Id="4D9A0BB9">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="D00F9D6F"/>
+            <Parameter Type="Param" Library="GHLo" Id="92917DC8"/>
+            <Parameter Type="Param" Library="GHLo" Id="A12EEAEB"/>
+            <Parameter Type="Param" Library="GHLo" Id="02FBBDF0"/>
+            <Parameter Type="Param" Library="GHLo" Id="6AA2CC58"/>
+        </Element>
+        <Element Type="Param" Id="92917DC8">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="EE631277"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78"/>
+        </Element>
+        <Element Type="Param" Id="A12EEAEB">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="BB4C37B6"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000262"/>
+        </Element>
+        <Element Type="Param" Id="02FBBDF0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ACC52290"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="8DA1FC37"/>
+        </Element>
+        <Element Type="Param" Id="6AA2CC58">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3F2584C8"/>
+            <Value>MorphToCollapsibleRockTowerDebrisRampLeftGreen</Value>
+            <ValueType Type="abilcmd"/>
+        </Element>
+        <Element Type="FunctionCall" Id="D5CBACBF">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="D00F9D6F"/>
+            <Parameter Type="Param" Library="GHLo" Id="C6FF4DD3"/>
+            <Parameter Type="Param" Library="GHLo" Id="7D20F3CE"/>
+            <Parameter Type="Param" Library="GHLo" Id="2D0F1E42"/>
+            <Parameter Type="Param" Library="GHLo" Id="1B186F91"/>
+        </Element>
+        <Element Type="Param" Id="C6FF4DD3">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="EE631277"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78"/>
+        </Element>
+        <Element Type="Param" Id="7D20F3CE">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="BB4C37B6"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000262"/>
+        </Element>
+        <Element Type="Param" Id="2D0F1E42">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ACC52290"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="8DA1FC37"/>
+        </Element>
+        <Element Type="Param" Id="1B186F91">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3F2584C8"/>
+            <Value>MorphToCollapsibleRockTowerDebrisRampRight</Value>
+            <ValueType Type="abilcmd"/>
+        </Element>
+        <Element Type="FunctionCall" Id="D9D6F5BA">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="D00F9D6F"/>
+            <Parameter Type="Param" Library="GHLo" Id="95F9A642"/>
+            <Parameter Type="Param" Library="GHLo" Id="036E5474"/>
+            <Parameter Type="Param" Library="GHLo" Id="C83E90E9"/>
+            <Parameter Type="Param" Library="GHLo" Id="1C919606"/>
+        </Element>
+        <Element Type="Param" Id="95F9A642">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="EE631277"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78"/>
+        </Element>
+        <Element Type="Param" Id="036E5474">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="BB4C37B6"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000262"/>
+        </Element>
+        <Element Type="Param" Id="C83E90E9">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ACC52290"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="8DA1FC37"/>
+        </Element>
+        <Element Type="Param" Id="1C919606">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3F2584C8"/>
+            <Value>MorphToCollapsibleRockTowerDebrisRampRightGreen</Value>
+            <ValueType Type="abilcmd"/>
+        </Element>
+        <Element Type="FunctionCall" Id="3E0F2E04">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="D00F9D6F"/>
+            <Parameter Type="Param" Library="GHLo" Id="EDD6B624"/>
+            <Parameter Type="Param" Library="GHLo" Id="7463A093"/>
+            <Parameter Type="Param" Library="GHLo" Id="05647157"/>
+            <Parameter Type="Param" Library="GHLo" Id="6EC93C2B"/>
+        </Element>
+        <Element Type="Param" Id="EDD6B624">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="EE631277"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78"/>
+        </Element>
+        <Element Type="Param" Id="7463A093">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="BB4C37B6"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000262"/>
+        </Element>
+        <Element Type="Param" Id="05647157">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ACC52290"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="8DA1FC37"/>
+        </Element>
+        <Element Type="Param" Id="6EC93C2B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3F2584C8"/>
+            <Value>MorphToCollapsibleTerranTowerDebris</Value>
+            <ValueType Type="abilcmd"/>
+        </Element>
+        <Element Type="FunctionCall" Id="BAE72F9E">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="D00F9D6F"/>
+            <Parameter Type="Param" Library="GHLo" Id="678DB425"/>
+            <Parameter Type="Param" Library="GHLo" Id="27845279"/>
+            <Parameter Type="Param" Library="GHLo" Id="15E32327"/>
+            <Parameter Type="Param" Library="GHLo" Id="91B03277"/>
+        </Element>
+        <Element Type="Param" Id="678DB425">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="EE631277"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78"/>
+        </Element>
+        <Element Type="Param" Id="27845279">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="BB4C37B6"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000262"/>
+        </Element>
+        <Element Type="Param" Id="15E32327">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ACC52290"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="8DA1FC37"/>
+        </Element>
+        <Element Type="Param" Id="91B03277">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3F2584C8"/>
+            <Value>MorphToCollapsibleTerranTowerDebrisRampLeft</Value>
+            <ValueType Type="abilcmd"/>
+        </Element>
+        <Element Type="FunctionCall" Id="206F2DAD">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="D00F9D6F"/>
+            <Parameter Type="Param" Library="GHLo" Id="6F08C729"/>
+            <Parameter Type="Param" Library="GHLo" Id="DFDFC431"/>
+            <Parameter Type="Param" Library="GHLo" Id="9F735626"/>
+            <Parameter Type="Param" Library="GHLo" Id="1B20C930"/>
+        </Element>
+        <Element Type="Param" Id="6F08C729">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="EE631277"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78"/>
+        </Element>
+        <Element Type="Param" Id="DFDFC431">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="BB4C37B6"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000262"/>
+        </Element>
+        <Element Type="Param" Id="9F735626">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ACC52290"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="8DA1FC37"/>
+        </Element>
+        <Element Type="Param" Id="1B20C930">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3F2584C8"/>
+            <Value>MorphToCollapsibleTerranTowerDebrisRampRight</Value>
+            <ValueType Type="abilcmd"/>
+        </Element>
+        <Element Type="FunctionCall" Id="DF8F56EB">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="D00F9D6F"/>
+            <Parameter Type="Param" Library="GHLo" Id="A0CC1930"/>
+            <Parameter Type="Param" Library="GHLo" Id="C68D9273"/>
+            <Parameter Type="Param" Library="GHLo" Id="39681E98"/>
+            <Parameter Type="Param" Library="GHLo" Id="FB906257"/>
+        </Element>
+        <Element Type="Param" Id="A0CC1930">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="EE631277"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78"/>
+        </Element>
+        <Element Type="Param" Id="C68D9273">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="BB4C37B6"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000262"/>
+        </Element>
+        <Element Type="Param" Id="39681E98">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ACC52290"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="8DA1FC37"/>
+        </Element>
+        <Element Type="Param" Id="FB906257">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3F2584C8"/>
+            <Value>MorphToCollapsiblePurifierTowerDebris</Value>
+            <ValueType Type="abilcmd"/>
+        </Element>
+        <Element Type="FunctionCall" Id="0A5473AB">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000133"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="445E6FAD"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="579AC0D2"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="54B92615"/>
+        </Element>
+        <Element Type="FunctionCall" Id="445E6FAD">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001"/>
+            <Parameter Type="Param" Library="GHLo" Id="55B4280E"/>
+            <Parameter Type="Param" Library="GHLo" Id="42945A02"/>
+            <Parameter Type="Param" Library="GHLo" Id="7ECBCFDF"/>
+        </Element>
+        <Element Type="Param" Id="55B4280E">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="GHLo" Id="AC4B3C9D"/>
+        </Element>
+        <Element Type="Param" Id="42945A02">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="7ECBCFDF">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="788AA7DC"/>
+        </Element>
+        <Element Type="FunctionCall" Id="579AC0D2">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001"/>
+            <Parameter Type="Param" Library="GHLo" Id="E60FB060"/>
+            <Parameter Type="Param" Library="GHLo" Id="2D341B42"/>
+            <Parameter Type="Param" Library="GHLo" Id="030220D0"/>
+        </Element>
+        <Element Type="Param" Id="E60FB060">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="GHLo" Id="AC4B3C9D"/>
+        </Element>
+        <Element Type="Param" Id="2D341B42">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="030220D0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="225999FD"/>
+        </Element>
+        <Element Type="FunctionCall" Id="54B92615">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001"/>
+            <Parameter Type="Param" Library="GHLo" Id="B89493C0"/>
+            <Parameter Type="Param" Library="GHLo" Id="CEEC3618"/>
+            <Parameter Type="Param" Library="GHLo" Id="C791D8FD"/>
+        </Element>
+        <Element Type="Param" Id="B89493C0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="GHLo" Id="AC4B3C9D"/>
+        </Element>
+        <Element Type="Param" Id="CEEC3618">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="C791D8FD">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="FF332154"/>
+        </Element>
+        <Element Type="FunctionCall" Id="FD95A7B6">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="CB774E72"/>
+            <Parameter Type="Param" Library="GHLo" Id="E8AB2D55"/>
+            <Parameter Type="Param" Library="GHLo" Id="40D38EE4"/>
+            <Parameter Type="Param" Library="GHLo" Id="0493D05E"/>
+            <Parameter Type="Param" Library="GHLo" Id="1458DB95"/>
+        </Element>
+        <Element Type="Param" Id="E8AB2D55">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="8B9F7B61"/>
+            <Variable Type="Variable" Library="GHLo" Id="4BCA2C4E"/>
+        </Element>
+        <Element Type="Param" Id="40D38EE4">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="E463F943"/>
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="0493D05E">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="E39E14DF"/>
+            <Value>AHLI_Reveal</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Behavior"/>
+        </Element>
+        <Element Type="Param" Id="1458DB95">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="10968B1B"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="8552D474"/>
+        </Element>
+        <Element Type="FunctionCall" Id="8552D474">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000092"/>
         </Element>
         <Element Type="Category" Id="EFF136AA">
             <Item Type="Comment" Library="GHLo" Id="A80F07A6"/>

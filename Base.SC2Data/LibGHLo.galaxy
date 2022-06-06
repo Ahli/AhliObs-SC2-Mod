@@ -1088,6 +1088,47 @@ void libGHLo_gt_GameHeartInitialization_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: GameHeart - RevealDebrisFromDestructubleTowers
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_controller;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_controller = PlayerType(EventPlayer());
+
+    // Conditions
+    if (testConds) {
+        if (!(((lv_controller == c_playerTypeNeutral) || (lv_controller == c_playerTypeHostile) || (lv_controller == c_playerTypeNone)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitBehaviorAddPlayer(EventUnit(), "AHLI_Reveal", libGHLo_gv_obsID, 1);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers_Init () {
+    libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers = TriggerCreate("libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers_Func");
+    TriggerAddEventUnitAbility(libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers, null, AbilityCommand("MorphToCollapsibleRockTowerDebris", 0), c_unitAbilStageComplete, true);
+    TriggerAddEventUnitAbility(libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers, null, AbilityCommand("MorphToCollapsibleRockTowerDebrisRampLeft", 0), c_unitAbilStageComplete, true);
+    TriggerAddEventUnitAbility(libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers, null, AbilityCommand("MorphToCollapsibleRockTowerDebrisRampLeftGreen", 0), c_unitAbilStageComplete, true);
+    TriggerAddEventUnitAbility(libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers, null, AbilityCommand("MorphToCollapsibleRockTowerDebrisRampRight", 0), c_unitAbilStageComplete, true);
+    TriggerAddEventUnitAbility(libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers, null, AbilityCommand("MorphToCollapsibleRockTowerDebrisRampRightGreen", 0), c_unitAbilStageComplete, true);
+    TriggerAddEventUnitAbility(libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers, null, AbilityCommand("MorphToCollapsibleTerranTowerDebris", 0), c_unitAbilStageComplete, true);
+    TriggerAddEventUnitAbility(libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers, null, AbilityCommand("MorphToCollapsibleTerranTowerDebrisRampLeft", 0), c_unitAbilStageComplete, true);
+    TriggerAddEventUnitAbility(libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers, null, AbilityCommand("MorphToCollapsibleTerranTowerDebrisRampRight", 0), c_unitAbilStageComplete, true);
+    TriggerAddEventUnitAbility(libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers, null, AbilityCommand("MorphToCollapsiblePurifierTowerDebris", 0), c_unitAbilStageComplete, true);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: ObserverUiAssist - Initialization
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_ObserverUiAssistInitialization_Func (bool testConds, bool runActions) {
@@ -2596,6 +2637,7 @@ void libGHLo_gt_MinimapFrustumPlayerLeaves_Init () {
 
 void libGHLo_InitTriggers () {
     libGHLo_gt_GameHeartInitialization_Init();
+    libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers_Init();
     libGHLo_gt_ObserverUiAssistInitialization_Init();
     libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat_Init();
     libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie_Init();
