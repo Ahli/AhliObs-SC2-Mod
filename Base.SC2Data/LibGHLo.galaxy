@@ -1031,9 +1031,19 @@ bool libGHLo_gf_MapNotificationsCheckFullHealth (unit lp_transportunit) {
 // Trigger: GameHeart - Initialization
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_GameHeartInitialization_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    unit lv_unit;
+    int lv_controller;
+
     // Automatic Variable Declarations
-    playergroup auto200383C7_g;
-    int auto200383C7_var;
+    playergroup autoAA0F1A58_g;
+    const int auto3843C4AA_ae = 15;
+    const int auto3843C4AA_ai = 1;
+    unitgroup autoBAD71A13_g;
+    int autoBAD71A13_u;
+
+    // Variable Initialization
 
     // Actions
     if (!runActions) {
@@ -1041,18 +1051,32 @@ bool libGHLo_gt_GameHeartInitialization_Func (bool testConds, bool runActions) {
     }
 
     UIUnitColorStyleOverride(libGHLo_gv_obs, c_unitColorStyleNormal);
-    auto200383C7_g = libGHLo_gv_initial_Active_Players;
-    auto200383C7_var = -1;
+    autoAA0F1A58_g = libGHLo_gv_initial_Active_Players;
+    lv_i = -1;
     while (true) {
-        auto200383C7_var = PlayerGroupNextPlayer(auto200383C7_g, auto200383C7_var);
-        if (auto200383C7_var < 0) { break; }
-        libGHLo_gf_ApplySkinSet(libGHLo_gf_PlayerSkinSet(auto200383C7_var), auto200383C7_var);
-        libNtve_gf_SetAllianceOneWay(libGHLo_gv_obsID, auto200383C7_var, libNtve_ge_AllianceSetting_Neutral);
-        PlayerSetAlliance(auto200383C7_var, c_allianceIdDefeat, libGHLo_gv_obsID, true);
-        PlayerSetAlliance(auto200383C7_var, c_allianceIdPassive, libGHLo_gv_obsID, true);
-        PlayerSetAlliance(auto200383C7_var, c_allianceIdControl, libGHLo_gv_obsID, true);
-        PlayerSetAlliance(auto200383C7_var, c_allianceIdVision, libGHLo_gv_obsID, true);
-        libNtve_gf_SetUpgradeLevelForPlayer(auto200383C7_var, "GameHeartActive", 1);
+        lv_i = PlayerGroupNextPlayer(autoAA0F1A58_g, lv_i);
+        if (lv_i < 0) { break; }
+        libGHLo_gf_ApplySkinSet(libGHLo_gf_PlayerSkinSet(lv_i), lv_i);
+        libNtve_gf_SetAllianceOneWay(libGHLo_gv_obsID, lv_i, libNtve_ge_AllianceSetting_Neutral);
+        PlayerSetAlliance(lv_i, c_allianceIdDefeat, libGHLo_gv_obsID, true);
+        PlayerSetAlliance(lv_i, c_allianceIdPassive, libGHLo_gv_obsID, true);
+        PlayerSetAlliance(lv_i, c_allianceIdControl, libGHLo_gv_obsID, true);
+        PlayerSetAlliance(lv_i, c_allianceIdVision, libGHLo_gv_obsID, true);
+        libNtve_gf_SetUpgradeLevelForPlayer(lv_i, "GameHeartActive", 1);
+    }
+    lv_i = 0;
+    for ( ; ( (auto3843C4AA_ai >= 0 && lv_i <= auto3843C4AA_ae) || (auto3843C4AA_ai < 0 && lv_i >= auto3843C4AA_ae) ) ; lv_i += auto3843C4AA_ai ) {
+        lv_controller = PlayerType(lv_i);
+        if (((lv_controller == c_playerTypeNeutral) || (lv_controller == c_playerTypeHostile) || (lv_controller == c_playerTypeNone))) {
+            autoBAD71A13_g = UnitGroup(null, lv_i, RegionEntireMap(), UnitFilter(0, 0, 0, 0), 0);
+            autoBAD71A13_u = UnitGroupCount(autoBAD71A13_g, c_unitCountAll);
+            for (;; autoBAD71A13_u -= 1) {
+                lv_unit = UnitGroupUnitFromEnd(autoBAD71A13_g, autoBAD71A13_u);
+                if (lv_unit == null) { break; }
+                UnitBehaviorAddPlayer(lv_unit, "AHLI_Reveal", libGHLo_gv_obsID, 1);
+            }
+        }
+
     }
     return true;
 }

@@ -24,4 +24,11 @@
             <Chance value="1"/>
         </DamageResponse>
     </CBehaviorBuff>
+    <CBehaviorBuff id="AHLI_Reveal">
+        <BehaviorFlags index="Permanent" value="1"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <Modification>
+            <ModifyFlags index="Reveal" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
 </Catalog>
