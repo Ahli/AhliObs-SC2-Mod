@@ -64,7 +64,6 @@ struct libGHLo_gs_GraphsData {
 };
 
 struct libGHLo_gs_Labels {
-    string[16] lv_colorStrings;
     bool lv_active;
 };
 

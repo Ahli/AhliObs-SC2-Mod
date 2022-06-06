@@ -33,9 +33,6 @@ void libGHLo_InitVariables () {
         libGHLo_gv_graphsData[init_i].lv_graph = c_invalidDialogControlId;
         libGHLo_gv_graphsData[init_i].lv_title = c_invalidDialogControlId;
     }
-    for (init_i1 = 0; init_i1 <= 15; init_i1 += 1) {
-        libGHLo_gv_labels.lv_colorStrings[init_i1] = "";
-    }
     for (init_i1 = 0; init_i1 <= libGHLo_gv_upgradeNotificationsMaxUISlots; init_i1 += 1) {
         libGHLo_gv_upgradeNotifications.lv_itemIcon[init_i1] = c_invalidDialogControlId;
     }
@@ -1507,14 +1504,10 @@ void libGHLo_gt_GraphsTimer_Init () {
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_LabelsInitialization_Func (bool testConds, bool runActions) {
     // Variable Declarations
-    int lv_playerColor;
     bool lv_labelUnitsEnabled;
     bool lv_labelResearchEnabled;
 
     // Automatic Variable Declarations
-    playergroup autoDC4E681F_g;
-    int autoDC4E681F_var;
-
     // Variable Initialization
     lv_labelUnitsEnabled = (UserDataGetInt("GameHeartSettings", "Labels (Units)", "Value", 1) == 1);
     lv_labelResearchEnabled = (UserDataGetInt("GameHeartSettings", "Labels (Research)", "Value", 1) == 1);
@@ -1526,61 +1519,6 @@ bool libGHLo_gt_LabelsInitialization_Func (bool testConds, bool runActions) {
 
     if (((lv_labelUnitsEnabled == true) || (lv_labelResearchEnabled == true))) {
         libGHLo_gv_labels.lv_active = true;
-        autoDC4E681F_g = libGHLo_gv_all_Players;
-        autoDC4E681F_var = -1;
-        while (true) {
-            autoDC4E681F_var = PlayerGroupNextPlayer(autoDC4E681F_g, autoDC4E681F_var);
-            if (autoDC4E681F_var < 0) { break; }
-            lv_playerColor = PlayerGetColorIndex(autoDC4E681F_var, false);
-            if ((lv_playerColor == 0)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "white";
-            }
-            else if ((lv_playerColor == 1)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "red";
-            }
-            else if ((lv_playerColor == 2)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "blue";
-            }
-            else if ((lv_playerColor == 3)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "teal";
-            }
-            else if ((lv_playerColor == 4)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "purple";
-            }
-            else if ((lv_playerColor == 5)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "yellow";
-            }
-            else if ((lv_playerColor == 6)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "orange";
-            }
-            else if ((lv_playerColor == 7)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "green";
-            }
-            else if ((lv_playerColor == 8)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "lightpink";
-            }
-            else if ((lv_playerColor == 9)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "violet";
-            }
-            else if ((lv_playerColor == 10)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "lightgrey";
-            }
-            else if ((lv_playerColor == 11)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "darkgreen";
-            }
-            else if ((lv_playerColor == 12)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "brown";
-            }
-            else if ((lv_playerColor == 13)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "lightgreen";
-            }
-            else if ((lv_playerColor == 14)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "darkgrey";
-            }
-            else if ((lv_playerColor == 15)) {
-                libGHLo_gv_labels.lv_colorStrings[autoDC4E681F_var] = "pink";
-            }
-        }
         libGHLo_gf_RegisterUnitCreatedEvent(libGHLo_gt_LabelsUnitCreated, null, null, null);
         if ((lv_labelUnitsEnabled == true)) {
             libGHLo_gf_RegisterUnitTrainingProgressEvent(libGHLo_gt_LabelsUnitTrainingStarted, null, c_unitProgressStageStart);
@@ -1617,16 +1555,13 @@ void libGHLo_gt_LabelsInitialization_Init () {
 bool libGHLo_gt_LabelsUnitCreated_Func (bool testConds, bool runActions) {
     // Variable Declarations
     string lv_unitTagString;
-    string lv_colorAccentImage;
     string lv_unitType;
     unit lv_unit;
-    int lv_unitOwner;
     int lv_dialogItem;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_unit = EventUnitCreatedUnit();
-    lv_unitOwner = UnitGetOwner(lv_unit);
     lv_dialogItem = c_invalidDialogControlId;
 
     // Actions
@@ -1634,16 +1569,14 @@ bool libGHLo_gt_LabelsUnitCreated_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    if ((UnitFilterMatch(lv_unit, lv_unitOwner, UnitFilter(0, 0, (1 << c_targetFilterMissile), 0)) == true)) {
+    if ((UnitFilterMatch(lv_unit, UnitGetOwner(lv_unit), UnitFilter(0, 0, (1 << c_targetFilterMissile), 0)) == true)) {
         lv_unitType = UnitGetType(lv_unit);
         if ((libGHLo_gf_LabelsUnitUsesCustomStatusBar(lv_unitType) == true)) {
             lv_unitTagString = IntToString(UnitGetTag(lv_unit));
-            lv_colorAccentImage = (("color_accents\\gh-btn-" + libGHLo_gv_labels.lv_colorStrings[lv_unitOwner] + ".dds"));
             DataTableSetString(true, (lv_unitTagString + libGHLo_gv_labelsSlot1), "");
             DataTableSetString(true, (lv_unitTagString + libGHLo_gv_labelsSlot2), "");
             DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon1\\IconBG", lv_unit);
             lv_dialogItem = DialogControlLastCreated();
-            libNtve_gf_SetDialogItemImage(lv_dialogItem, lv_colorAccentImage, libGHLo_gv_all_Players);
             DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
             libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString), lv_dialogItem);
@@ -1656,7 +1589,6 @@ bool libGHLo_gt_LabelsUnitCreated_Func (bool testConds, bool runActions) {
             if (((lv_unitType == "Barracks") || (lv_unitType == "Factory") || (lv_unitType == "Starport"))) {
                 DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon2\\IconBG", lv_unit);
                 lv_dialogItem = DialogControlLastCreated();
-                libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), lv_colorAccentImage, libGHLo_gv_all_Players);
                 DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
                 DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
                 libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString), DialogControlLastCreated());
@@ -1668,7 +1600,6 @@ bool libGHLo_gt_LabelsUnitCreated_Func (bool testConds, bool runActions) {
                 libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsIcon2 + lv_unitTagString), lv_dialogItem);
                 DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon3\\IconBG", lv_unit);
                 lv_dialogItem = DialogControlLastCreated();
-                libNtve_gf_SetDialogItemImage(lv_dialogItem, lv_colorAccentImage, libGHLo_gv_all_Players);
                 DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
                 DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
                 libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString), lv_dialogItem);

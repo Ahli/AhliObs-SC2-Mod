@@ -10,6 +10,8 @@
             <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
             <Height val="60"/>
             <Width val="60"/>
+            <Texture val="color_accents/gh-btn-white.dds"/>
+            <Color val="{$parent/$parent/PlayerFrame/@Color}"/>
             <Visible val="false"/>
         </Frame>
 
@@ -32,6 +34,11 @@
             <Anchor side="Left" relative="$parent" pos="Min" offset="65"/>
             <Height val="0"/>
             <Width val="0"/>
+        </Frame>
+
+        <Frame type="PlayerFrame" name="PlayerFrame">
+            <Anchor relative="$parent"/>
+            <PlayerId val="{$parent/@ControlPlayerId}"/>
         </Frame>
 
         <Frame type="Frame" name="StatusIcon1" template="ProductionStatusBars/UnitIconTemplate">
@@ -61,6 +68,11 @@
             <Anchor side="Left" relative="$parent" pos="Min" offset="65"/>
             <Height val="0"/>
             <Width val="0"/>
+        </Frame>
+
+        <Frame type="PlayerFrame" name="PlayerFrame">
+            <Anchor relative="$parent"/>
+            <PlayerId val="{$parent/@ControlPlayerId}"/>
         </Frame>
 
         <Frame type="Frame" name="StatusIcon1" template="ProductionStatusBars/UnitIconTemplate">
