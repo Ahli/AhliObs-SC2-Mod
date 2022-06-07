@@ -8451,7 +8451,7 @@
         </Element>
         <Element Type="Param" Id="A7E10DF6">
             <ParameterDef Type="ParamDef" Library="GHLo" Id="F0AAF7F3"/>
-            <Value>100.0</Value>
+            <Value>400.0</Value>
             <ValueType Type="fixed"/>
         </Element>
         <Element Type="Param" Id="AEEAA3FF">
@@ -8460,12 +8460,12 @@
         </Element>
         <Element Type="Param" Id="F133131E">
             <ParameterDef Type="ParamDef" Library="GHLo" Id="D3A2A0F9"/>
-            <Value>50.0</Value>
+            <Value>500.0</Value>
             <ValueType Type="fixed"/>
         </Element>
         <Element Type="Param" Id="791836A4">
             <ParameterDef Type="ParamDef" Library="GHLo" Id="67AC533C"/>
-            <Value>50.0</Value>
+            <Value>500.0</Value>
             <ValueType Type="fixed"/>
         </Element>
         <Element Type="FunctionCall" Id="DB607AAC">
@@ -8502,7 +8502,7 @@
         </Element>
         <Element Type="Param" Id="98D164A5">
             <ParameterDef Type="ParamDef" Library="GHLo" Id="F0AAF7F3"/>
-            <Value>10000.0</Value>
+            <Value>7500.0</Value>
             <ValueType Type="fixed"/>
         </Element>
         <Element Type="Param" Id="BC3376B4">
@@ -8511,12 +8511,12 @@
         </Element>
         <Element Type="Param" Id="5C635E5C">
             <ParameterDef Type="ParamDef" Library="GHLo" Id="D3A2A0F9"/>
-            <Value>1000.0</Value>
+            <Value>10000.0</Value>
             <ValueType Type="fixed"/>
         </Element>
         <Element Type="Param" Id="AFE78FBB">
             <ParameterDef Type="ParamDef" Library="GHLo" Id="67AC533C"/>
-            <Value>1000.0</Value>
+            <Value>10000.0</Value>
             <ValueType Type="fixed"/>
         </Element>
         <Element Type="FunctionCall" Id="2F345F27">

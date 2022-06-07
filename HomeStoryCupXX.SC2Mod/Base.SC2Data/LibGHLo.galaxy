@@ -1419,8 +1419,8 @@ bool libGHLo_gt_GraphsInitialization_Func (bool testConds, bool runActions) {
         libGHLo_gv_graphsGeneral.lv_container = DialogControlLastCreated();
         libGHLo_gf_GraphsDefineGraph(1, StringExternal("Param/Value/lib_GHLo_8058A929"), "IncomeGraph", "ResourceCollectionRate", libGHLo_ge_GraphStyle_Differential, 350.0, 400.0, 200.0);
         libGHLo_gf_GraphsDefineGraph(2, StringExternal("Param/Value/lib_GHLo_31D21183"), "ArmySizeGraph", "FoodUsedArmy", libGHLo_ge_GraphStyle_Comparative, 40.0, 50.0, 50.0);
-        libGHLo_gf_GraphsDefineGraph(3, StringExternal("Param/Value/lib_GHLo_0DD54D0A"), "ResourcesLostDiffGraph", "ResourcesLostUnits", libGHLo_ge_GraphStyle_Differential, 100.0, 50.0, 50.0);
-        libGHLo_gf_GraphsDefineGraph(4, StringExternal("Param/Value/lib_GHLo_572C86BD"), "ResourcesGatheredGraph", "ResourcesGathered", libGHLo_ge_GraphStyle_Comparative, 10000.0, 1000.0, 1000.0);
+        libGHLo_gf_GraphsDefineGraph(3, StringExternal("Param/Value/lib_GHLo_0DD54D0A"), "ResourcesLostDiffGraph", "ResourcesLostUnits", libGHLo_ge_GraphStyle_Differential, 400.0, 500.0, 500.0);
+        libGHLo_gf_GraphsDefineGraph(4, StringExternal("Param/Value/lib_GHLo_572C86BD"), "ResourcesGatheredGraph", "ResourcesGathered", libGHLo_ge_GraphStyle_Comparative, 7500.0, 10000.0, 10000.0);
     }
     else {
         return false;
