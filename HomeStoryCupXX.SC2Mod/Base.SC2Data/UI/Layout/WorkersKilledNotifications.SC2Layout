@@ -23,6 +23,16 @@
             <TextureType val="Normal"/>
             <RenderPriority val="500"/>
             <Anchor relative="$parent"/>
+			<Color val="{PlayerFrame/@Color}"/>
+		
+			<Frame type="PlayerFrame" name="PlayerFrame">
+				<Anchor relative="$parent"/>
+				<PlayerId val="{PlayerIdLabel/@Text}"/>
+				<Frame type="Label" name="PlayerIdLabel">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+				</Frame>
+			</Frame>
         </Frame>
 
         <Frame type="Image" name="WorkerColor">
@@ -34,6 +44,16 @@
             <Texture val="Assets/Textures/BTN-Border-TransportSlot-Filled.dds"/>
             <TextureType val="Normal"/>
             <RenderPriority val="502"/>
+			<Color val="{PlayerFrame/@Color}"/>
+		
+			<Frame type="PlayerFrame" name="PlayerFrame">
+				<Anchor relative="$parent"/>
+				<PlayerId val="{PlayerIdLabel/@Text}"/>
+				<Frame type="Label" name="PlayerIdLabel">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+				</Frame>
+			</Frame>
 
             <Frame type="Image" name="WorkerCross">
                 <Height val="#CrossSize"/>

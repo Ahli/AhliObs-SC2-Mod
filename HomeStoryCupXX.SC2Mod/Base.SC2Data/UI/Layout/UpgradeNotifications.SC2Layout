@@ -17,7 +17,7 @@
         <Width val="#Width"/>
         <CollapseLayout val="true"/>
         <Visible val="false"/>
-		<Color val="{$this/PlayerFrame/@Color}"/>
+		<Color val="{PlayerFrame/@Color}"/>
 		
 		<Frame type="PlayerFrame" name="PlayerFrame">
 			<Anchor relative="$parent"/>

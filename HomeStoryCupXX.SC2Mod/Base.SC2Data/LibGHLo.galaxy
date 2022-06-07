@@ -66,10 +66,10 @@ void libGHLo_InitVariables () {
         libGHLo_gv_workersKilledNotifications.lv_itemPanel[init_i1] = c_invalidDialogControlId;
     }
     for (init_i1 = 0; init_i1 <= libGHLo_gv_workersKilledNotificationsMaxUISlots; init_i1 += 1) {
-        libGHLo_gv_workersKilledNotifications.lv_itemBackground[init_i1] = c_invalidDialogControlId;
+        libGHLo_gv_workersKilledNotifications.lv_itemKillerPlayerIdLabel[init_i1] = c_invalidDialogControlId;
     }
     for (init_i1 = 0; init_i1 <= libGHLo_gv_workersKilledNotificationsMaxUISlots; init_i1 += 1) {
-        libGHLo_gv_workersKilledNotifications.lv_itemWorkerColor[init_i1] = c_invalidDialogControlId;
+        libGHLo_gv_workersKilledNotifications.lv_itemWorkerPlayerIdLabel[init_i1] = c_invalidDialogControlId;
     }
     for (init_i1 = 0; init_i1 <= libGHLo_gv_workersKilledNotificationsMaxUISlots; init_i1 += 1) {
         libGHLo_gv_workersKilledNotifications.lv_itemIcon[init_i1] = c_invalidDialogControlId;
@@ -1943,8 +1943,8 @@ bool libGHLo_gt_UpgradeNotificationsInitialization_Func (bool testConds, bool ru
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/PlayerFrame/PlayerIdLabel")));
             libGHLo_gv_upgradeNotifications.lv_itemPlayerIdLabel[lv_slot] = DialogControlLastCreated();
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-            libNtve_gf_SetDialogItemPlayerId(DialogControlLastCreated(), libGHLo_gv_obsID, libGHLo_gv_obs);
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/TimerWindow/TimerStatus")));
             libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
@@ -2233,23 +2233,20 @@ bool libGHLo_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
                 DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
                 DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
                 DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+                libNtve_gf_SetDialogItemText(DialogControlLastCreated(), StringToText(""), libGHLo_gv_obs);
                 DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerType")));
                 lv_icon[lv_slot] = DialogControlLastCreated();
                 DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
                 DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
                 DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-                DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerColor")));
+                DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerColor/PlayerFrame/PlayerIdLabel")));
                 lv_workerColor[lv_slot] = DialogControlLastCreated();
                 DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
                 DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-                DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerBackground")));
+                DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerBackground/PlayerFrame/PlayerIdLabel")));
                 lv_background[lv_slot] = DialogControlLastCreated();
                 DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-                DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
                 DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-                libNtve_gf_SetDialogItemText(lv_timeLabel[lv_slot], StringToText(""), libGHLo_gv_obs);
-                libNtve_gf_SetDialogItemColor(lv_panel[lv_slot], Color(100,100,100), libGHLo_gv_obs);
             }
             lv_count = 0;
             autoA9BD4D01_g = libGHLo_gv_initial_Active_Players;
@@ -2260,8 +2257,8 @@ bool libGHLo_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
                 libGHLo_gv_workersKilledNotifications.lv_itemPanel[autoA9BD4D01_var] = lv_panel[lv_count];
                 libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[autoA9BD4D01_var] = lv_timeLabel[lv_count];
                 libGHLo_gv_workersKilledNotifications.lv_itemIcon[autoA9BD4D01_var] = lv_icon[lv_count];
-                libGHLo_gv_workersKilledNotifications.lv_itemWorkerColor[autoA9BD4D01_var] = lv_workerColor[lv_count];
-                libGHLo_gv_workersKilledNotifications.lv_itemBackground[autoA9BD4D01_var] = lv_background[lv_count];
+                libGHLo_gv_workersKilledNotifications.lv_itemWorkerPlayerIdLabel[autoA9BD4D01_var] = lv_workerColor[lv_count];
+                libGHLo_gv_workersKilledNotifications.lv_itemKillerPlayerIdLabel[autoA9BD4D01_var] = lv_background[lv_count];
                 lv_count += 1;
             }
             libGHLo_gf_RegisterTimerRunsOutEvent(libGHLo_gt_WorkersKilledNotificationsTimerRunsOut, null);
@@ -2306,7 +2303,7 @@ bool libGHLo_gt_WorkersKilledNotificationsTimerRunsOut_Func (bool testConds, boo
         for ( ; ( (autoA8D51FBB_ai >= 0 && lv_slot <= autoA8D51FBB_ae) || (autoA8D51FBB_ai < 0 && lv_slot >= autoA8D51FBB_ae) ) ; lv_slot += autoA8D51FBB_ai ) {
             if ((lv_timer == libGHLo_gv_workersKilledNotifications.lv_timerDestruction[lv_slot])) {
                 libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_slot] = libGHLo_ge_WorkersKilledNotificationsSlotStatus_Hidden;
-                DialogControlSetVisible(libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_slot], libGHLo_gv_all_Players, false);
+                DialogControlSetVisible(libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_slot], libGHLo_gv_obs, false);
                 return true;
             }
 
@@ -2356,10 +2353,10 @@ bool libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Func (bool testConds, boo
                 libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[lv_deadUnitOwner], IntToText(libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner]), libGHLo_gv_obs);
                 libNtve_gf_SetDialogItemImage(libGHLo_gv_workersKilledNotifications.lv_itemIcon[lv_deadUnitOwner], (CatalogFieldValueGet(c_gameCatalogActor, lv_unitType, "UnitIcon", c_playerAny)), libGHLo_gv_obs);
                 if ((UnitIsValid(libNtve_gf_KillingUnit()) == true)) {
-                    libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemBackground[lv_deadUnitOwner], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(UnitGetOwner(lv_killingUnit), false)), libGHLo_gv_obs);
+                    libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemKillerPlayerIdLabel[lv_deadUnitOwner], IntToText(UnitGetOwner(lv_killingUnit)), libGHLo_gv_obs);
                 }
 
-                libNtve_gf_SetDialogItemColor(libGHLo_gv_workersKilledNotifications.lv_itemWorkerColor[lv_deadUnitOwner], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv_deadUnitOwner, false)), libGHLo_gv_obs);
+                libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemWorkerPlayerIdLabel[lv_deadUnitOwner], IntToText(lv_deadUnitOwner), libGHLo_gv_obs);
                 libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_deadUnitOwner] = libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible;
                 if ((libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] > 1)) {
                     DialogControlSetVisible(libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_deadUnitOwner], libGHLo_gv_obs, true);

@@ -89,8 +89,8 @@ struct libGHLo_gs_WorkersKilledNotifications {
     int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_slotStatus;
     int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_intKilledAmount;
     int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemPanel;
-    int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemBackground;
-    int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemWorkerColor;
+    int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemKillerPlayerIdLabel;
+    int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemWorkerPlayerIdLabel;
     int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemIcon;
     int[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemCountLabel;
     timer[libGHLo_gv_workersKilledNotificationsMaxUISlots + 1] lv_timerDestruction;
