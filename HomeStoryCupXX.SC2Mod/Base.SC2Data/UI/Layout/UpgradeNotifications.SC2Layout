@@ -11,13 +11,23 @@
     <Constant name="ProgressHeight" val="15"/>
 
     <Frame type="Frame" name="TimerFrameTemplate">
-        <Height val="#Height"/>
-        <Width val="#Width"/>
-        <Visible val="false"/>
-        <CollapseLayout val="true"/>
         <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
         <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
-
+        <Height val="#Height"/>
+        <Width val="#Width"/>
+        <CollapseLayout val="true"/>
+        <Visible val="false"/>
+		<Color val="{$this/PlayerFrame/@Color}"/>
+		
+		<Frame type="PlayerFrame" name="PlayerFrame">
+			<Anchor relative="$parent"/>
+			<PlayerId val="{PlayerIdLabel/@Text}"/>
+			<Frame type="Label" name="PlayerIdLabel">
+				<Anchor relative="$parent"/>
+				<Visible val="false"/>
+			</Frame>
+		</Frame>
+		
         <Frame type="Image" name="TimerWindow">
             <Texture val="MIT/ghbackground.dds"/>
             <TextureType val="Normal"/>

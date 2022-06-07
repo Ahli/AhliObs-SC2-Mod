@@ -73,6 +73,7 @@ struct libGHLo_gs_UpgradeNotifications {
     int[libGHLo_gv_upgradeNotificationsMaxUISlots + 1] lv_itemIcon;
     int[libGHLo_gv_upgradeNotificationsMaxUISlots + 1] lv_itemName;
     int[libGHLo_gv_upgradeNotificationsMaxUISlots + 1] lv_itemPanel;
+    int[libGHLo_gv_upgradeNotificationsMaxUISlots + 1] lv_itemPlayerIdLabel;
     int[libGHLo_gv_upgradeNotificationsMaxUISlots + 1] lv_itemProgressBar;
     int[libGHLo_gv_upgradeNotificationsMaxUISlots + 1] lv_itemTimerStatus;
     int[libGHLo_gv_upgradeNotificationsMaxUISlots + 1] lv_itemTimerLabel;
@@ -149,7 +150,7 @@ text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade);
 bool libGHLo_gf_UpgradeNotificationsUpgradeNeedsToBeVisible (fixed lp_remainingTime);
 void libGHLo_gf_UpgradeNotificationsUpdateThread ();
 void libGHLo_gf_UpgradeNotificationsSetStatusLabel (int lp_slot, text lp_status);
-void libGHLo_gf_UpgradeNotificationsSetSlotData (int lp_slot, text lp_name, string lp_icon, color lp_color, bool lp_visible);
+void libGHLo_gf_UpgradeNotificationsSetSlotData (int lp_slot, text lp_name, string lp_icon, int lp_player, bool lp_visible);
 int libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne (int lp_minUncheckedSlot, int lp_slot);
 void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_slotB);
 void libGHLo_gf_UpgradeNotificationsUpdateProgressData (int lp_slot);
