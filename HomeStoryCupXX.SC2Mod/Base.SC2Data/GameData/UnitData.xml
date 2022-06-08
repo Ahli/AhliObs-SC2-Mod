@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
+    <CUnit id="AssimilatorRich">
+        <LeaderAlias value="Assimilator"/>
+    </CUnit>
+    <CUnit id="ExtractorRich">
+        <LeaderAlias value="Extractor"/>
+    </CUnit>
     <CUnit id="KD8Charge">
         <LeaderAlias value=""/>
     </CUnit>
@@ -14,6 +20,9 @@
     </CUnit>
     <CUnit id="FactoryTechLab">
         <LeaderAlias value="TechLab"/>
+    </CUnit>
+    <CUnit id="RefineryRich">
+        <LeaderAlias value="Refinery"/>
     </CUnit>
     <CUnit id="StarportReactor">
         <LeaderAlias value="Reactor"/>
