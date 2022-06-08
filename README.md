@@ -22,6 +22,7 @@ Available on Americas, Europe and Korean servers.
     - saves the player status in the PlayerStatus score
       - this assists observer interfaces in figuring out if a player is still playing, left in victory/defeat/tie
     - animation event "TextUpdated" is fired when worker killed counter's text is updated => Observer UIs can animate
+    - production tags and notifications now dynamically change to reflect alliance colors
 - **Bug Fixes**
   - fixed Dark Shrine not showing upgrades in research on a tag
   - fixed potential bug when worker is killed at the same time as that player's notification timer expires resulting in a hidden notification and subsequently resulting in a wrong displayed count when the next one is killed
@@ -63,5 +64,5 @@ Available on Americas, Europe and Korean servers.
     - all failed conditions will now appear in failed executions instead of only the initial checks (triggers return 0)
 
 ### Known "Problems"
-- Notifications appear visually bugged when the Rewind feature is used by the players after playing the match (converts the match into a replay)
-- On the minimap, attacked units are flashing red instead of white
+- Notifications appear visually bugged when the Rewind feature is used by the players after playing the match. The rewind feature converts the match into a replay
+- On the minimap, attacked units are flashing red instead of white. This issue is present in all versions of GameHeart
