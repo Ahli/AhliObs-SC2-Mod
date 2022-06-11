@@ -20,6 +20,7 @@ const int libGHLo_ge_WorkersKilledNotificationsSlotStatus_Hidden = 0;
 const int libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible = 1;
 
 // Constants
+const int libGHLo_gv_chronoBoostMAX_SLOTS = 17;
 const int libGHLo_gv_graphsTotalNodes = 100;
 const string libGHLo_gv_labelsSlot1 = "-slot1";
 const string libGHLo_gv_labelsSlot2 = "-slot2";
@@ -36,6 +37,13 @@ const int libGHLo_gv_workersKilledNotificationsMaxUISlots = 15;
 const fixed libGHLo_gv_workersKilledNotificationsVisibleTime = 20.0;
 
 // Structures
+struct libGHLo_gs_ChronoBoost {
+    int[libGHLo_gv_chronoBoostMAX_SLOTS + 1] lv_slots;
+    string[libGHLo_gv_chronoBoostMAX_SLOTS + 1] lv_slotContents;
+    int lv_lastUsedSlot;
+    unitgroup lv_boosted;
+};
+
 struct libGHLo_gs_GraphsGeneral {
     bool lv_active;
     int lv_playerLeft;
@@ -117,6 +125,7 @@ playergroup libGHLo_gv_all_Players;
 playergroup libGHLo_gv_initial_Active_Players;
 int libGHLo_gv_obsID;
 playergroup libGHLo_gv_obs;
+libGHLo_gs_ChronoBoost[16] libGHLo_gv_chronoBoost;
 libGHLo_gs_GraphsGeneral libGHLo_gv_graphsGeneral;
 libGHLo_gs_GraphsData[5] libGHLo_gv_graphsData;
 libGHLo_gs_Labels libGHLo_gv_labels;
@@ -126,8 +135,6 @@ libGHLo_gs_MapNotifications libGHLo_gv_mapNotifications;
 libGHLo_gs_MinimapFrustum libGHLo_gv_minimapFrustum;
 
 // Function Declarations
-void libGHLo_gf_ObserverUiAssistSetPlayerIdScore (int lp_player);
-void libGHLo_gf_ObserverUiAssistSetPlayerStatusScore (int lp_player, int lp_status);
 void libGHLo_gf_ApplySkinSet (string lp_skinSet, int lp_player);
 string libGHLo_gf_PlayerSkinSet (int lp_player);
 void libGHLo_gf_RegisterCameraMoveEvent (trigger lp_trigger, int lp_playerId, int lp_cameraMoveReason);
@@ -139,6 +146,10 @@ void libGHLo_gf_RegisterUnitArmingProgressEvent (trigger lp_trigger, unit lp_uni
 void libGHLo_gf_RegisterUnitResearchProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage);
 void libGHLo_gf_RegisterUnitDiesEvent (trigger lp_trigger, unit lp_unit);
 void libGHLo_gf_RegisterPlayerLeavesEvent (trigger lp_trigger, int lp_player, int lp_gameResult);
+void libGHLo_gf_ChronoBoostregisterboosteditem (int lp_player, string lp_item);
+void libGHLo_gf_ChronoBoostremoveboosteditem (int lp_player, string lp_item);
+void libGHLo_gf_ObserverUiAssistSetPlayerIdScore (int lp_player);
+void libGHLo_gf_ObserverUiAssistSetPlayerStatusScore (int lp_player, int lp_status);
 void libGHLo_gf_GraphsDefineGraph (int lp_iD, text lp_title, string lp_string, string lp_scoreType, int lp_style, fixed lp_minimumValue, fixed lp_rangeBase, fixed lp_rangeIncrement);
 void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graph);
 void libGHLo_gf_GraphsUpdateDataComparative (int lp_graph);
@@ -159,6 +170,13 @@ bool libGHLo_gf_MapNotificationsCheckFullHealth (unit lp_transportunit);
 // Trigger Declarations
 trigger libGHLo_gt_GameHeartInitialization;
 trigger libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers;
+trigger libGHLo_gt_ChronoBoostInit;
+trigger libGHLo_gt_ChronoBoostActivates;
+trigger libGHLo_gt_ChronoBoostDeactivates;
+trigger libGHLo_gt_ChronoBoostTrainingStarted;
+trigger libGHLo_gt_ChronoBoostTrainingStopped;
+trigger libGHLo_gt_ChronoBoostResearchStarted;
+trigger libGHLo_gt_ChronoBoostResearchStopped;
 trigger libGHLo_gt_ObserverUiAssistInitialization;
 trigger libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat;
 trigger libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie;

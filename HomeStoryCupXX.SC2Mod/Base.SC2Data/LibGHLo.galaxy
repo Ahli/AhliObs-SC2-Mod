@@ -27,6 +27,15 @@ void libGHLo_InitVariables () {
     libGHLo_gv_initial_Active_Players = PlayerGroupActive();
     libGHLo_gv_obsID = CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny);
     libGHLo_gv_obs = PlayerGroupSingle(libGHLo_gv_obsID);
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        for (init_i1 = 0; init_i1 <= libGHLo_gv_chronoBoostMAX_SLOTS; init_i1 += 1) {
+            libGHLo_gv_chronoBoost[init_i].lv_slots[init_i1] = c_invalidDialogControlId;
+        }
+        for (init_i1 = 0; init_i1 <= libGHLo_gv_chronoBoostMAX_SLOTS; init_i1 += 1) {
+            libGHLo_gv_chronoBoost[init_i].lv_slotContents[init_i1] = "";
+        }
+        libGHLo_gv_chronoBoost[init_i].lv_lastUsedSlot = -1;
+    }
     libGHLo_gv_graphsGeneral.lv_intervals = 6;
     libGHLo_gv_graphsGeneral.lv_container = c_invalidDialogControlId;
     for (init_i = 0; init_i <= 4; init_i += 1) {
@@ -92,38 +101,6 @@ void libGHLo_InitVariables () {
 
 // Presets
 // Functions
-void libGHLo_gf_ObserverUiAssistSetPlayerIdScore (int lp_player) {
-    // Automatic Variable Declarations
-    // Implementation
-    PlayerScoreValueSetFromInt(lp_player, "PlayerId", lp_player);
-}
-
-void libGHLo_gf_ObserverUiAssistSetPlayerStatusScore (int lp_player, int lp_status) {
-    // Automatic Variable Declarations
-    int autoD1011202_val;
-
-    // Implementation
-    autoD1011202_val = lp_status;
-    if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_Playing) {
-        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 1);
-    }
-    else if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_LeftGameinDefeat) {
-        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 4);
-    }
-    else if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_LeftGameinVictory) {
-        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 2);
-    }
-    else if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_LeftGameinTie) {
-        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 3);
-    }
-    else if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_DroppedbeforeMapInitialization) {
-        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 5);
-    }
-    else {
-        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 0);
-    }
-}
-
 void libGHLo_gf_ApplySkinSet (string lp_skinSet, int lp_player) {
     // Variable Declarations
     string lv_itSkinPack;
@@ -238,6 +215,110 @@ void libGHLo_gf_RegisterPlayerLeavesEvent (trigger lp_trigger, int lp_player, in
     // Automatic Variable Declarations
     // Implementation
     TriggerAddEventPlayerLeft(lp_trigger,lp_player,lp_gameResult);
+}
+
+void libGHLo_gf_ChronoBoostregisterboosteditem (int lp_player, string lp_item) {
+    // Variable Declarations
+    int lv_slot;
+
+    // Automatic Variable Declarations
+    int autoF3D2BD25_ae;
+    const int autoF3D2BD25_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    autoF3D2BD25_ae = libGHLo_gv_chronoBoost[lp_player].lv_lastUsedSlot;
+    lv_slot = 0;
+    for ( ; ( (autoF3D2BD25_ai >= 0 && lv_slot <= autoF3D2BD25_ae) || (autoF3D2BD25_ai < 0 && lv_slot >= autoF3D2BD25_ae) ) ; lv_slot += autoF3D2BD25_ai ) {
+        if ((libGHLo_gv_chronoBoost[lp_player].lv_slotContents[lv_slot] == lp_item)) {
+            return ;
+        }
+
+    }
+    if ((libGHLo_gv_chronoBoost[lp_player].lv_lastUsedSlot < libGHLo_gv_chronoBoostMAX_SLOTS)) {
+        libGHLo_gv_chronoBoost[lp_player].lv_lastUsedSlot += 1;
+        libGHLo_gv_chronoBoost[lp_player].lv_slotContents[libGHLo_gv_chronoBoost[lp_player].lv_lastUsedSlot] = lp_item;
+        libNtve_gf_SetDialogItemText(libGHLo_gv_chronoBoost[lp_player].lv_slots[libGHLo_gv_chronoBoost[lp_player].lv_lastUsedSlot], StringToText(lp_item), libGHLo_gv_obs);
+    }
+
+}
+
+void libGHLo_gf_ChronoBoostremoveboosteditem (int lp_player, string lp_item) {
+    // Variable Declarations
+    int lv_slot;
+    int lv_foundSlot;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    unitgroup auto9705BA23_g;
+    int auto9705BA23_u;
+    int autoF0BB58F8_ae;
+    const int autoF0BB58F8_ai = 1;
+
+    // Variable Initialization
+    lv_foundSlot = -1;
+
+    // Implementation
+    auto9705BA23_g = libGHLo_gv_chronoBoost[lp_player].lv_boosted;
+    auto9705BA23_u = UnitGroupCount(auto9705BA23_g, c_unitCountAll);
+    for (;; auto9705BA23_u -= 1) {
+        lv_unit = UnitGroupUnitFromEnd(auto9705BA23_g, auto9705BA23_u);
+        if (lv_unit == null) { break; }
+        if (((lp_item == (libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lv_unit, 1, 1))) || (lp_item == (libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(lv_unit, 1, 1))))) {
+            return ;
+        }
+
+    }
+    autoF0BB58F8_ae = libGHLo_gv_chronoBoost[lp_player].lv_lastUsedSlot;
+    lv_slot = 0;
+    for ( ; ( (autoF0BB58F8_ai >= 0 && lv_slot <= autoF0BB58F8_ae) || (autoF0BB58F8_ai < 0 && lv_slot >= autoF0BB58F8_ae) ) ; lv_slot += autoF0BB58F8_ai ) {
+        if ((libGHLo_gv_chronoBoost[lp_player].lv_slotContents[lv_slot] == lp_item)) {
+            lv_foundSlot = lv_slot;
+            break;
+        }
+
+    }
+    if ((lv_foundSlot >= 0)) {
+        libNtve_gf_SetDialogItemText(libGHLo_gv_chronoBoost[lp_player].lv_slots[lv_foundSlot], StringToText(libGHLo_gv_chronoBoost[lp_player].lv_slotContents[libGHLo_gv_chronoBoost[lp_player].lv_lastUsedSlot]), libGHLo_gv_obs);
+        libGHLo_gv_chronoBoost[lp_player].lv_slotContents[lv_foundSlot] = libGHLo_gv_chronoBoost[lp_player].lv_slotContents[libGHLo_gv_chronoBoost[lp_player].lv_lastUsedSlot];
+        libNtve_gf_SetDialogItemText(libGHLo_gv_chronoBoost[lp_player].lv_slots[libGHLo_gv_chronoBoost[lp_player].lv_lastUsedSlot], StringToText(""), libGHLo_gv_obs);
+        libGHLo_gv_chronoBoost[lp_player].lv_slotContents[libGHLo_gv_chronoBoost[lp_player].lv_lastUsedSlot] = null;
+        libGHLo_gv_chronoBoost[lp_player].lv_lastUsedSlot -= 1;
+    }
+
+}
+
+void libGHLo_gf_ObserverUiAssistSetPlayerIdScore (int lp_player) {
+    // Automatic Variable Declarations
+    // Implementation
+    PlayerScoreValueSetFromInt(lp_player, "PlayerId", lp_player);
+}
+
+void libGHLo_gf_ObserverUiAssistSetPlayerStatusScore (int lp_player, int lp_status) {
+    // Automatic Variable Declarations
+    int autoD1011202_val;
+
+    // Implementation
+    autoD1011202_val = lp_status;
+    if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_Playing) {
+        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 1);
+    }
+    else if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_LeftGameinDefeat) {
+        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 4);
+    }
+    else if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_LeftGameinVictory) {
+        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 2);
+    }
+    else if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_LeftGameinTie) {
+        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 3);
+    }
+    else if (autoD1011202_val == libGHLo_ge_PlayerStatusScoreValue_DroppedbeforeMapInitialization) {
+        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 5);
+    }
+    else {
+        PlayerScoreValueSetFromInt(lp_player, "PlayerStatus", 0);
+    }
 }
 
 void libGHLo_gf_GraphsDefineGraph (int lp_iD, text lp_title, string lp_string, string lp_scoreType, int lp_style, fixed lp_minimumValue, fixed lp_rangeBase, fixed lp_rangeIncrement) {
@@ -471,14 +552,9 @@ string libGHLo_gf_UpgradeNotificationsUpgradeImage (string lp_upgrade) {
 }
 
 text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade) {
-    // Variable Declarations
-    string lv_unittype;
-
     // Automatic Variable Declarations
     string autoCE61EBE2_val;
     string auto4FCB9578_val;
-
-    // Variable Initialization
 
     // Implementation
     autoCE61EBE2_val = lp_upgrade;
@@ -527,33 +603,6 @@ text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade) {
     else if (autoCE61EBE2_val == "ProtossAirArmorsLevel3") {
         return StringExternal("Param/Value/lib_GHLo_7DDACA58");
     }
-    else if (autoCE61EBE2_val == "PsiStormTech") {
-        return StringExternal("Param/Value/lib_GHLo_21DF5A4C");
-    }
-    else if (autoCE61EBE2_val == "haltech") {
-        return StringExternal("Param/Value/lib_GHLo_1962231B");
-    }
-    else if (autoCE61EBE2_val == "BlinkTech") {
-        return StringExternal("Param/Value/lib_GHLo_FF134713");
-    }
-    else if (autoCE61EBE2_val == "WarpGateResearch") {
-        return StringExternal("Param/Value/lib_GHLo_66FF4009");
-    }
-    else if (autoCE61EBE2_val == "CarrierLaunchSpeedUpgrade") {
-        return StringExternal("Param/Value/lib_GHLo_0FEE00C3");
-    }
-    else if (autoCE61EBE2_val == "ExtendedThermalLance") {
-        return StringExternal("Param/Value/lib_GHLo_3DC9C957");
-    }
-    else if (autoCE61EBE2_val == "ObserverGraviticBooster") {
-        return StringExternal("Param/Value/lib_GHLo_1CA862CB");
-    }
-    else if (autoCE61EBE2_val == "GraviticDrive") {
-        return StringExternal("Param/Value/lib_GHLo_02FAA83E");
-    }
-    else if (autoCE61EBE2_val == "Charge") {
-        return StringExternal("Param/Value/lib_GHLo_8D6CCD20");
-    }
     else if (autoCE61EBE2_val == "TerranInfantryWeaponsLevel1") {
         return StringExternal("Param/Value/lib_GHLo_F4FDF319");
     }
@@ -581,15 +630,6 @@ text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade) {
     else if (autoCE61EBE2_val == "TerranShipWeaponsLevel3") {
         return StringExternal("Param/Value/lib_GHLo_FE6B18DF");
     }
-    else if (autoCE61EBE2_val == "TerranShipArmorsLevel1") {
-        return StringExternal("Param/Value/lib_GHLo_20A7437D");
-    }
-    else if (autoCE61EBE2_val == "TerranShipArmorsLevel2") {
-        return StringExternal("Param/Value/lib_GHLo_F2858873");
-    }
-    else if (autoCE61EBE2_val == "TerranShipArmorsLevel3") {
-        return StringExternal("Param/Value/lib_GHLo_B0C4FC71");
-    }
     else if (autoCE61EBE2_val == "TerranVehicleWeaponsLevel1") {
         return StringExternal("Param/Value/lib_GHLo_BA3355B7");
     }
@@ -599,65 +639,11 @@ text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade) {
     else if (autoCE61EBE2_val == "TerranVehicleWeaponsLevel3") {
         return StringExternal("Param/Value/lib_GHLo_FD235555");
     }
-    else if (autoCE61EBE2_val == "TerranVehicleArmorsLevel1") {
-        return StringExternal("Param/Value/lib_GHLo_3808F996");
-    }
-    else if (autoCE61EBE2_val == "TerranVehicleArmorsLevel2") {
-        return StringExternal("Param/Value/lib_GHLo_B786F38D");
-    }
-    else if (autoCE61EBE2_val == "TerranVehicleArmorsLevel3") {
-        return StringExternal("Param/Value/lib_GHLo_AAFD0831");
-    }
     else if (autoCE61EBE2_val == "BansheeCloak") {
         return StringExternal("Param/Value/lib_GHLo_25348DDA");
     }
     else if (autoCE61EBE2_val == "PersonalCloaking") {
         return StringExternal("Param/Value/lib_GHLo_E15F370F");
-    }
-    else if (autoCE61EBE2_val == "HighCapacityBarrels") {
-        return StringExternal("Param/Value/lib_GHLo_194821E6");
-    }
-    else if (autoCE61EBE2_val == "PunisherGrenades") {
-        return StringExternal("Param/Value/lib_GHLo_BA8B7BF7");
-    }
-    else if (autoCE61EBE2_val == "HunterSeeker") {
-        return StringExternal("Param/Value/lib_GHLo_AE64F24D");
-    }
-    else if (autoCE61EBE2_val == "SiegeTech") {
-        return StringExternal("Param/Value/lib_GHLo_F302BCF7");
-    }
-    else if (autoCE61EBE2_val == "Stimpack") {
-        return StringExternal("Param/Value/lib_GHLo_CD8E3531");
-    }
-    else if (autoCE61EBE2_val == "BattlecruiserEnableSpecializations") {
-        return StringExternal("Param/Value/lib_GHLo_AC52166F");
-    }
-    else if (autoCE61EBE2_val == "BattlecruiserBehemothReactor") {
-        return StringExternal("Param/Value/lib_GHLo_DC405726");
-    }
-    else if (autoCE61EBE2_val == "NeosteelFrame") {
-        return StringExternal("Param/Value/lib_GHLo_81482459");
-    }
-    else if (autoCE61EBE2_val == "GhostMoebiusReactor") {
-        return StringExternal("Param/Value/lib_GHLo_B046590A");
-    }
-    else if (autoCE61EBE2_val == "HiSecAutoTracking") {
-        return StringExternal("Param/Value/lib_GHLo_3B8D503E");
-    }
-    else if (autoCE61EBE2_val == "ShieldWall") {
-        return StringExternal("Param/Value/lib_GHLo_468E9F4E");
-    }
-    else if (autoCE61EBE2_val == "MedivacCaduceusReactor") {
-        return StringExternal("Param/Value/lib_GHLo_9B9ED2B6");
-    }
-    else if (autoCE61EBE2_val == "RavenCorvidReactor") {
-        return StringExternal("Param/Value/lib_GHLo_1D1F0DE0");
-    }
-    else if (autoCE61EBE2_val == "DurableMaterials") {
-        return StringExternal("Param/Value/lib_GHLo_46050353");
-    }
-    else if (autoCE61EBE2_val == "ReaperSpeed") {
-        return StringExternal("Param/Value/lib_GHLo_8B372612");
     }
     else if (autoCE61EBE2_val == "TerranBuildingArmor") {
         return StringExternal("Param/Value/lib_GHLo_F70F87FB");
@@ -707,46 +693,10 @@ text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade) {
     else if (autoCE61EBE2_val == "ZergFlyerArmorsLevel3") {
         return StringExternal("Param/Value/lib_GHLo_3726C408");
     }
-    else if (autoCE61EBE2_val == "CentrificalHooks") {
-        return StringExternal("Param/Value/lib_GHLo_58EFE930");
-    }
-    else if (autoCE61EBE2_val == "Burrow") {
-        return StringExternal("Param/Value/lib_GHLo_5532ADFA");
-    }
-    else if (autoCE61EBE2_val == "hydraliskspeed") {
-        return StringExternal("Param/Value/lib_GHLo_899E3E66");
-    }
-    else if (autoCE61EBE2_val == "InfestorEnergyUpgrade") {
-        return StringExternal("Param/Value/lib_GHLo_D9A2B952");
-    }
-    else if (autoCE61EBE2_val == "overlordspeed") {
-        return StringExternal("Param/Value/lib_GHLo_E89E063F");
-    }
-    else if (autoCE61EBE2_val == "overlordtransport") {
-        return StringExternal("Param/Value/lib_GHLo_0650DD4D");
-    }
-    else if (autoCE61EBE2_val == "GlialReconstitution") {
-        return StringExternal("Param/Value/lib_GHLo_F459DB2F");
-    }
-    else if (autoCE61EBE2_val == "TunnelingClaws") {
-        return StringExternal("Param/Value/lib_GHLo_5E548048");
-    }
-    else if (autoCE61EBE2_val == "ChitinousPlating") {
-        return StringExternal("Param/Value/lib_GHLo_E8B9CA49");
-    }
-    else if (autoCE61EBE2_val == "zerglingattackspeed") {
-        return StringExternal("Param/Value/lib_GHLo_F471A2AB");
-    }
-    else if (autoCE61EBE2_val == "zerglingmovementspeed") {
-        return StringExternal("Param/Value/lib_GHLo_EE405ACD");
-    }
     else {
     }
     auto4FCB9578_val = (lp_upgrade);
-    if (auto4FCB9578_val == "PhoenixRangeUpgrade") {
-        return StringExternal("Param/Value/lib_GHLo_4BFCDF33");
-    }
-    else if (auto4FCB9578_val == "TerranVehicleAndShipArmorsLevel1") {
+    if (auto4FCB9578_val == "TerranVehicleAndShipArmorsLevel1") {
         return StringExternal("Param/Value/lib_GHLo_4D4D6280");
     }
     else if (auto4FCB9578_val == "TerranVehicleAndShipArmorsLevel2") {
@@ -754,27 +704,6 @@ text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade) {
     }
     else if (auto4FCB9578_val == "TerranVehicleAndShipArmorsLevel3") {
         return StringExternal("Param/Value/lib_GHLo_AE1A3D18");
-    }
-    else if (auto4FCB9578_val == "TerranVehicleAndShipWeaponsLevel1") {
-        return StringExternal("Param/Value/lib_GHLo_E219DB63");
-    }
-    else if (auto4FCB9578_val == "TerranVehicleAndShipWeaponsLevel2") {
-        return StringExternal("Param/Value/lib_GHLo_1F2C3FE5");
-    }
-    else if (auto4FCB9578_val == "TerranVehicleAndShipWeaponsLevel3") {
-        return StringExternal("Param/Value/lib_GHLo_DDD73466");
-    }
-    else if (auto4FCB9578_val == "DrillClaws") {
-        return StringExternal("Param/Value/lib_GHLo_8971C8C7");
-    }
-    else if (auto4FCB9578_val == "TransformationServos") {
-        return StringExternal("Param/Value/lib_GHLo_D9809947");
-    }
-    else if (auto4FCB9578_val == "LocustLifetimeIncrease") {
-        return StringExternal("Param/Value/lib_GHLo_ACCE65B6");
-    }
-    else if (auto4FCB9578_val == "NeuralParasite") {
-        return StringExternal("Param/Value/lib_GHLo_BA6FB095");
     }
     else {
     }
@@ -1053,7 +982,7 @@ bool libGHLo_gt_GameHeartInitialization_Func (bool testConds, bool runActions) {
         if (lv_i < 0) { break; }
         libGHLo_gf_ApplySkinSet(libGHLo_gf_PlayerSkinSet(lv_i), lv_i);
         libNtve_gf_SetAllianceOneWay(libGHLo_gv_obsID, lv_i, libNtve_ge_AllianceSetting_Neutral);
-        PlayerSetAlliance(lv_i, c_allianceIdDefeat, libGHLo_gv_obsID, true);
+        PlayerSetAlliance(lv_i, c_allianceIdDefeat, libGHLo_gv_obsID, false);
         PlayerSetAlliance(lv_i, c_allianceIdPassive, libGHLo_gv_obsID, true);
         PlayerSetAlliance(lv_i, c_allianceIdControl, libGHLo_gv_obsID, true);
         PlayerSetAlliance(lv_i, c_allianceIdVision, libGHLo_gv_obsID, true);
@@ -1121,6 +1050,263 @@ void libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers_Init () {
     TriggerAddEventUnitAbility(libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers, null, AbilityCommand("MorphToCollapsibleTerranTowerDebrisRampLeft", 0), c_unitAbilStageComplete, true);
     TriggerAddEventUnitAbility(libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers, null, AbilityCommand("MorphToCollapsibleTerranTowerDebrisRampRight", 0), c_unitAbilStageComplete, true);
     TriggerAddEventUnitAbility(libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers, null, AbilityCommand("MorphToCollapsiblePurifierTowerDebris", 0), c_unitAbilStageComplete, true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ChronoBoost - Init
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ChronoBoostInit_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    int lv_slot;
+
+    // Automatic Variable Declarations
+    playergroup auto394B4064_g;
+    const int autoD07B238D_ae = libGHLo_gv_chronoBoostMAX_SLOTS;
+    const int autoD07B238D_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto394B4064_g = libGHLo_gv_initial_Active_Players;
+    lv_player = -1;
+    while (true) {
+        lv_player = PlayerGroupNextPlayer(auto394B4064_g, lv_player);
+        if (lv_player < 0) { break; }
+        libGHLo_gv_chronoBoost[lv_player].lv_boosted = UnitGroupEmpty();
+        lv_slot = 0;
+        for ( ; ( (autoD07B238D_ai >= 0 && lv_slot <= autoD07B238D_ae) || (autoD07B238D_ai < 0 && lv_slot >= autoD07B238D_ae) ) ; lv_slot += autoD07B238D_ai ) {
+            DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame2/Player" + IntToString(lv_player) + "/ChronoBoostInput/s" + IntToString(lv_slot)));
+            libGHLo_gv_chronoBoost[lv_player].lv_slots[lv_slot] = DialogControlLastCreated();
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ChronoBoostInit_Init () {
+    libGHLo_gt_ChronoBoostInit = TriggerCreate("libGHLo_gt_ChronoBoostInit_Func");
+    TriggerAddEventMapInit(libGHLo_gt_ChronoBoostInit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ChronoBoost - Activates
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ChronoBoostActivates_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unitType;
+    unit lv_boostedStructure;
+    string lv_upgrade;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_boostedStructure = EventUnit();
+    lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(lv_boostedStructure, 1, 1);
+    lv_player = UnitGetOwner(lv_boostedStructure);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitGroupAdd(libGHLo_gv_chronoBoost[lv_player].lv_boosted, lv_boostedStructure);
+    if ((lv_upgrade != null)) {
+        libGHLo_gf_ChronoBoostregisterboosteditem(lv_player, (lv_upgrade));
+    }
+    else {
+        lv_unitType = libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lv_boostedStructure, 1, 1);
+        if ((lv_unitType != null)) {
+            libGHLo_gf_ChronoBoostregisterboosteditem(lv_player, (lv_unitType));
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ChronoBoostActivates_Init () {
+    libGHLo_gt_ChronoBoostActivates = TriggerCreate("libGHLo_gt_ChronoBoostActivates_Func");
+    TriggerAddEventUnitBehaviorChange(libGHLo_gt_ChronoBoostActivates, null, "ChronoBoostEnergyCost", c_unitBehaviorChangeActivate);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ChronoBoost - Deactivates
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ChronoBoostDeactivates_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unitType;
+    unit lv_boostedStructure;
+    string lv_upgrade;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_boostedStructure = EventUnit();
+    lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(lv_boostedStructure, 1, 1);
+    lv_player = UnitGetOwner(lv_boostedStructure);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitGroupRemove(libGHLo_gv_chronoBoost[lv_player].lv_boosted, lv_boostedStructure);
+    if ((lv_upgrade != null)) {
+        libGHLo_gf_ChronoBoostremoveboosteditem(lv_player, (lv_upgrade));
+    }
+    else {
+        lv_unitType = libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lv_boostedStructure, 1, 1);
+        if ((lv_unitType != null)) {
+            libGHLo_gf_ChronoBoostremoveboosteditem(lv_player, (lv_unitType));
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ChronoBoostDeactivates_Init () {
+    libGHLo_gt_ChronoBoostDeactivates = TriggerCreate("libGHLo_gt_ChronoBoostDeactivates_Func");
+    TriggerAddEventUnitBehaviorChange(libGHLo_gt_ChronoBoostDeactivates, null, "ChronoBoostEnergyCost", c_unitBehaviorChangeDeactivate);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ChronoBoost - Training Started
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ChronoBoostTrainingStarted_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_producer;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_producer = EventUnit();
+    lv_player = UnitGetOwner(lv_producer);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGroupHasUnit(libGHLo_gv_chronoBoost[lv_player].lv_boosted, lv_producer) == true)) {
+        libGHLo_gf_ChronoBoostregisterboosteditem(lv_player, (libNtve_gf_TriggeringProgressUnitType()));
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ChronoBoostTrainingStarted_Init () {
+    libGHLo_gt_ChronoBoostTrainingStarted = TriggerCreate("libGHLo_gt_ChronoBoostTrainingStarted_Func");
+    TriggerAddEventUnitTrainProgress(libGHLo_gt_ChronoBoostTrainingStarted, null, c_unitProgressStageStart);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ChronoBoost - Training Stopped
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ChronoBoostTrainingStopped_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_producer;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_producer = EventUnit();
+    lv_player = UnitGetOwner(lv_producer);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGroupHasUnit(libGHLo_gv_chronoBoost[lv_player].lv_boosted, lv_producer) == true)) {
+        libGHLo_gf_ChronoBoostremoveboosteditem(lv_player, (libNtve_gf_TriggeringProgressUnitType()));
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ChronoBoostTrainingStopped_Init () {
+    libGHLo_gt_ChronoBoostTrainingStopped = TriggerCreate("libGHLo_gt_ChronoBoostTrainingStopped_Func");
+    TriggerAddEventUnitTrainProgress(libGHLo_gt_ChronoBoostTrainingStopped, null, c_unitProgressStageComplete);
+    TriggerAddEventUnitTrainProgress(libGHLo_gt_ChronoBoostTrainingStopped, null, c_unitProgressStageCancel);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ChronoBoost - Research Started
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ChronoBoostResearchStarted_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_producer;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_producer = EventUnit();
+    lv_player = UnitGetOwner(lv_producer);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGroupHasUnit(libGHLo_gv_chronoBoost[lv_player].lv_boosted, lv_producer) == true)) {
+        libGHLo_gf_ChronoBoostregisterboosteditem(lv_player, (libNtve_gf_TriggeringProgressUpgrade()));
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ChronoBoostResearchStarted_Init () {
+    libGHLo_gt_ChronoBoostResearchStarted = TriggerCreate("libGHLo_gt_ChronoBoostResearchStarted_Func");
+    TriggerAddEventUnitResearchProgress(libGHLo_gt_ChronoBoostResearchStarted, null, c_unitProgressStageStart);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ChronoBoost - Research Stopped
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ChronoBoostResearchStopped_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_producer;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_producer = EventUnit();
+    lv_player = UnitGetOwner(lv_producer);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGroupHasUnit(libGHLo_gv_chronoBoost[lv_player].lv_boosted, lv_producer) == true)) {
+        libGHLo_gf_ChronoBoostremoveboosteditem(lv_player, (libNtve_gf_TriggeringProgressUpgrade()));
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ChronoBoostResearchStopped_Init () {
+    libGHLo_gt_ChronoBoostResearchStopped = TriggerCreate("libGHLo_gt_ChronoBoostResearchStopped_Func");
+    TriggerAddEventUnitResearchProgress(libGHLo_gt_ChronoBoostResearchStopped, null, c_unitProgressStageComplete);
+    TriggerAddEventUnitResearchProgress(libGHLo_gt_ChronoBoostResearchStopped, null, c_unitProgressStageCancel);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1634,22 +1820,22 @@ bool libGHLo_gt_LabelsUnitTrainingStarted_Func (bool testConds, bool runActions)
     string lv_unitTagString;
     string lv_unitTagStringSlot1;
     string lv_unitTagStringSlot2;
-    string lv_traineeType;
     int lv_activeTags;
     int lv_dialogItem;
     string lv_savedTypeSlot1;
     string lv_savedTypeSlot2;
+    string lv_traineeType;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_dialogItem = c_invalidDialogControlId;
+    lv_traineeType = libNtve_gf_TriggeringProgressUnitType();
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_traineeType = libNtve_gf_TriggeringProgressUnitType();
     if ((lv_traineeType != "Broodling") && (lv_traineeType != "BroodlingEscort") && (lv_traineeType != "Interceptor") && (lv_traineeType != "Baneling")) {
         lv_unit = EventUnit();
         lv_unitTagString = IntToString(UnitGetTag(lv_unit));
@@ -2567,6 +2753,13 @@ void libGHLo_gt_MinimapFrustumPlayerLeaves_Init () {
 void libGHLo_InitTriggers () {
     libGHLo_gt_GameHeartInitialization_Init();
     libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers_Init();
+    libGHLo_gt_ChronoBoostInit_Init();
+    libGHLo_gt_ChronoBoostActivates_Init();
+    libGHLo_gt_ChronoBoostDeactivates_Init();
+    libGHLo_gt_ChronoBoostTrainingStarted_Init();
+    libGHLo_gt_ChronoBoostTrainingStopped_Init();
+    libGHLo_gt_ChronoBoostResearchStarted_Init();
+    libGHLo_gt_ChronoBoostResearchStopped_Init();
     libGHLo_gt_ObserverUiAssistInitialization_Init();
     libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat_Init();
     libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie_Init();
