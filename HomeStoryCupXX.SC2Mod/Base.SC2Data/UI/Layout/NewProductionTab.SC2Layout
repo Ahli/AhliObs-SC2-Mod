@@ -4145,8 +4145,7 @@
 	</Frame>
 	
 	<Frame type="PlayerProductionFrame" name="PlayerProductionFrameTemplate">
-		<Height val="84"/>
-		<CollapseLayout val="true"/>
+		<Anchor relative="$parent"/>
 		
 		<Frame type="Image" name="LeaderPanelBackgroundImageTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
@@ -4382,6 +4381,43 @@
 		</Frame>
 	</Frame>
 	
+	
+	<Frame type="Frame" name="PlayerFrameContainerTemplate">
+		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Left" relative="$parent" pos="Min" offset="500"/>
+		<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+		<Height val="92"/>
+		<CollapseLayout val="true"/>
+		
+		<Frame type="PlayerProductionFrame" name="ProdFrame" template="NewProductionTab/PlayerProductionFrameTemplate">
+		</Frame>
+	</Frame>
+	
+	
+			
+	<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorTemplate">
+		<Anchor relative="$parent"/>
+		
+		<Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
+			<Anchor relative="$parent"/>
+			<ScoreValueLink val="PlayerStatus"/>
+			
+			<Frame type="Label" name="Label">
+				<Anchor relative="$parent"/>
+				<Visible val="false"/>
+				<Alpha val="0"/>
+			</Frame>
+		</Frame>
+		
+		<StateGroup name="PlayerStatus">
+			<State name="unused">
+				<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+			</State>
+		</StateGroup>
+	</Frame>
+	
+	
+	
 	<Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer/LeaderPanel" file="GameUI">
 	
 		<!-- OBSERVER INTERFACE -->
@@ -4393,110 +4429,241 @@
 		</Frame>-->
 		
 		<Frame type="Frame" name="ProductionFrame2">
-            <Anchor side="Top" relative="$parent/SelectPulldown" pos="Max" offset="0"/>
-            <Anchor side="Left" relative="$parent/SelectPulldown" pos="Min" offset="0"/>
+            <Anchor side="Top" relative="$parent/SelectPulldown" pos="Max" offset="4"/>
+            <Anchor side="Left" relative="$parent/SelectPulldown" pos="Min" offset="500"/>
 			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
 			<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
 			
 			<!-- OBSERVER INTERFACE -->
 			<Visible val="{$parent/ProductionFrame/@Visible}"/>
 			
-			<Frame type="PlayerProductionFrame" name="Player0" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent" pos="Min" offset="4"/>
-				<Anchor side="Left" relative="$parent" pos="Min" offset="500"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="Frame" name="Player0" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="0"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player1" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player0" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="1"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player2" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player1" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="2"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player3" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player2" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="3"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player4" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player3" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="4"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player5" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player4" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="5"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player6" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player5" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="6"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player7" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player6" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="7"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player8" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player7" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="8"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player9" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player8" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="9"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player10" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player9" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="10"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player11" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player10" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="11"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player12" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player11" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="12"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player13" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player12" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="13"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player14" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player13" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="14"/>
+				</Frame>
+			</Frame>
+			<Frame type="Frame" name="Player15" template="NewProductionTab/PlayerFrameContainerTemplate">
+				<Anchor side="Top" relative="$parent/Player14" pos="Max" offset="0"/>
+				<Frame type="PlayerProductionFrame" name="ProdFrame">
+					<PlayerId val="15"/>
+				</Frame>
+			</Frame>
+			
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP0" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="0"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player0" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player1" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player0" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player0" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP1" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="1"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player1" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player2" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player1" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player1" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP2" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="2"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player2" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player3" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player2" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player2" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP3" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="3"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player3" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player4" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player3" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player3" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP4" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="4"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player4" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player5" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player4" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player4" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP5" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="5"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player5" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player6" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player5" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player5" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP6" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="6"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player6" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player7" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player6" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player6" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP7" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="7"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player7" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player8" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player7" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player7" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP8" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="8"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player8" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player9" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player8" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player8" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP9" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="9"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player9" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player10" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player9" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player9" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP10" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="10"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player10" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player11" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player10" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player10" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP11" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="11"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player11" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player12" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player11" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player11" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP12" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="12"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player12" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player13" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player12" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player12" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP13" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="13"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player13" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player14" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player13" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player13" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP14" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="14"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player14" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
-			<Frame type="PlayerProductionFrame" name="Player15" template="NewProductionTab/PlayerProductionFrameTemplate">
-				<Anchor side="Top" relative="$parent/Player14" pos="Max" offset="4"/>
-				<Anchor side="Left" relative="$parent/Player14" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorP15" template="NewProductionTab/UnusedSlotDetectorTemplate">
 				<PlayerId val="15"/>
+				<StateGroup name="PlayerStatus">
+					<State name="unused">
+						<Action type="SetProperty" frame="$parent/Player15" visible="false"/>
+					</State>
+				</StateGroup>
 			</Frame>
+			
+			
 		</Frame>
 
 	</Frame>

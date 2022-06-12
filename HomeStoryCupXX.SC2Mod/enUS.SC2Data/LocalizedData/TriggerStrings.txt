@@ -256,6 +256,7 @@ Variable/Name/lib_FixD_F3487E4C=triggeringOrder
 Variable/Name/lib_GHLo_0377A0C5=Active
 Variable/Name/lib_GHLo_0555E039=dialogItem
 Variable/Name/lib_GHLo_0566C33A=Style
+Variable/Name/lib_GHLo_0603B1FD=player
 Variable/Name/lib_GHLo_0795773E=foundSlot
 Variable/Name/lib_GHLo_0A89C778=unitType
 Variable/Name/lib_GHLo_0BD9F6EC=Difference

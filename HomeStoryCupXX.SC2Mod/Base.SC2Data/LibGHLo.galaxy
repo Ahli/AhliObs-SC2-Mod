@@ -1080,7 +1080,7 @@ bool libGHLo_gt_ChronoBoostInit_Func (bool testConds, bool runActions) {
         libGHLo_gv_chronoBoost[lv_player].lv_boosted = UnitGroupEmpty();
         lv_slot = 0;
         for ( ; ( (autoD07B238D_ai >= 0 && lv_slot <= autoD07B238D_ae) || (autoD07B238D_ai < 0 && lv_slot >= autoD07B238D_ae) ) ; lv_slot += autoD07B238D_ai ) {
-            DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame2/Player" + IntToString(lv_player) + "/ChronoBoostInput/s" + IntToString(lv_slot)));
+            DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame2/Player" + IntToString(lv_player) + "/ProdFrame/ChronoBoostInput/s" + IntToString(lv_slot)));
             libGHLo_gv_chronoBoost[lv_player].lv_slots[lv_slot] = DialogControlLastCreated();
         }
     }
@@ -1313,27 +1313,31 @@ void libGHLo_gt_ChronoBoostResearchStopped_Init () {
 // Trigger: ObserverUiAssist - Initialization
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_ObserverUiAssistInitialization_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+
     // Automatic Variable Declarations
-    playergroup autoC0965509_g;
-    int autoC0965509_var;
+    playergroup autoB00B28D1_g;
+
+    // Variable Initialization
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    autoC0965509_g = libGHLo_gv_initial_Active_Players;
-    autoC0965509_var = -1;
+    autoB00B28D1_g = libGHLo_gv_initial_Active_Players;
+    lv_player = -1;
     while (true) {
-        autoC0965509_var = PlayerGroupNextPlayer(autoC0965509_g, autoC0965509_var);
-        if (autoC0965509_var < 0) { break; }
-        libGHLo_gf_ObserverUiAssistSetPlayerIdScore(autoC0965509_var);
-        if ((PlayerStatus(autoC0965509_var) == c_playerStatusActive)) {
-            libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(autoC0965509_var, libGHLo_ge_PlayerStatusScoreValue_Playing);
+        lv_player = PlayerGroupNextPlayer(autoB00B28D1_g, lv_player);
+        if (lv_player < 0) { break; }
+        libGHLo_gf_ObserverUiAssistSetPlayerIdScore(lv_player);
+        if ((PlayerStatus(lv_player) == c_playerStatusActive)) {
+            libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(lv_player, libGHLo_ge_PlayerStatusScoreValue_Playing);
         }
         else {
-            if ((PlayerStatus(autoC0965509_var) == c_playerStatusLeft) && (PlayerScoreValueGetAsInt(autoC0965509_var, "PlayerStatus") == 0)) {
-                libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(autoC0965509_var, libGHLo_ge_PlayerStatusScoreValue_LeftGameinDefeat);
+            if ((PlayerStatus(lv_player) == c_playerStatusLeft) && (PlayerScoreValueGetAsInt(lv_player, "PlayerStatus") == 0)) {
+                libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(lv_player, libGHLo_ge_PlayerStatusScoreValue_LeftGameinDefeat);
             }
 
         }
