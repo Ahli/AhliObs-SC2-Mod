@@ -341,16 +341,16 @@ void libGHLo_gf_GraphsDefineGraph (int lp_iD, text lp_title, string lp_string, s
     libGHLo_gv_graphsData[lv_graph].lv_rangeBase = lp_rangeBase;
     libGHLo_gv_graphsData[lv_graph].lv_rangeIncrement = lp_rangeIncrement;
     DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/GraphContainer/" + lp_string));
-    DialogControlSetEnabled(DialogControlLastCreated(), libGHLo_gv_all_Players, true);
+    DialogControlSetEnabled(DialogControlLastCreated(), libGHLo_gv_obs, true);
     DialogControlHookupStandard(c_triggerControlTypeGraphFrame, ("UIContainer/FullscreenUpperContainer/GraphContainer/" + lp_string + "/Graph/GraphFrame"));
     libGHLo_gv_graphsData[lv_graph].lv_graph = DialogControlLastCreated();
     DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/GraphContainer/" + lp_string + "/Graph/Title"));
     libGHLo_gv_graphsData[lv_graph].lv_title = DialogControlLastCreated();
-    libNtve_gf_SetDialogItemText(libGHLo_gv_graphsData[lv_graph].lv_title, lp_title, libGHLo_gv_all_Players);
+    libNtve_gf_SetDialogItemText(libGHLo_gv_graphsData[lv_graph].lv_title, lp_title, libGHLo_gv_obs);
     lv_count = (0 - libGHLo_gv_graphsTotalNodes);
     for ( ; ( (auto236CE7AF_ai >= 0 && lv_count <= auto236CE7AF_ae) || (auto236CE7AF_ai < 0 && lv_count >= auto236CE7AF_ae) ) ; lv_count += auto236CE7AF_ai ) {
-        DialogControlAddDataPoint(libGHLo_gv_graphsData[lv_graph].lv_graph, libGHLo_gv_all_Players, lv_count, 0.0, 1);
-        DialogControlAddDataPoint(libGHLo_gv_graphsData[lv_graph].lv_graph, libGHLo_gv_all_Players, lv_count, 0.0, 2);
+        DialogControlAddDataPoint(libGHLo_gv_graphsData[lv_graph].lv_graph, libGHLo_gv_obs, lv_count, 0.0, 1);
+        DialogControlAddDataPoint(libGHLo_gv_graphsData[lv_graph].lv_graph, libGHLo_gv_obs, lv_count, 0.0, 2);
     }
 }
 
@@ -391,18 +391,18 @@ void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graph) {
         libGHLo_gv_graphsData[lp_graph].lv_value[0] = (lv_teamAverage[libGHLo_gv_graphsGeneral.lv_teamRight]-lv_teamAverage[libGHLo_gv_graphsGeneral.lv_teamLeft]);
     }
     if ((libGHLo_gv_graphsData[lp_graph].lv_team == libGHLo_gv_graphsGeneral.lv_teamLeft)) {
-        DialogControlAddDataPoint(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, libGHLo_gv_graphsGeneral.lv_currentNode, libGHLo_gv_graphsData[lp_graph].lv_value[0], 1);
-        DialogControlAddDataPoint(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, libGHLo_gv_graphsGeneral.lv_currentNode, (0 - libGHLo_gv_graphsData[lp_graph].lv_value[0]), 2);
+        DialogControlAddDataPoint(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, libGHLo_gv_graphsGeneral.lv_currentNode, libGHLo_gv_graphsData[lp_graph].lv_value[0], 1);
+        DialogControlAddDataPoint(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, libGHLo_gv_graphsGeneral.lv_currentNode, (0 - libGHLo_gv_graphsData[lp_graph].lv_value[0]), 2);
     }
     else {
-        DialogControlAddDataPoint(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, libGHLo_gv_graphsGeneral.lv_currentNode, (0 - libGHLo_gv_graphsData[lp_graph].lv_value[0]), 1);
-        DialogControlAddDataPoint(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, libGHLo_gv_graphsGeneral.lv_currentNode, libGHLo_gv_graphsData[lp_graph].lv_value[0], 2);
+        DialogControlAddDataPoint(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, libGHLo_gv_graphsGeneral.lv_currentNode, (0 - libGHLo_gv_graphsData[lp_graph].lv_value[0]), 1);
+        DialogControlAddDataPoint(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, libGHLo_gv_graphsGeneral.lv_currentNode, libGHLo_gv_graphsData[lp_graph].lv_value[0], 2);
     }
-    if ((DialogControlGetMinYValue(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players) <= (0.0 - DialogControlGetMaxYValue(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players)))) {
-        lv_differential = AbsF(DialogControlGetMinYValue(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players));
+    if ((DialogControlGetMinYValue(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs) <= (0.0 - DialogControlGetMaxYValue(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs)))) {
+        lv_differential = AbsF(DialogControlGetMinYValue(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs));
     }
     else {
-        lv_differential = DialogControlGetMaxYValue(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players);
+        lv_differential = DialogControlGetMaxYValue(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs);
     }
     if ((lv_differential < libGHLo_gv_graphsData[lp_graph].lv_minimumValue)) {
         lv_differential = libGHLo_gv_graphsData[lp_graph].lv_rangeBase;
@@ -411,10 +411,10 @@ void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graph) {
         lv_differential = (lv_differential * 1.15);
         lv_differential = (Ceiling((lv_differential / libGHLo_gv_graphsData[lp_graph].lv_rangeIncrement)) * libGHLo_gv_graphsData[lp_graph].lv_rangeIncrement);
     }
-    DialogControlSetMaxYVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, lv_differential);
-    DialogControlSetMinYVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, (0.0 - lv_differential));
-    DialogControlSetMinXVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, (libGHLo_gv_graphsGeneral.lv_currentNode - libGHLo_gv_graphsTotalNodes));
-    DialogControlSetMaxXVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, libGHLo_gv_graphsGeneral.lv_currentNode);
+    DialogControlSetMaxYVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, lv_differential);
+    DialogControlSetMinYVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, (0.0 - lv_differential));
+    DialogControlSetMinXVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, (libGHLo_gv_graphsGeneral.lv_currentNode - libGHLo_gv_graphsTotalNodes));
+    DialogControlSetMaxXVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, libGHLo_gv_graphsGeneral.lv_currentNode);
 }
 
 void libGHLo_gf_GraphsUpdateDataComparative (int lp_graph) {
@@ -438,18 +438,18 @@ void libGHLo_gf_GraphsUpdateDataComparative (int lp_graph) {
     }
     libGHLo_gv_graphsData[lp_graph].lv_value[libGHLo_gv_graphsGeneral.lv_teamLeft] = (lv_teamTotal[libGHLo_gv_graphsGeneral.lv_teamLeft]/libGHLo_gv_graphsGeneral.lv_intervals);
     libGHLo_gv_graphsData[lp_graph].lv_value[libGHLo_gv_graphsGeneral.lv_teamRight] = (lv_teamTotal[libGHLo_gv_graphsGeneral.lv_teamRight]/libGHLo_gv_graphsGeneral.lv_intervals);
-    DialogControlAddDataPoint(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, libGHLo_gv_graphsGeneral.lv_currentNode, libGHLo_gv_graphsData[lp_graph].lv_value[libGHLo_gv_graphsGeneral.lv_teamLeft], 1);
-    DialogControlAddDataPoint(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, libGHLo_gv_graphsGeneral.lv_currentNode, libGHLo_gv_graphsData[lp_graph].lv_value[libGHLo_gv_graphsGeneral.lv_teamRight], 2);
-    DialogControlSetMinXVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, (libGHLo_gv_graphsGeneral.lv_currentNode - libGHLo_gv_graphsTotalNodes));
-    DialogControlSetMaxXVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, libGHLo_gv_graphsGeneral.lv_currentNode);
-    DialogControlSetMinYVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, 0.0);
-    if ((DialogControlGetMaxYValue(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players) <= libGHLo_gv_graphsData[lp_graph].lv_minimumValue)) {
-        DialogControlSetMaxYVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, libGHLo_gv_graphsData[lp_graph].lv_rangeBase);
+    DialogControlAddDataPoint(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, libGHLo_gv_graphsGeneral.lv_currentNode, libGHLo_gv_graphsData[lp_graph].lv_value[libGHLo_gv_graphsGeneral.lv_teamLeft], 1);
+    DialogControlAddDataPoint(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, libGHLo_gv_graphsGeneral.lv_currentNode, libGHLo_gv_graphsData[lp_graph].lv_value[libGHLo_gv_graphsGeneral.lv_teamRight], 2);
+    DialogControlSetMinXVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, (libGHLo_gv_graphsGeneral.lv_currentNode - libGHLo_gv_graphsTotalNodes));
+    DialogControlSetMaxXVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, libGHLo_gv_graphsGeneral.lv_currentNode);
+    DialogControlSetMinYVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, 0.0);
+    if ((DialogControlGetMaxYValue(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs) <= libGHLo_gv_graphsData[lp_graph].lv_minimumValue)) {
+        DialogControlSetMaxYVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, libGHLo_gv_graphsData[lp_graph].lv_rangeBase);
     }
     else {
-        lv_maxValue = (DialogControlGetMaxYValue(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players) * 1.15);
+        lv_maxValue = (DialogControlGetMaxYValue(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs) * 1.15);
         lv_maxValue = (Ceiling((lv_maxValue / libGHLo_gv_graphsData[lp_graph].lv_rangeIncrement)) * libGHLo_gv_graphsData[lp_graph].lv_rangeIncrement);
-        DialogControlSetMaxYVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_all_Players, lv_maxValue);
+        DialogControlSetMaxYVisible(libGHLo_gv_graphsData[lp_graph].lv_graph, libGHLo_gv_obs, lv_maxValue);
     }
 }
 
