@@ -1436,13 +1436,30 @@ void libGHLo_gt_ObserverUiAssistInitialization_Init () {
 // Trigger: ObserverUiAssist - PlayerLeavesGameDefeat
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_unit;
+    int lv_player;
+
     // Automatic Variable Declarations
+    unitgroup autoED37B730_g;
+    int autoED37B730_u;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+
     // Actions
     if (!runActions) {
         return true;
     }
 
-    libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(EventPlayer(), libGHLo_ge_PlayerStatusScoreValue_LeftGameinDefeat);
+    libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(lv_player, libGHLo_ge_PlayerStatusScoreValue_LeftGameinDefeat);
+    autoED37B730_g = UnitGroup(null, lv_player, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), 0), 0);
+    autoED37B730_u = UnitGroupCount(autoED37B730_g, c_unitCountAll);
+    for (;; autoED37B730_u -= 1) {
+        lv_unit = UnitGroupUnitFromEnd(autoED37B730_g, autoED37B730_u);
+        if (lv_unit == null) { break; }
+        UnitBehaviorAddPlayer(lv_unit, "AHLI_Reveal", libGHLo_gv_obsID, 1);
+    }
     return true;
 }
 
@@ -1456,13 +1473,30 @@ void libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat_Init () {
 // Trigger: ObserverUiAssist - PlayerLeavesGameTie
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_unit;
+    int lv_player;
+
     // Automatic Variable Declarations
+    unitgroup auto4C1668FC_g;
+    int auto4C1668FC_u;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+
     // Actions
     if (!runActions) {
         return true;
     }
 
-    libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(EventPlayer(), libGHLo_ge_PlayerStatusScoreValue_LeftGameinTie);
+    libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(lv_player, libGHLo_ge_PlayerStatusScoreValue_LeftGameinTie);
+    auto4C1668FC_g = UnitGroup(null, lv_player, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32))), 0);
+    auto4C1668FC_u = UnitGroupCount(auto4C1668FC_g, c_unitCountAll);
+    for (;; auto4C1668FC_u -= 1) {
+        lv_unit = UnitGroupUnitFromEnd(auto4C1668FC_g, auto4C1668FC_u);
+        if (lv_unit == null) { break; }
+        UnitBehaviorAddPlayer(lv_unit, "AHLI_Reveal", libGHLo_gv_obsID, 1);
+    }
     return true;
 }
 
@@ -1476,13 +1510,30 @@ void libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie_Init () {
 // Trigger: ObserverUiAssist - PlayerLeavesGameVictory
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_unit;
+    int lv_player;
+
     // Automatic Variable Declarations
+    unitgroup autoC9465B8D_g;
+    int autoC9465B8D_u;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+
     // Actions
     if (!runActions) {
         return true;
     }
 
-    libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(EventPlayer(), libGHLo_ge_PlayerStatusScoreValue_LeftGameinVictory);
+    libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(lv_player, libGHLo_ge_PlayerStatusScoreValue_LeftGameinVictory);
+    autoC9465B8D_g = UnitGroup(null, lv_player, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32))), 0);
+    autoC9465B8D_u = UnitGroupCount(autoC9465B8D_g, c_unitCountAll);
+    for (;; autoC9465B8D_u -= 1) {
+        lv_unit = UnitGroupUnitFromEnd(autoC9465B8D_g, autoC9465B8D_u);
+        if (lv_unit == null) { break; }
+        UnitBehaviorAddPlayer(lv_unit, "AHLI_Reveal", libGHLo_gv_obsID, 1);
+    }
     return true;
 }
 
