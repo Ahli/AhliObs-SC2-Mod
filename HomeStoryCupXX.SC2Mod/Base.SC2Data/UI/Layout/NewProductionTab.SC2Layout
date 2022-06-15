@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
-	<Constant name="hOffset_LeaderPanelIcon" val="4"/>
+	<Constant name="unitSlotGap" val="6"/>
+	<Constant name="slotHeight" val="88"/>
+	<Constant name="slotHeight2" val="176"/>
+	<Constant name="slotHeight3" val="264"/>
+	<Constant name="slotHeight4" val="352"/>
+	<Constant name="slotHeight5" val="440"/>
+	<Constant name="slotHeight6" val="528"/>
+	<Constant name="slotHeight7" val="616"/>
 
 	<Frame type="ProductionCountFrame" name="ProductionCountFrameTemplate">
 		<Height val="83"/>
@@ -4147,16 +4154,31 @@
 	<Frame type="PlayerProductionFrame" name="PlayerProductionFrameTemplate">
 		<Anchor relative="$parent"/>
 		
-		<Frame type="Image" name="LeaderPanelBackgroundImageTemplate">
+		<Frame type="Image" name="LeaderPanelBackgroundImage">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
 			<Anchor side="Bottom" relative="$parent" pos="Max" offset="-4"/>
 			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Right" relative="$parent/MoreIconsLabel" pos="Max" offset="0"/>
+			<Anchor side="Right" relative="$parent/BackgroundEmptySlotExtraWidth" pos="Max" offset="0"/>
 			<Texture val="@@UI/LeaderPanelBackground"/>
 			<LayerColor val="##StandardBorder"/>
 			<TextureType val="Border"/>
 			<IgnoreParentColor val="true"/>
 			<AcceptsMouse val="true"/>
+			
+			<StateGroup name="NiceEmptyProdFrame">
+				<State name="Empty">
+					<When type="Property" frame="$parent/ProductionCountFrame0" visible="false"/>
+					<Action type="SetProperty" frame="$parent/BackgroundEmptySlotExtraWidth" visible="true"/>
+				</State>
+			</StateGroup>
+		</Frame>
+		<Frame type="Frame" name="BackgroundEmptySlotExtraWidth">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+			<Anchor side="Left" relative="$parent/MoreIconsLabel" pos="Max" offset="0"/>
+			<Width val="6"/>
+			<Visible val="false"/>
+			<CollapseLayout val="true"/>
 		</Frame>
 		
 		<Frame type="Image" name="PlayerImage">
@@ -4198,92 +4220,92 @@
 		
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame0" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent" pos="Min" offset="38"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="44"/>
 		</Frame>
 
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame1" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame0" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame0" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame2" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame1" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame1" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame3" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame2" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame2" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame4" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame3" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame3" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame5" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame4" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame4" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame6" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame5" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame5" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame7" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame6" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame6" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame8" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame7" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame7" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame9" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame8" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame8" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 		
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame10" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame9" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame9" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 		
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame11" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame10" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame10" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 		
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame12" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame11" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame11" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 		
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame13" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame12" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame12" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 		
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame14" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame13" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame13" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 		
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame15" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame14" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame14" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 		
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame16" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame15" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame15" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 		
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame17" template="NewProductionTab/ProductionCountFrameTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame16" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame16" pos="Max" offset="#unitSlotGap"/>
 		</Frame>
 		
 		<Frame type="ProductionCountFrame" name="ProductionCountFrame18" template="NewProductionTab/ProductionCountFrameTemplate">
@@ -4294,7 +4316,7 @@
 		<Frame type="Label" name="MoreIconsLabel">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
 			<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-			<Anchor side="Left" relative="$parent/ProductionCountFrame17" pos="Max" offset="#hOffset_LeaderPanelIcon"/>
+			<Anchor side="Left" relative="$parent/ProductionCountFrame17" pos="Max" offset="#unitSlotGap"/>
 			<IgnoreParentColor val="true"/>
 			<Style val="ResourceValue"/>
 			<Text val="..."/>
@@ -4386,7 +4408,7 @@
 		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
 		<Anchor side="Left" relative="$parent" pos="Min" offset="300"/>
 		<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
-		<Height val="88"/>
+		<Height val="#slotHeight"/>
 		<CollapseLayout val="true"/>
 		
 		<Frame type="PlayerProductionFrame" name="ProdFrame" template="NewProductionTab/PlayerProductionFrameTemplate">
@@ -4394,7 +4416,7 @@
 	</Frame>
 	
 	
-			
+	
 	<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorTemplate">
 		<Anchor relative="$parent"/>
 		
@@ -4416,7 +4438,61 @@
 		</StateGroup>
 	</Frame>
 	
+	<Frame type="PlayerScoreValueFrame" name="VersusModeSideDetectorTemplate">
+		<Anchor relative="$parent"/>
+		
+		<Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
+			<Anchor relative="$parent"/>
+			<ScoreValueLink val="VersusModePlayerSide"/>
+			
+			<Frame type="Label" name="Label">
+				<Anchor relative="$parent"/>
+				<Visible val="false"/>
+				<Alpha val="0"/>
+			</Frame>
+		</Frame>
+	</Frame>	
 	
+	<Frame type="PlayerScoreValueFrame" name="VersusPlayerFrameTemplate">
+		<Anchor relative="$parent"/>
+		
+		<Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
+			<Anchor relative="$parent"/>
+			<ScoreValueLink val="PlayerId"/>
+			
+			<Frame type="Label" name="Label">
+				<Anchor relative="$parent"/>
+				<Visible val="false"/>
+				<Alpha val="0"/>
+			</Frame>
+		</Frame>
+	</Frame>
+	
+	
+	<Frame type="Frame" name="TopOffsetSlot0">
+		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+	</Frame>
+	<Frame type="Frame" name="TopOffsetSlot1">
+		<Anchor side="Top" relative="$parent" pos="Min" offset="#slotHeight"/>
+	</Frame>
+	<Frame type="Frame" name="TopOffsetSlot2">
+		<Anchor side="Top" relative="$parent" pos="Min" offset="#slotHeight2"/>
+	</Frame>
+	<Frame type="Frame" name="TopOffsetSlot3">
+		<Anchor side="Top" relative="$parent" pos="Min" offset="#slotHeight3"/>
+	</Frame>
+	<Frame type="Frame" name="TopOffsetSlot4">
+		<Anchor side="Top" relative="$parent" pos="Min" offset="#slotHeight4"/>
+	</Frame>
+	<Frame type="Frame" name="TopOffsetSlot5">
+		<Anchor side="Top" relative="$parent" pos="Min" offset="#slotHeight5"/>
+	</Frame>
+	<Frame type="Frame" name="TopOffsetSlot6">
+		<Anchor side="Top" relative="$parent" pos="Min" offset="#slotHeight6"/>
+	</Frame>
+	<Frame type="Frame" name="TopOffsetSlot7">
+		<Anchor side="Top" relative="$parent" pos="Min" offset="#slotHeight7"/>
+	</Frame>
 	
 	<Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer/LeaderPanel" file="GameUI">
 	
@@ -4663,7 +4739,2897 @@
 				</StateGroup>
 			</Frame>
 			
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP0" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="0"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP1" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="1"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP2" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="2"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP3" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="3"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP4" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="4"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP5" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="5"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP6" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="6"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP7" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="7"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP8" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="8"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP9" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="9"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP10" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="10"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP11" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="11"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP12" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="12"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP13" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="13"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP14" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="14"/>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP15" template="NewProductionTab/VersusModeSideDetectorTemplate">
+				<PlayerId val="15"/>
+			</Frame>
 			
+			<Frame type="PlayerScoreValueFrame" name="DetectPlayerFrameLeft0" template="NewProductionTab/VersusPlayerFrameTemplate">
+				<VersusModePlayerSide val="Left"/>
+				<VersusModePlayerIndex val="0"/>
+				
+				<StateGroup name="Position">
+					<State name="0a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="0b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="0c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="0">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="1a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="1b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="1c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="1">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="2a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="2b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="2c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="2">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="3a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="3b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="3c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="3">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="4a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="4b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="4c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="4">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="5a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="5b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="5c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="5">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="6a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="6b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="6c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="6">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="7a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="7b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="7c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="7">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="8a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="8b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="8c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="8">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="9a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="9b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="9c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="9">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="10a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="10b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="10c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="10">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="11a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="11b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="11c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="11">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="12a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="12b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="12c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="12">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="13a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="13b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="13c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="13">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="14a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="14b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="14c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="14">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="15a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="15b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="15c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="15">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+				</StateGroup>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="DetectPlayerFrameLeft1" template="NewProductionTab/VersusPlayerFrameTemplate">
+				<VersusModePlayerSide val="Left"/>
+				<VersusModePlayerIndex val="1"/>
+				
+				<StateGroup name="Position">
+					<State name="0a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="0b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="0c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="0">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="1a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="1b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="1c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="1">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="2a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="2b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="2c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="2">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="3a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="3b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="3c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="3">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="4a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="4b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="4c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="4">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="5a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="5b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="5c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="5">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="6a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="6b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="6c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="6">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="7a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="7b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="7c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="7">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="8a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="8b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="8c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="8">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="9a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="9b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="9c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="9">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="10a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="10b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="10c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="10">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="11a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="11b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="11c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="11">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="12a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="12b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="12c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="12">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="13a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="13b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="13c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="13">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="14a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="14b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="14c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="14">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="15a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="15b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="15c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="15">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+				</StateGroup>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="DetectPlayerFrameLeft2" template="NewProductionTab/VersusPlayerFrameTemplate">
+				<VersusModePlayerSide val="Left"/>
+				<VersusModePlayerIndex val="2"/>
+				
+				<StateGroup name="Position">
+					<State name="0b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="0c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="0">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="1b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="1c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="1">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="2b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="2c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="2">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="3b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="3c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="3">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="4b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="4c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="4">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="5b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="5c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="5">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="6b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="6c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="6">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="7b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="7c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="7">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="8b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="8c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="8">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="9b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="9c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="9">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="10b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="10c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="10">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="11b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="11c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="11">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="12b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="12c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="12">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="13b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="13c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="13">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="14b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="14c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="14">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="15b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="15c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="15">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+				</StateGroup>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="DetectPlayerFrameLeft3" template="NewProductionTab/VersusPlayerFrameTemplate">
+				<VersusModePlayerSide val="Left"/>
+				<VersusModePlayerIndex val="3"/>
+				
+				<StateGroup name="Position">
+					<State name="0c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="0">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="1c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="1">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="2c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="2">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="3c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="3">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="4c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="4">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="5c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="5">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="6c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="6">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="7c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="7">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="8c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="8">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="9c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="9">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="10c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="10">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="11c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="11">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="12c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="12">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="13c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="13">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="14c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="14">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="15c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="15">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+				</StateGroup>
+			</Frame>
+			
+			<Frame type="PlayerScoreValueFrame" name="DetectPlayerFrameRight0" template="NewProductionTab/VersusPlayerFrameTemplate">
+				<VersusModePlayerSide val="Right"/>
+				<VersusModePlayerIndex val="0"/>
+				<!-- TODO 2v2/3v3/4v4 && L -->
+				<StateGroup name="Position">
+					<State name="0g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="0f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="0e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="0d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="0c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="0b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="0a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="1g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="1f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="1e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="1d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="1c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="1b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="1a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="2g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="2f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="2e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="2d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="2c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="2b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="2a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="3g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="3f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="3e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="3d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="3c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="3b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="3a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="4g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="4f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="4e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="4d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="4c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="4b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="4a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="5g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="5f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="5e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="5d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="5c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="5b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="5a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="6g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="6f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="6e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="6d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="6c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="6b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="6a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="7g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="7f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="7e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="7d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="7c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="7b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="7a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="8g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="8f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="8e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="8d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="8c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="8b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="8a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="9g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="9f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="9e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="9d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="9c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="9b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="9a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="10g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="10f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="10e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="10d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="10c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="10b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="10a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="11g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="11f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="11e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="11d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="11c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="11b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="11a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="12g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="12f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="12e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="12d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="12c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="12b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="12a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="13g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="13f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="13e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="13d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="13c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="13b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="13a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="14g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="14f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="14e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="14d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="14c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="14b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="14a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="15g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="15f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="15e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot0"/>
+					</State>
+					<State name="15d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="15c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="15b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="15a">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="1v1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+				</StateGroup>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="DetectPlayerFrameRight1" template="NewProductionTab/VersusPlayerFrameTemplate">
+				<VersusModePlayerSide val="Right"/>
+				<VersusModePlayerIndex val="1"/>
+				
+				<StateGroup name="Position">
+					<State name="0g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="0f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="0e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="0d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="0c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="0b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="1g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="1f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="1e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="1d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="1c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="1b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="2g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="2f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="2e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="2d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="2c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="2b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="3g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="3f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="3e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="3d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="3c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="3b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="4g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="4f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="4e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="4d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="4c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="4b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="5g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="5f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="5e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="5d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="5c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="5b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="6g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="6f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="6e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="6d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="6c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="6b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="7g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="7f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="7e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="7d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="7c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="7b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="8g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="8f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="8e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="8d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="8c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="8b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="9g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="9f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="9e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="9d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="9c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="9b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="10g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="10f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="10e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="10d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="10c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="10b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="11g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="11f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="11e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="11d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="11c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="11b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="12g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="12f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="12e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="12d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="12c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="12b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="13g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="13f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="13e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="13d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="13c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="13b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="14g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="14f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="14e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="14d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="14c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="14b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="15g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="15f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="15e">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot1"/>
+					</State>
+					<State name="15d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="15c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot4"/>
+					</State>
+					<State name="15b">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="2v2"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+				</StateGroup>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="DetectPlayerFrameRight2" template="NewProductionTab/VersusPlayerFrameTemplate">
+				<VersusModePlayerSide val="Right"/>
+				<VersusModePlayerIndex val="2"/>
+				
+				<StateGroup name="Position">
+					<State name="0g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="0f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="0d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="0c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="1g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="1f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="1d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="1c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="2g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="2f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="2d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="2c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="3g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="3f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="3d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="3c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="4g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="4f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="4d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="4c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="5g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="5f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="5d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="5c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="6g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="6f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="6d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="6c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="7g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="7f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="7d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="7c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="8g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="8f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="8d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="8c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="9g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="9f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="9d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="9c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="10g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="10f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="10d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="10c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="11g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="11f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="11d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="11c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="12g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="12f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="12d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="12c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="13g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="13f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="13d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="13c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="14g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="14f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="14d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="14c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+					<State name="15g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="15f">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot2"/>
+					</State>
+					<State name="15d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot6"/>
+					</State>
+					<State name="15c">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="3v3"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot5"/>
+					</State>
+				</StateGroup>
+			</Frame>
+			<Frame type="PlayerScoreValueFrame" name="DetectPlayerFrameRight3" template="NewProductionTab/VersusPlayerFrameTemplate">
+				<VersusModePlayerSide val="Right"/>
+				<VersusModePlayerIndex val="3"/>
+				
+				<StateGroup name="Position">
+					<State name="0g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="0d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player0" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="1g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="1d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player1" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="2g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="2d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="2"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player2" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="3g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="3d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player3" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="4g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="4d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player4" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="5g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="5d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player5" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="6g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="6d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player6" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="7g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="7d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player7" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="8g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="8d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player8" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="9g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="9d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player9" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="10g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="10d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player10" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="11g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="11d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player11" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="12g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="12d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player12" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="13g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="13d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player13" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="14g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="14d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player14" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+					<State name="15g">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="1"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot3"/>
+					</State>
+					<State name="15d">
+						<When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
+						<When type="AnimationState" frame="$ancestor[@type=GameUI]" VersusMode="4v4"/>
+						<Action type="ApplyTemplate" frame="$parent/Player15" template="NewProductionTab/TopOffsetSlot7"/>
+					</State>
+				</StateGroup>
+			</Frame>
+
 		</Frame>
 
 	</Frame>

@@ -1313,17 +1313,98 @@ void libGHLo_gt_ChronoBoostResearchStopped_Init () {
 // Trigger: ObserverUiAssist - Initialization
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_ObserverUiAssistInitialization_Func (bool testConds, bool runActions) {
+    int init_i;
+
     // Variable Declarations
     int lv_player;
+    int lv_team;
+    playergroup[3] lv_playersOnTeam;
+    fixed lv_xCoord;
+    fixed[3] lv_mostleftTeamStartPosX;
+    int[3] lv_mostleftTeamStartPlayerId;
+    int[3] lv_teamsVersusModeScoreValue;
+    bool lv_team1IsLeft;
 
     // Automatic Variable Declarations
+    const int auto41403137_ae = 2;
+    const int auto41403137_ai = 1;
+    playergroup auto6857D5A5_g;
+    const int auto564D10B3_ae = 2;
+    const int auto564D10B3_ai = 1;
+    playergroup auto74DCA28D_g;
+    const int auto6646F1A7_ae = 2;
+    const int auto6646F1A7_ai = 1;
+    playergroup auto196BFCB7_g;
     playergroup autoB00B28D1_g;
 
     // Variable Initialization
+    for (init_i = 0; init_i <= 2; init_i += 1) {
+        lv_mostleftTeamStartPosX[init_i] = 524287.0;
+    }
+    for (init_i = 0; init_i <= 2; init_i += 1) {
+        lv_mostleftTeamStartPlayerId[init_i] = 16;
+    }
+    for (init_i = 0; init_i <= 2; init_i += 1) {
+        lv_teamsVersusModeScoreValue[init_i] = 1;
+    }
 
     // Actions
     if (!runActions) {
         return true;
+    }
+
+    lv_playersOnTeam[1] = GameAttributePlayersForTeam(1);
+    lv_playersOnTeam[2] = GameAttributePlayersForTeam(2);
+    if (((PlayerGroupCount(lv_playersOnTeam[1]) + PlayerGroupCount(lv_playersOnTeam[2])) == PlayerGroupCount(libGHLo_gv_initial_Active_Players)) && (PlayerGroupCount(lv_playersOnTeam[1]) > 0) && (PlayerGroupCount(lv_playersOnTeam[2]) > 0)) {
+        if ((PlayerGroupCount(lv_playersOnTeam[1]) != 1)) {
+            lv_team = 1;
+            for ( ; ( (auto6646F1A7_ai >= 0 && lv_team <= auto6646F1A7_ae) || (auto6646F1A7_ai < 0 && lv_team >= auto6646F1A7_ae) ) ; lv_team += auto6646F1A7_ai ) {
+                auto196BFCB7_g = lv_playersOnTeam[lv_team];
+                lv_player = -1;
+                while (true) {
+                    lv_player = PlayerGroupNextPlayer(auto196BFCB7_g, lv_player);
+                    if (lv_player < 0) { break; }
+                    PlayerScoreValueSetFromInt(lv_player, "VersusModePlayerSide", lv_team);
+                }
+            }
+        }
+        else {
+            lv_team = 1;
+            for ( ; ( (auto41403137_ai >= 0 && lv_team <= auto41403137_ae) || (auto41403137_ai < 0 && lv_team >= auto41403137_ae) ) ; lv_team += auto41403137_ai ) {
+                auto6857D5A5_g = lv_playersOnTeam[lv_team];
+                lv_player = -1;
+                while (true) {
+                    lv_player = PlayerGroupNextPlayer(auto6857D5A5_g, lv_player);
+                    if (lv_player < 0) { break; }
+                    lv_xCoord = PointGetX(PlayerStartLocation(lv_player));
+                    if ((lv_xCoord < lv_mostleftTeamStartPosX[lv_team])) {
+                        lv_mostleftTeamStartPosX[lv_team] = lv_xCoord;
+                        lv_mostleftTeamStartPlayerId[lv_team] = lv_player;
+                    }
+
+                }
+            }
+            if (((lv_mostleftTeamStartPosX[1] < lv_mostleftTeamStartPosX[2]) || ((lv_mostleftTeamStartPosX[1] == lv_mostleftTeamStartPosX[2]) && (lv_mostleftTeamStartPlayerId[1] < lv_mostleftTeamStartPlayerId[2])))) {
+                lv_team1IsLeft = true;
+            }
+
+            if ((lv_team1IsLeft == true)) {
+                lv_teamsVersusModeScoreValue[2] = 2;
+            }
+            else {
+                lv_teamsVersusModeScoreValue[1] = 2;
+            }
+            lv_team = 1;
+            for ( ; ( (auto564D10B3_ai >= 0 && lv_team <= auto564D10B3_ae) || (auto564D10B3_ai < 0 && lv_team >= auto564D10B3_ae) ) ; lv_team += auto564D10B3_ai ) {
+                auto74DCA28D_g = lv_playersOnTeam[lv_team];
+                lv_player = -1;
+                while (true) {
+                    lv_player = PlayerGroupNextPlayer(auto74DCA28D_g, lv_player);
+                    if (lv_player < 0) { break; }
+                    PlayerScoreValueSetFromInt(lv_player, "VersusModePlayerSide", lv_teamsVersusModeScoreValue[lv_team]);
+                }
+            }
+        }
     }
 
     autoB00B28D1_g = libGHLo_gv_initial_Active_Players;
@@ -1337,7 +1418,7 @@ bool libGHLo_gt_ObserverUiAssistInitialization_Func (bool testConds, bool runAct
         }
         else {
             if ((PlayerStatus(lv_player) == c_playerStatusLeft) && (PlayerScoreValueGetAsInt(lv_player, "PlayerStatus") == 0)) {
-                libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(lv_player, libGHLo_ge_PlayerStatusScoreValue_LeftGameinDefeat);
+                libGHLo_gf_ObserverUiAssistSetPlayerStatusScore(lv_player, libGHLo_ge_PlayerStatusScoreValue_DroppedbeforeMapInitialization);
             }
 
         }
@@ -1593,13 +1674,13 @@ bool libGHLo_gt_GraphsInitialization_Func (bool testConds, bool runActions) {
             libGHLo_gv_graphsGeneral.lv_playerRight = lv_playerfromTeam1;
             libGHLo_gv_graphsGeneral.lv_teamRight = 1;
         }
-        else if ((lv_xofStartLocationTeam1 == lv_xofStartLocationTeam2) && (lv_playerfromTeam1 < lv_playerfromTeam2)) {
+        else if ((lv_playerfromTeam1 < lv_playerfromTeam2)) {
             libGHLo_gv_graphsGeneral.lv_playerLeft = lv_playerfromTeam1;
             libGHLo_gv_graphsGeneral.lv_teamLeft = 1;
             libGHLo_gv_graphsGeneral.lv_playerRight = lv_playerfromTeam2;
             libGHLo_gv_graphsGeneral.lv_teamRight = 2;
         }
-        else if ((lv_xofStartLocationTeam1 == lv_xofStartLocationTeam2) && (lv_playerfromTeam1 > lv_playerfromTeam2)) {
+        else if ((lv_playerfromTeam1 > lv_playerfromTeam2)) {
             libGHLo_gv_graphsGeneral.lv_playerLeft = lv_playerfromTeam2;
             libGHLo_gv_graphsGeneral.lv_teamLeft = 2;
             libGHLo_gv_graphsGeneral.lv_playerRight = lv_playerfromTeam1;

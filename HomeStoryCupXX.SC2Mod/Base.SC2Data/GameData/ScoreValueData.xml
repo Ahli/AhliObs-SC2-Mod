@@ -2,6 +2,7 @@
 <Catalog>
     <CScoreValueCustom id="PlayerId"/>
     <CScoreValueCustom id="PlayerStatus"/>
+    <CScoreValueCustom id="VersusModePlayerSide"/>
     <CScoreValueCombine id="ResourcesLostUnits">
         <ValueTable value="MineralsLostArmy"/>
         <ValueTable value="MineralsLostEconomy"/>

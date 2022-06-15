@@ -5,7 +5,6 @@
     <Constant name="PanelVerticalOffset" val="100"/>
     <Constant name="PanelGap" val="-6"/>
     <Constant name="Width" val="267"/>
-    <Constant name="Alpha" val="255"/>
     <Constant name="IconSize" val="64"/>
     <Constant name="ProgressWidth" val="150"/>
     <Constant name="ProgressHeight" val="15"/>
@@ -29,35 +28,34 @@
 		</Frame>
 		
         <Frame type="Image" name="TimerWindow">
+            <Anchor relative="$parent"/>
             <Texture val="MIT/ghbackground.dds"/>
             <TextureType val="Normal"/>
-            <Alpha val="#Alpha"/>
             <RenderPriority val="500"/>
-            <Anchor relative="$parent"/>
 
             <Frame type="Image" name="TimerIcon">
+                <Anchor side="Left" relative="$parent" pos="Min" offset="22"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="-2"/>
+                <Height val="#IconSize"/>
+                <Width val="#IconSize"/>
                 <Texture val="Assets/Textures/White32.dds"/>
                 <TextureType val="Normal"/>
                 <Color val="255,255,255"/>
                 <IgnoreParentColor val="true"/>
                 <RenderPriority val="501"/>
-                <Height val="#IconSize"/>
-                <Width val="#IconSize"/>
-                <Anchor side="Left" relative="$parent" pos="Min" offset="22"/>
-                <Anchor side="Bottom" relative="$parent" pos="Max" offset="-2"/>
             </Frame>
 
             <Frame type="ProgressBar" name="TimerBar">
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="-7"/>
+                <Anchor side="Left" relative="$parent/TimerIcon" pos="Max" offset="10"/>
+                <Height val="#ProgressHeight"/>
+                <Width val="#ProgressWidth"/>
                 <Texture val="MIT/ghprogressfill.dds"/>
                 <MinValue val="0.000000"/>
                 <MaxValue val="100.000000"/>
                 <FillInset val="0.000000"/>
                 <IgnoreParentColor val="false"/>
                 <RenderPriority val="502"/>
-                <Height val="#ProgressHeight"/>
-                <Width val="#ProgressWidth"/>
-                <Anchor side="Bottom" relative="$parent" pos="Max" offset="-7"/>
-                <Anchor side="Left" relative="$parent/TimerIcon" pos="Max" offset="10"/>
             </Frame>
 
             <Frame type="Label" name="TimerType">
@@ -90,7 +88,6 @@
                 <Anchor side="Top" relative="$parent/TimerIcon" pos="Min" offset="2"/>
                 <Anchor side="Left" relative="$parent/TimerIcon" pos="Max" offset="7"/>
                 <Height val="46"/>
-                <Width val="0"/>
                 <Unclipped val="true"/>
                 <Style val="TimerCountdown"/>
                 <RenderPriority val="501"/>
