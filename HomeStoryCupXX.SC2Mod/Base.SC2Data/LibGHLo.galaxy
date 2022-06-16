@@ -926,7 +926,7 @@ void libGHLo_gf_UpgradeNotificationsUpdateProgressData (int lp_slot) {
     libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lp_slot], (IntToText(lv_remainingSeconds) + (StringExternal("Param/Value/lib_GHLo_28BC4DAB") + (((StringExternal("Param/Value/lib_GHLo_97202C9A") + lv_extraZero) + IntToText(lv_remainingMilliseconds)) + StringExternal("Param/Value/lib_GHLo_25E0C402")))), libGHLo_gv_obs);
 }
 
-bool libGHLo_gf_MapNotificationsCheckFullHealth (unit lp_transportunit) {
+bool libGHLo_gf_MapNotificationsCargoUnitshaveFullHealth (unit lp_transportunit) {
     // Variable Declarations
     unit lv_unit;
 
@@ -2664,8 +2664,8 @@ bool libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Func (bool testConds, boo
         if ((UnitTestState(lv_deadUnit, c_unitStateHallucination) == false)) {
             lv_unitType = UnitGetType(lv_deadUnit);
             lv_deadUnitOwner = UnitGetOwner(lv_deadUnit);
-            lv_killingUnit = libNtve_gf_KillingUnit();
             if (((lv_unitType == "Drone") || (lv_unitType == "Probe") || (lv_unitType == "SCV") || (lv_unitType == "DroneBurrowed")) && (libGHLo_gv_workersKilledNotifications.lv_itemPanel[lv_deadUnitOwner] != c_invalidDialogControlId)) {
+                lv_killingUnit = libNtve_gf_KillingUnit();
                 if ((libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_deadUnitOwner] == libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible)) {
                     libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] = (libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] + 1);
                 }
@@ -2674,10 +2674,12 @@ bool libGHLo_gt_WorkersKilledNotificationsWorkerKilled_Func (bool testConds, boo
                 }
                 libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemCountLabel[lv_deadUnitOwner], IntToText(libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner]), libGHLo_gv_obs);
                 libNtve_gf_SetDialogItemImage(libGHLo_gv_workersKilledNotifications.lv_itemIcon[lv_deadUnitOwner], (CatalogFieldValueGet(c_gameCatalogActor, lv_unitType, "UnitIcon", c_playerAny)), libGHLo_gv_obs);
-                if ((UnitIsValid(libNtve_gf_KillingUnit()) == true)) {
+                if ((UnitIsValid(lv_killingUnit) == true)) {
                     libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemKillerPlayerIdLabel[lv_deadUnitOwner], IntToText(UnitGetOwner(lv_killingUnit)), libGHLo_gv_obs);
                 }
-
+                else {
+                    libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemKillerPlayerIdLabel[lv_deadUnitOwner], StringToText(""), libGHLo_gv_obs);
+                }
                 libNtve_gf_SetDialogItemText(libGHLo_gv_workersKilledNotifications.lv_itemWorkerPlayerIdLabel[lv_deadUnitOwner], IntToText(lv_deadUnitOwner), libGHLo_gv_obs);
                 libGHLo_gv_workersKilledNotifications.lv_slotStatus[lv_deadUnitOwner] = libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible;
                 if ((libGHLo_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] > 1)) {
@@ -2709,23 +2711,26 @@ bool libGHLo_gt_MapNotificationsDrop_Func (bool testConds, bool runActions) {
     // Variable Declarations
     point lv_position;
     unit lv_unit;
+    int lv_ping;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_unit = EventUnit();
+    lv_ping = c_invalidPingId;
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    if ((UnitCargoValue(lv_unit, c_unitCargoSpaceUsed) == UnitCargoValue(lv_unit, c_unitCargoSpaceTotal)) && (UnitTypeTestAttribute(UnitGetType(lv_unit), c_unitAttributeStructure) == false) && (libGHLo_gf_MapNotificationsCheckFullHealth(lv_unit) == true)) {
+    if ((UnitCargoValue(lv_unit, c_unitCargoSpaceUsed) == UnitCargoValue(lv_unit, c_unitCargoSpaceTotal)) && (UnitTypeTestAttribute(UnitGetType(lv_unit), c_unitAttributeStructure) == false) && (libGHLo_gf_MapNotificationsCargoUnitshaveFullHealth(lv_unit) == true)) {
         lv_position = UnitGetPosition(lv_unit);
         if (((libGHLo_gv_mapNotifications.lv_mostRecentPingLocation == null) || (TimerGetElapsed(libGHLo_gv_mapNotifications.lv_mostRecentTimer) >= libGHLo_gv_mapNotifications.lv_pingDuration) || (DistanceBetweenPoints(libGHLo_gv_mapNotifications.lv_mostRecentPingLocation, lv_position) > libGHLo_gv_mapNotifications.lv_minimumPickupSpacing))) {
-            libNtve_gf_CreatePingFacingAngle(libGHLo_gv_obs, "PingBonus", UnitGetPosition(lv_unit), Color(100.00, 100.00, 0.00), libGHLo_gv_mapNotifications.lv_pingDuration, -90.0);
-            PingSetObserver(PingLastCreated(), true);
-            PingSetUnit(PingLastCreated(), lv_unit);
-            libGHLo_gv_mapNotifications.lv_mostRecentPingLocation = PingGetPosition(PingLastCreated());
+            libNtve_gf_CreatePingFacingAngle(libGHLo_gv_obs, "PingBonus", lv_position, Color(100.00, 100.00, 0.00), libGHLo_gv_mapNotifications.lv_pingDuration, -90.0);
+            lv_ping = PingLastCreated();
+            PingSetObserver(lv_ping, true);
+            PingSetUnit(lv_ping, lv_unit);
+            libGHLo_gv_mapNotifications.lv_mostRecentPingLocation = lv_position;
             TimerStart(libGHLo_gv_mapNotifications.lv_mostRecentTimer, libGHLo_gv_mapNotifications.lv_pingDuration, false, c_timeGame);
             return true;
         }
