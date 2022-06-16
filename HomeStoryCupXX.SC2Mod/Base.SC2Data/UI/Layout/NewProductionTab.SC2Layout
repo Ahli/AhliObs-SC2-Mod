@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
+	
+	<!-- Use this code to use the new production panel in an observer interface:
+	
+	<Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame2" file="GameUI">
+		<Visible val="{$parent/ProductionFrame/@Visible}"/>
+		<StateGroup name="HideOriginalProductionFrame">
+			<State name="Init">
+				<When type="Property" frame="$ancestor[@name=GameUI]" visible="true"/>
+				<Action type="SetProperty" frame="$parent/ProductionFrame" alpha="0"/>
+			</State>
+		</StateGroup>
+	</Frame>
+	-->
+	
+	
 	<Constant name="unitSlotGap" val="6"/>
 	<Constant name="slotHeight" val="88"/>
 	<Constant name="slotHeight2" val="176"/>
@@ -7618,30 +7633,6 @@
 
 		</Frame>
 		
-	</Frame>
-	
-	<!-- This Template allows you to use the new production panel in an observer interface.
-
-	You can apply this like this and you would end up with a leaderpanel that looks
-	and acts exactly like the default one, just with the additional features:
-	
-	<Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
-		<Frame type="Frame" name="LeaderPanel" template="NewProductionTab/LeaderPanelExtendedProductionFrameTemplate"/>
-	</Frame>
-	-->
-	<Frame type="Frame" name="LeaderPanelExtendedProductionFrameTemplate">
-		<!-- Hide the original Leaderpanel -->
-		<Frame type="LeaderPanelProductionFrame" name="ProductionFrame">
-			<Anchor side="Left" relative="$parent" pos="Max" offset="999"/>
-			<Anchor side="Right" relative="$parent" pos="Max" offset="999"/>
-			<RenderType val="Offscreen"/>
-			<Alpha val="0"/>
-		</Frame>
-		
-		<!-- Show the new Leaderpanel when the old Leaderpanel would have been visible -->
-		<Frame type="Frame" name="ProductionFrame2">
-			<Visible val="{$parent/ProductionFrame/@Visible}"/>
-		</Frame>
 	</Frame>
 	
 </Desc>
