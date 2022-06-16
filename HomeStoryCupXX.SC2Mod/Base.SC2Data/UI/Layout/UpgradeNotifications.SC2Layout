@@ -94,7 +94,17 @@
                 <Text val="8"/>
                 <IgnoreParentColor val="true"/>
             </Frame>
+			
+			<Frame type="UnitTargetFrame" name="UnitTargetFrame">
+				<Anchor relative="$parent/TimerIcon"/>
+				<AllowCameraCentering val="True"/>
+				<AllowSelection val="True"/>
+				<AllowTargeting val="False"/>
+				<AllowSmartCommand val="False"/>
+				<AllowCursorChanging val="False"/>
+			</Frame>
         </Frame>
+		
     </Frame>
 
     <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
