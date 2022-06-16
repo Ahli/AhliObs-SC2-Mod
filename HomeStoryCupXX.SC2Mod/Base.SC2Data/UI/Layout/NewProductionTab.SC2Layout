@@ -4403,10 +4403,9 @@
 		</Frame>
 	</Frame>
 	
-	
 	<Frame type="Frame" name="PlayerFrameContainerTemplate">
 		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-		<Anchor side="Left" relative="$parent" pos="Min" offset="300"/>
+		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
 		<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
 		<Height val="#slotHeight"/>
 		<CollapseLayout val="true"/>
@@ -4414,8 +4413,6 @@
 		<Frame type="PlayerProductionFrame" name="ProdFrame" template="NewProductionTab/PlayerProductionFrameTemplate">
 		</Frame>
 	</Frame>
-	
-	
 	
 	<Frame type="PlayerScoreValueFrame" name="UnusedSlotDetectorTemplate">
 		<Anchor relative="$parent"/>
@@ -4468,7 +4465,6 @@
 		</Frame>
 	</Frame>
 	
-	
 	<Frame type="Frame" name="TopOffsetSlot0">
 		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
 	</Frame>
@@ -4495,23 +4491,13 @@
 	</Frame>
 	
 	<Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer/LeaderPanel" file="GameUI">
-	
-		<!-- OBSERVER INTERFACE -->
-<!--		<Frame type="LeaderPanelProductionFrame" name="ProductionFrame">
-			<Anchor side="Left" relative="$parent" pos="Max" offset="999"/>
-			<Anchor side="Right" relative="$parent" pos="Max" offset="999"/>
-			<RenderType val="Offscreen"/>
-			<Alpha val="0"/>
-		</Frame>-->
 		
 		<Frame type="Frame" name="ProductionFrame2">
             <Anchor side="Top" relative="$parent/SelectPulldown" pos="Max" offset="4"/>
-            <Anchor side="Left" relative="$parent/SelectPulldown" pos="Min" offset="300"/>
+            <Anchor side="Left" relative="$parent/SelectPulldown" pos="Min" offset="0"/>
 			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
 			<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-			
-			<!-- OBSERVER INTERFACE -->
-			<Visible val="{$parent/ProductionFrame/@Visible}"/>
+			<Visible val="false"/>
 			
 			<Frame type="Frame" name="Player0" template="NewProductionTab/PlayerFrameContainerTemplate">
 				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
@@ -7631,7 +7617,31 @@
 			</Frame>
 
 		</Frame>
+		
+	</Frame>
+	
+	<!-- This Template allows you to use the new production panel in an observer interface.
 
+	You can apply this like this and you would end up with a leaderpanel that looks
+	and acts exactly like the default one, just with the additional features:
+	
+	<Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
+		<Frame type="Frame" name="LeaderPanel" template="NewProductionTab/LeaderPanelExtendedProductionFrameTemplate"/>
+	</Frame>
+	-->
+	<Frame type="Frame" name="LeaderPanelExtendedProductionFrameTemplate">
+		<!-- Hide the original Leaderpanel -->
+		<Frame type="LeaderPanelProductionFrame" name="ProductionFrame">
+			<Anchor side="Left" relative="$parent" pos="Max" offset="999"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="999"/>
+			<RenderType val="Offscreen"/>
+			<Alpha val="0"/>
+		</Frame>
+		
+		<!-- Show the new Leaderpanel when the old Leaderpanel would have been visible -->
+		<Frame type="Frame" name="ProductionFrame2">
+			<Visible val="{$parent/ProductionFrame/@Visible}"/>
+		</Frame>
 	</Frame>
 	
 </Desc>
