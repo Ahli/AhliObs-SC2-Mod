@@ -1911,7 +1911,7 @@ bool libGHLo_gt_LabelsUnitCreated_Func (bool testConds, bool runActions) {
             libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString), lv_dialogItem);
             DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon1\\Icon", lv_unit);
             lv_dialogItem = DialogControlLastCreated();
-            libNtve_gf_SetDialogItemImage(lv_dialogItem, "Assets\\Textures\\blank.dds", libGHLo_gv_all_Players);
+            libNtve_gf_SetDialogItemImage(lv_dialogItem, "Assets\\Textures\\blank.dds", libGHLo_gv_obs);
             DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
             libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString), lv_dialogItem);
@@ -1923,7 +1923,7 @@ bool libGHLo_gt_LabelsUnitCreated_Func (bool testConds, bool runActions) {
                 libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString), DialogControlLastCreated());
                 DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon2\\Icon", lv_unit);
                 lv_dialogItem = DialogControlLastCreated();
-                libNtve_gf_SetDialogItemImage(lv_dialogItem, "Assets\\Textures\\blank.dds", libGHLo_gv_all_Players);
+                libNtve_gf_SetDialogItemImage(lv_dialogItem, "Assets\\Textures\\blank.dds", libGHLo_gv_obs);
                 DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
                 DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
                 libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsIcon2 + lv_unitTagString), lv_dialogItem);
@@ -1934,7 +1934,7 @@ bool libGHLo_gt_LabelsUnitCreated_Func (bool testConds, bool runActions) {
                 libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString), lv_dialogItem);
                 DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon3\\Icon", lv_unit);
                 lv_dialogItem = DialogControlLastCreated();
-                libNtve_gf_SetDialogItemImage(lv_dialogItem, "Assets\\Textures\\blank.dds", libGHLo_gv_all_Players);
+                libNtve_gf_SetDialogItemImage(lv_dialogItem, "Assets\\Textures\\blank.dds", libGHLo_gv_obs);
                 DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
                 DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
                 libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString), lv_dialogItem);
@@ -2012,17 +2012,17 @@ bool libGHLo_gt_LabelsUnitTrainingStarted_Func (bool testConds, bool runActions)
             DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString)), libGHLo_gv_obs, false);
             DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG2 + lv_unitTagString)), libGHLo_gv_obs, true);
             lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon2 + lv_unitTagString));
-            libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot1), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
+            libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot1), "UnitIcon", c_playerAny)), libGHLo_gv_obs);
             DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
             DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG3 + lv_unitTagString)), libGHLo_gv_obs, true);
             lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString));
-            libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot2), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
+            libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot2), "UnitIcon", c_playerAny)), libGHLo_gv_obs);
             DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
         }
         else {
             DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, true);
             lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString));
-            libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot1), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
+            libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot1), "UnitIcon", c_playerAny)), libGHLo_gv_obs);
             DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
         }
     }
@@ -2059,7 +2059,7 @@ bool libGHLo_gt_LabelsResearchStarted_Func (bool testConds, bool runActions) {
 
     DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, true);
     lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString));
-    libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_research, "Icon", c_playerAny)), libGHLo_gv_all_Players);
+    libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_research, "Icon", c_playerAny)), libGHLo_gv_obs);
     DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
     return true;
 }
@@ -2119,7 +2119,7 @@ bool libGHLo_gt_LabelsUnitTrainingStopped_Func (bool testConds, bool runActions)
             DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString)), libGHLo_gv_obs, false);
             DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, true);
             lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString));
-            libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot2), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
+            libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot2), "UnitIcon", c_playerAny)), libGHLo_gv_obs);
             DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
             DataTableSetString(true, lv_unitTagStringSlot1, lv_savedTypeSlot2);
             DataTableSetString(true, lv_unitTagStringSlot2, "");
@@ -2131,7 +2131,7 @@ bool libGHLo_gt_LabelsUnitTrainingStopped_Func (bool testConds, bool runActions)
             DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString)), libGHLo_gv_obs, false);
             DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, true);
             lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString));
-            libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot1), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
+            libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_savedTypeSlot1), "UnitIcon", c_playerAny)), libGHLo_gv_obs);
             DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
             DataTableSetString(true, lv_unitTagStringSlot2, "");
         }
@@ -2215,7 +2215,7 @@ bool libGHLo_gt_LabelsReactorDestroyed_Func (bool testConds, bool runActions) {
                     DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon3 + lv_unitTagString)), libGHLo_gv_obs, false);
                     DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIconBG1 + lv_unitTagString)), libGHLo_gv_obs, true);
                     lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString));
-                    libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_slot1unitType), "UnitIcon", c_playerAny)), libGHLo_gv_all_Players);
+                    libNtve_gf_SetDialogItemImage(lv_dialogItem, (CatalogFieldValueGet(c_gameCatalogActor, (lv_slot1unitType), "UnitIcon", c_playerAny)), libGHLo_gv_obs);
                     DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
                 }
 
