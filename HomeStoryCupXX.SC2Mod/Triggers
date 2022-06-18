@@ -3983,6 +3983,7 @@
     </Library>
     <Library Id="GHLo">
         <Root>
+            <Item Type="Comment" Library="GHLo" Id="2F8D1027"/>
             <Item Type="Variable" Library="GHLo" Id="35514AC2"/>
             <Item Type="Variable" Library="GHLo" Id="760B3FCA"/>
             <Item Type="Variable" Library="GHLo" Id="4BCA2C4E"/>
@@ -4000,6 +4001,20 @@
             <Item Type="Category" Library="GHLo" Id="3BEE1E05"/>
             <Item Type="Category" Library="GHLo" Id="15831B74"/>
         </Root>
+        <Element Type="Comment" Id="2F8D1027">
+            <Comment>
+                Credits:
+                Author: Christoph &quot;Ahli&quot; Ahlers (@AhliSC2)
+                
+                You can find this mod&apos;s source code here: https://github.com/Ahli/HomeStoryCup-mod
+                
+                This mod is based on the work from:
+                - WCS GameHeart (official extension Mod published by Blizzard):
+                - - Ryan Schutter, Christoph Ahlers, Philip Tan, Nick Mohr, The MIT Game Lab, Milov Vasya and Pedro Zea for their amazing work on the original GameHeart Mod. Portions contributed by the MIT Game Lab
+                - HomeStoryCup Logo and Name:
+                - - TakeTV ( https://taketv.net )
+            </Comment>
+        </Element>
         <Element Type="Variable" Id="35514AC2">
             <VariableType>
                 <Type Value="playergroup"/>
