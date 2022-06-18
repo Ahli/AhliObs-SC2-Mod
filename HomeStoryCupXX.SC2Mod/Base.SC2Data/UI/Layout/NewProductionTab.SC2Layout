@@ -5941,7 +5941,6 @@
 			<Frame type="PlayerScoreValueFrame" name="DetectPlayerFrameRight0" template="NewProductionTab/VersusPlayerFrameTemplate">
 				<VersusModePlayerSide val="Right"/>
 				<VersusModePlayerIndex val="0"/>
-				<!-- TODO 2v2/3v3/4v4 && L -->
 				<StateGroup name="Position">
 					<State name="0g">
 						<When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
