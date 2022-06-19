@@ -100,7 +100,6 @@
             <ColorStep val="##StandardProgressFill"/>
         </Frame>
 
-		<!-- OBSERVER INTERFACE -->
 		<Frame type="Image" name="ChronoBoosted">
             <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
