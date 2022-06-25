@@ -16,6 +16,9 @@ Available on Americas, Europe and Korean servers.
   - Workers Killed Notifications are now enabled when there are 2-4 players
   - Upgrade Notifications are enabled in games with 1-4 players
   - labels in Upgrade Notifications will resize to make their text fit
+  - added production tab to leaderpanel that can be used to display chrono boost near the unit icon
+  - moved default observed player from 14 to 15 (Hostile). This allows 14 player FFAs
+  - Upgrade Notifications' icon can now be clicked to select the facility researching it
   - added technical assistance for Observer Interfaces
     - saves the player slot number of each player to the PlayerId score
       - this assists observer interfaces in figuring out which Player Id is the left/right player in 1vs1 matches
@@ -23,6 +26,7 @@ Available on Americas, Europe and Korean servers.
       - this assists observer interfaces in figuring out if a player is still playing, left in victory/defeat/tie
     - animation event "TextUpdated" is fired when worker killed counter's text is updated => Observer UIs can animate
     - production tags and notifications now dynamically change to reflect alliance colors
+    - added player score that provides a player's starting position belonging to the initial 1=left or 2=right team for observer interfaces
 - **Bug Fixes**
   - fixed Dark Shrine not showing upgrades in research on a tag
   - fixed potential bug when worker is killed at the same time as that player's notification timer expires resulting in a hidden notification and subsequently resulting in a wrong displayed count when the next one is killed
@@ -33,11 +37,15 @@ Available on Americas, Europe and Korean servers.
   - Worker Killed Notification counts larger than 99 will now shrink to fit instead of showing an ellipsis
   - fixed the last upgrade notification slot never being used
   - fixed having more than 50 upgrades causing further upgrades to not be displayed. Now the limit is 100 as previously intended
+  - graph shortcuts are now disabled when not playing a 1vs1 instead of showing an empty graph dialog
 - **SC2 Bug Fixes**
   - Units Lost Resources:
     - Overlords with Ventral Sacs and Overseers made from them will report its actual resource worth on death
       - this was 25/25 too low
     - Archons will report their actual resource worth on death instead of assuming the Archon was created by one HT and one DT
+  - corrected score amount of Upgrades to match resource costs:
+    - Cloaking Field, Hyperflight Rotors, Infernal Pre-Igniter, Drilling Claws, Smart Servos,
+    - Tunneling Claws, Charge, Extended Thermal Lance, Flux Vanes
   - Observer Leaderpanel:
     - removed Reaper's KD8 Charges from the structures tab
     - fixed Reactors and Tech Labs creating multiple buttons
@@ -62,7 +70,4 @@ Available on Americas, Europe and Korean servers.
   - re-ordered unit type checks based on likelihood
   - more general trigger optimizations based on the trigger debugger's execution duration
     - all failed conditions will now appear in failed executions instead of only the initial checks (triggers return 0)
-
-### Known "Problems"
-- Notifications appear visually bugged when the Rewind feature is used by the players after playing the match. The rewind feature converts the match into a replay
-- On the minimap, attacked units are flashing red instead of white. This issue is present in all versions of GameHeart
+  - removed superfluous upgrade name overrides
