@@ -5,6 +5,13 @@ Available on Americas, Europe and Korean servers.
 
 ![Find HomeStoryCup XX extension mod](https://pbs.twimg.com/media/FUlMat4WQAItXQm?format=jpg&name=medium)
 
+### Observer UIs supporting this mod's features:
+
+- [GameHeart 3.5](https://www.dropbox.com/s/egixonbgilk3no8/GameHeart_3.5.SC2Interface?dl=1)
+- [Pro2020 AhliMod 1.1](https://www.dropbox.com/s/g47yvccechvmiqn/Pro2020ahliMod_1.1.SC2Interface?dl=1)
+
+Editor to edit settings/hotkeys:
+- [Settings Editor (Windows only)](https://www.dropbox.com/s/3f2a9ta6sbjzmrs/Observer%20UI%20Settings%20Editor%20Setup.exe?dl=1)
 
 ### All Changes compared to WCS GameHeart 1.25/Americas
 - **Changes**
