@@ -15,19 +15,29 @@ Editor to edit settings/hotkeys:
 
 ### All Changes compared to WCS GameHeart 1.25/Americas
 - **Changes**
-  - new feature: added new graphs:
-    - Resources Lost differential graph on Hotkey Numpad3
-    - Resources Gathered comparative graph on Hotkey Numpad4
-  - new feature: player camera positions are now shown on minimap in 1vs1
-  - new feature: neutral units are selectable through the fog
-  - Workers Killed Notifications are now enabled when there are 2-4 players
-  - Upgrade Notifications are enabled in games with 1-4 players
-  - labels in Upgrade Notifications will resize to make their text fit
-  - added production tab to leaderpanel that can be used to display chrono boost near the unit icon
-  - moved default observed player from 14 to 15 (Hostile). This allows 14 player FFAs
-  - Upgrade Notifications' icon can now be clicked to select the facility researching it
-  - production tags and notifications now dynamically change to reflect alliance colors
-  - added technical assistance for Observer Interfaces
+  - Upgrade Notifications:
+    - icon can now be clicked to select the facility researching it
+    - now dynamically change to reflect alliance colors
+    - are now enabled in games with 1-4 players
+    - labels will resize to make their text fit
+  - Workers killed Notifications:
+    - are now enabled when there are 2-4 players
+    - now dynamically change to reflect alliance colors
+  - Graphs:
+    - added Resources Lost differential graph on Hotkey Numpad3
+    - added Resources Gathered comparative graph on Hotkey Numpad4
+  - Minimap:
+    - player camera positions are now shown on minimap in 1vs1
+  - World:
+    - neutral units are selectable through the fog
+  - Leaderpanel:
+    - added production tab that allows observer interfaces to display information near unit icons. Supported are:
+      - Chrono Boost
+    - removed Reaper's KD8 Charges from the structures tab
+    - fixed Reactors, Tech Labs and rich Refineries/Assimilators/Extractors creating multiple buttons
+  - General:
+    - moved default observed player from 14 to 15 (Hostile). This allows 14 player FFAs
+  - Features for Observer Interfaces:
     - saves the player slot number of each player to the PlayerId score
       - this assists observer interfaces in figuring out which Player Id is the left/right player in 1vs1 matches
     - saves the player status in the PlayerStatus score
@@ -35,27 +45,25 @@ Editor to edit settings/hotkeys:
     - animation event "TextUpdated" is fired when worker killed counter's text is updated => Observer UIs can animate
     - added player score that provides a player's starting position belonging to the initial 1=left or 2=right team for observer interfaces
 - **Bug Fixes**
-  - fixed Dark Shrine not showing upgrades in research on a tag
-  - fixed potential bug when worker is killed at the same time as that player's notification timer expires resulting in a hidden notification and subsequently resulting in a wrong displayed count when the next one is killed
-  - fixed not respecting facility slot limit which breaks the entire upgrade notification system, if upgrades in research exceed 100
-  - fixed a bug when UI upgrade notification slots are exceeded (> 50) and the upgrade is cancelled/finished in that slot
-  - fixed a Reactor being destroyed causing a blue unit icon when the player is supply blocked
-  - fixed white production labels being able to appear briefly on screen at the map start
-  - Worker Killed Notification counts larger than 99 will now shrink to fit instead of showing an ellipsis
-  - fixed the last upgrade notification slot never being used
-  - fixed having more than 50 upgrades causing further upgrades to not be displayed. Now the limit is 100 as previously intended
-  - graph shortcuts are now disabled when not playing a 1vs1 instead of showing an empty graph dialog
-- **SC2 Bug Fixes**
-  - Units Lost Resources:
-    - Overlords with Ventral Sacs and Overseers made from them will report its actual resource worth on death
-      - this was 25/25 too low
-    - Archons will report their actual resource worth on death instead of assuming the Archon was created by one HT and one DT
-  - corrected score amount of Upgrades to match resource costs:
-    - Cloaking Field, Hyperflight Rotors, Infernal Pre-Igniter, Drilling Claws, Smart Servos,
-    - Tunneling Claws, Charge, Extended Thermal Lance, Flux Vanes
-  - Observer Leaderpanel:
-    - removed Reaper's KD8 Charges from the structures tab
-    - fixed Reactors and Tech Labs creating multiple buttons
+  - SC2:
+    - Units Lost Resources:
+      - Overlords with Ventral Sacs and Overseers made from them will report its actual resource worth on death
+        - this was 25/25 too low
+      - Archons will report their actual resource worth on death instead of assuming the Archon was created by one HT and one DT
+    - corrected score amount of Upgrades to match resource costs:
+      - Cloaking Field, Hyperflight Rotors, Infernal Pre-Igniter, Drilling Claws, Smart Servos,
+      - Tunneling Claws, Charge, Extended Thermal Lance, Flux Vanes
+  - WCS GameHeart:
+    - fixed Dark Shrine not showing upgrades in research on a tag
+    - fixed potential bug when worker is killed at the same time as that player's notification timer expires resulting in a hidden notification and subsequently resulting in a wrong displayed count when the next one is killed
+    - fixed not respecting facility slot limit which breaks the entire upgrade notification system, if upgrades in research exceed 100
+    - fixed a bug when UI upgrade notification slots are exceeded (> 50) and the upgrade is cancelled/finished in that slot
+    - fixed a Reactor being destroyed causing a blue unit icon when the player is supply blocked
+    - fixed white production labels being able to appear briefly on screen at the map start
+    - Worker Killed Notification counts larger than 99 will now shrink to fit instead of showing an ellipsis
+    - fixed the last upgrade notification slot never being used
+    - fixed having more than 50 upgrades causing further upgrades to not be displayed. Now the limit is 100 as previously intended
+    - graph shortcuts are now disabled when not playing a 1vs1 instead of showing an empty graph dialog
 - **Optimizations**
   - fixed performance issues of Battlecruiser script triggers created by Blizzard
     - the game will now use less CPU when issuing commands and when units execute abilities (global improvement for all units)
