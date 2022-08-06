@@ -26,13 +26,13 @@ Editor to edit settings/hotkeys:
   - added production tab to leaderpanel that can be used to display chrono boost near the unit icon
   - moved default observed player from 14 to 15 (Hostile). This allows 14 player FFAs
   - Upgrade Notifications' icon can now be clicked to select the facility researching it
+  - production tags and notifications now dynamically change to reflect alliance colors
   - added technical assistance for Observer Interfaces
     - saves the player slot number of each player to the PlayerId score
       - this assists observer interfaces in figuring out which Player Id is the left/right player in 1vs1 matches
     - saves the player status in the PlayerStatus score
       - this assists observer interfaces in figuring out if a player is still playing, left in victory/defeat/tie
     - animation event "TextUpdated" is fired when worker killed counter's text is updated => Observer UIs can animate
-    - production tags and notifications now dynamically change to reflect alliance colors
     - added player score that provides a player's starting position belonging to the initial 1=left or 2=right team for observer interfaces
 - **Bug Fixes**
   - fixed Dark Shrine not showing upgrades in research on a tag
@@ -57,24 +57,23 @@ Editor to edit settings/hotkeys:
     - removed Reaper's KD8 Charges from the structures tab
     - fixed Reactors and Tech Labs creating multiple buttons
 - **Optimizations**
-  - remove some upgrade notification text styles from trigger script as it was set in UI already
-  - reduced minimum loop iterations when updating upgrade notifications
-  - minor trigger action de-duplication
   - fixed performance issues of Battlecruiser script triggers created by Blizzard
     - the game will now use less CPU when issuing commands and when units execute abilities (global improvement for all units)
     - the BC's behavior did not change
-  - eliminated duplicated calculations
-  - eliminated unnecessary variable allocations
-  - eliminated duplicated function calls with additional variables
   - production label check filters missiles faster (trigger runs 30% faster on average)
-  - all players and active players function calls were replaced by a variable
-  - trigger events are now only registered, if the feature is enabled and can function
-  - less code is executed for disabled features
   - optimized production label's UI code to use less resources and not save unused entries into the data table
     - this will make the script slow down less over time
   - improved upgrade notification update thread to not scan used slots multiple times
-  - production tags do not contain more slots than the unit require (e.g. Nexus has at most 1 production slot)
   - re-ordered unit type checks based on likelihood
+  - reduced minimum loop iterations when updating upgrade notifications
+  - trigger events are now only registered, if the feature is enabled and can function
+  - remove some upgrade notification text styles from trigger script as it was set in UI already
+  - production tags do not contain more slots than the unit require (e.g. Nexus has at most 1 production slot)
+  - minor trigger action de-duplication
+  - eliminated duplicated calculations
+  - eliminated unnecessary variable allocations
+  - eliminated duplicated function calls with additional variables
+  - less code is executed for disabled features
+  - removed superfluous upgrade name overrides
   - more general trigger optimizations based on the trigger debugger's execution duration
     - all failed conditions will now appear in failed executions instead of only the initial checks (triggers return 0)
-  - removed superfluous upgrade name overrides
