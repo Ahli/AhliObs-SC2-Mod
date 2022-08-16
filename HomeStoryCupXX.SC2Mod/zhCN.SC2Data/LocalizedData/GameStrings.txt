@@ -131,8 +131,9 @@ Param/Value/lib_GHLo_FF134713=闪现
 Param/Value/lib_GHLo_28BC4DAB=.
 Param/Value/lib_GHLo_97202C9A=<s val="TimerDecimals">
 Param/Value/lib_GHLo_25E0C402=</s>
-Param/Value/lib_GHLo_0DD54D0A=RESOURCES LOST
-Param/Value/lib_GHLo_572C86BD=RESOURCES GATHERED
+Param/Value/lib_GHLo_0DD54D0A=损失的资源
+Param/Value/lib_GHLo_572C86BD=收集的资源
 UI/Graphs/CurrentTime=当前
 UI/Graphs/Minus10Minutes=-10 分钟
 UI/Graphs/Minus5Minutes=-5 分钟
+UI/BattleReport/Title=战斗报告

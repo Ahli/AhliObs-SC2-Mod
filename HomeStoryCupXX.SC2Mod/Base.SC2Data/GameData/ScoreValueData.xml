@@ -3,6 +3,12 @@
     <CScoreValueCustom id="PlayerId"/>
     <CScoreValueCustom id="PlayerStatus"/>
     <CScoreValueCustom id="VersusModePlayerSide"/>
+    <CScoreValueCustom id="BattleReportMineralsDestroyed"/>
+    <CScoreValueCustom id="BattleReportVespeneDestroyed"/>
+    <CScoreValueCustom id="BattleReportDamageDealt"/>
+    <CScoreValueCustom id="BattleReportDamageDealtPercent">
+        <Type value="Fixed"/>
+    </CScoreValueCustom>
     <CScoreValueCombine id="ResourcesLostUnits">
         <ValueTable value="MineralsLostArmy"/>
         <ValueTable value="MineralsLostEconomy"/>

@@ -44,6 +44,7 @@
                 <Field Id="Description"/>
             </Text>
         </Instances>
+        <Instances Id="Battle Report"/>
     </CUser>
     <CUser id="SC2SkinSets">
         <Fields Id="SkinSet" Type="String" EditorColumn="1"/>

@@ -21,7 +21,9 @@ const int libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible = 1;
 
 // Constants
 const int libGHLo_gv_chronoBoostMAX_SLOTS = 17;
-const int libGHLo_gv_graphsTotalNodes = 100;
+const int libGHLo_gv_graphsMaxNode = 100;
+const int libGHLo_gv_graphsMaxGraphId = 3;
+const int libGHLo_gv_graphsIntervalLength = 6;
 const string libGHLo_gv_labelsSlot1 = "-slot1";
 const string libGHLo_gv_labelsSlot2 = "-slot2";
 const string libGHLo_gv_labelsIconBG1 = "IconBG1-";
@@ -34,7 +36,9 @@ const int libGHLo_gv_upgradeNotificationsMaxUISlots = 50;
 const int libGHLo_gv_upgradeNotificationsMaxFacilitySlots = 100;
 const fixed libGHLo_gv_upgradeNotificationsVisibleTime = 15.0;
 const int libGHLo_gv_workersKilledNotificationsMaxUISlots = 15;
-const fixed libGHLo_gv_workersKilledNotificationsVisibleTime = 20.0;
+const fixed libGHLo_gv_battleReportBattleEndingTimerGameTimeDuration = 9.0;
+const int libGHLo_gv_battleReportMaxAbilitySlot = 11;
+const int libGHLo_gv_battleReportMaxKilledUnitTypeSlot = 17;
 
 // Structures
 struct libGHLo_gs_ChronoBoost {
@@ -51,8 +55,6 @@ struct libGHLo_gs_GraphsGeneral {
     int lv_teamLeft;
     int lv_teamRight;
     int lv_currentInterval;
-    int lv_totalGraphs;
-    int lv_intervals;
     int lv_container;
     int lv_currentNode;
 };
@@ -66,9 +68,10 @@ struct libGHLo_gs_GraphsData {
     fixed lv_rangeBase;
     fixed lv_rangeIncrement;
     int lv_maxValue;
-    int[3][7] lv_tempValues;
+    int[3][libGHLo_gv_graphsIntervalLength + 1] lv_tempValues;
     int[3] lv_value;
     int lv_team;
+    bool lv_averageValues;
 };
 
 struct libGHLo_gs_Labels {
@@ -121,19 +124,60 @@ struct libGHLo_gs_MinimapFrustum {
     int lv_playerTwo;
 };
 
+struct libGHLo_gs_BattleReport {
+    bool lv_active;
+    bool lv_battleActive;
+    int lv_battleNr;
+    int lv_battleGameTimeDuration;
+    timer lv_battleEndingTimer;
+    int[2] lv_playerIdSide;
+    bool lv_updateDueToDamage;
+    bool lv_updateDueToDeathAll;
+    bool lv_updateDueToDeathOnlyLabels;
+    bool lv_updateDueToAbilityAll;
+    bool lv_updateDueToAbilityOnlyLabels;
+    bool lv_resetBattleEndingTimer;
+    bool lv_resetUnusedSlots;
+    int lv_uiBattleDurationLabel;
+};
+
+struct libGHLo_gs_BattleReportSide {
+    int lv_killedUnitTypeLastUsedSlot;
+    string[libGHLo_gv_battleReportMaxKilledUnitTypeSlot + 1] lv_killedUnitType;
+    int[libGHLo_gv_battleReportMaxKilledUnitTypeSlot + 1] lv_killedUnitTypeCount;
+    string[libGHLo_gv_battleReportMaxKilledUnitTypeSlot + 1] lv_killedUnitTypeIcon;
+    text[libGHLo_gv_battleReportMaxKilledUnitTypeSlot + 1] lv_killedUnitTypeName;
+    int lv_abilitiesCastedLastUsedSlot;
+    abilcmd[libGHLo_gv_battleReportMaxAbilitySlot + 1] lv_abilitiesCasted;
+    int[libGHLo_gv_battleReportMaxAbilitySlot + 1] lv_abilitiesCastedCount;
+    string[libGHLo_gv_battleReportMaxAbilitySlot + 1] lv_abilitiesCastedIcon;
+    text[libGHLo_gv_battleReportMaxAbilitySlot + 1] lv_abilitiesCastedName;
+    fixed lv_damageDealt;
+    int[2] lv_resourcesDestroyed;
+    int[libGHLo_gv_battleReportMaxKilledUnitTypeSlot + 1] lv_uiUnitTypeButton;
+    int[libGHLo_gv_battleReportMaxAbilitySlot + 1] lv_uiAbilityButton;
+    int lv_uiDamageLabel;
+    int lv_uiMineralsLabel;
+    int lv_uiVespeneLabel;
+};
+
 // Variable Declarations
 playergroup libGHLo_gv_all_Players;
 playergroup libGHLo_gv_initial_Active_Players;
 int libGHLo_gv_obsID;
 playergroup libGHLo_gv_obs;
+fixed libGHLo_gv_gameSpeedFactor;
 libGHLo_gs_ChronoBoost[16] libGHLo_gv_chronoBoost;
 libGHLo_gs_GraphsGeneral libGHLo_gv_graphsGeneral;
-libGHLo_gs_GraphsData[5] libGHLo_gv_graphsData;
+libGHLo_gs_GraphsData[libGHLo_gv_graphsMaxGraphId + 1] libGHLo_gv_graphsData;
 libGHLo_gs_Labels libGHLo_gv_labels;
 libGHLo_gs_UpgradeNotifications libGHLo_gv_upgradeNotifications;
 libGHLo_gs_WorkersKilledNotifications libGHLo_gv_workersKilledNotifications;
+fixed libGHLo_gv_workersKilledNotificationsVisibleGameTime;
 libGHLo_gs_MapNotifications libGHLo_gv_mapNotifications;
 libGHLo_gs_MinimapFrustum libGHLo_gv_minimapFrustum;
+libGHLo_gs_BattleReport libGHLo_gv_battleReport;
+libGHLo_gs_BattleReportSide[2] libGHLo_gv_battleReportSideData;
 
 // Function Declarations
 void libGHLo_gf_ApplySkinSet (string lp_skinSet, int lp_player);
@@ -147,26 +191,45 @@ void libGHLo_gf_RegisterUnitArmingProgressEvent (trigger lp_trigger, unit lp_uni
 void libGHLo_gf_RegisterUnitResearchProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage);
 void libGHLo_gf_RegisterUnitDiesEvent (trigger lp_trigger, unit lp_unit);
 void libGHLo_gf_RegisterPlayerLeavesEvent (trigger lp_trigger, int lp_player, int lp_gameResult);
+void libGHLo_gf_RegisterAbilityUsedEvent (trigger lp_trigger, unit lp_unit, abilcmd lp_abilityCommand, int lp_stage, bool lp_includeSharedAbilities);
+void libGHLo_gf_RegisterUnitTakesDamageEvent (trigger lp_trigger, unit lp_unit, int lp_damageType, int lp_fatal, string lp_effect);
+void libGHLo_gf_RegisterTimerExpiresEvent (trigger lp_trigger, timer lp_timer);
 void libGHLo_gf_ChronoBoostregisterboosteditem (int lp_player, string lp_item);
 void libGHLo_gf_ChronoBoostremoveboosteditem (int lp_player, string lp_item);
 void libGHLo_gf_ObserverUiAssistSetPlayerIdScore (int lp_player);
 void libGHLo_gf_ObserverUiAssistSetPlayerStatusScore (int lp_player, int lp_status);
-void libGHLo_gf_GraphsDefineGraph (int lp_iD, text lp_title, string lp_string, string lp_scoreType, int lp_style, fixed lp_minimumValue, fixed lp_rangeBase, fixed lp_rangeIncrement);
-void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graph);
-void libGHLo_gf_GraphsUpdateDataComparative (int lp_graph);
+int libGHLo_gf_GetFixedUnitResourceCost (unit lp_unit, int lp_resource, int lp_player);
+void libGHLo_gf_GraphsDefineGraph (int lp_id, text lp_title, string lp_frameName, string lp_scoreType, int lp_style, fixed lp_minimumValue, fixed lp_rangeBase, fixed lp_rangeIncrement, bool lp_averageValues);
+void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graphIndex);
+void libGHLo_gf_GraphsUpdateDataComparative (int lp_graphIndex);
 bool libGHLo_gf_LabelsUnitUsesCustomStatusBar (string lp_unitType);
 void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot);
 int libGHLo_gf_UpgradeNotificationsSearchFacilitySlot (unit lp_facility);
 string libGHLo_gf_UpgradeNotificationsUpgradeImage (string lp_upgrade);
 text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade);
 bool libGHLo_gf_UpgradeNotificationsUpgradeNeedsToBeVisible (fixed lp_remainingTime);
-void libGHLo_gf_UpgradeNotificationsUpdateThread ();
+void libGHLo_gf_UpgradeNotificationsUpdateUIthreaded ();
 void libGHLo_gf_UpgradeNotificationsSetStatusLabel (int lp_slot, text lp_status);
 void libGHLo_gf_UpgradeNotificationsSetSlotData (int lp_slot, text lp_name, string lp_icon, int lp_player, bool lp_visible, unit lp_facility);
 int libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne (int lp_minUncheckedSlot, int lp_slot);
 void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_slotB);
 void libGHLo_gf_UpgradeNotificationsUpdateProgressData (int lp_slot);
 bool libGHLo_gf_MapNotificationsCargoUnitshaveFullHealth (unit lp_transportunit);
+int libGHLo_gf_BattleReportGetPlayerSideIndex (int lp_player);
+int libGHLo_gf_BattleReportGetOpposingPlayerSideIndex (int lp_player);
+bool libGHLo_gf_BattleReportHasBattleStarted ();
+bool libGHLo_gf_BattleReportIsTrackedUnitType (unit lp_unit, string lp_unitType);
+void libGHLo_gf_BattleReportStartBattle ();
+void libGHLo_gf_BattleReportStartBattleActiveDurationCounterthreaded (int lp_battleNr);
+void libGHLo_gf_BattleReportUpdateUIthreaded (int lp_battleNr);
+void libGHLo_gf_BattleReportUpdateUI ();
+void libGHLo_gf_BattleReportResetBattleEndingTimer ();
+void libGHLo_gf_BattleReportIncrementDamage (int lp_sideIndex, fixed lp_damage);
+void libGHLo_gf_BattleReportIncrementAbilityUsage (int lp_sideIndex, abilcmd lp_abilityCommand);
+void libGHLo_gf_BattleReportIncrementUnitTypeKill (int lp_sideIndex, string lp_unitType);
+void libGHLo_gf_BattleReportIncrementResourceDamage (int lp_sideIndex, int lp_minerals, int lp_vespene);
+void libGHLo_gf_BattleReportEndBattle ();
+void libGHLo_gf_BattleReportClearBattleData ();
 
 // Trigger Declarations
 trigger libGHLo_gt_GameHeartInitialization;
@@ -208,6 +271,12 @@ trigger libGHLo_gt_MapNotificationsScannerSweep;
 trigger libGHLo_gt_MinimapFrustumInitialization;
 trigger libGHLo_gt_MinimapFrustumPlayerCameraMoved;
 trigger libGHLo_gt_MinimapFrustumPlayerLeaves;
+trigger libGHLo_gt_BattleReportInitialization;
+trigger libGHLo_gt_BattleReportUnitIsDamaged;
+trigger libGHLo_gt_BattleReportUnitDies;
+trigger libGHLo_gt_BattleReportTrackedAbilityUsedAbattlestarting;
+trigger libGHLo_gt_BattleReportTrackedAbilityUsedBnobattlestart;
+trigger libGHLo_gt_BattleReportBattleEndingTimerExpires;
 
 // Library Initialization
 void libGHLo_InitVariables ();

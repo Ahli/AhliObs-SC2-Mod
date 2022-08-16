@@ -136,3 +136,4 @@ Param/Value/lib_GHLo_572C86BD=RESOURCES GATHERED
 UI/Graphs/CurrentTime=ACTUAL
 UI/Graphs/Minus10Minutes=-10 MIN
 UI/Graphs/Minus5Minutes=-5 MIN
+UI/BattleReport/Title=Battle Report

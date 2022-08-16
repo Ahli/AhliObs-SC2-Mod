@@ -132,7 +132,8 @@ Param/Value/lib_GHLo_28BC4DAB=.
 Param/Value/lib_GHLo_97202C9A=<s val="TimerDecimals">
 Param/Value/lib_GHLo_25E0C402=</s>
 Param/Value/lib_GHLo_0DD54D0A=RESOURCES LOST
-Param/Value/lib_GHLo_572C86BD=RESOURCES GATHERED
+Param/Value/lib_GHLo_572C86BD=СОБРАННЫЕ РЕСУРСЫ
 UI/Graphs/CurrentTime=ТЕКУЩИЙ
 UI/Graphs/Minus10Minutes=-10 мин.
 UI/Graphs/Minus5Minutes=-5 мин.
+UI/BattleReport/Title=Боевой отчет

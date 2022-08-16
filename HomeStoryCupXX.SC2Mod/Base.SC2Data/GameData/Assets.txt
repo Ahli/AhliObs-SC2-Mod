@@ -1,3 +1,7 @@
-UI/RaceIcon_Zerg=Assets\Textures\icon-1v1-zerg.dds
-UI/RaceIcon_Prot=Assets\Textures\icon-1v1-protoss.dds
-UI/RaceIcon_Terr=Assets\Textures\icon-1v1-terran.dds
+UI/BattleReportRaceIcon_Zerg=assets\textures\sc2_ui_loadingscreen_playercard_raceindicator_zerg.dds
+UI/BattleReportRaceIcon_Prot=assets\textures\sc2_ui_loadingscreen_playercard_raceindicator_protoss.dds
+UI/BattleReportRaceIcon_Terr=assets\textures\sc2_ui_loadingscreen_playercard_raceindicator_terran.dds
+
+UI/BattleReportVespeneIcon_Zerg=Assets\Textures\icon-gas-zerg-nobg.dds
+UI/BattleReportVespeneIcon_Prot=Assets\Textures\icon-gas-protoss-nobg.dds
+UI/BattleReportVespeneIcon_Terr=Assets\Textures\icon-gas-terran-nobg.dds
