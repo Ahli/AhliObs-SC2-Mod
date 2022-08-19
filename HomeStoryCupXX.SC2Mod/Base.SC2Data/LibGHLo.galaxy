@@ -178,7 +178,6 @@ string libGHLo_gf_PlayerSkinSet (int lp_player) {
     lv_attribute = (GameAttributePlayerValue("1", lp_player));
 
     // Implementation
-    TriggerDebugOutput(1, StringToText(lv_attribute), false);
     return UserDataGetString("SC2SkinSets", (lv_attribute), "SkinSet", 1);
 }
 
@@ -1353,10 +1352,15 @@ void libGHLo_gf_BattleReportIncrementAbilityUsage (int lp_sideIndex, abilcmd lp_
     lv_abilityCmd = lp_abilityCommand;
 
     // Implementation
-    if (((lp_abilityCommand == AbilityCommand("Stimpack", 0)) || (lp_abilityCommand == AbilityCommand("StimpackMarauder", 0)))) {
+    if ((lp_abilityCommand == AbilityCommand("StimpackMarauder", 0))) {
         lv_abilityCmd = AbilityCommand("Stimpack", 0);
     }
+    else {
+        if (((lp_abilityCommand == AbilityCommand("HallucinationOracle", 0)) || (lp_abilityCommand == AbilityCommand("HallucinationAdept", 0)) || (lp_abilityCommand == AbilityCommand("HallucinationColossus", 0)) || (lp_abilityCommand == AbilityCommand("HallucinationDisruptor", 0)) || (lp_abilityCommand == AbilityCommand("HallucinationHighTemplar", 0)) || (lp_abilityCommand == AbilityCommand("HallucinationImmortal", 0)) || (lp_abilityCommand == AbilityCommand("HallucinationPhoenix", 0)) || (lp_abilityCommand == AbilityCommand("HallucinationProbe", 0)) || (lp_abilityCommand == AbilityCommand("HallucinationStalker", 0)) || (lp_abilityCommand == AbilityCommand("HallucinationVoidRay", 0)) || (lp_abilityCommand == AbilityCommand("HallucinationWarpPrism", 0)) || (lp_abilityCommand == AbilityCommand("HallucinationZealot", 0)))) {
+            lv_abilityCmd = AbilityCommand("HallucinationArchon", 0);
+        }
 
+    }
     autoC63ED29B_ae = lv_lastUsedSlot;
     lv_slot = 0;
     for ( ; ( (autoC63ED29B_ai >= 0 && lv_slot <= autoC63ED29B_ae) || (autoC63ED29B_ai < 0 && lv_slot >= autoC63ED29B_ae) ) ; lv_slot += autoC63ED29B_ai ) {
@@ -1384,15 +1388,21 @@ void libGHLo_gf_BattleReportIncrementAbilityUsage (int lp_sideIndex, abilcmd lp_
                 libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Unit/Name/AutoTurret");
             }
             else {
-                if ((CatalogEntryIsValid(c_gameCatalogButton, lv_ability) == true)) {
-                    libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = (CatalogFieldValueGet(c_gameCatalogButton, lv_ability, "Icon", c_playerAny));
-                    libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal(CatalogFieldValueGet(c_gameCatalogButton, lv_ability, "Name", c_playerAny));
+                if ((lv_abilityCmd == AbilityCommand("HallucinationArchon", 0))) {
+                    libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-protoss-hallucination-color.dds";
+                    libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/Hallucination");
                 }
                 else {
-                    libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\ui_ingame_help_techtree_questionmark.dds";
-                    libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringToText(lv_ability);
-                    TextExpressionSetToken("Param/Expression/lib_GHLo_A9C854E2", "A", StringToText(lv_ability));
-                    TriggerDebugOutput(2, TextExpressionAssemble("Param/Expression/lib_GHLo_A9C854E2"), true);
+                    if ((CatalogEntryIsValid(c_gameCatalogButton, lv_ability) == true)) {
+                        libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = (CatalogFieldValueGet(c_gameCatalogButton, lv_ability, "Icon", c_playerAny));
+                        libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal(CatalogFieldValueGet(c_gameCatalogButton, lv_ability, "Name", c_playerAny));
+                    }
+                    else {
+                        libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\ui_ingame_help_techtree_questionmark.dds";
+                        libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringToText(lv_ability);
+                        TextExpressionSetToken("Param/Expression/lib_GHLo_A9C854E2", "A", StringToText(lv_ability));
+                        TriggerDebugOutput(2, TextExpressionAssemble("Param/Expression/lib_GHLo_A9C854E2"), true);
+                    }
                 }
             }
         }
@@ -1570,8 +1580,6 @@ bool libGHLo_gt_GameHeartInitialization_Func (bool testConds, bool runActions) {
         }
 
     }
-    TextExpressionSetToken("Param/Expression/lib_GHLo_AE82D04D", "A", FixedToText(libGHLo_gv_gameSpeedFactor, c_fixedPrecisionAny));
-    TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_GHLo_AE82D04D"), false);
     return true;
 }
 
@@ -2073,7 +2081,7 @@ bool libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie_Func (bool testConds, bool r
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie_Init () {
     libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie = TriggerCreate("libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie_Func");
-    TriggerAddEventPlayerLeft(libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie, c_playerAny, c_gameResultDefeat);
+    TriggerAddEventPlayerLeft(libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie, c_playerAny, c_gameResultTie);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2110,7 +2118,7 @@ bool libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory_Func (bool testConds, bo
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory_Init () {
     libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory = TriggerCreate("libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory_Func");
-    TriggerAddEventPlayerLeft(libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory, c_playerAny, c_gameResultDefeat);
+    TriggerAddEventPlayerLeft(libGHLo_gt_ObserverUiAssistPlayerLeavesGameVictory, c_playerAny, c_gameResultVictory);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2228,7 +2236,7 @@ bool libGHLo_gt_OverlordTransportMorphCompleted_Func (bool testConds, bool runAc
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_OverlordTransportMorphCompleted_Init () {
     libGHLo_gt_OverlordTransportMorphCompleted = TriggerCreate("libGHLo_gt_OverlordTransportMorphCompleted_Func");
-    TriggerAddEventUnitAbility(libGHLo_gt_OverlordTransportMorphCompleted, null, AbilityCommand("MorphToTransportOverlord", 0), c_unitAbilStageComplete, true);
+    TriggerAddEventUnitAbility(libGHLo_gt_OverlordTransportMorphCompleted, null, AbilityCommand("MorphToTransportOverlord", 0), c_unitAbilStageComplete, false);
 }
 
 //--------------------------------------------------------------------------------------------------
