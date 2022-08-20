@@ -670,7 +670,7 @@
                 <Shortcut val="NumPad1"/>
                 <ShortcutEnabledForParticipants val="false"/>
                 <ShortcutEnabledForObservers val="true"/>
-				<Enabled val="false"/>
+                <Enabled val="false"/>
                 <LinkedModalFrame val="$parent/ArmySizeGraph"/>
                 <LinkedModalFrame val="$parent/ResourcesLostDiffGraph"/>
                 <LinkedModalFrame val="$parent/ResourcesGatheredGraph"/>
@@ -686,7 +686,7 @@
                 <Shortcut val="NumPad2"/>
                 <ShortcutEnabledForParticipants val="false"/>
                 <ShortcutEnabledForObservers val="true"/>
-				<Enabled val="false"/>
+                <Enabled val="false"/>
                 <LinkedModalFrame val="$parent/IncomeGraph"/>
                 <LinkedModalFrame val="$parent/ResourcesLostDiffGraph"/>
                 <LinkedModalFrame val="$parent/ResourcesGatheredGraph"/>
@@ -701,7 +701,7 @@
                 <Shortcut val="NumPad3"/>
                 <ShortcutEnabledForParticipants val="false"/>
                 <ShortcutEnabledForObservers val="true"/>
-				<Enabled val="false"/>
+                <Enabled val="false"/>
                 <LinkedModalFrame val="$parent/ArmySizeGraph"/>
                 <LinkedModalFrame val="$parent/IncomeGraph"/>
                 <LinkedModalFrame val="$parent/ResourcesGatheredGraph"/>
@@ -716,7 +716,7 @@
                 <Shortcut val="NumPad4"/>
                 <ShortcutEnabledForParticipants val="false"/>
                 <ShortcutEnabledForObservers val="true"/>
-				<Enabled val="false"/>
+                <Enabled val="false"/>
                 <LinkedModalFrame val="$parent/ArmySizeGraph"/>
                 <LinkedModalFrame val="$parent/IncomeGraph"/>
                 <LinkedModalFrame val="$parent/ResourcesLostDiffGraph"/>

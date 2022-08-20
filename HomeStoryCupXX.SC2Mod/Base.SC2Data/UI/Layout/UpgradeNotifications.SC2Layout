@@ -16,17 +16,17 @@
         <Width val="#Width"/>
         <CollapseLayout val="true"/>
         <Visible val="false"/>
-		<Color val="{PlayerFrame/@Color}"/>
-		
-		<Frame type="PlayerFrame" name="PlayerFrame">
-			<Anchor relative="$parent"/>
-			<PlayerId val="{PlayerIdLabel/@Text}"/>
-			<Frame type="Label" name="PlayerIdLabel">
-				<Anchor relative="$parent"/>
-				<Visible val="false"/>
-			</Frame>
-		</Frame>
-		
+        <Color val="{PlayerFrame/@Color}"/>
+        
+        <Frame type="PlayerFrame" name="PlayerFrame">
+            <Anchor relative="$parent"/>
+            <PlayerId val="{PlayerIdLabel/@Text}"/>
+            <Frame type="Label" name="PlayerIdLabel">
+                <Anchor relative="$parent"/>
+                <Visible val="false"/>
+            </Frame>
+        </Frame>
+        
         <Frame type="Image" name="TimerWindow">
             <Anchor relative="$parent"/>
             <Texture val="MIT/ghbackground.dds"/>
@@ -68,7 +68,7 @@
                 <RenderPriority val="501"/>
                 <Text val="TimerType"/>
                 <IgnoreParentColor val="true"/>
-                <Options val="NoWrapping | ScaleToPreventTruncation"/>
+                <Options val="NoWrapping|ScaleToPreventTruncation"/>
             </Frame>
 
             <Frame type="Label" name="TimerStatus">
@@ -81,7 +81,7 @@
                 <RenderPriority val="501"/>
                 <Text val="Status"/>
                 <IgnoreParentColor val="true"/>
-                <Options val="NoWrapping | ScaleToPreventTruncation"/>
+                <Options val="NoWrapping|ScaleToPreventTruncation"/>
             </Frame>
 
             <Frame type="Label" name="TimerCountdown">
@@ -94,17 +94,17 @@
                 <Text val="8"/>
                 <IgnoreParentColor val="true"/>
             </Frame>
-			
-			<Frame type="UnitTargetFrame" name="UnitTargetFrame">
-				<Anchor relative="$parent/TimerIcon"/>
-				<AllowCameraCentering val="True"/>
-				<AllowSelection val="True"/>
-				<AllowTargeting val="False"/>
-				<AllowSmartCommand val="False"/>
-				<AllowCursorChanging val="False"/>
-			</Frame>
+            
+            <Frame type="UnitTargetFrame" name="UnitTargetFrame">
+                <Anchor relative="$parent/TimerIcon"/>
+                <AllowCameraCentering val="True"/>
+                <AllowSelection val="True"/>
+                <AllowTargeting val="False"/>
+                <AllowSmartCommand val="False"/>
+                <AllowCursorChanging val="False"/>
+            </Frame>
         </Frame>
-		
+        
     </Frame>
 
     <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">

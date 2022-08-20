@@ -6,5 +6,5 @@
     <Include path="UI/Layout/WorkersKilledNotifications.SC2Layout"/>
     <Include path="UI/Layout/GraphTemplate.SC2Layout"/>
     <Include path="UI/Layout/NewProductionTab.SC2Layout"/>
-	<Include path="UI/Layout/BattleReport.SC2Layout"/>
+    <Include path="UI/Layout/BattleReport.SC2Layout"/>
 </Desc>
