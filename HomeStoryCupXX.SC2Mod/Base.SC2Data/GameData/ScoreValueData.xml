@@ -4,8 +4,11 @@
     <CScoreValueCustom id="PlayerStatus"/>
     <CScoreValueCustom id="VersusModePlayerSide"/>
     <CScoreValueCustom id="BattleReportMineralsDestroyed"/>
+    <CScoreValueCustom id="BattleReportMineralsDestroyedTotal"/>
     <CScoreValueCustom id="BattleReportVespeneDestroyed"/>
+    <CScoreValueCustom id="BattleReportVespeneDestroyedTotal"/>
     <CScoreValueCustom id="BattleReportDamageDealt"/>
+    <CScoreValueCustom id="BattleReportDamageDealtTotal"/>
     <CScoreValueCustom id="BattleReportDamageDealtPercent">
         <Type value="Fixed"/>
     </CScoreValueCustom>

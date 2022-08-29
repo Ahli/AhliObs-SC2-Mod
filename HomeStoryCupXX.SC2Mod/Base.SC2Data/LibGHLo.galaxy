@@ -103,6 +103,7 @@ void libGHLo_InitVariables () {
         libGHLo_gv_minimapFrustum.lv_ping[init_i1] = c_invalidPingId;
     }
     libGHLo_gv_battleReport.lv_uiBattleDurationLabel = c_invalidDialogControlId;
+    libGHLo_gv_battleReport.lv_uiBattleActiveIndicator = c_invalidDialogControlId;
     for (init_i = 0; init_i <= 1; init_i += 1) {
         libGHLo_gv_battleReportSideData[init_i].lv_killedUnitTypeLastUsedSlot = -1;
         libGHLo_gv_battleReportSideData[init_i].lv_abilitiesCastedLastUsedSlot = -1;
@@ -1092,6 +1093,7 @@ void libGHLo_gf_BattleReportStartBattle () {
     libGHLo_gv_battleReport.lv_updateDueToDeathAll = true;
     libGHLo_gv_battleReport.lv_resetUnusedSlots = true;
     libGHLo_gf_BattleReportUpdateUIthreaded(libGHLo_gv_battleReport.lv_battleNr);
+    DialogControlSetEnabled(libGHLo_gv_battleReport.lv_uiBattleActiveIndicator, libGHLo_gv_obs, true);
 }
 
 trigger auto_libGHLo_gf_BattleReportStartBattleActiveDurationCounterthreaded_Trigger = null;
@@ -1171,7 +1173,8 @@ bool auto_libGHLo_gf_BattleReportUpdateUIthreaded_TriggerFunc (bool testConds, b
 void libGHLo_gf_BattleReportUpdateUI () {
     // Variable Declarations
     int lv_i;
-    fixed lv_sum;
+    fixed lv_sumReal;
+    int lv_sumInt;
 
     // Automatic Variable Declarations
     int auto7E2F46BA_ae;
@@ -1271,17 +1274,25 @@ void libGHLo_gf_BattleReportUpdateUI () {
         PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyed", libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[0]);
         PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyed", libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[1]);
         PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyed", libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[1]);
+        lv_sumInt = (libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[0] + libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[0]);
+        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyedTotal", lv_sumInt);
+        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyedTotal", lv_sumInt);
+        lv_sumInt = (libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[1] + libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[1]);
+        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyedTotal", lv_sumInt);
+        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyedTotal", lv_sumInt);
         PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealt", libGHLo_gv_battleReportSideData[0].lv_damageDealt);
         PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealt", libGHLo_gv_battleReportSideData[1].lv_damageDealt);
-        lv_sum = (libGHLo_gv_battleReportSideData[0].lv_damageDealt + libGHLo_gv_battleReportSideData[1].lv_damageDealt);
-        if ((lv_sum != 0.0)) {
-            PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealtPercent", ((libGHLo_gv_battleReportSideData[0].lv_damageDealt / lv_sum) * 100.0));
-            PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealtPercent", ((libGHLo_gv_battleReportSideData[1].lv_damageDealt / lv_sum) * 100.0));
+        lv_sumReal = (libGHLo_gv_battleReportSideData[0].lv_damageDealt + libGHLo_gv_battleReportSideData[1].lv_damageDealt);
+        if ((lv_sumReal != 0.0)) {
+            PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealtPercent", ((libGHLo_gv_battleReportSideData[0].lv_damageDealt / lv_sumReal) * 100.0));
+            PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealtPercent", ((libGHLo_gv_battleReportSideData[1].lv_damageDealt / lv_sumReal) * 100.0));
         }
         else {
             PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealtPercent", 0.0);
             PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealtPercent", 0.0);
         }
+        PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealtTotal", lv_sumReal);
+        PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealtTotal", lv_sumReal);
         libGHLo_gv_battleReport.lv_updateDueToDamage = false;
     }
 
@@ -1483,6 +1494,7 @@ void libGHLo_gf_BattleReportEndBattle () {
     libGHLo_gf_BattleReportUpdateUI();
     libGHLo_gv_battleReport.lv_battleActive = false;
     libGHLo_gf_BattleReportClearBattleData();
+    DialogControlSetEnabled(libGHLo_gv_battleReport.lv_uiBattleActiveIndicator, libGHLo_gv_obs, false);
 }
 
 void libGHLo_gf_BattleReportClearBattleData () {
@@ -3541,23 +3553,33 @@ bool libGHLo_gt_BattleReportInitialization_Func (bool testConds, bool runActions
         DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
         DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         DialogControlHookupStandard(c_triggerControlTypeLabel, "UIContainer/FullscreenUpperContainer/BattleReport/PlayerA/PlayerIdInput");
+        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         libNtve_gf_SetDialogItemText(DialogControlLastCreated(), IntToText(libGHLo_gv_battleReport.lv_playerIdSide[0]), libGHLo_gv_obs);
         DialogControlHookupStandard(c_triggerControlTypeLabel, "UIContainer/FullscreenUpperContainer/BattleReport/PlayerB/PlayerIdInput");
+        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         libNtve_gf_SetDialogItemText(DialogControlLastCreated(), IntToText(libGHLo_gv_battleReport.lv_playerIdSide[1]), libGHLo_gv_obs);
         DialogControlHookupStandard(c_triggerControlTypeLabel, "UIContainer/FullscreenUpperContainer/BattleReport/Header/BattleLengthLabel");
+        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         libGHLo_gv_battleReport.lv_uiBattleDurationLabel = DialogControlLastCreated();
+        DialogControlHookupStandard(c_triggerControlTypeImage, "UIContainer/FullscreenUpperContainer/BattleReport/Header/BattleActiveIndicator");
+        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+        libGHLo_gv_battleReport.lv_uiBattleActiveIndicator = DialogControlLastCreated();
         lv_i = 0;
         for ( ; ( (auto90DBBF1F_ai >= 0 && lv_i <= auto90DBBF1F_ae) || (auto90DBBF1F_ai < 0 && lv_i >= auto90DBBF1F_ae) ) ; lv_i += auto90DBBF1F_ai ) {
             DialogControlHookupStandard(c_triggerControlTypeButton, ("UIContainer/FullscreenUpperContainer/BattleReport/ReportL/UnitButtons/Unit" + IntToString(lv_i)));
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libGHLo_gv_battleReportSideData[0].lv_uiUnitTypeButton[lv_i] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeButton, ("UIContainer/FullscreenUpperContainer/BattleReport/ReportR/UnitButtons/Unit" + IntToString(lv_i)));
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libGHLo_gv_battleReportSideData[1].lv_uiUnitTypeButton[lv_i] = DialogControlLastCreated();
         }
         lv_i = 0;
         for ( ; ( (auto3089C34C_ai >= 0 && lv_i <= auto3089C34C_ae) || (auto3089C34C_ai < 0 && lv_i >= auto3089C34C_ae) ) ; lv_i += auto3089C34C_ai ) {
             DialogControlHookupStandard(c_triggerControlTypeButton, ("UIContainer/FullscreenUpperContainer/BattleReport/ReportL/AbilityButtons/Abil" + IntToString(lv_i)));
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libGHLo_gv_battleReportSideData[0].lv_uiAbilityButton[lv_i] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeButton, ("UIContainer/FullscreenUpperContainer/BattleReport/ReportR/AbilityButtons/Abil" + IntToString(lv_i)));
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libGHLo_gv_battleReportSideData[1].lv_uiAbilityButton[lv_i] = DialogControlLastCreated();
         }
     }
@@ -3659,39 +3681,44 @@ bool libGHLo_gt_BattleReportUnitDies_Func (bool testConds, bool runActions) {
         lv_opposingSideIndex = libGHLo_gf_BattleReportGetOpposingPlayerSideIndex(lv_owner);
         if ((lv_opposingSideIndex != -1)) {
             lv_unitType = UnitGetType(lv_unit);
-            if (libGHLo_gf_BattleReportIsTrackedUnitType(lv_unit, lv_unitType)) {
-                TextExpressionSetToken("Param/Expression/lib_GHLo_FC01BBBE", "A", StringToText((lv_unitType)));
-                TriggerDebugOutput(4, TextExpressionAssemble("Param/Expression/lib_GHLo_FC01BBBE"), false);
-                lv_unitTypeLeaderAlias = (CatalogFieldValueGet(c_gameCatalogUnit, lv_unitType, "LeaderAlias", lv_owner));
-                if ((lv_unitTypeLeaderAlias != null) && (lv_unitTypeLeaderAlias != lv_unitType)) {
-                    TextExpressionSetToken("Param/Expression/lib_GHLo_FA4529F1", "A", StringToText((lv_unitType)));
-                    TextExpressionSetToken("Param/Expression/lib_GHLo_FA4529F1", "B", StringToText((lv_unitTypeLeaderAlias)));
-                    TriggerDebugOutput(3, TextExpressionAssemble("Param/Expression/lib_GHLo_FA4529F1"), false);
-                    lv_unitType = lv_unitTypeLeaderAlias;
-                }
+            if ((UnitHasBehavior2(lv_unit, "Hallucination") == false)) {
+                if (libGHLo_gf_BattleReportIsTrackedUnitType(lv_unit, lv_unitType)) {
+                    TextExpressionSetToken("Param/Expression/lib_GHLo_FC01BBBE", "A", StringToText((lv_unitType)));
+                    TriggerDebugOutput(4, TextExpressionAssemble("Param/Expression/lib_GHLo_FC01BBBE"), false);
+                    lv_unitTypeLeaderAlias = (CatalogFieldValueGet(c_gameCatalogUnit, lv_unitType, "LeaderAlias", lv_owner));
+                    if ((lv_unitTypeLeaderAlias != null) && (lv_unitTypeLeaderAlias != lv_unitType)) {
+                        TextExpressionSetToken("Param/Expression/lib_GHLo_FA4529F1", "A", StringToText((lv_unitType)));
+                        TextExpressionSetToken("Param/Expression/lib_GHLo_FA4529F1", "B", StringToText((lv_unitTypeLeaderAlias)));
+                        TriggerDebugOutput(3, TextExpressionAssemble("Param/Expression/lib_GHLo_FA4529F1"), false);
+                        lv_unitType = lv_unitTypeLeaderAlias;
+                    }
 
-                libGHLo_gf_BattleReportIncrementUnitTypeKill(lv_opposingSideIndex, lv_unitType);
+                    libGHLo_gf_BattleReportIncrementUnitTypeKill(lv_opposingSideIndex, lv_unitType);
+                }
+                else {
+                    TextExpressionSetToken("Param/Expression/lib_GHLo_20C59CCF", "A", StringToText((lv_unitType)));
+                    TriggerDebugOutput(5, TextExpressionAssemble("Param/Expression/lib_GHLo_20C59CCF"), false);
+                }
                 lv_mineralsCost = libGHLo_gf_GetFixedUnitResourceCost(lv_unit, c_unitCostMinerals, lv_owner);
                 lv_vespeneCost = libGHLo_gf_GetFixedUnitResourceCost(lv_unit, c_unitCostVespene, lv_owner);
                 libGHLo_gf_BattleReportIncrementResourceDamage(lv_opposingSideIndex, lv_mineralsCost, lv_vespeneCost);
+                return true;
             }
             else {
-                TextExpressionSetToken("Param/Expression/lib_GHLo_20C59CCF", "A", StringToText((lv_unitType)));
-                TriggerDebugOutput(5, TextExpressionAssemble("Param/Expression/lib_GHLo_20C59CCF"), false);
-                return false;
+                TextExpressionSetToken("Param/Expression/lib_GHLo_0AF13ABE", "A", StringToText((UnitGetType(lv_unit))));
+                TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_GHLo_0AF13ABE"), false);
             }
         }
         else {
             TextExpressionSetToken("Param/Expression/lib_GHLo_134CEF65", "A", StringToText((UnitGetType(lv_unit))));
             TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_GHLo_134CEF65"), false);
-            return false;
         }
     }
     else {
         TextExpressionSetToken("Param/Expression/lib_GHLo_AA66FCE5", "A", StringToText((UnitGetType(EventUnit()))));
         TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_GHLo_AA66FCE5"), false);
-        return false;
     }
+    return false;
     return true;
 }
 

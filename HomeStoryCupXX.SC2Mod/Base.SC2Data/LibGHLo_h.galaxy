@@ -139,6 +139,7 @@ struct libGHLo_gs_BattleReport {
     bool lv_resetBattleEndingTimer;
     bool lv_resetUnusedSlots;
     int lv_uiBattleDurationLabel;
+    int lv_uiBattleActiveIndicator;
 };
 
 struct libGHLo_gs_BattleReportSide {
