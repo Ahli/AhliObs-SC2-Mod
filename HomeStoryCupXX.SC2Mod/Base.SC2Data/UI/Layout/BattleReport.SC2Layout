@@ -69,7 +69,7 @@
         </Frame>
     </Frame>
 
-    <Frame type="Button" name="UnitLostButton">
+    <Frame type="Button" name="UnitLostButtonTemplate">
         <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
         <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
         <Width val="52"/>
@@ -167,81 +167,9 @@
         </StateGroup>
     </Frame>
 
-    <Frame type="Frame" name="ReportTemplate">
+    <Frame type="Frame" name="StatsTemplate">
         <Anchor side="Top" relative="$parent/PlayerNameL" pos="Max" offset="0"/>
         <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-
-        <Frame type="Frame" name="UnitButtons">
-            <Anchor side="Top" relative="$parent/$parent/SubtitlesFrame/UnitsKilledLabel" pos="Max" offset="5"/>
-            <Anchor side="Left" relative="$parent" pos="Min" offset="25"/>
-            <Anchor side="Right" relative="$parent" pos="Max" offset="-15"/>
-            <Height val="135"/>
-
-            <Frame type="Button" name="Unit0" template="BattleReport/UnitLostButton"/>
-            <Frame type="Button" name="Unit1" template="BattleReport/UnitLostButton">
-                <Anchor side="Left" relative="$parent/Unit0" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit2" template="BattleReport/UnitLostButton">
-                <Anchor side="Left" relative="$parent/Unit1" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit3" template="BattleReport/UnitLostButton">
-                <Anchor side="Left" relative="$parent/Unit2" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit4" template="BattleReport/UnitLostButton">
-                <Anchor side="Left" relative="$parent/Unit3" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit5" template="BattleReport/UnitLostButton">
-                <Anchor side="Left" relative="$parent/Unit4" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit6" template="BattleReport/UnitLostButton">
-                <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
-                <Anchor side="Left" relative="$parent/Unit0" pos="Min" offset="0"/>
-            </Frame>
-            <Frame type="Button" name="Unit7" template="BattleReport/UnitLostButton">
-                <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
-                <Anchor side="Left" relative="$parent/Unit6" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit8" template="BattleReport/UnitLostButton">
-                <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
-                <Anchor side="Left" relative="$parent/Unit7" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit9" template="BattleReport/UnitLostButton">
-                <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
-                <Anchor side="Left" relative="$parent/Unit8" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit10" template="BattleReport/UnitLostButton">
-                <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
-                <Anchor side="Left" relative="$parent/Unit9" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit11" template="BattleReport/UnitLostButton">
-                <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
-                <Anchor side="Left" relative="$parent/Unit10" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit12" template="BattleReport/UnitLostButton">
-                <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
-                <Anchor side="Left" relative="$parent/Unit6" pos="Min" offset="0"/>
-            </Frame>
-            <Frame type="Button" name="Unit13" template="BattleReport/UnitLostButton">
-                <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
-                <Anchor side="Left" relative="$parent/Unit12" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit14" template="BattleReport/UnitLostButton">
-                <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
-                <Anchor side="Left" relative="$parent/Unit13" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit15" template="BattleReport/UnitLostButton">
-                <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
-                <Anchor side="Left" relative="$parent/Unit14" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit16" template="BattleReport/UnitLostButton">
-                <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
-                <Anchor side="Left" relative="$parent/Unit15" pos="Max" offset="5"/>
-            </Frame>
-            <Frame type="Button" name="Unit17" template="BattleReport/UnitLostButton">
-                <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
-                <Anchor side="Left" relative="$parent/Unit16" pos="Max" offset="5"/>
-            </Frame>
-        </Frame>
 
         <Frame type="Frame" name="ResourcesLostFrame">
             <Anchor side="Top" relative="$parent/$parent/SubtitlesFrame/ResourcesLostLabel" pos="Max" offset="0"/>
@@ -349,52 +277,139 @@
                 <Options val="NoWrapping|ScaleToPreventTruncation"/>
             </Frame>
         </Frame>
+    </Frame>
+
+    <Frame type="Frame" name="ButtonsTemplate">
+
+        <Frame type="Frame" name="UnitButtons">
+            <Anchor side="Top" relative="$parent/$parent/SubtitlesFrame/UnitsKilledLabel" pos="Max" offset="5"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="25"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="-15"/>
+            <Height val="120"/>
+
+            <Frame type="Button" name="Unit0" template="BattleReport/UnitLostButtonTemplate"/>
+            <Frame type="Button" name="Unit1" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Left" relative="$parent/Unit0" pos="Max" offset="5"/>
+            </Frame>
+            <Frame type="Button" name="Unit2" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Left" relative="$parent/Unit1" pos="Max" offset="5"/>
+            </Frame>
+            <Frame type="Button" name="Unit3" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Left" relative="$parent/Unit2" pos="Max" offset="5"/>
+            </Frame>
+            <Frame type="Button" name="Unit4" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Left" relative="$parent/Unit3" pos="Max" offset="5"/>
+            </Frame>
+            <Frame type="Button" name="Unit5" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Left" relative="$parent/Unit4" pos="Max" offset="5"/>
+            </Frame>
+            <Frame type="Button" name="Unit6" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
+                <Anchor side="Left" relative="$parent/Unit0" pos="Min" offset="0"/>
+            </Frame>
+            <Frame type="Button" name="Unit7" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
+                <Anchor side="Left" relative="$parent/Unit6" pos="Max" offset="5"/>
+            </Frame>
+            <Frame type="Button" name="Unit8" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
+                <Anchor side="Left" relative="$parent/Unit7" pos="Max" offset="5"/>
+            </Frame>
+            <Frame type="Button" name="Unit9" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
+                <Anchor side="Left" relative="$parent/Unit8" pos="Max" offset="5"/>
+            </Frame>
+            <Frame type="Button" name="Unit10" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
+                <Anchor side="Left" relative="$parent/Unit9" pos="Max" offset="5"/>
+            </Frame>
+            <Frame type="Button" name="Unit11" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
+                <Anchor side="Left" relative="$parent/Unit10" pos="Max" offset="5"/>
+            </Frame>
+            <Frame type="Button" name="Unit12" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
+                <Anchor side="Left" relative="$parent/Unit6" pos="Min" offset="0"/>
+                <Visible val="false"/>
+            </Frame>
+            <Frame type="Button" name="Unit13" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
+                <Anchor side="Left" relative="$parent/Unit12" pos="Max" offset="5"/>
+                <Visible val="{$parent/Unit12/@Visible}"/>
+            </Frame>
+            <Frame type="Button" name="Unit14" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
+                <Anchor side="Left" relative="$parent/Unit13" pos="Max" offset="5"/>
+                <Visible val="{$parent/Unit12/@Visible}"/>
+            </Frame>
+            <Frame type="Button" name="Unit15" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
+                <Anchor side="Left" relative="$parent/Unit14" pos="Max" offset="5"/>
+                <Visible val="{$parent/Unit12/@Visible}"/>
+            </Frame>
+            <Frame type="Button" name="Unit16" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
+                <Anchor side="Left" relative="$parent/Unit15" pos="Max" offset="5"/>
+                <Visible val="{$parent/Unit12/@Visible}"/>
+            </Frame>
+            <Frame type="Button" name="Unit17" template="BattleReport/UnitLostButtonTemplate">
+                <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
+                <Anchor side="Left" relative="$parent/Unit16" pos="Max" offset="5"/>
+                <Visible val="{$parent/Unit12/@Visible}"/>
+            </Frame>
+        </Frame>
 
         <Frame type="Frame" name="AbilityButtons">
             <Anchor side="Top" relative="$parent/$parent/SubtitlesFrame/AbilitiesUsedLabel" pos="Max" offset="5"/>
             <Anchor side="Left" relative="$parent/UnitButtons" pos="Min" offset="0"/>
             <Anchor side="Right" relative="$parent/UnitButtons" pos="Max" offset="0"/>
-            <Height val="75"/>
+            <Height val="52"/>
 
-            <Frame type="Button" name="Abil0" template="BattleReport/UnitLostButton"/>
-            <Frame type="Button" name="Abil1" template="BattleReport/UnitLostButton">
+            <Frame type="Button" name="Abil0" template="BattleReport/UnitLostButtonTemplate"/>
+            <Frame type="Button" name="Abil1" template="BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Abil0" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Abil2" template="BattleReport/UnitLostButton">
+            <Frame type="Button" name="Abil2" template="BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Abil1" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Abil3" template="BattleReport/UnitLostButton">
+            <Frame type="Button" name="Abil3" template="BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Abil2" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Abil4" template="BattleReport/UnitLostButton">
+            <Frame type="Button" name="Abil4" template="BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Abil3" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Abil5" template="BattleReport/UnitLostButton">
+            <Frame type="Button" name="Abil5" template="BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Abil4" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Abil6" template="BattleReport/UnitLostButton">
+            <Frame type="Button" name="Abil6" template="BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Abil0" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Abil0" pos="Min" offset="0"/>
+                <Visible val="false"/>
             </Frame>
-            <Frame type="Button" name="Abil7" template="BattleReport/UnitLostButton">
+            <Frame type="Button" name="Abil7" template="BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Abil6" pos="Min" offset="0"/>
                 <Anchor side="Left" relative="$parent/Abil6" pos="Max" offset="5"/>
+                <Visible val="{$parent/Abil6/@Visible}"/>
             </Frame>
-            <Frame type="Button" name="Abil8" template="BattleReport/UnitLostButton">
+            <Frame type="Button" name="Abil8" template="BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Abil6" pos="Min" offset="0"/>
                 <Anchor side="Left" relative="$parent/Abil7" pos="Max" offset="5"/>
+                <Visible val="{$parent/Abil6/@Visible}"/>
             </Frame>
-            <Frame type="Button" name="Abil9" template="BattleReport/UnitLostButton">
+            <Frame type="Button" name="Abil9" template="BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Abil6" pos="Min" offset="0"/>
                 <Anchor side="Left" relative="$parent/Abil8" pos="Max" offset="5"/>
+                <Visible val="{$parent/Abil6/@Visible}"/>
             </Frame>
-            <Frame type="Button" name="Abil10" template="BattleReport/UnitLostButton">
+            <Frame type="Button" name="Abil10" template="BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Abil6" pos="Min" offset="0"/>
                 <Anchor side="Left" relative="$parent/Abil9" pos="Max" offset="5"/>
+                <Visible val="{$parent/Abil6/@Visible}"/>
             </Frame>
-            <Frame type="Button" name="Abil11" template="BattleReport/UnitLostButton">
+            <Frame type="Button" name="Abil11" template="BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Abil6" pos="Min" offset="0"/>
                 <Anchor side="Left" relative="$parent/Abil10" pos="Max" offset="5"/>
+                <Visible val="{$parent/Abil6/@Visible}"/>
             </Frame>
         </Frame>
     </Frame>
@@ -441,7 +456,7 @@
         <StateGroup name="ValueTotalState">
             <State name="0">
                 <When type="Property" frame="ValueTotal" RealValue="0"/>
-                <Action type="SetProperty" frame="ProgressBarL/FillImageContainer/FillImage" visible="false"/>
+                <Action type="SetProperty" frame="ProgressBarL/FillImageContainer/FillImage" alpha="0"/>
                 <Action type="SetProperty" frame="FillImageR" visible="false"/>
             </State>
         </StateGroup>
@@ -465,14 +480,14 @@
     <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
 
         <Frame type="Frame" name="BattleReport">
-            <Anchor side="Top" relative="$parent" pos="Mid" offset="-50"/>
+            <Anchor side="Top" relative="$parent" pos="Mid" offset="-370"/>
             <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
-            <Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Bottom" relative="ButtonsL" pos="Max" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
             <Width val="790"/>
-            <Height val="640"/>
             <Handle val="BattleReport"/>
-            <Visible val="False"/>
+            <!--<Visible val="False"/>-->
+            <Alpha val="0"/>
 
             <Frame type="Frame" name="Background" template="StandardExtendedExperienceTemplates/StandardSizeExtendedExperienceTemplate">
                 <Alpha val="224"/>
@@ -489,16 +504,15 @@
                     <Unclipped val="True"/>
                 </Frame>
                 <Frame type="Frame" name="AnchorFrame">
-                    <Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
-                    <Anchor side="Bottom" relative="$parent" pos="Mid" offset="-15"/>
+                    <Anchor side="Top" relative="$parent/$parent" pos="Min" offset="0"/>
+                    <Anchor side="Bottom" relative="$parent/$parent/ButtonsL" pos="Max" offset="40"/>
                     <Width val="800"/>
-                    <Height val="660"/>
                     <AcceptsMouse val="true"/>
                 </Frame>
             </Frame>
-            
+
             <Frame type="Frame" name="Header">
-                <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Top" relative="$parent" pos="Min" offset="20"/>
                 <Anchor side="Left" relative="$parent" pos="Min" offset="15"/>
                 <Anchor side="Right" relative="$parent" pos="Max" offset="-15"/>
                 <Height val="55" />
@@ -652,6 +666,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP2/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="1a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="1"/>
@@ -659,6 +677,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP1/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="3a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="3"/>
@@ -666,6 +688,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP3/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="4a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="4"/>
@@ -673,6 +699,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP4/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="5a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="5"/>
@@ -680,6 +710,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP5/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="6a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="6"/>
@@ -687,6 +721,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP6/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="7a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="7"/>
@@ -694,6 +732,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP7/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="8a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="8"/>
@@ -701,6 +743,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP8/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="9a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="9"/>
@@ -708,6 +754,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP9/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="10a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="10"/>
@@ -715,6 +765,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP10/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="11a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="11"/>
@@ -722,6 +776,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP11/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="12a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="12"/>
@@ -729,6 +787,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP12/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="13a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="13"/>
@@ -736,6 +798,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP13/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="14a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="14"/>
@@ -743,6 +809,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP14/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="0a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="0"/>
@@ -750,6 +820,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP0/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                     <State name="15a">
                         <When type="Property" frame="ScoreValueFrame0/Label" text="15"/>
@@ -757,6 +831,10 @@
                         <When type="Property" frame="$parent/VersusModeSlotDetectorP15/ScoreValueFrame0/Label" text="2"/>
                         <Action type="SetProperty" frame="$parent/PlayerL" PlayerId="{$parent/PlayerB/@PlayerId}"/>
                         <Action type="SetProperty" frame="$parent/PlayerR" PlayerId="{$parent/PlayerA/@PlayerId}"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Left" relative="$parent" pos="Mid" offset="0"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsL" side="Right" relative="$parent" pos="Max" offset="-15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Left" relative="$parent" pos="Min" offset="15"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR" side="Right" relative="$parent" pos="Mid" offset="0"/>
                     </State>
                 </StateGroup>
             </Frame>
@@ -810,7 +888,7 @@
                 </Frame>
             </Frame>
 
-            <Frame type="Frame" name="ReportL" template="BattleReport/ReportTemplate">
+            <Frame type="Frame" name="StatsL" template="BattleReport/StatsTemplate">
                 <Anchor side="Left" relative="$parent" pos="Min" offset="15"/>
                 <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
 
@@ -834,7 +912,7 @@
                     </Frame>
                 </Frame>
             </Frame>
-            <Frame type="Frame" name="ReportR" template="BattleReport/ReportTemplate">
+            <Frame type="Frame" name="StatsR" template="BattleReport/StatsTemplate">
                 <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
                 <Anchor side="Right" relative="$parent" pos="Max" offset="-15"/>
 
@@ -888,6 +966,53 @@
                 </Frame>
             </Frame>
 
+            <Frame type="Frame" name="ButtonsL" template="BattleReport/ButtonsTemplate">
+                <Anchor side="Top" relative="$parent/PlayerNameL" pos="Max" offset="0"/>
+                <Anchor side="Bottom" relative="AbilityButtons" pos="Max" offset="0"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="15"/>
+                <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+
+                <StateGroup name="UnitThirdRowVis">
+                    <State name="L">
+                        <When type="Property" frame="UnitButtons/Unit12/Label" operator="NotEqual" text=""/>
+                        <Action type="SetAnchor" frame="UnitButtons" side="Bottom" relative="$this" pos="Min" offset="166"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR/UnitButtons" side="Bottom" relative="$this" pos="Min" offset="166"/>
+                        <Action type="SetProperty" frame="UnitButtons/Unit12" visible="true"/>
+                        <Action type="SetProperty" frame="$parent/ButtonsR/UnitButtons/Unit12" visible="true"/>
+                    </State>
+                    <State name="R">
+                        <When type="Property" frame="$parent/ButtonsR/UnitButtons/Unit12/Label" operator="NotEqual" text=""/>
+                        <Action type="SetAnchor" frame="UnitButtons" side="Bottom" relative="$this" pos="Min" offset="166"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR/UnitButtons" side="Bottom" relative="$this" pos="Min" offset="166"/>
+                        <Action type="SetProperty" frame="UnitButtons/Unit12" visible="true"/>
+                        <Action type="SetProperty" frame="$parent/ButtonsR/UnitButtons/Unit12" visible="true"/>
+                    </State>
+                </StateGroup>
+
+                <StateGroup name="AbilSecondRowVis">
+                    <State name="L">
+                        <When type="Property" frame="AbilityButtons/Abil6/Label" operator="NotEqual" text=""/>
+                        <Action type="SetAnchor" frame="AbilityButtons" side="Bottom" relative="$this" pos="Min" offset="114"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR/AbilityButtons" side="Bottom" relative="$this" pos="Min" offset="114"/>
+                        <Action type="SetProperty" frame="AbilityButtons/Abil6" visible="true"/>
+                        <Action type="SetProperty" frame="$parent/ButtonsR/AbilityButtons/Abil6" visible="true"/>
+                    </State>
+                    <State name="R">
+                        <When type="Property" frame="$parent/ButtonsR/AbilityButtons/Abil6/Label" operator="NotEqual" text=""/>
+                        <Action type="SetAnchor" frame="AbilityButtons" side="Bottom" relative="$this" pos="Min" offset="114"/>
+                        <Action type="SetAnchor" frame="$parent/ButtonsR/AbilityButtons" side="Bottom" relative="$this" pos="Min" offset="114"/>
+                        <Action type="SetProperty" frame="AbilityButtons/Abil6" visible="true"/>
+                        <Action type="SetProperty" frame="$parent/ButtonsR/AbilityButtons/Abil6" visible="true"/>
+                    </State>
+                </StateGroup>
+            </Frame>
+            <Frame type="Frame" name="ButtonsR" template="BattleReport/ButtonsTemplate">
+                <Anchor side="Top" relative="$parent/PlayerNameL" pos="Max" offset="0"/>
+                <Anchor side="Bottom" relative="AbilityButtons" pos="Max" offset="0"/>
+                <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="-15"/>
+            </Frame>
+
             <Frame type="BlurFrame" name="GraphsFrame">
                 <Anchor relative="$parent"/>
                 <BlurAmount val="0.5"/>
@@ -896,8 +1021,8 @@
 
                 <Frame type="Frame" name="DamageDealtBarGraph" template="BattleReport/ComparisonBarTemplate">
                     <Anchor side="Top" relative="$parent/$parent/SubtitlesFrame/DmgLabel" pos="Max" offset="5"/>
-                    <Anchor side="Left" relative="$parent/$parent/ReportL/DmgValue" pos="Max" offset="10"/>
-                    <Anchor side="Right" relative="$parent/$parent/ReportR/DmgValue" pos="Min" offset="-15"/>
+                    <Anchor side="Left" relative="$parent/$parent/StatsL/DmgValue" pos="Max" offset="10"/>
+                    <Anchor side="Right" relative="$parent/$parent/StatsR/DmgValue" pos="Min" offset="-15"/>
                     <Height val="30"/>
 
                     <Frame type="DataRefFrame" name="ValueL">
@@ -994,7 +1119,7 @@
                 </Frame>
 
                 <Frame type="Label" name="ResourcesLostLabel">
-                    <Anchor side="Top" relative="$parent/$parent/ReportL/UnitButtons" pos="Max" offset="15"/>
+                    <Anchor side="Top" relative="$parent/$parent/ButtonsL/UnitButtons" pos="Max" offset="15"/>
                     <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
                     <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
                     <Width val="250"/>
@@ -1004,7 +1129,7 @@
                 </Frame>
 
                 <Frame type="Label" name="DmgLabel">
-                    <Anchor side="Top" relative="$parent/$parent/ReportL/ResourcesLostFrame/ResourcesLostGas" pos="Max" offset="15"/>
+                    <Anchor side="Top" relative="$parent/$parent/StatsL/ResourcesLostFrame/ResourcesLostGas" pos="Max" offset="15"/>
                     <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
                     <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
                     <Width val="250"/>
@@ -1032,9 +1157,10 @@
             <Shortcut val="Shift+B"/>
             <ShortcutEnabledForParticipants val="false"/>
             <ShortcutEnabledForObservers val="true"/>
+            <Visible val="false"/>
 
             <Animation name="Show">
-                <Event event="OnHidden" action="Reset,Play" />
+                <Event event="OnShown" action="Reset,Play" />
                 <Controller type="Fade" end="Pause" frame="$BattleReport">
                     <Key type="Curve" time="0" value="0" />
                     <Key type="Curve" time="0.125" value="255"/>
@@ -1043,13 +1169,13 @@
                     <Key type="Curve" time="0" value="30" inout="Linear" />
                     <Key type="Curve" time="0.125" value="0" inout="Slow,Linear"/>
                 </Controller>
-                <Controller type="Visibility" end="Pause" frame="$BattleReport">
+                <!--<Controller type="Visibility" end="Pause" frame="$BattleReport">
                     <Key type="Bool" time="0" value="true"/>
-                </Controller>
+                </Controller>-->
             </Animation>
 
             <Animation name="Hide">
-                <Event event="OnShown" action="Reset,Play"/>
+                <Event event="OnHidden" action="Reset,Play"/>
                 <Controller type="Fade" end="Pause" frame="$BattleReport">
                     <Key type="Curve" time="0" value="255"/>
                     <Key type="Curve" time="0.125" value="0"/>
@@ -1058,10 +1184,10 @@
                     <Key type="Curve" time="0" value="0" inout="Linear"/>
                     <Key type="Curve" time="0.125" value="30" inout="Slow,Linear"/>
                 </Controller>
-                <Controller type="Visibility" end="Pause" frame="$BattleReport">
+                <!--<Controller type="Visibility" end="Pause" frame="$BattleReport">
                     <Key type="Bool" time="0" value="True"/>
                     <Key type="Bool" time="0.125" value="False"/>
-                </Controller>
+                </Controller>-->
             </Animation>
         </Frame>
     </Frame>
