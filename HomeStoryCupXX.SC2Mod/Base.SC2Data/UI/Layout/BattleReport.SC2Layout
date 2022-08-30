@@ -426,7 +426,11 @@
             <UseFillContainer val="true"/>
             <Vertical val="False"/>
             <MinValue val="0"/>
-            <MaxValue val="{$parent/ValueTotal/@RealValue}"/>
+            <!--<MaxValue val="{$parent/ValueTotal/@RealValue}"/>
+                   This has issues when MaxValue was 0
+                      => first update causes progressbar's value to always be 0
+                         => calc percentage in triggers instead -->
+            <MaxValue val="100"/>
             <Value val="{$parent/ValueL/@RealValue}"/>
 
             <Frame type="Frame" name="FillImageContainer">
@@ -456,7 +460,7 @@
         <StateGroup name="ValueTotalState">
             <State name="0">
                 <When type="Property" frame="ValueTotal" RealValue="0"/>
-                <Action type="SetProperty" frame="ProgressBarL/FillImageContainer/FillImage" alpha="0"/>
+                <Action type="SetProperty" frame="ProgressBarL/FillImageContainer/FillImage" visible="false"/>
                 <Action type="SetProperty" frame="FillImageR" visible="false"/>
             </State>
         </StateGroup>
@@ -486,10 +490,10 @@
             <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
             <Width val="790"/>
             <Handle val="BattleReport"/>
-            <!--<Visible val="False"/>-->
-            <Alpha val="0"/>
+            <Visible val="False"/>
 
             <Frame type="Frame" name="Background" template="StandardExtendedExperienceTemplates/StandardSizeExtendedExperienceTemplate">
+                <Anchor side="Bottom" relative="$parent/ButtonsL" pos="Max" offset="40"/>
                 <Alpha val="224"/>
                 <Frame type="Image" name="FullscreenBlackoutImage">
                     <Visible val="false"/>
@@ -1026,7 +1030,7 @@
                     <Height val="30"/>
 
                     <Frame type="DataRefFrame" name="ValueL">
-                        <Argument name="Score" val="BattleReportDamageDealt"/>
+                        <Argument name="Score" val="BattleReportDamageDealtPercent"/>
                         <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
                     </Frame>
                     <Frame type="DataRefFrame" name="ValueTotal">
@@ -1054,7 +1058,7 @@
                     <Height val="30"/>
 
                     <Frame type="DataRefFrame" name="ValueL">
-                        <Argument name="Score" val="BattleReportMineralsDestroyed"/>
+                        <Argument name="Score" val="BattleReportMineralsDestroyedPercent"/>
                         <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
                     </Frame>
                     <Frame type="DataRefFrame" name="ValueTotal">
@@ -1082,7 +1086,7 @@
                     <Height val="30"/>
 
                     <Frame type="DataRefFrame" name="ValueL">
-                        <Argument name="Score" val="BattleReportVespeneDestroyed"/>
+                        <Argument name="Score" val="BattleReportVespeneDestroyedPercent"/>
                         <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
                     </Frame>
                     <Frame type="DataRefFrame" name="ValueTotal">
@@ -1169,9 +1173,9 @@
                     <Key type="Curve" time="0" value="30" inout="Linear" />
                     <Key type="Curve" time="0.125" value="0" inout="Slow,Linear"/>
                 </Controller>
-                <!--<Controller type="Visibility" end="Pause" frame="$BattleReport">
+                <Controller type="Visibility" end="Pause" frame="$BattleReport">
                     <Key type="Bool" time="0" value="true"/>
-                </Controller>-->
+                </Controller>
             </Animation>
 
             <Animation name="Hide">
@@ -1184,10 +1188,10 @@
                     <Key type="Curve" time="0" value="0" inout="Linear"/>
                     <Key type="Curve" time="0.125" value="30" inout="Slow,Linear"/>
                 </Controller>
-                <!--<Controller type="Visibility" end="Pause" frame="$BattleReport">
+                <Controller type="Visibility" end="Pause" frame="$BattleReport">
                     <Key type="Bool" time="0" value="True"/>
                     <Key type="Bool" time="0.125" value="False"/>
-                </Controller>-->
+                </Controller>
             </Animation>
         </Frame>
     </Frame>

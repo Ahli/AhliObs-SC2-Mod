@@ -1093,7 +1093,10 @@ void libGHLo_gf_BattleReportStartBattle () {
     libGHLo_gv_battleReport.lv_updateDueToDeathAll = true;
     libGHLo_gv_battleReport.lv_resetUnusedSlots = true;
     libGHLo_gf_BattleReportUpdateUIthreaded(libGHLo_gv_battleReport.lv_battleNr);
-    DialogControlSetEnabled(libGHLo_gv_battleReport.lv_uiBattleActiveIndicator, libGHLo_gv_obs, true);
+    if ((libGHLo_gv_battleReport.lv_noUiUpdates == false)) {
+        DialogControlSetEnabled(libGHLo_gv_battleReport.lv_uiBattleActiveIndicator, libGHLo_gv_obs, true);
+    }
+
 }
 
 trigger auto_libGHLo_gf_BattleReportStartBattleActiveDurationCounterthreaded_Trigger = null;
@@ -1122,18 +1125,21 @@ bool auto_libGHLo_gf_BattleReportStartBattleActiveDurationCounterthreaded_Trigge
     lv_format = StringToText("<min/>:<sec2/>");
 
     // Implementation
-    Wait(1.0, c_timeGame);
+    Wait(0.25, c_timeGame);
     Wait(0.0, c_timeGame);
     while ((libGHLo_gv_battleReport.lv_battleActive == true) && (libGHLo_gv_battleReport.lv_battleNr == lp_battleNr)) {
-        libGHLo_gv_battleReport.lv_battleGameTimeDuration += 1;
-        lv_seconds = FixedToInt((libGHLo_gv_battleReport.lv_battleGameTimeDuration / libGHLo_gv_gameSpeedFactor));
-        if ((lv_seconds >= 3600) && (lv_hourFormatSet == false)) {
-            lv_format = StringToText("<hour/>:<min2/>:<sec2/>");
-            lv_hourFormatSet = true;
+        libGHLo_gv_battleReport.lv_battleGameTimeDuration += 0.25;
+        if ((libGHLo_gv_battleReport.lv_noUiUpdates == false)) {
+            lv_seconds = FixedToInt((libGHLo_gv_battleReport.lv_battleGameTimeDuration / libGHLo_gv_gameSpeedFactor));
+            if ((lv_seconds >= 3600) && (lv_hourFormatSet == false)) {
+                lv_format = StringToText("<hour/>:<min2/>:<sec2/>");
+                lv_hourFormatSet = true;
+            }
+
+            libNtve_gf_SetDialogItemText(libGHLo_gv_battleReport.lv_uiBattleDurationLabel, TextTimeFormat(lv_format, lv_seconds), libGHLo_gv_obs);
         }
 
-        libNtve_gf_SetDialogItemText(libGHLo_gv_battleReport.lv_uiBattleDurationLabel, TextTimeFormat(lv_format, lv_seconds), libGHLo_gv_obs);
-        Wait(1.0, c_timeGame);
+        Wait(0.25, c_timeGame);
         Wait(0.0, c_timeGame);
     }
     return true;
@@ -1163,7 +1169,15 @@ bool auto_libGHLo_gf_BattleReportUpdateUIthreaded_TriggerFunc (bool testConds, b
 
     // Implementation
     while ((libGHLo_gv_battleReport.lv_battleActive == true) && (libGHLo_gv_battleReport.lv_battleNr == lp_battleNr)) {
-        libGHLo_gf_BattleReportUpdateUI();
+        if ((libGHLo_gv_battleReport.lv_resetBattleEndingTimer == true)) {
+            TimerRestart(libGHLo_gv_battleReport.lv_battleEndingTimer);
+            libGHLo_gv_battleReport.lv_resetBattleEndingTimer = false;
+        }
+
+        if ((libGHLo_gv_battleReport.lv_noUiUpdates == false)) {
+            libGHLo_gf_BattleReportUpdateUI();
+        }
+
         Wait(0.0625, c_timeGame);
         Wait(0.0, c_timeGame);
     }
@@ -1270,16 +1284,6 @@ void libGHLo_gf_BattleReportUpdateUI () {
     }
 
     if ((libGHLo_gv_battleReport.lv_updateDueToDamage == true)) {
-        lv_sumInt = (libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[0] + libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[0]);
-        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyedTotal", lv_sumInt);
-        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyedTotal", lv_sumInt);
-        lv_sumInt = (libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[1] + libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[1]);
-        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyedTotal", lv_sumInt);
-        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyedTotal", lv_sumInt);
-        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyed", libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[0]);
-        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyed", libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[0]);
-        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyed", libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[1]);
-        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyed", libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[1]);
         lv_sumReal = (libGHLo_gv_battleReportSideData[0].lv_damageDealt + libGHLo_gv_battleReportSideData[1].lv_damageDealt);
         if ((lv_sumReal != 0.0)) {
             PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealtPercent", ((libGHLo_gv_battleReportSideData[0].lv_damageDealt / lv_sumReal) * 100.0));
@@ -1296,9 +1300,34 @@ void libGHLo_gf_BattleReportUpdateUI () {
         libGHLo_gv_battleReport.lv_updateDueToDamage = false;
     }
 
-    if ((libGHLo_gv_battleReport.lv_resetBattleEndingTimer == true)) {
-        TimerRestart(libGHLo_gv_battleReport.lv_battleEndingTimer);
-        libGHLo_gv_battleReport.lv_resetBattleEndingTimer = false;
+    if ((libGHLo_gv_battleReport.lv_updateDueToDeathResources == true)) {
+        lv_sumInt = (libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[0] + libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[0]);
+        if ((lv_sumInt != 0)) {
+            PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyedPercent", ((libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[0] / IntToFixed(lv_sumInt)) * 100.0));
+            PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyedPercent", ((libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[0] / IntToFixed(lv_sumInt)) * 100.0));
+        }
+        else {
+            PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyedPercent", 0.0);
+            PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyedPercent", 0.0);
+        }
+        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyedTotal", lv_sumInt);
+        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyedTotal", lv_sumInt);
+        lv_sumInt = (libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[1] + libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[1]);
+        if ((lv_sumInt != 0)) {
+            PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyedPercent", ((libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[1] / IntToFixed(lv_sumInt)) * 100.0));
+            PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyedPercent", ((libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[1] / IntToFixed(lv_sumInt)) * 100.0));
+        }
+        else {
+            PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyedPercent", 0.0);
+            PlayerScoreValueSetFromFixed(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyedPercent", 0.0);
+        }
+        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyedTotal", lv_sumInt);
+        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyedTotal", lv_sumInt);
+        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyed", libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[0]);
+        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyed", libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[0]);
+        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyed", libGHLo_gv_battleReportSideData[0].lv_resourcesDestroyed[1]);
+        PlayerScoreValueSetFromInt(libGHLo_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyed", libGHLo_gv_battleReportSideData[1].lv_resourcesDestroyed[1]);
+        libGHLo_gv_battleReport.lv_updateDueToDeathResources = false;
     }
 
     if ((libGHLo_gv_battleReport.lv_resetUnusedSlots == true)) {
@@ -1510,6 +1539,7 @@ void libGHLo_gf_BattleReportIncrementResourceDamage (int lp_sideIndex, int lp_mi
     // Implementation
     libGHLo_gv_battleReportSideData[lp_sideIndex].lv_resourcesDestroyed[0] += lp_minerals;
     libGHLo_gv_battleReportSideData[lp_sideIndex].lv_resourcesDestroyed[1] += lp_vespene;
+    libGHLo_gv_battleReport.lv_updateDueToDeathResources = true;
 }
 
 void libGHLo_gf_BattleReportEndBattle () {
@@ -1517,8 +1547,15 @@ void libGHLo_gf_BattleReportEndBattle () {
     // Implementation
     libGHLo_gf_BattleReportUpdateUI();
     libGHLo_gv_battleReport.lv_battleActive = false;
-    libGHLo_gf_BattleReportClearBattleData();
     DialogControlSetEnabled(libGHLo_gv_battleReport.lv_uiBattleActiveIndicator, libGHLo_gv_obs, false);
+    if ((libGHLo_gv_battleReport.lv_noUiUpdates == true)) {
+        libNtve_gf_SetDialogItemText(libGHLo_gv_battleReport.lv_uiBattleDurationLabel, TextTimeFormat(StringToText("<min/>:<sec2/>"), FixedToInt((libGHLo_gv_battleReport.lv_battleGameTimeDuration / libGHLo_gv_gameSpeedFactor))), libGHLo_gv_obs);
+    }
+    else {
+        libGHLo_gv_battleReport.lv_noUiUpdates = true;
+    }
+    libGHLo_gf_BattleReportClearBattleData();
+    TimerStart(libGHLo_gv_battleReport.lv_noUiUpdateTimer, libGHLo_gv_battleReportAfterBattleEndedNoUiUpdateTimerGameTimeDuration, false, c_timeGame);
 }
 
 void libGHLo_gf_BattleReportClearBattleData () {
@@ -3571,12 +3608,13 @@ bool libGHLo_gt_BattleReportInitialization_Func (bool testConds, bool runActions
         libGHLo_gf_RegisterUnitDiesEvent(libGHLo_gt_BattleReportUnitDies, null);
         libGHLo_gv_battleReport.lv_battleEndingTimer = TimerCreate();
         libGHLo_gf_RegisterTimerExpiresEvent(libGHLo_gt_BattleReportBattleEndingTimerExpires, libGHLo_gv_battleReport.lv_battleEndingTimer);
+        libGHLo_gv_battleReport.lv_noUiUpdateTimer = TimerCreate();
+        libGHLo_gf_RegisterTimerExpiresEvent(libGHLo_gt_BattleReportNoUiUpdateTimerExpires, libGHLo_gv_battleReport.lv_noUiUpdateTimer);
         libGHLo_gv_battleReport.lv_playerIdSide[0] = PlayerGroupPlayer(GameAttributePlayersForTeam(1), 1);
         libGHLo_gv_battleReport.lv_playerIdSide[1] = PlayerGroupPlayer(GameAttributePlayersForTeam(2), 1);
         DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/BattleReport");
         DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
         DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
         DialogControlHookupStandard(c_triggerControlTypeLabel, "UIContainer/FullscreenUpperContainer/BattleReport/PlayerA/PlayerIdInput");
         DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         libNtve_gf_SetDialogItemText(DialogControlLastCreated(), IntToText(libGHLo_gv_battleReport.lv_playerIdSide[0]), libGHLo_gv_obs);
@@ -3703,7 +3741,10 @@ bool libGHLo_gt_BattleReportUnitDies_Func (bool testConds, bool runActions) {
 
                 lv_mineralsCost = libGHLo_gf_GetFixedUnitResourceCost(lv_unit, c_unitCostMinerals, lv_owner);
                 lv_vespeneCost = libGHLo_gf_GetFixedUnitResourceCost(lv_unit, c_unitCostVespene, lv_owner);
-                libGHLo_gf_BattleReportIncrementResourceDamage(lv_opposingSideIndex, lv_mineralsCost, lv_vespeneCost);
+                if (((lv_mineralsCost > 0) || (lv_vespeneCost > 0))) {
+                    libGHLo_gf_BattleReportIncrementResourceDamage(lv_opposingSideIndex, lv_mineralsCost, lv_vespeneCost);
+                }
+
                 return true;
             }
 
@@ -3738,7 +3779,7 @@ bool libGHLo_gt_BattleReportTrackedAbilityUsedAbattlestarting_Func (bool testCon
 
     if ((lv_sideIndex != -1)) {
         if (libGHLo_gv_battleReport.lv_battleActive) {
-            TimerRestart(libGHLo_gv_battleReport.lv_battleEndingTimer);
+            libGHLo_gv_battleReport.lv_resetBattleEndingTimer = true;
         }
         else {
             libGHLo_gf_BattleReportStartBattle();
@@ -3808,6 +3849,29 @@ void libGHLo_gt_BattleReportBattleEndingTimerExpires_Init () {
     libGHLo_gt_BattleReportBattleEndingTimerExpires = TriggerCreate("libGHLo_gt_BattleReportBattleEndingTimerExpires_Func");
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Battle Report - NoUiUpdateTimer Expires
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_BattleReportNoUiUpdateTimerExpires_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libGHLo_gv_battleReport.lv_noUiUpdates = false;
+    if ((libGHLo_gv_battleReport.lv_battleActive == true)) {
+        DialogControlSetEnabled(libGHLo_gv_battleReport.lv_uiBattleActiveIndicator, libGHLo_gv_obs, true);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_BattleReportNoUiUpdateTimerExpires_Init () {
+    libGHLo_gt_BattleReportNoUiUpdateTimerExpires = TriggerCreate("libGHLo_gt_BattleReportNoUiUpdateTimerExpires_Func");
+}
+
 void libGHLo_InitTriggers () {
     libGHLo_gt_GameHeartInitialization_Init();
     libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers_Init();
@@ -3854,6 +3918,7 @@ void libGHLo_InitTriggers () {
     libGHLo_gt_BattleReportTrackedAbilityUsedAbattlestarting_Init();
     libGHLo_gt_BattleReportTrackedAbilityUsedBnobattlestart_Init();
     libGHLo_gt_BattleReportBattleEndingTimerExpires_Init();
+    libGHLo_gt_BattleReportNoUiUpdateTimerExpires_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

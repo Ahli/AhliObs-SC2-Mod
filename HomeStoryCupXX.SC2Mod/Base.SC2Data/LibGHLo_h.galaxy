@@ -36,7 +36,8 @@ const int libGHLo_gv_upgradeNotificationsMaxUISlots = 50;
 const int libGHLo_gv_upgradeNotificationsMaxFacilitySlots = 100;
 const fixed libGHLo_gv_upgradeNotificationsVisibleTime = 15.0;
 const int libGHLo_gv_workersKilledNotificationsMaxUISlots = 15;
-const fixed libGHLo_gv_battleReportBattleEndingTimerGameTimeDuration = 9.0;
+const fixed libGHLo_gv_battleReportBattleEndingTimerGameTimeDuration = 12.0;
+const fixed libGHLo_gv_battleReportAfterBattleEndedNoUiUpdateTimerGameTimeDuration = 25.0;
 const int libGHLo_gv_battleReportMaxAbilitySlot = 11;
 const int libGHLo_gv_battleReportMaxKilledUnitTypeSlot = 17;
 
@@ -128,18 +129,21 @@ struct libGHLo_gs_BattleReport {
     bool lv_active;
     bool lv_battleActive;
     int lv_battleNr;
-    int lv_battleGameTimeDuration;
+    fixed lv_battleGameTimeDuration;
     timer lv_battleEndingTimer;
     int[2] lv_playerIdSide;
     bool lv_updateDueToDamage;
     bool lv_updateDueToDeathAll;
     bool lv_updateDueToDeathOnlyLabels;
+    bool lv_updateDueToDeathResources;
     bool lv_updateDueToAbilityAll;
     bool lv_updateDueToAbilityOnlyLabels;
     bool lv_resetBattleEndingTimer;
     bool lv_resetUnusedSlots;
     int lv_uiBattleDurationLabel;
     int lv_uiBattleActiveIndicator;
+    timer lv_noUiUpdateTimer;
+    bool lv_noUiUpdates;
 };
 
 struct libGHLo_gs_BattleReportSide {
@@ -278,6 +282,7 @@ trigger libGHLo_gt_BattleReportUnitDies;
 trigger libGHLo_gt_BattleReportTrackedAbilityUsedAbattlestarting;
 trigger libGHLo_gt_BattleReportTrackedAbilityUsedBnobattlestart;
 trigger libGHLo_gt_BattleReportBattleEndingTimerExpires;
+trigger libGHLo_gt_BattleReportNoUiUpdateTimerExpires;
 
 // Library Initialization
 void libGHLo_InitVariables ();
