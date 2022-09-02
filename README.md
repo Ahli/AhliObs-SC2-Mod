@@ -15,6 +15,13 @@ Editor to edit settings/hotkeys:
 
 ### All Changes compared to WCS GameHeart 1.25/Americas
 - **Changes**
+  - Battle Report:
+    - added Battle Reports based on nice__username's Observer Plus extension mod
+      - damage includes damage on all units and structures of the enemy
+      - resource damage includes units and structures
+      - current limitations:
+        - damage does not track friendly fire, yet
+        - resource damage does not track refunds of (forcefully) cancelled morphs (Orbital, Planetary, Zerg), yet
   - Upgrade Notifications:
     - icon can now be clicked to select the facility researching it
     - now dynamically change to reflect alliance colors
@@ -26,6 +33,7 @@ Editor to edit settings/hotkeys:
   - Graphs:
     - added Resources Lost differential graph on Hotkey Numpad3
     - added Resources Gathered comparative graph on Hotkey Numpad4
+    - Army, Resources Lost and Gathered graphs are now using the most recent value instead of averaging the last 6 seconds
   - Minimap:
     - player camera positions are now shown on minimap in 1vs1
   - World:
