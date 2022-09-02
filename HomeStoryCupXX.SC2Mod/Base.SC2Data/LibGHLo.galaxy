@@ -368,20 +368,77 @@ int libGHLo_gf_GetFixedUnitResourceCost (unit lp_unit, int lp_resource, int lp_p
     lv_unitType = UnitGetType(lp_unit);
 
     // Implementation
-    if ((((lv_unitType == "HighTemplar") && (UnitHasBehavior2(lp_unit, "AHLI_fixUnitLostResourcesOfArchonHTHT") == true)) || ((lv_unitType == "DarkTemplar") && (UnitHasBehavior2(lp_unit, "AHLI_fixUnitLostResourcesOfArchonDTDT") == true)))) {
-        if ((lp_resource == c_unitCostVespene)) {
-            lv_resourceCostIndex = 1;
-        }
+    if ((lv_unitType == "Archon")) {
+        if ((UnitHasBehavior2(lp_unit, "AHLI_fixUnitLostResourcesOfArchonHTHT") == true)) {
+            if ((lp_resource == c_unitCostVespene)) {
+                lv_resourceCostIndex = 1;
+            }
 
-        return (UnitTypeGetCost(lv_unitType, lp_resource) + ((CatalogFieldValueGetAsInt(c_gameCatalogUnit, lv_unitType, "CostResource[" + IntToString(lv_resourceCostIndex) + "]", lp_player) * 2) - CatalogFieldValueGetAsInt(c_gameCatalogUnit, "Archon", "CostResource[" + IntToString(lv_resourceCostIndex) + "]", lp_player)));
+            return (CatalogFieldValueGetAsInt(c_gameCatalogUnit, "HighTemplar", "CostResource[" + IntToString(lv_resourceCostIndex) + "]", lp_player) * 2);
+        }
+        else {
+            if ((UnitHasBehavior2(lp_unit, "AHLI_fixUnitLostResourcesOfArchonDTDT") == true)) {
+                if ((lp_resource == c_unitCostVespene)) {
+                    lv_resourceCostIndex = 1;
+                }
+
+                return (CatalogFieldValueGetAsInt(c_gameCatalogUnit, "DarkTemplar", "CostResource[" + IntToString(lv_resourceCostIndex) + "]", lp_player) * 2);
+            }
+
+        }
     }
     else {
-        if ((lv_unitType == "HighTemplar")) {
+        if ((((lv_unitType == "Overseer") && (UnitHasBehavior2(lp_unit, "AHLI_fixUnitLostResourcesOfOverlordTransport") == true)) || (lv_unitType == "OverlordTransport"))) {
             if ((lp_resource == c_unitCostVespene)) {
                 lv_resourceCostIndex = 1;
             }
 
             return (UnitTypeGetCost(lv_unitType, lp_resource) + CatalogFieldValueGetAsInt(c_gameCatalogAbil, "MorphToTransportOverlord", "Cost.Resource[" + IntToString(lv_resourceCostIndex) + "]", lp_player));
+        }
+
+        if ((lv_unitType == "BanelingCocoon")) {
+            if ((lp_resource == c_unitCostVespene)) {
+                lv_resourceCostIndex = 1;
+            }
+
+            return UnitTypeGetCost("Zergling", lp_resource);
+        }
+
+        if ((lv_unitType == "BroodLordCocoon")) {
+            if ((lp_resource == c_unitCostVespene)) {
+                lv_resourceCostIndex = 1;
+            }
+
+            return UnitTypeGetCost("BroodLordCocoon", lp_resource);
+        }
+
+        if ((lv_unitType == "LurkerMPEgg")) {
+            if ((lp_resource == c_unitCostVespene)) {
+                lv_resourceCostIndex = 1;
+            }
+
+            return UnitTypeGetCost("Hydralisk", lp_resource);
+        }
+
+        if ((lv_unitType == "TransportOverlordCocoon")) {
+            if ((lp_resource == c_unitCostVespene)) {
+                lv_resourceCostIndex = 1;
+            }
+
+            return UnitTypeGetCost("Overlord", lp_resource);
+        }
+
+        if ((lv_unitType == "OverlordCocoon")) {
+            if ((lp_resource == c_unitCostVespene)) {
+                lv_resourceCostIndex = 1;
+            }
+
+            if ((UnitHasBehavior2(lp_unit, "AHLI_fixUnitLostResourcesOfOverlordTransport") == true)) {
+                return (UnitTypeGetCost(lv_unitType, lp_resource) + CatalogFieldValueGetAsInt(c_gameCatalogAbil, "MorphToTransportOverlord", "Cost.Resource[" + IntToString(lv_resourceCostIndex) + "]", lp_player));
+            }
+            else {
+                return UnitTypeGetCost("Overlord", lp_resource);
+            }
         }
 
     }
@@ -1073,7 +1130,7 @@ bool libGHLo_gf_BattleReportHasBattleStarted () {
 bool libGHLo_gf_BattleReportIsTrackedUnitType (unit lp_unit, string lp_unitType) {
     // Automatic Variable Declarations
     // Implementation
-    if (((UnitTypeTestFlag(lp_unitType, c_unitFlagNoScore) == false) || (lp_unitType == "AutoTurret")) && (UnitHasBehavior2(lp_unit, "Hallucination") == false) && ((UnitTypeTestAttribute(lp_unitType, c_unitAttributeStructure) == false) || (lp_unitType == "SpineCrawler") || (lp_unitType == "SpineCrawlerUprooted") || (lp_unitType == "SporeCrawler") || (lp_unitType == "SporeCrawlerUprooted") || (lp_unitType == "PhotonCannon") || (lp_unitType == "MissileTurret") || (lp_unitType == "PlanetaryFortress") || (lp_unitType == "ShieldBattery") || (lp_unitType == "Bunker")) && (lp_unitType != "ParasiticBombDummy")) {
+    if (((UnitTypeTestFlag(lp_unitType, c_unitFlagNoScore) == false) || (lp_unitType == "AutoTurret") || (lp_unitType == "BanelingCocoon") || (lp_unitType == "RavagerCocoon") || (lp_unitType == "BroodLordCocoon") || (lp_unitType == "TransportOverlordCocoon") || (lp_unitType == "LurkerMPEgg")) && (UnitHasBehavior2(lp_unit, "Hallucination") == false) && ((UnitTypeTestAttribute(lp_unitType, c_unitAttributeStructure) == false) || (lp_unitType == "SpineCrawler") || (lp_unitType == "SpineCrawlerUprooted") || (lp_unitType == "SporeCrawler") || (lp_unitType == "SporeCrawlerUprooted") || (lp_unitType == "PhotonCannon") || (lp_unitType == "MissileTurret") || (lp_unitType == "PlanetaryFortress") || (lp_unitType == "ShieldBattery") || (lp_unitType == "Bunker") || (lp_unitType == "AutoTurret")) && (lp_unitType != "ParasiticBombDummy")) {
         return true;
     }
     else {
@@ -3708,6 +3765,7 @@ void libGHLo_gt_BattleReportUnitIsDamaged_Init () {
 bool libGHLo_gt_BattleReportUnitDies_Func (bool testConds, bool runActions) {
     // Variable Declarations
     string lv_unitType;
+    string lv_unitTypeForCounter;
     string lv_unitTypeLeaderAlias;
     unit lv_unit;
     int lv_opposingSideIndex;
@@ -3725,24 +3783,74 @@ bool libGHLo_gt_BattleReportUnitDies_Func (bool testConds, bool runActions) {
 
     if (libGHLo_gv_battleReport.lv_battleActive) {
         lv_unit = EventUnit();
-        lv_owner = UnitGetOwner(lv_unit);
-        lv_opposingSideIndex = libGHLo_gf_BattleReportGetOpposingPlayerSideIndex(lv_owner);
+        if ((UnitHasBehavior2(lv_unit, "NeuralParasite") == true)) {
+            lv_owner = UnitGetOwner(lv_unit);
+            lv_opposingSideIndex = libGHLo_gf_BattleReportGetPlayerSideIndex(lv_owner);
+            lv_owner = libGHLo_gv_battleReport.lv_playerIdSide[libGHLo_gf_BattleReportGetOpposingPlayerSideIndex(lv_owner)];
+        }
+        else {
+            lv_owner = UnitGetOwner(lv_unit);
+            lv_opposingSideIndex = libGHLo_gf_BattleReportGetOpposingPlayerSideIndex(lv_owner);
+        }
         if ((lv_opposingSideIndex != -1)) {
             lv_unitType = UnitGetType(lv_unit);
-            if ((UnitHasBehavior2(lv_unit, "Hallucination") == false)) {
+            if ((UnitHasBehavior2(lv_unit, "Hallucination") == false) && (lv_unitType != "MULE") && (EventUnitDamageDeathCheck(c_deathTypeRemove) == false)) {
                 if (libGHLo_gf_BattleReportIsTrackedUnitType(lv_unit, lv_unitType)) {
                     lv_unitTypeLeaderAlias = (CatalogFieldValueGet(c_gameCatalogUnit, lv_unitType, "LeaderAlias", lv_owner));
                     if ((lv_unitTypeLeaderAlias != null) && (lv_unitTypeLeaderAlias != lv_unitType)) {
                         lv_unitType = lv_unitTypeLeaderAlias;
                     }
 
-                    libGHLo_gf_BattleReportIncrementUnitTypeKill(lv_opposingSideIndex, lv_unitType);
+                    lv_unitTypeForCounter = lv_unitType;
+                    if ((lv_unitType == "BanelingCocoon")) {
+                        lv_unitTypeForCounter = "Zergling";
+                    }
+                    else {
+                        if ((lv_unitType == "RavagerCocoon")) {
+                            lv_unitTypeForCounter = "Roach";
+                        }
+                        else {
+                            if ((lv_unitType == "BroodLordCocoon")) {
+                                lv_unitTypeForCounter = "Corruptor";
+                            }
+                            else {
+                                if ((lv_unitType == "LurkerMPEgg")) {
+                                    lv_unitTypeForCounter = "Hydralisk";
+                                }
+                                else {
+                                    if ((lv_unitType == "TransportOverlordCocoon")) {
+                                        if ((UnitHasBehavior2(lv_unit, "AHLI_fixUnitLostResourcesOfOverlordTransport") == true)) {
+                                            lv_unitTypeForCounter = "OverlordTransport";
+                                        }
+                                        else {
+                                            lv_unitTypeForCounter = "Overlord";
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                    libGHLo_gf_BattleReportIncrementUnitTypeKill(lv_opposingSideIndex, lv_unitTypeForCounter);
                 }
 
-                lv_mineralsCost = libGHLo_gf_GetFixedUnitResourceCost(lv_unit, c_unitCostMinerals, lv_owner);
-                lv_vespeneCost = libGHLo_gf_GetFixedUnitResourceCost(lv_unit, c_unitCostVespene, lv_owner);
-                if (((lv_mineralsCost > 0) || (lv_vespeneCost > 0))) {
-                    libGHLo_gf_BattleReportIncrementResourceDamage(lv_opposingSideIndex, lv_mineralsCost, lv_vespeneCost);
+                if ((lv_unitType != "AutoTurret")) {
+                    lv_mineralsCost = libGHLo_gf_GetFixedUnitResourceCost(lv_unit, c_unitCostMinerals, lv_owner);
+                    lv_vespeneCost = libGHLo_gf_GetFixedUnitResourceCost(lv_unit, c_unitCostVespene, lv_owner);
+                    if (((EventUnitDamageDeathCheck(c_deathTypeCancel) == true) || (EventUnitDamageDeathCheck(c_deathTypeSalvage) == true))) {
+                        if ((UnitTypeTestAttribute(lv_unitType, c_unitAttributeStructure) == true) && (UnitTypeTestAttribute(lv_unitType, c_unitAttributeBiological) == true)) {
+                            lv_mineralsCost = MaxI((lv_mineralsCost - CatalogFieldValueGetAsInt(c_gameCatalogUnit, "Drone", "CostResource[" + IntToString(0) + "]", lv_owner)), 0);
+                            lv_vespeneCost = MaxI((lv_vespeneCost - CatalogFieldValueGetAsInt(c_gameCatalogUnit, "Drone", "CostResource[" + IntToString(1) + "]", lv_owner)), 0);
+                        }
+
+                        lv_mineralsCost /= 4;
+                        lv_vespeneCost /= 4;
+                    }
+
+                    if (((lv_mineralsCost > 0) || (lv_vespeneCost > 0))) {
+                        libGHLo_gf_BattleReportIncrementResourceDamage(lv_opposingSideIndex, lv_mineralsCost, lv_vespeneCost);
+                    }
+
                 }
 
                 return true;
