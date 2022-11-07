@@ -4,6 +4,9 @@ include "TriggerLibs/natives"
 // Library: WCS GameHeart Fix
 //--------------------------------------------------------------------------------------------------
 // Preset Declarations
+const int libGHLo_ge_ProductionType_Structure = 0;
+const int libGHLo_ge_ProductionType_Unit = 1;
+const int libGHLo_ge_ProductionType_Upgrade = 2;
 const int libGHLo_ge_PlayerStatusScoreValue_UnusedNotPlaying = 0;
 const int libGHLo_ge_PlayerStatusScoreValue_Playing = 1;
 const int libGHLo_ge_PlayerStatusScoreValue_LeftGameinVictory = 2;
@@ -20,8 +23,8 @@ const int libGHLo_ge_WorkersKilledNotificationsSlotStatus_Hidden = 0;
 const int libGHLo_ge_WorkersKilledNotificationsSlotStatus_Visible = 1;
 
 // Constants
-const int libGHLo_gv_contaminateMAX_SLOTS = 17;
-const int libGHLo_gv_chronoBoostMAX_SLOTS = 17;
+const int libGHLo_gv_productionTabMAX_VISIBLE_SLOTS = 17;
+const int libGHLo_gv_productionTabMAX_SLOTS = 30;
 const int libGHLo_gv_graphsMaxNode = 100;
 const int libGHLo_gv_graphsMaxGraphId = 3;
 const int libGHLo_gv_graphsIntervalLength = 6;
@@ -43,18 +46,27 @@ const int libGHLo_gv_battleReportMaxAbilitySlot = 11;
 const int libGHLo_gv_battleReportMaxKilledUnitTypeSlot = 17;
 
 // Structures
-struct libGHLo_gs_Contaminate {
-    int[libGHLo_gv_contaminateMAX_SLOTS + 1] lv_slots;
-    string[libGHLo_gv_contaminateMAX_SLOTS + 1] lv_slotContents;
+struct libGHLo_gs_ProductionTab {
+    int[libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotButton;
+    int[libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotImage;
+    int[libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotCountLabel;
+    int[libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotProgressBar;
+    int[libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotUnitTargetFrame;
+    int[libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotPanel;
+    int[libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotChronoBoosted;
+    int[libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotContaminated;
+    int lv_moreSlotsLabel;
+    string[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotContent;
+    string[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotIconFile;
+    int[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotCount;
+    string[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotName;
+    unitgroup[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotSelection;
+    int[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotAttributes;
+    int[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotType;
     int lv_lastUsedSlot;
     unitgroup lv_contanimated;
-};
-
-struct libGHLo_gs_ChronoBoost {
-    int[libGHLo_gv_chronoBoostMAX_SLOTS + 1] lv_slots;
-    string[libGHLo_gv_chronoBoostMAX_SLOTS + 1] lv_slotContents;
-    int lv_lastUsedSlot;
-    unitgroup lv_boosted;
+    unitgroup lv_chronoBoosted;
+    bool lv_uiUpdateSlots;
 };
 
 struct libGHLo_gs_GraphsGeneral {
@@ -180,8 +192,7 @@ playergroup libGHLo_gv_initial_Active_Players;
 int libGHLo_gv_obsID;
 playergroup libGHLo_gv_obs;
 fixed libGHLo_gv_gameSpeedFactor;
-libGHLo_gs_Contaminate[16] libGHLo_gv_contaminate;
-libGHLo_gs_ChronoBoost[16] libGHLo_gv_chronoBoost;
+libGHLo_gs_ProductionTab[16] libGHLo_gv_productionTab;
 libGHLo_gs_GraphsGeneral libGHLo_gv_graphsGeneral;
 libGHLo_gs_GraphsData[libGHLo_gv_graphsMaxGraphId + 1] libGHLo_gv_graphsData;
 libGHLo_gs_Labels libGHLo_gv_labels;
@@ -208,10 +219,10 @@ void libGHLo_gf_RegisterPlayerLeavesEvent (trigger lp_trigger, int lp_player, in
 void libGHLo_gf_RegisterAbilityUsedEvent (trigger lp_trigger, unit lp_unit, abilcmd lp_abilityCommand, int lp_stage, bool lp_includeSharedAbilities);
 void libGHLo_gf_RegisterUnitTakesDamageEvent (trigger lp_trigger, unit lp_unit, int lp_damageType, int lp_fatal, string lp_effect);
 void libGHLo_gf_RegisterTimerExpiresEvent (trigger lp_trigger, timer lp_timer);
-void libGHLo_gf_Contaminateregisterhalteditem (int lp_player, string lp_item);
-void libGHLo_gf_Contaminateremovehalteditem (int lp_player, string lp_item);
-void libGHLo_gf_ChronoBoostregisterboosteditem (int lp_player, string lp_item);
-void libGHLo_gf_ChronoBoostremoveboosteditem (int lp_player, string lp_item);
+void libGHLo_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, int lp_productionType, unit lp_relatedUnit);
+void libGHLo_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, int lp_productionType, unit lp_relatedUnit);
+void libGHLo_gf_ProductionTabSwapSlots (int lp_player, int lp_slotA, int lp_slotB);
+void libGHLo_gf_ProductionTabUpdateUIthreaded ();
 void libGHLo_gf_ObserverUiAssistSetPlayerIdScore (int lp_player);
 void libGHLo_gf_ObserverUiAssistSetPlayerStatusScore (int lp_player, int lp_status);
 int libGHLo_gf_GetFixedUnitResourceCost (unit lp_unit, int lp_resource, int lp_player);
@@ -250,18 +261,17 @@ void libGHLo_gf_BattleReportClearBattleData ();
 // Trigger Declarations
 trigger libGHLo_gt_GameHeartInitialization;
 trigger libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers;
-trigger libGHLo_gt_ContaminateInit;
-trigger libGHLo_gt_ContaminateActivates;
-trigger libGHLo_gt_ContaminateDeactivates;
-trigger libGHLo_gt_ContaminateTrainingCancelled;
-trigger libGHLo_gt_ContaminateResearchCancelled;
-trigger libGHLo_gt_ChronoBoostInit;
-trigger libGHLo_gt_ChronoBoostActivates;
-trigger libGHLo_gt_ChronoBoostDeactivates;
-trigger libGHLo_gt_ChronoBoostTrainingStarted;
-trigger libGHLo_gt_ChronoBoostTrainingStopped;
-trigger libGHLo_gt_ChronoBoostResearchStarted;
-trigger libGHLo_gt_ChronoBoostResearchStopped;
+trigger libGHLo_gt_ProductionTabInit;
+trigger libGHLo_gt_ProductionTabConstructionStarted;
+trigger libGHLo_gt_ProductionTabConstructionEnded;
+trigger libGHLo_gt_ProductionTabTrainingStarted;
+trigger libGHLo_gt_ProductionTabTrainingEnded;
+trigger libGHLo_gt_ProductionTabResearchStarted;
+trigger libGHLo_gt_ProductionTabResearchEnded;
+trigger libGHLo_gt_ProductionTabContaminateActivates;
+trigger libGHLo_gt_ProductionTabContaminateDeactivates;
+trigger libGHLo_gt_ProductionTabChronoBoostActivates;
+trigger libGHLo_gt_ProductionTabChronoBoostDeactivates;
 trigger libGHLo_gt_ObserverUiAssistInitialization;
 trigger libGHLo_gt_ObserverUiAssistPlayerLeavesGameDefeat;
 trigger libGHLo_gt_ObserverUiAssistPlayerLeavesGameTie;
