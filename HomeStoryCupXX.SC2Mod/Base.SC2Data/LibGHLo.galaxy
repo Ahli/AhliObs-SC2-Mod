@@ -29,6 +29,15 @@ void libGHLo_InitVariables () {
     libGHLo_gv_obs = PlayerGroupSingle(libGHLo_gv_obsID);
     libGHLo_gv_gameSpeedFactor = GameGetSpeed();
     for (init_i = 0; init_i <= 15; init_i += 1) {
+        for (init_i1 = 0; init_i1 <= libGHLo_gv_contaminateMAX_SLOTS; init_i1 += 1) {
+            libGHLo_gv_contaminate[init_i].lv_slots[init_i1] = c_invalidDialogControlId;
+        }
+        for (init_i1 = 0; init_i1 <= libGHLo_gv_contaminateMAX_SLOTS; init_i1 += 1) {
+            libGHLo_gv_contaminate[init_i].lv_slotContents[init_i1] = "";
+        }
+        libGHLo_gv_contaminate[init_i].lv_lastUsedSlot = -1;
+    }
+    for (init_i = 0; init_i <= 15; init_i += 1) {
         for (init_i1 = 0; init_i1 <= libGHLo_gv_chronoBoostMAX_SLOTS; init_i1 += 1) {
             libGHLo_gv_chronoBoost[init_i].lv_slots[init_i1] = c_invalidDialogControlId;
         }
@@ -252,6 +261,78 @@ void libGHLo_gf_RegisterTimerExpiresEvent (trigger lp_trigger, timer lp_timer) {
     // Automatic Variable Declarations
     // Implementation
     TriggerAddEventTimer(lp_trigger, lp_timer);
+}
+
+void libGHLo_gf_Contaminateregisterhalteditem (int lp_player, string lp_item) {
+    // Variable Declarations
+    int lv_slot;
+
+    // Automatic Variable Declarations
+    int auto4B8CBB3E_ae;
+    const int auto4B8CBB3E_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    auto4B8CBB3E_ae = libGHLo_gv_contaminate[lp_player].lv_lastUsedSlot;
+    lv_slot = 0;
+    for ( ; ( (auto4B8CBB3E_ai >= 0 && lv_slot <= auto4B8CBB3E_ae) || (auto4B8CBB3E_ai < 0 && lv_slot >= auto4B8CBB3E_ae) ) ; lv_slot += auto4B8CBB3E_ai ) {
+        if ((libGHLo_gv_contaminate[lp_player].lv_slotContents[lv_slot] == lp_item)) {
+            return ;
+        }
+
+    }
+    if ((libGHLo_gv_contaminate[lp_player].lv_lastUsedSlot < libGHLo_gv_contaminateMAX_SLOTS)) {
+        libGHLo_gv_contaminate[lp_player].lv_lastUsedSlot += 1;
+        libGHLo_gv_contaminate[lp_player].lv_slotContents[libGHLo_gv_contaminate[lp_player].lv_lastUsedSlot] = lp_item;
+        libNtve_gf_SetDialogItemText(libGHLo_gv_contaminate[lp_player].lv_slots[libGHLo_gv_contaminate[lp_player].lv_lastUsedSlot], StringToText(lp_item), libGHLo_gv_obs);
+    }
+
+}
+
+void libGHLo_gf_Contaminateremovehalteditem (int lp_player, string lp_item) {
+    // Variable Declarations
+    int lv_slot;
+    int lv_foundSlot;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    unitgroup autoDC7E2D70_g;
+    int autoDC7E2D70_u;
+    int auto7281D0D3_ae;
+    const int auto7281D0D3_ai = 1;
+
+    // Variable Initialization
+    lv_foundSlot = -1;
+
+    // Implementation
+    autoDC7E2D70_g = libGHLo_gv_contaminate[lp_player].lv_contanimated;
+    autoDC7E2D70_u = UnitGroupCount(autoDC7E2D70_g, c_unitCountAll);
+    for (;; autoDC7E2D70_u -= 1) {
+        lv_unit = UnitGroupUnitFromEnd(autoDC7E2D70_g, autoDC7E2D70_u);
+        if (lv_unit == null) { break; }
+        if (((lp_item == (libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lv_unit, 1, 1))) || (lp_item == (libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(lv_unit, 1, 1))))) {
+            return ;
+        }
+
+    }
+    auto7281D0D3_ae = libGHLo_gv_contaminate[lp_player].lv_lastUsedSlot;
+    lv_slot = 0;
+    for ( ; ( (auto7281D0D3_ai >= 0 && lv_slot <= auto7281D0D3_ae) || (auto7281D0D3_ai < 0 && lv_slot >= auto7281D0D3_ae) ) ; lv_slot += auto7281D0D3_ai ) {
+        if ((libGHLo_gv_contaminate[lp_player].lv_slotContents[lv_slot] == lp_item)) {
+            lv_foundSlot = lv_slot;
+            break;
+        }
+
+    }
+    if ((lv_foundSlot >= 0)) {
+        libNtve_gf_SetDialogItemText(libGHLo_gv_contaminate[lp_player].lv_slots[lv_foundSlot], StringToText(libGHLo_gv_contaminate[lp_player].lv_slotContents[libGHLo_gv_contaminate[lp_player].lv_lastUsedSlot]), libGHLo_gv_obs);
+        libGHLo_gv_contaminate[lp_player].lv_slotContents[lv_foundSlot] = libGHLo_gv_contaminate[lp_player].lv_slotContents[libGHLo_gv_contaminate[lp_player].lv_lastUsedSlot];
+        libNtve_gf_SetDialogItemText(libGHLo_gv_contaminate[lp_player].lv_slots[libGHLo_gv_contaminate[lp_player].lv_lastUsedSlot], StringToText(""), libGHLo_gv_obs);
+        libGHLo_gv_contaminate[lp_player].lv_slotContents[libGHLo_gv_contaminate[lp_player].lv_lastUsedSlot] = null;
+        libGHLo_gv_contaminate[lp_player].lv_lastUsedSlot -= 1;
+    }
+
 }
 
 void libGHLo_gf_ChronoBoostregisterboosteditem (int lp_player, string lp_item) {
@@ -1761,6 +1842,199 @@ void libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Contaminate - Init
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ContaminateInit_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    int lv_slot;
+
+    // Automatic Variable Declarations
+    playergroup autoB96520F5_g;
+    const int auto04D99A9A_ae = libGHLo_gv_contaminateMAX_SLOTS;
+    const int auto04D99A9A_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoB96520F5_g = libGHLo_gv_initial_Active_Players;
+    lv_player = -1;
+    while (true) {
+        lv_player = PlayerGroupNextPlayer(autoB96520F5_g, lv_player);
+        if (lv_player < 0) { break; }
+        libGHLo_gv_contaminate[lv_player].lv_contanimated = UnitGroupEmpty();
+        lv_slot = 0;
+        for ( ; ( (auto04D99A9A_ai >= 0 && lv_slot <= auto04D99A9A_ae) || (auto04D99A9A_ai < 0 && lv_slot >= auto04D99A9A_ae) ) ; lv_slot += auto04D99A9A_ai ) {
+            DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame2/Player" + IntToString(lv_player) + "/ProdFrame/ContaminateInput/s" + IntToString(lv_slot)));
+            libGHLo_gv_contaminate[lv_player].lv_slots[lv_slot] = DialogControlLastCreated();
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ContaminateInit_Init () {
+    libGHLo_gt_ContaminateInit = TriggerCreate("libGHLo_gt_ContaminateInit_Func");
+    TriggerAddEventMapInit(libGHLo_gt_ContaminateInit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Contaminate - Activates
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ContaminateActivates_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_contaminatedStructure;
+    string lv_unitOrUpgrade;
+    string lv_unitType2;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_contaminatedStructure = EventUnit();
+    lv_unitOrUpgrade = libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lv_contaminatedStructure, 1, 1);
+    lv_player = UnitGetOwner(lv_contaminatedStructure);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitGroupAdd(libGHLo_gv_contaminate[lv_player].lv_contanimated, lv_contaminatedStructure);
+    if ((lv_unitOrUpgrade != null)) {
+        libGHLo_gf_Contaminateregisterhalteditem(lv_player, (lv_unitOrUpgrade));
+        if ((UnitHasBehavior(lv_contaminatedStructure, "ReactorQueue") == true)) {
+            lv_unitType2 = libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lv_contaminatedStructure, 2, 1);
+            if ((lv_unitType2 != null) && (lv_unitType2 != lv_unitOrUpgrade)) {
+                libGHLo_gf_Contaminateregisterhalteditem(lv_player, (lv_unitType2));
+            }
+
+        }
+
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ContaminateActivates_Init () {
+    libGHLo_gt_ContaminateActivates = TriggerCreate("libGHLo_gt_ContaminateActivates_Func");
+    TriggerAddEventUnitBehaviorChange(libGHLo_gt_ContaminateActivates, null, "Contaminated", c_unitBehaviorChangeActivate);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Contaminate - Deactivates
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ContaminateDeactivates_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_contaminatedStructure;
+    string lv_unitOrUpgrade;
+    string lv_unitType2;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_contaminatedStructure = EventUnit();
+    lv_unitOrUpgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(lv_contaminatedStructure, 1, 1);
+    lv_player = UnitGetOwner(lv_contaminatedStructure);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitGroupRemove(libGHLo_gv_contaminate[lv_player].lv_contanimated, lv_contaminatedStructure);
+    if ((lv_unitOrUpgrade != null)) {
+        libGHLo_gf_Contaminateremovehalteditem(lv_player, (lv_unitOrUpgrade));
+        if ((UnitHasBehavior(lv_contaminatedStructure, "ReactorQueue") == true)) {
+            lv_unitType2 = libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lv_contaminatedStructure, 2, 1);
+            if ((lv_unitType2 != null) && (lv_unitType2 != lv_unitOrUpgrade)) {
+                libGHLo_gf_Contaminateremovehalteditem(lv_player, (lv_unitType2));
+            }
+
+        }
+
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ContaminateDeactivates_Init () {
+    libGHLo_gt_ContaminateDeactivates = TriggerCreate("libGHLo_gt_ContaminateDeactivates_Func");
+    TriggerAddEventUnitBehaviorChange(libGHLo_gt_ContaminateDeactivates, null, "Contaminated", c_unitBehaviorChangeDeactivate);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Contaminate - Training Cancelled
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ContaminateTrainingCancelled_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_producer;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_producer = EventUnit();
+    lv_player = UnitGetOwner(lv_producer);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGroupHasUnit(libGHLo_gv_contaminate[lv_player].lv_contanimated, lv_producer) == true)) {
+        libGHLo_gf_Contaminateremovehalteditem(lv_player, (libNtve_gf_TriggeringProgressUnitType()));
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ContaminateTrainingCancelled_Init () {
+    libGHLo_gt_ContaminateTrainingCancelled = TriggerCreate("libGHLo_gt_ContaminateTrainingCancelled_Func");
+    TriggerAddEventUnitTrainProgress(libGHLo_gt_ContaminateTrainingCancelled, null, c_unitProgressStageCancel);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Contaminate - Research Cancelled
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ContaminateResearchCancelled_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_producer;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_producer = EventUnit();
+    lv_player = UnitGetOwner(lv_producer);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGroupHasUnit(libGHLo_gv_contaminate[lv_player].lv_contanimated, lv_producer) == true)) {
+        libGHLo_gf_Contaminateremovehalteditem(lv_player, (libNtve_gf_TriggeringProgressUpgrade()));
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ContaminateResearchCancelled_Init () {
+    libGHLo_gt_ContaminateResearchCancelled = TriggerCreate("libGHLo_gt_ContaminateResearchCancelled_Func");
+    TriggerAddEventUnitResearchProgress(libGHLo_gt_ContaminateResearchCancelled, null, c_unitProgressStageCancel);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: ChronoBoost - Init
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_ChronoBoostInit_Func (bool testConds, bool runActions) {
@@ -2512,56 +2786,6 @@ bool libGHLo_gt_GraphsTimer_Func (bool testConds, bool runActions) {
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_GraphsTimer_Init () {
     libGHLo_gt_GraphsTimer = TriggerCreate("libGHLo_gt_GraphsTimer_Func");
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Labels - Initialization
-//--------------------------------------------------------------------------------------------------
-bool libGHLo_gt_LabelsInitialization_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    bool lv_labelUnitsEnabled;
-    bool lv_labelResearchEnabled;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_labelUnitsEnabled = (UserDataGetInt("GameHeartSettings", "Labels (Units)", "Value", 1) == 1);
-    lv_labelResearchEnabled = (UserDataGetInt("GameHeartSettings", "Labels (Research)", "Value", 1) == 1);
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if (((lv_labelUnitsEnabled == true) || (lv_labelResearchEnabled == true))) {
-        libGHLo_gv_labels.lv_active = true;
-        libGHLo_gf_RegisterUnitCreatedEvent(libGHLo_gt_LabelsUnitCreated, null, null, null);
-        if ((lv_labelUnitsEnabled == true)) {
-            libGHLo_gf_RegisterUnitTrainingProgressEvent(libGHLo_gt_LabelsUnitTrainingStarted, null, c_unitProgressStageStart);
-            libGHLo_gf_RegisterUnitArmingProgressEvent(libGHLo_gt_LabelsUnitTrainingStarted, null, c_unitProgressStageStart);
-            libGHLo_gf_RegisterUnitTrainingProgressEvent(libGHLo_gt_LabelsUnitTrainingStopped, null, c_unitProgressStageComplete);
-            libGHLo_gf_RegisterUnitTrainingProgressEvent(libGHLo_gt_LabelsUnitTrainingStopped, null, c_unitProgressStageCancel);
-            libGHLo_gf_RegisterUnitArmingProgressEvent(libGHLo_gt_LabelsUnitTrainingStopped, null, c_unitProgressStageComplete);
-            libGHLo_gf_RegisterUnitArmingProgressEvent(libGHLo_gt_LabelsUnitTrainingStopped, null, c_unitProgressStageCancel);
-            libGHLo_gf_RegisterUnitDiesEvent(libGHLo_gt_LabelsReactorDestroyed, null);
-        }
-
-        if ((lv_labelResearchEnabled == true)) {
-            libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_LabelsResearchStarted, null, c_unitProgressStageStart);
-            libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_LabelsResearchStopped, null, c_unitProgressStageComplete);
-            libGHLo_gf_RegisterUnitResearchProgressEvent(libGHLo_gt_LabelsResearchStopped, null, c_unitProgressStageCancel);
-        }
-
-    }
-    else {
-        return false;
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libGHLo_gt_LabelsInitialization_Init () {
-    libGHLo_gt_LabelsInitialization = TriggerCreate("libGHLo_gt_LabelsInitialization_Func");
-    TriggerAddEventMapInit(libGHLo_gt_LabelsInitialization);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -3983,6 +4207,11 @@ void libGHLo_gt_BattleReportNoUiUpdateTimerExpires_Init () {
 void libGHLo_InitTriggers () {
     libGHLo_gt_GameHeartInitialization_Init();
     libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers_Init();
+    libGHLo_gt_ContaminateInit_Init();
+    libGHLo_gt_ContaminateActivates_Init();
+    libGHLo_gt_ContaminateDeactivates_Init();
+    libGHLo_gt_ContaminateTrainingCancelled_Init();
+    libGHLo_gt_ContaminateResearchCancelled_Init();
     libGHLo_gt_ChronoBoostInit_Init();
     libGHLo_gt_ChronoBoostActivates_Init();
     libGHLo_gt_ChronoBoostDeactivates_Init();
@@ -4000,7 +4229,6 @@ void libGHLo_InitTriggers () {
     libGHLo_gt_OverseerFromOverlordTransportDied_Init();
     libGHLo_gt_GraphsInitialization_Init();
     libGHLo_gt_GraphsTimer_Init();
-    libGHLo_gt_LabelsInitialization_Init();
     libGHLo_gt_LabelsUnitCreated_Init();
     libGHLo_gt_LabelsUnitTrainingStarted_Init();
     libGHLo_gt_LabelsResearchStarted_Init();
