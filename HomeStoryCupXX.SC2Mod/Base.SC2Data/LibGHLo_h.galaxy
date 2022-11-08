@@ -59,7 +59,7 @@ struct libGHLo_gs_ProductionTab {
     string[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotContent;
     string[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotIconFile;
     int[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotCount;
-    string[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotName;
+    text[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotName;
     unitgroup[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotSelection;
     int[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotAttributes;
     int[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotType;
@@ -205,6 +205,10 @@ libGHLo_gs_BattleReport libGHLo_gv_battleReport;
 libGHLo_gs_BattleReportSide[2] libGHLo_gv_battleReportSideData;
 
 // Function Declarations
+string libGHLo_gf_ImageofUpgrade (string lp_upgrade);
+string libGHLo_gf_IconofProduction (string lp_item, bool lp_isUnit);
+text libGHLo_gf_NameofProduction (string lp_item, bool lp_isUnit);
+string libGHLo_gf_IconofUnit (string lp_unitType);
 void libGHLo_gf_ApplySkinSet (string lp_skinSet, int lp_player);
 string libGHLo_gf_PlayerSkinSet (int lp_player);
 void libGHLo_gf_RegisterCameraMoveEvent (trigger lp_trigger, int lp_playerId, int lp_cameraMoveReason);
@@ -232,7 +236,6 @@ void libGHLo_gf_GraphsUpdateDataComparative (int lp_graphIndex);
 bool libGHLo_gf_LabelsUnitUsesCustomStatusBar (string lp_unitType);
 void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot);
 int libGHLo_gf_UpgradeNotificationsSearchFacilitySlot (unit lp_facility);
-string libGHLo_gf_UpgradeNotificationsUpgradeImage (string lp_upgrade);
 text libGHLo_gf_UpgradeNotificationsUpgradeName (string lp_upgrade);
 bool libGHLo_gf_UpgradeNotificationsUpgradeNeedsToBeVisible (fixed lp_remainingTime);
 void libGHLo_gf_UpgradeNotificationsUpdateUIthreaded ();
@@ -282,6 +285,7 @@ trigger libGHLo_gt_OverlordTransportMorphCompleted;
 trigger libGHLo_gt_OverseerFromOverlordTransportDied;
 trigger libGHLo_gt_GraphsInitialization;
 trigger libGHLo_gt_GraphsTimer;
+trigger libGHLo_gt_LabelsInitialization;
 trigger libGHLo_gt_LabelsUnitCreated;
 trigger libGHLo_gt_LabelsUnitTrainingStarted;
 trigger libGHLo_gt_LabelsResearchStarted;

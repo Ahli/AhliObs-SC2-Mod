@@ -3,7 +3,7 @@
     
     <!-- Use this code to use the new production panel in an observer interface:
     
-    <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame2" file="GameUI">
+    <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3" file="GameUI">
         <Visible val="{$parent/ProductionFrame/@Visible}"/>
         <StateGroup name="HideOriginalProductionFrame">
             <State name="Init">
@@ -102,22 +102,23 @@
         <Frame type="Image" name="Contaminated">
             <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-            <Texture val="Assets\Textures\btn-ability-zerg-contaminate-color.dds"/>
             <Height val="30"/>
             <Width val="30"/>
             <IgnoreParentColor val="true"/>
             <Visible val="false"/>
 			<CollapseLayout val="true"/>
+            <Texture val="Assets\Textures\btn-ability-zerg-contaminate-color.dds"/>
         </Frame>
 
         <Frame type="Image" name="ChronoBoosted">
             <Anchor side="Top" relative="$parent/Contaminated" pos="Max" offset="0"/>
             <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-            <Texture val="Assets\Textures\btn-ability-protoss-protoncharge-color.dds"/>
             <Height val="30"/>
             <Width val="30"/>
             <IgnoreParentColor val="true"/>
             <Visible val="false"/>
+			<CollapseLayout val="true"/>
+            <Texture val="Assets\Textures\btn-ability-protoss-protoncharge-color.dds"/>
         </Frame>
 
 		<Frame type="UnitTargetFrame" name="UnitTargetFrame">
@@ -388,7 +389,7 @@
     
     <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer/LeaderPanel" file="GameUI">
         
-        <Frame type="Frame" name="ProductionFrame2">
+        <Frame type="Frame" name="ProductionFrame3">
             <Anchor side="Top" relative="$parent/SelectPulldown" pos="Max" offset="4"/>
             <Anchor side="Left" relative="$parent/SelectPulldown" pos="Min" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
