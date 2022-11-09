@@ -143,12 +143,6 @@ void libGHLo_InitVariables () {
 
 // Presets
 // Functions
-string libGHLo_gf_ImageofUpgrade (string lp_upgrade) {
-    // Automatic Variable Declarations
-    // Implementation
-    return (CatalogFieldValueGet(c_gameCatalogUpgrade, lp_upgrade, "Icon", c_playerAny));
-}
-
 string libGHLo_gf_IconofProduction (string lp_item, bool lp_isUnit) {
     // Automatic Variable Declarations
     // Implementation
@@ -157,30 +151,12 @@ string libGHLo_gf_IconofProduction (string lp_item, bool lp_isUnit) {
     }
     else {
         if ((CatalogEntryIsValid(c_gameCatalogUpgrade, lp_item) == true)) {
-            return (CatalogFieldValueGet(c_gameCatalogUpgrade, (lp_item), "Icon", c_playerAny));
+            return (CatalogFieldValueGet(c_gameCatalogUpgrade, (lp_item), "Icon", libGHLo_gv_obsID));
         }
         else {
             TextExpressionSetToken("Param/Expression/lib_GHLo_DD90EB18", "A", StringToText(lp_item));
             TriggerDebugOutput(2, TextExpressionAssemble("Param/Expression/lib_GHLo_DD90EB18"), false);
             return "Assets\\Textures\\ui_ingame_help_techtree_questionmark.dds";
-        }
-    }
-}
-
-text libGHLo_gf_NameofProduction (string lp_item, bool lp_isUnit) {
-    // Automatic Variable Declarations
-    // Implementation
-    if ((lp_isUnit == true)) {
-        return UnitTypeGetName((lp_item));
-    }
-    else {
-        if ((CatalogEntryIsValid(c_gameCatalogUpgrade, lp_item) == true)) {
-            return StringExternal(CatalogFieldValueGet(c_gameCatalogUpgrade, lp_item, "Name", c_playerAny));
-        }
-        else {
-            TextExpressionSetToken("Param/Expression/lib_GHLo_611EC01F", "A", StringToText(lp_item));
-            TriggerDebugOutput(2, TextExpressionAssemble("Param/Expression/lib_GHLo_611EC01F"), false);
-            return StringToText(lp_item);
         }
     }
 }
@@ -199,6 +175,30 @@ string libGHLo_gf_IconofUnit (string lp_unitType) {
             TextExpressionSetToken("Param/Expression/lib_GHLo_DCC6FE9D", "A", StringToText((lp_unitType)));
             TriggerDebugOutput(2, TextExpressionAssemble("Param/Expression/lib_GHLo_DCC6FE9D"), false);
             return "Assets\\Textures\\ui_ingame_help_techtree_questionmark.dds";
+        }
+    }
+}
+
+string libGHLo_gf_IconofUpgrade (string lp_upgrade) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (CatalogFieldValueGet(c_gameCatalogUpgrade, lp_upgrade, "Icon", libGHLo_gv_obsID));
+}
+
+text libGHLo_gf_NameofProduction (string lp_item, bool lp_isUnit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((lp_isUnit == true)) {
+        return UnitTypeGetName((lp_item));
+    }
+    else {
+        if ((CatalogEntryIsValid(c_gameCatalogUpgrade, lp_item) == true)) {
+            return StringExternal(CatalogFieldValueGet(c_gameCatalogUpgrade, lp_item, "Name", c_playerAny));
+        }
+        else {
+            TextExpressionSetToken("Param/Expression/lib_GHLo_611EC01F", "A", StringToText(lp_item));
+            TriggerDebugOutput(2, TextExpressionAssemble("Param/Expression/lib_GHLo_611EC01F"), false);
+            return StringToText(lp_item);
         }
     }
 }
@@ -353,6 +353,10 @@ void libGHLo_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, 
     // Implementation
     if ((lv_isUnit == true)) {
         lv_itemAlias = CatalogFieldValueGet(c_gameCatalogUnit, lp_item, "LeaderAlias", c_playerAny);
+        if ((lv_itemAlias == null)) {
+            return ;
+        }
+
     }
 
     TextExpressionSetToken("Param/Expression/lib_GHLo_961CE472", "A", StringToText(lv_itemAlias));
@@ -362,7 +366,7 @@ void libGHLo_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, 
     for ( ; ( (auto98AE4297_ai >= 0 && lv_slot <= auto98AE4297_ae) || (auto98AE4297_ai < 0 && lv_slot >= auto98AE4297_ae) ) ; lv_slot += auto98AE4297_ai ) {
         if ((libGHLo_gv_productionTab[lp_player].lv_slotContent[lv_slot] == lv_itemAlias) && (libGHLo_gv_productionTab[lp_player].lv_slotType[lv_slot] == lp_productionType)) {
             libGHLo_gv_productionTab[lp_player].lv_slotCount[lv_slot] += 1;
-            UnitGroupAdd(libGHLo_gv_productionTab[lp_player].lv_slotSelection[lp_player], lp_relatedUnit);
+            UnitGroupAdd(libGHLo_gv_productionTab[lp_player].lv_slotSelection[lv_slot], lp_relatedUnit);
             return ;
         }
 
@@ -462,7 +466,7 @@ void libGHLo_gf_ProductionTabSwapSlots (int lp_player, int lp_slotA, int lp_slot
     lv_slotIcon = libGHLo_gv_productionTab[lp_player].lv_slotIconFile[lp_slotA];
     lv_slotCount = libGHLo_gv_productionTab[lp_player].lv_slotCount[lp_slotA];
     lv_slotName = libGHLo_gv_productionTab[lp_player].lv_slotName[lp_slotA];
-    lv_slotSelection = libGHLo_gv_productionTab[lp_player].lv_slotSelection[0];
+    lv_slotSelection = libGHLo_gv_productionTab[lp_player].lv_slotSelection[lp_slotA];
     lv_slotAttributes = libGHLo_gv_productionTab[lp_player].lv_slotAttributes[lp_slotA];
     lv_slotType = libGHLo_gv_productionTab[lp_player].lv_slotType[lp_slotA];
 
@@ -515,14 +519,13 @@ bool auto_libGHLo_gf_ProductionTabUpdateUIthreaded_TriggerFunc (bool testConds, 
             lv_player = PlayerGroupNextPlayer(autoC6A44A0E_g, lv_player);
             if (lv_player < 0) { break; }
             if ((libGHLo_gv_productionTab[lv_player].lv_lastUsedSlot >= 0)) {
-                auto2A63620B_ae = libGHLo_gv_productionTab[lv_player].lv_lastUsedSlot;
+                auto2A63620B_ae = MinI(libGHLo_gv_productionTab[lv_player].lv_lastUsedSlot, libGHLo_gv_productionTabMAX_VISIBLE_SLOTS);
                 lv_slot = 0;
                 for ( ; ( (auto2A63620B_ai >= 0 && lv_slot <= auto2A63620B_ae) || (auto2A63620B_ai < 0 && lv_slot >= auto2A63620B_ae) ) ; lv_slot += auto2A63620B_ai ) {
                     libNtve_gf_SetDialogItemText(libGHLo_gv_productionTab[lv_player].lv_slotCountLabel[lv_slot], IntToText(libGHLo_gv_productionTab[lv_player].lv_slotCount[lv_slot]), libGHLo_gv_obs);
                     libNtve_gf_SetDialogItemImage(libGHLo_gv_productionTab[lv_player].lv_slotImage[lv_slot], libGHLo_gv_productionTab[lv_player].lv_slotIconFile[lv_slot], libGHLo_gv_obs);
-                    libNtve_gf_SetDialogItemTooltip(libGHLo_gv_productionTab[lv_player].lv_slotButton[lv_slot], (libGHLo_gv_productionTab[lv_player].lv_slotName[lv_slot]), libGHLo_gv_obs);
-                    libNtve_gf_SetDialogItemTooltip(libGHLo_gv_productionTab[lv_player].lv_slotPanel[lv_slot], (libGHLo_gv_productionTab[lv_player].lv_slotName[lv_slot]), libGHLo_gv_obs);
-                    libNtve_gf_SetDialogItemUnitGroup(libGHLo_gv_productionTab[lv_player].lv_slotUnitTargetFrame[lv_slot], libGHLo_gv_productionTab[lv_player].lv_slotSelection[lv_slot], libGHLo_gv_obs);
+                    libNtve_gf_SetDialogItemTooltip(libGHLo_gv_productionTab[lv_player].lv_slotUnitTargetFrame[lv_slot], (libGHLo_gv_productionTab[lv_player].lv_slotName[lv_slot]), libGHLo_gv_obs);
+                    libNtve_gf_SetDialogItemUnit(libGHLo_gv_productionTab[lv_player].lv_slotUnitTargetFrame[lv_slot], UnitGroupUnit(libGHLo_gv_productionTab[lv_player].lv_slotSelection[lv_slot], 1), libGHLo_gv_obs);
                     libNtve_gf_SetDialogItemMaximumValue(libGHLo_gv_productionTab[lv_player].lv_slotProgressBar[lv_slot], 0.0, libGHLo_gv_obs);
                     DialogControlSetVisible(libGHLo_gv_productionTab[lv_player].lv_slotPanel[lv_slot], libGHLo_gv_obs, true);
                 }
@@ -852,7 +855,7 @@ void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
             if ((lv_count == lv_sLOT_MAX_INDEX1)) {
                 lv_count1 = (lv_count - 1);
                 lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], 1, 1);
-                libGHLo_gf_UpgradeNotificationsSetSlotData(lv_count1, libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_upgrade, "Icon", c_playerAny)), UnitGetOwner(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count]), ((UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1) / libGHLo_gv_gameSpeedFactor) <= libGHLo_gv_upgradeNotificationsVisibleTime), libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count]);
+                libGHLo_gf_UpgradeNotificationsSetSlotData(lv_count1, libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_upgrade, "Icon", libGHLo_gv_obsID)), UnitGetOwner(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count]), ((UnitQueueItemTime(libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1) / libGHLo_gv_gameSpeedFactor) <= libGHLo_gv_upgradeNotificationsVisibleTime), libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_count]);
                 libGHLo_gv_upgradeNotifications.lv_slotStatus[lv_count1] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
                 libNtve_gf_SetDialogItemText(libGHLo_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], StringToText(""), libGHLo_gv_obs);
                 DialogControlSetVisible(libGHLo_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libGHLo_gv_obs, true);
@@ -1213,7 +1216,7 @@ void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_sl
         lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(libGHLo_gv_upgradeNotifications.lv_slotFacility[lp_slotA], 1, 1);
         lv_status[0] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
         lv_name[0] = libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade);
-        lv_icon[0] = (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_upgrade, "Icon", c_playerAny));
+        lv_icon[0] = (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_upgrade, "Icon", libGHLo_gv_obsID));
         lv_timer[0] = TimerCreate();
         lv_facility[0] = libGHLo_gv_upgradeNotifications.lv_slotFacility[lp_slotA];
     }
@@ -1233,7 +1236,7 @@ void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_sl
         lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(libGHLo_gv_upgradeNotifications.lv_slotFacility[lp_slotB], 1, 1);
         lv_status[1] = libGHLo_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
         lv_name[1] = libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade);
-        lv_icon[1] = (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_upgrade, "Icon", c_playerAny));
+        lv_icon[1] = (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_upgrade, "Icon", libGHLo_gv_obsID));
         lv_timer[1] = TimerCreate();
         lv_facility[1] = libGHLo_gv_upgradeNotifications.lv_slotFacility[lp_slotB];
     }
@@ -1734,7 +1737,7 @@ void libGHLo_gf_BattleReportIncrementAbilityUsage (int lp_sideIndex, abilcmd lp_
                                         }
                                         else {
                                             if ((CatalogEntryIsValid(c_gameCatalogButton, lv_ability) == true)) {
-                                                libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = (CatalogFieldValueGet(c_gameCatalogButton, lv_ability, "Icon", c_playerAny));
+                                                libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = (CatalogFieldValueGet(c_gameCatalogButton, lv_ability, "Icon", libGHLo_gv_obsID));
                                                 libGHLo_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal(CatalogFieldValueGet(c_gameCatalogButton, lv_ability, "Name", c_playerAny));
                                             }
                                             else {
@@ -2027,19 +2030,17 @@ void libGHLo_gt_ProductionTabInit_Init () {
 bool libGHLo_gt_ProductionTabConstructionStarted_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_structure;
-    int lv_player;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_structure = EventUnitProgressUnit();
-    lv_player = UnitGetOwner(lv_structure);
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    libGHLo_gf_ProductionTabRegisterProduction(lv_player, (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Structure, lv_structure);
+    libGHLo_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_structure), (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Structure, lv_structure);
     return true;
 }
 
@@ -2055,19 +2056,17 @@ void libGHLo_gt_ProductionTabConstructionStarted_Init () {
 bool libGHLo_gt_ProductionTabConstructionEnded_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_structure;
-    int lv_player;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_structure = EventUnitProgressUnit();
-    lv_player = UnitGetOwner(lv_structure);
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    libGHLo_gf_ProductionTabRemoveProduction(lv_player, (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Structure, lv_structure);
+    libGHLo_gf_ProductionTabRemoveProduction(UnitGetOwner(lv_structure), (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Structure, lv_structure);
     return true;
 }
 
@@ -2084,19 +2083,17 @@ void libGHLo_gt_ProductionTabConstructionEnded_Init () {
 bool libGHLo_gt_ProductionTabTrainingStarted_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_producer;
-    int lv_player;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_producer = EventUnit();
-    lv_player = UnitGetOwner(lv_producer);
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    libGHLo_gf_ProductionTabRegisterProduction(lv_player, (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Unit, lv_producer);
+    libGHLo_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Unit, lv_producer);
     return true;
 }
 
@@ -2112,19 +2109,17 @@ void libGHLo_gt_ProductionTabTrainingStarted_Init () {
 bool libGHLo_gt_ProductionTabTrainingEnded_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_producer;
-    int lv_player;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_producer = EventUnit();
-    lv_player = UnitGetOwner(lv_producer);
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    libGHLo_gf_ProductionTabRemoveProduction(lv_player, (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Unit, lv_producer);
+    libGHLo_gf_ProductionTabRemoveProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Unit, lv_producer);
     return true;
 }
 
@@ -2141,19 +2136,17 @@ void libGHLo_gt_ProductionTabTrainingEnded_Init () {
 bool libGHLo_gt_ProductionTabResearchStarted_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_producer;
-    int lv_player;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_producer = EventUnit();
-    lv_player = UnitGetOwner(lv_producer);
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    libGHLo_gf_ProductionTabRegisterProduction(lv_player, (libNtve_gf_TriggeringProgressUpgrade()), libGHLo_ge_ProductionType_Upgrade, lv_producer);
+    libGHLo_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUpgrade()), libGHLo_ge_ProductionType_Upgrade, lv_producer);
     return true;
 }
 
@@ -2169,19 +2162,17 @@ void libGHLo_gt_ProductionTabResearchStarted_Init () {
 bool libGHLo_gt_ProductionTabResearchEnded_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_producer;
-    int lv_player;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_producer = EventUnit();
-    lv_player = UnitGetOwner(lv_producer);
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    libGHLo_gf_ProductionTabRemoveProduction(lv_player, (libNtve_gf_TriggeringProgressUpgrade()), libGHLo_ge_ProductionType_Upgrade, lv_producer);
+    libGHLo_gf_ProductionTabRemoveProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUpgrade()), libGHLo_ge_ProductionType_Upgrade, lv_producer);
     return true;
 }
 
@@ -2190,6 +2181,166 @@ void libGHLo_gt_ProductionTabResearchEnded_Init () {
     libGHLo_gt_ProductionTabResearchEnded = TriggerCreate("libGHLo_gt_ProductionTabResearchEnded_Func");
     TriggerAddEventUnitResearchProgress(libGHLo_gt_ProductionTabResearchEnded, null, c_unitProgressStageComplete);
     TriggerAddEventUnitResearchProgress(libGHLo_gt_ProductionTabResearchEnded, null, c_unitProgressStageCancel);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ProductionTab - Arming Started
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ProductionTabArmingStarted_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_producer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_producer = EventUnit();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libGHLo_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Unit, lv_producer);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ProductionTabArmingStarted_Init () {
+    libGHLo_gt_ProductionTabArmingStarted = TriggerCreate("libGHLo_gt_ProductionTabArmingStarted_Func");
+    TriggerAddEventUnitArmMagazineProgress(libGHLo_gt_ProductionTabArmingStarted, null, c_unitProgressStageStart);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ProductionTab - Arming Ended
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ProductionTabArmingEnded_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_producer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_producer = EventUnit();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libGHLo_gf_ProductionTabRemoveProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Unit, lv_producer);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ProductionTabArmingEnded_Init () {
+    libGHLo_gt_ProductionTabArmingEnded = TriggerCreate("libGHLo_gt_ProductionTabArmingEnded_Func");
+    TriggerAddEventUnitArmMagazineProgress(libGHLo_gt_ProductionTabArmingEnded, null, c_unitProgressStageComplete);
+    TriggerAddEventUnitArmMagazineProgress(libGHLo_gt_ProductionTabArmingEnded, null, c_unitProgressStageCancel);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ProductionTab - Morph Started
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ProductionTabMorphStarted_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_targetUnitType;
+    int lv_lastInfoArrayIndex;
+    unit lv_unit;
+    string lv_sourceUnitType;
+    abilcmd lv_abilCmd;
+    string lv_ability;
+    int lv_productionType;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_abilCmd = EventUnitAbility();
+    lv_ability = AbilityCommandGetAbility(lv_abilCmd);
+    lv_productionType = libGHLo_ge_ProductionType_Unit;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((AbilityCommandGetCommand(lv_abilCmd) == 0) && (CatalogFieldValueGet(c_gameCatalogAbil, (lv_ability), "Flags[" + IntToString(18) + "]", c_playerAny) == "1")) {
+        lv_unit = EventUnit();
+        lv_sourceUnitType = UnitGetType(lv_unit);
+        lv_lastInfoArrayIndex = (CatalogFieldValueCount(c_gameCatalogAbil, lv_ability, "InfoArray", c_playerAny) - 1);
+        if (((lv_lastInfoArrayIndex == 0) || (lv_sourceUnitType != (CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(0) + "].Unit", c_playerAny))))) {
+            lv_targetUnitType = CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(lv_lastInfoArrayIndex) + "].Unit", c_playerAny);
+            TextExpressionSetToken("Param/Expression/lib_GHLo_04EC4953", "A", StringToText((lv_sourceUnitType)));
+            TextExpressionSetToken("Param/Expression/lib_GHLo_04EC4953", "B", StringToText(lv_targetUnitType));
+            TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_GHLo_04EC4953"), true);
+            if ((UnitTypeTestAttribute(lv_sourceUnitType, c_unitAttributeStructure) == true)) {
+                lv_productionType = libGHLo_ge_ProductionType_Structure;
+            }
+
+            libGHLo_gf_ProductionTabRegisterProduction(EventPlayer(), lv_targetUnitType, lv_productionType, lv_unit);
+        }
+        else {
+            return false;
+        }
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ProductionTabMorphStarted_Init () {
+    libGHLo_gt_ProductionTabMorphStarted = TriggerCreate("libGHLo_gt_ProductionTabMorphStarted_Func");
+    TriggerAddEventUnitAbility(libGHLo_gt_ProductionTabMorphStarted, null, null, c_abilMorphStageUnitStart, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ProductionTab - Morph Finished
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ProductionTabMorphFinished_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_targetUnitType;
+    int lv_lastInfoArrayIndex;
+    unit lv_unit;
+    abilcmd lv_abilCmd;
+    string lv_ability;
+    int lv_productionType;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_abilCmd = EventUnitAbility();
+    lv_ability = AbilityCommandGetAbility(lv_abilCmd);
+    lv_productionType = libGHLo_ge_ProductionType_Unit;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((AbilityCommandGetCommand(lv_abilCmd) == 0) && (CatalogFieldValueGet(c_gameCatalogAbil, (lv_ability), "Flags[" + IntToString(18) + "]", c_playerAny) == "1")) {
+        lv_lastInfoArrayIndex = (CatalogFieldValueCount(c_gameCatalogAbil, lv_ability, "InfoArray", c_playerAny) - 1);
+        lv_targetUnitType = CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(lv_lastInfoArrayIndex) + "].Unit", c_playerAny);
+        lv_unit = EventUnit();
+        if ((lv_targetUnitType == (UnitGetType(lv_unit)))) {
+            if ((UnitTypeTestAttribute((lv_targetUnitType), c_unitAttributeStructure) == true)) {
+                lv_productionType = libGHLo_ge_ProductionType_Structure;
+            }
+
+            TextExpressionSetToken("Param/Expression/lib_GHLo_496D498B", "A", StringToText(lv_targetUnitType));
+            TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_GHLo_496D498B"), true);
+            libGHLo_gf_ProductionTabRemoveProduction(EventPlayer(), lv_targetUnitType, lv_productionType, lv_unit);
+        }
+        else {
+            return false;
+        }
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ProductionTabMorphFinished_Init () {
+    libGHLo_gt_ProductionTabMorphFinished = TriggerCreate("libGHLo_gt_ProductionTabMorphFinished_Func");
+    TriggerAddEventUnitAbility(libGHLo_gt_ProductionTabMorphFinished, null, null, c_abilMorphStageUnitEnd, false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -3452,7 +3603,7 @@ bool libGHLo_gt_UpgradeNotificationsResearchStarted_Func (bool testConds, bool r
             libGHLo_gv_upgradeNotifications.lv_slotFacility[lv_slot] = lv_facility;
             if ((lv_slot <= libGHLo_gv_upgradeNotificationsMaxUISlots)) {
                 lv_upgrade = libNtve_gf_TriggeringProgressUpgrade();
-                libGHLo_gf_UpgradeNotificationsSetSlotData(lv_slot, libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_upgrade, "Icon", c_playerAny)), EventPlayer(), false, lv_facility);
+                libGHLo_gf_UpgradeNotificationsSetSlotData(lv_slot, libGHLo_gf_UpgradeNotificationsUpgradeName(lv_upgrade), (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_upgrade, "Icon", libGHLo_gv_obsID)), EventPlayer(), false, lv_facility);
                 if ((libGHLo_gv_upgradeNotifications.lv_updateThreadRunning == false)) {
                     libGHLo_gv_upgradeNotifications.lv_updateThreadRunning = true;
                     libGHLo_gf_UpgradeNotificationsUpdateUIthreaded();
@@ -4282,6 +4433,10 @@ void libGHLo_InitTriggers () {
     libGHLo_gt_ProductionTabTrainingEnded_Init();
     libGHLo_gt_ProductionTabResearchStarted_Init();
     libGHLo_gt_ProductionTabResearchEnded_Init();
+    libGHLo_gt_ProductionTabArmingStarted_Init();
+    libGHLo_gt_ProductionTabArmingEnded_Init();
+    libGHLo_gt_ProductionTabMorphStarted_Init();
+    libGHLo_gt_ProductionTabMorphFinished_Init();
     libGHLo_gt_ProductionTabContaminateActivates_Init();
     libGHLo_gt_ProductionTabContaminateDeactivates_Init();
     libGHLo_gt_ProductionTabChronoBoostActivates_Init();

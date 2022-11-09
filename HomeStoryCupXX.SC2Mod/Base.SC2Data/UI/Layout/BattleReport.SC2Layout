@@ -141,8 +141,8 @@
             <!-- Number Background -->
             <Frame type="Image" name="NumberBackground">
                 <Anchor side="Left" relative="$parent" pos="0.3333" offset="0"/>
-                <Anchor side="Right" relative="$parent" pos="Max" offset="-3"/>
-                <Anchor side="Bottom" relative="$parent" pos="Max" offset="-3"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="-1"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="-1"/>
                 <Height val="24"/>
                 <Color val="255,0,0,0"/>
                 <Alpha val="128"/>
@@ -151,9 +151,9 @@
         </Frame>
 
         <Frame type="Label" name="Label">
-            <Anchor side="Right" relative="$parent" pos="Max" offset="-8"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="-4"/>
             <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-            <Anchor side="Bottom" relative="$parent" pos="Max" offset="1"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="5"/>
             <Height val="32"/>
             <Style val="BattleReportButtonCount"/>
             <Options val="ScaleToPreventTruncation"/>

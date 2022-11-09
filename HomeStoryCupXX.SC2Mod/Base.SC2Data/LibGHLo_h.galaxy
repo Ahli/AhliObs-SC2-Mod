@@ -205,10 +205,10 @@ libGHLo_gs_BattleReport libGHLo_gv_battleReport;
 libGHLo_gs_BattleReportSide[2] libGHLo_gv_battleReportSideData;
 
 // Function Declarations
-string libGHLo_gf_ImageofUpgrade (string lp_upgrade);
 string libGHLo_gf_IconofProduction (string lp_item, bool lp_isUnit);
-text libGHLo_gf_NameofProduction (string lp_item, bool lp_isUnit);
 string libGHLo_gf_IconofUnit (string lp_unitType);
+string libGHLo_gf_IconofUpgrade (string lp_upgrade);
+text libGHLo_gf_NameofProduction (string lp_item, bool lp_isUnit);
 void libGHLo_gf_ApplySkinSet (string lp_skinSet, int lp_player);
 string libGHLo_gf_PlayerSkinSet (int lp_player);
 void libGHLo_gf_RegisterCameraMoveEvent (trigger lp_trigger, int lp_playerId, int lp_cameraMoveReason);
@@ -271,6 +271,10 @@ trigger libGHLo_gt_ProductionTabTrainingStarted;
 trigger libGHLo_gt_ProductionTabTrainingEnded;
 trigger libGHLo_gt_ProductionTabResearchStarted;
 trigger libGHLo_gt_ProductionTabResearchEnded;
+trigger libGHLo_gt_ProductionTabArmingStarted;
+trigger libGHLo_gt_ProductionTabArmingEnded;
+trigger libGHLo_gt_ProductionTabMorphStarted;
+trigger libGHLo_gt_ProductionTabMorphFinished;
 trigger libGHLo_gt_ProductionTabContaminateActivates;
 trigger libGHLo_gt_ProductionTabContaminateDeactivates;
 trigger libGHLo_gt_ProductionTabChronoBoostActivates;

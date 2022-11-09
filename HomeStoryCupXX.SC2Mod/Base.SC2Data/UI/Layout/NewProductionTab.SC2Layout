@@ -39,7 +39,7 @@
             <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
             <Height val="69"/>
-            <Tooltip val="{$parent/@Tooltip}"/>
+            <!--<Tooltip val="{$parent/@Tooltip}"/>-->
             <IgnoreParentColor val="true"/>
 
             <Frame type="Image" name="NormalImage">
@@ -122,7 +122,10 @@
         </Frame>
 
 		<Frame type="UnitTargetFrame" name="UnitTargetFrame">
-			<Anchor relative="$parent/BackgroundButton/HitTestFrame"/>
+            <Anchor side="Top" relative="$parent/BackgroundButton/HitTestFrame" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BackgroundButton/HitTestFrame" pos="Min" offset="0"/>
+            <Anchor side="Right" relative="$parent/BackgroundButton/HitTestFrame" pos="Max" offset="0"/>
+            <Anchor side="Bottom" relative="$parent/ProgressBar" pos="Max" offset="0"/>
 			<AllowCameraCentering val="True"/>
 			<AllowSelection val="True"/>
 			<AllowTargeting val="False"/>
