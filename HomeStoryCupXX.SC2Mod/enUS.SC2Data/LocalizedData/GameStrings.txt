@@ -324,6 +324,7 @@ Param/Value/lib_GHLo_899E3E66=Muscular Augments
 Param/Value/lib_GHLo_8B1D7D0E=Flyer Attacks Level 3
 Param/Value/lib_GHLo_8B372612=Nitro Packs
 Param/Value/lib_GHLo_8D6CCD20=Charge
+Param/Value/lib_GHLo_8EE077FC=UI UPDATE
 Param/Value/lib_GHLo_8F85CCDB=Missile Attacks Level 1
 Param/Value/lib_GHLo_9209B1AF=Air Armor Level 2
 Param/Value/lib_GHLo_9266D633=Denied

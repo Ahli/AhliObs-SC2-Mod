@@ -30,7 +30,7 @@
         <Visible val="False"/>
         <CollapseLayout val="True"/>
 
-        <Frame type="Button" name="BackgroundButton">
+        <!--<Frame type="Button" name="BackgroundButton">
             <NormalImage val="NormalImage"/>
             <HoverImage val="HoverImage"/>
             <HitTestFrame val="HitTestFrame"/>
@@ -39,7 +39,6 @@
             <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
             <Height val="69"/>
-            <!--<Tooltip val="{$parent/@Tooltip}"/>-->
             <IgnoreParentColor val="true"/>
 
             <Frame type="Image" name="NormalImage">
@@ -68,8 +67,27 @@
                 <Anchor side="Left" relative="$parent" pos="Min" offset="6"/>
                 <Anchor side="Right" relative="$parent" pos="Max" offset="-6"/>
             </Frame>
-        </Frame>
-
+        </Frame>-->
+		
+		<Frame type="Image" name="NormalImage">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="3"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+            <Height val="69"/>
+			<Texture val="@@UI/LeaderPanelButtonNormal"/>
+			<TextureType val="Nineslice"/>
+			<Tiled val="true"/>
+            <IgnoreParentColor val="true"/>
+		</Frame>
+		<Frame type="Image" name="HoverImage">
+			<Anchor relative="$parent/NormalImage"/>
+			<Texture val="@@UI/LeaderPanelButtonHover"/>
+			<TextureType val="Nineslice"/>
+			<Tiled val="true"/>
+            <IgnoreParentColor val="true"/>
+			<Visible val="false"/>
+		</Frame>
+		
         <Frame type="Image" name="IconImage">
             <Anchor side="Top" relative="$parent/BackgroundButton" pos="Min" offset="7"/>
             <Anchor side="Bottom" relative="$parent/BackgroundButton" pos="Max" offset="-7"/>
@@ -122,15 +140,28 @@
         </Frame>
 
 		<Frame type="UnitTargetFrame" name="UnitTargetFrame">
-            <Anchor side="Top" relative="$parent/BackgroundButton/HitTestFrame" pos="Min" offset="0"/>
-            <Anchor side="Left" relative="$parent/BackgroundButton/HitTestFrame" pos="Min" offset="0"/>
-            <Anchor side="Right" relative="$parent/BackgroundButton/HitTestFrame" pos="Max" offset="0"/>
+            <Anchor side="Top" relative="$parent" pos="Min" offset="6"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="6"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="-6"/>
             <Anchor side="Bottom" relative="$parent/ProgressBar" pos="Max" offset="0"/>
 			<AllowCameraCentering val="True"/>
 			<AllowSelection val="True"/>
 			<AllowTargeting val="False"/>
 			<AllowSmartCommand val="False"/>
 			<AllowCursorChanging val="False"/>
+			
+			<Animation name="Hover">
+				<Event event="OnMouseEnter" action="Play"/>
+				<Event event="OnMouseExit" action="Reset"/>
+				<Controller type="Visibility" end="Pause" frame="$parent/NormalImage">
+					<Key type="Bool" time="0" value="true"/>
+					<Key type="Bool" time="0" value="false"/>
+				</Controller>
+				<Controller type="Visibility" end="Pause" frame="$parent/HoverImage">
+					<Key type="Bool" time="0" value="false"/>
+					<Key type="Bool" time="0" value="true"/>
+				</Controller>
+			</Animation>
 		</Frame>
     </Frame>
     

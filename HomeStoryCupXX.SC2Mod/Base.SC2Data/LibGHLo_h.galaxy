@@ -47,7 +47,6 @@ const int libGHLo_gv_battleReportMaxKilledUnitTypeSlot = 17;
 
 // Structures
 struct libGHLo_gs_ProductionTab {
-    int[libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotButton;
     int[libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotImage;
     int[libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotCountLabel;
     int[libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotProgressBar;
@@ -61,8 +60,9 @@ struct libGHLo_gs_ProductionTab {
     int[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotCount;
     text[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotName;
     unitgroup[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotSelection;
-    int[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotAttributes;
+    bool[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotIsMorph;
     int[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotType;
+    int[libGHLo_gv_productionTabMAX_SLOTS + 1] lv_slotBuildDurationMax;
     int lv_lastUsedSlot;
     unitgroup lv_contanimated;
     unitgroup lv_chronoBoosted;
@@ -223,10 +223,11 @@ void libGHLo_gf_RegisterPlayerLeavesEvent (trigger lp_trigger, int lp_player, in
 void libGHLo_gf_RegisterAbilityUsedEvent (trigger lp_trigger, unit lp_unit, abilcmd lp_abilityCommand, int lp_stage, bool lp_includeSharedAbilities);
 void libGHLo_gf_RegisterUnitTakesDamageEvent (trigger lp_trigger, unit lp_unit, int lp_damageType, int lp_fatal, string lp_effect);
 void libGHLo_gf_RegisterTimerExpiresEvent (trigger lp_trigger, timer lp_timer);
-void libGHLo_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, int lp_productionType, unit lp_relatedUnit);
+void libGHLo_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, int lp_productionType, unit lp_relatedUnit, bool lp_isMorph);
 void libGHLo_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, int lp_productionType, unit lp_relatedUnit);
 void libGHLo_gf_ProductionTabSwapSlots (int lp_player, int lp_slotA, int lp_slotB);
 void libGHLo_gf_ProductionTabUpdateUIthreaded ();
+fixed libGHLo_gf_ProductionTabGetCurrentProgress (unitgroup lp_units, bool lp_isMorph);
 void libGHLo_gf_ObserverUiAssistSetPlayerIdScore (int lp_player);
 void libGHLo_gf_ObserverUiAssistSetPlayerStatusScore (int lp_player, int lp_status);
 int libGHLo_gf_GetFixedUnitResourceCost (unit lp_unit, int lp_resource, int lp_player);
