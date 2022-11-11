@@ -28,34 +28,36 @@ void libGHLo_InitVariables () {
     libGHLo_gv_obsID = CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny);
     libGHLo_gv_obs = PlayerGroupSingle(libGHLo_gv_obsID);
     libGHLo_gv_gameSpeedFactor = GameGetSpeed();
+    libGHLo_gv_productionTabGeneral.lv_selectionIndexRaw = -1;
     for (init_i = 0; init_i <= 15; init_i += 1) {
         for (init_i1 = 0; init_i1 <= libGHLo_gv_productionTabMAX_VISIBLE_SLOTS; init_i1 += 1) {
-            libGHLo_gv_productionTab[init_i].lv_slotImage[init_i1] = c_invalidDialogControlId;
+            libGHLo_gv_productionTabPlayer[init_i].lv_slotImage[init_i1] = c_invalidDialogControlId;
         }
         for (init_i1 = 0; init_i1 <= libGHLo_gv_productionTabMAX_VISIBLE_SLOTS; init_i1 += 1) {
-            libGHLo_gv_productionTab[init_i].lv_slotCountLabel[init_i1] = c_invalidDialogControlId;
+            libGHLo_gv_productionTabPlayer[init_i].lv_slotCountLabel[init_i1] = c_invalidDialogControlId;
         }
         for (init_i1 = 0; init_i1 <= libGHLo_gv_productionTabMAX_VISIBLE_SLOTS; init_i1 += 1) {
-            libGHLo_gv_productionTab[init_i].lv_slotProgressBar[init_i1] = c_invalidDialogControlId;
+            libGHLo_gv_productionTabPlayer[init_i].lv_slotProgressBar[init_i1] = c_invalidDialogControlId;
         }
         for (init_i1 = 0; init_i1 <= libGHLo_gv_productionTabMAX_VISIBLE_SLOTS; init_i1 += 1) {
-            libGHLo_gv_productionTab[init_i].lv_slotUnitTargetFrame[init_i1] = c_invalidDialogControlId;
+            libGHLo_gv_productionTabPlayer[init_i].lv_slotUnitTargetFrame[init_i1] = c_invalidDialogControlId;
         }
         for (init_i1 = 0; init_i1 <= libGHLo_gv_productionTabMAX_VISIBLE_SLOTS; init_i1 += 1) {
-            libGHLo_gv_productionTab[init_i].lv_slotPanel[init_i1] = c_invalidDialogControlId;
+            libGHLo_gv_productionTabPlayer[init_i].lv_slotPanel[init_i1] = c_invalidDialogControlId;
         }
         for (init_i1 = 0; init_i1 <= libGHLo_gv_productionTabMAX_VISIBLE_SLOTS; init_i1 += 1) {
-            libGHLo_gv_productionTab[init_i].lv_slotChronoBoosted[init_i1] = c_invalidDialogControlId;
+            libGHLo_gv_productionTabPlayer[init_i].lv_slotChronoBoosted[init_i1] = c_invalidDialogControlId;
         }
         for (init_i1 = 0; init_i1 <= libGHLo_gv_productionTabMAX_VISIBLE_SLOTS; init_i1 += 1) {
-            libGHLo_gv_productionTab[init_i].lv_slotContaminated[init_i1] = c_invalidDialogControlId;
+            libGHLo_gv_productionTabPlayer[init_i].lv_slotContaminated[init_i1] = c_invalidDialogControlId;
         }
-        libGHLo_gv_productionTab[init_i].lv_moreSlotsLabel = c_invalidDialogControlId;
+        libGHLo_gv_productionTabPlayer[init_i].lv_moreSlotsLabel = c_invalidDialogControlId;
         for (init_i1 = 0; init_i1 <= libGHLo_gv_productionTabMAX_SLOTS; init_i1 += 1) {
-            libGHLo_gv_productionTab[init_i].lv_slotContent[init_i1] = "";
+            libGHLo_gv_productionTabPlayer[init_i].lv_slotContent[init_i1] = "";
         }
-        libGHLo_gv_productionTab[init_i].lv_lastUsedSlot = -1;
+        libGHLo_gv_productionTabPlayer[init_i].lv_lastUsedSlot = -1;
     }
+    libGHLo_gv_productionTabMAX_VISIBLE_SLOTS__1 = (libGHLo_gv_productionTabMAX_VISIBLE_SLOTS + 1);
     libGHLo_gv_graphsGeneral.lv_container = c_invalidDialogControlId;
     for (init_i = 0; init_i <= libGHLo_gv_graphsMaxGraphId; init_i += 1) {
         libGHLo_gv_graphsData[init_i].lv_graph = c_invalidDialogControlId;
@@ -333,7 +335,7 @@ void libGHLo_gf_RegisterTimerExpiresEvent (trigger lp_trigger, timer lp_timer) {
     TriggerAddEventTimer(lp_trigger, lp_timer);
 }
 
-void libGHLo_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, int lp_productionType, unit lp_relatedUnit, bool lp_isMorph) {
+void libGHLo_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, int lp_productionType, unit lp_relatedUnit, bool lp_isMorph, int lp_buildQueueIndex) {
     // Variable Declarations
     int lv_slot;
     bool lv_isUnit;
@@ -356,30 +358,50 @@ void libGHLo_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, 
 
     }
 
+    TextExpressionSetToken("Param/Expression/lib_GHLo_961CE472", "C", FixedToText(GameGetMissionTime(), 4));
+    TextExpressionSetToken("Param/Expression/lib_GHLo_961CE472", "A", StringToText(lv_itemAlias));
+    TextExpressionSetToken("Param/Expression/lib_GHLo_961CE472", "B", StringToText((UnitGetType(lp_relatedUnit))));
+    TriggerDebugOutput(3, TextExpressionAssemble("Param/Expression/lib_GHLo_961CE472"), true);
     lv_slot = 0;
     for ( ; ( (auto98AE4297_ai >= 0 && lv_slot <= auto98AE4297_ae) || (auto98AE4297_ai < 0 && lv_slot >= auto98AE4297_ae) ) ; lv_slot += auto98AE4297_ai ) {
-        if ((libGHLo_gv_productionTab[lp_player].lv_slotContent[lv_slot] == lv_itemAlias) && (libGHLo_gv_productionTab[lp_player].lv_slotType[lv_slot] == lp_productionType)) {
-            libGHLo_gv_productionTab[lp_player].lv_slotCount[lv_slot] += 1;
-            UnitGroupAdd(libGHLo_gv_productionTab[lp_player].lv_slotSelection[lv_slot], lp_relatedUnit);
+        if ((libGHLo_gv_productionTabPlayer[lp_player].lv_slotContent[lv_slot] == lv_itemAlias) && (libGHLo_gv_productionTabPlayer[lp_player].lv_slotType[lv_slot] == lp_productionType)) {
+            libGHLo_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot] += 1;
+            UnitGroupAdd(libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot], lp_relatedUnit);
+            libNtve_gf_SetDialogItemText(libGHLo_gv_productionTabPlayer[lp_player].lv_slotCountLabel[lv_slot], IntToText(libGHLo_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot]), libGHLo_gv_obs);
             return ;
         }
 
     }
-    if ((libGHLo_gv_productionTab[lp_player].lv_lastUsedSlot < libGHLo_gv_productionTabMAX_SLOTS)) {
-        libGHLo_gv_productionTab[lp_player].lv_lastUsedSlot += 1;
-        lv_slot = libGHLo_gv_productionTab[lp_player].lv_lastUsedSlot;
-        libGHLo_gv_productionTab[lp_player].lv_slotContent[lv_slot] = lv_itemAlias;
-        libGHLo_gv_productionTab[lp_player].lv_slotCount[lv_slot] = 1;
-        libGHLo_gv_productionTab[lp_player].lv_slotIconFile[lv_slot] = libGHLo_gf_IconofProduction(lv_itemAlias, lv_isUnit);
-        libGHLo_gv_productionTab[lp_player].lv_slotName[lv_slot] = libGHLo_gf_NameofProduction(lv_itemAlias, lv_isUnit);
-        if ((libGHLo_gv_productionTab[lp_player].lv_slotSelection[lv_slot] != null)) {
-            UnitGroupAdd(libGHLo_gv_productionTab[lp_player].lv_slotSelection[lv_slot], lp_relatedUnit);
+    if ((libGHLo_gv_productionTabPlayer[lp_player].lv_lastUsedSlot < libGHLo_gv_productionTabMAX_SLOTS)) {
+        libGHLo_gv_productionTabPlayer[lp_player].lv_lastUsedSlot += 1;
+        lv_slot = libGHLo_gv_productionTabPlayer[lp_player].lv_lastUsedSlot;
+        libGHLo_gv_productionTabPlayer[lp_player].lv_slotContent[lv_slot] = lv_itemAlias;
+        libGHLo_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot] = 1;
+        libGHLo_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot] = libGHLo_gf_IconofProduction(lv_itemAlias, lv_isUnit);
+        libGHLo_gv_productionTabPlayer[lp_player].lv_slotName[lv_slot] = libGHLo_gf_NameofProduction(lv_itemAlias, lv_isUnit);
+        if ((libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot] != null)) {
+            UnitGroupAdd(libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot], lp_relatedUnit);
         }
         else {
-            libGHLo_gv_productionTab[lp_player].lv_slotSelection[lv_slot] = libNtve_gf_ConvertUnitToUnitGroup(lp_relatedUnit);
+            libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot] = libNtve_gf_ConvertUnitToUnitGroup(lp_relatedUnit);
         }
-        libGHLo_gv_productionTab[lp_player].lv_slotIsMorph[lv_slot] = lp_isMorph;
-        libGHLo_gv_productionTab[lp_player].lv_slotType[lv_slot] = lp_productionType;
+        libGHLo_gv_productionTabPlayer[lp_player].lv_slotIsMorph[lv_slot] = lp_isMorph;
+        libGHLo_gv_productionTabPlayer[lp_player].lv_slotType[lv_slot] = lp_productionType;
+        libGHLo_gv_productionTabPlayer[lp_player].lv_slotBuildQueueIndex[lv_slot] = lp_buildQueueIndex;
+        libNtve_gf_SetDialogItemText(libGHLo_gv_productionTabPlayer[lp_player].lv_slotCountLabel[lv_slot], IntToText(libGHLo_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot]), libGHLo_gv_obs);
+        libNtve_gf_SetDialogItemImage(libGHLo_gv_productionTabPlayer[lp_player].lv_slotImage[lv_slot], libGHLo_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot], libGHLo_gv_obs);
+        libNtve_gf_SetDialogItemTooltip(libGHLo_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_slot], (libGHLo_gv_productionTabPlayer[lp_player].lv_slotName[lv_slot]), libGHLo_gv_obs);
+        libNtve_gf_SetDialogItemUnit(libGHLo_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_slot], lp_relatedUnit, libGHLo_gv_obs);
+        libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_productionTabPlayer[lp_player].lv_slotProgressBar[lv_slot], 0.0, libGHLo_gv_obs);
+        if ((lv_slot <= libGHLo_gv_productionTabMAX_VISIBLE_SLOTS)) {
+            DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotPanel[lv_slot], libGHLo_gv_obs, true);
+        }
+        else {
+            if ((lv_slot == libGHLo_gv_productionTabMAX_VISIBLE_SLOTS__1)) {
+                DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_moreSlotsLabel, libGHLo_gv_obs, true);
+            }
+
+        }
     }
     else {
         TextExpressionSetToken("Param/Expression/lib_GHLo_B1281E8F", "A", StringToText(lp_item));
@@ -408,34 +430,59 @@ void libGHLo_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, in
     // Implementation
     if ((lv_isUnit == true)) {
         lv_itemAlias = CatalogFieldValueGet(c_gameCatalogUnit, lp_item, "LeaderAlias", c_playerAny);
+        if ((lv_itemAlias == null)) {
+            return ;
+        }
+
     }
 
-    auto8F3ABC0D_ae = libGHLo_gv_productionTab[lp_player].lv_lastUsedSlot;
+    TextExpressionSetToken("Param/Expression/lib_GHLo_14C0C432", "C", FixedToText(GameGetMissionTime(), 4));
+    TextExpressionSetToken("Param/Expression/lib_GHLo_14C0C432", "A", StringToText(lv_itemAlias));
+    TextExpressionSetToken("Param/Expression/lib_GHLo_14C0C432", "B", StringToText((UnitGetType(lp_relatedUnit))));
+    TriggerDebugOutput(3, TextExpressionAssemble("Param/Expression/lib_GHLo_14C0C432"), true);
+    auto8F3ABC0D_ae = libGHLo_gv_productionTabPlayer[lp_player].lv_lastUsedSlot;
     lv_slot = 0;
     for ( ; ( (auto8F3ABC0D_ai >= 0 && lv_slot <= auto8F3ABC0D_ae) || (auto8F3ABC0D_ai < 0 && lv_slot >= auto8F3ABC0D_ae) ) ; lv_slot += auto8F3ABC0D_ai ) {
-        if ((libGHLo_gv_productionTab[lp_player].lv_slotContent[lv_slot] == lv_itemAlias) && (libGHLo_gv_productionTab[lp_player].lv_slotType[lv_slot] == lp_productionType)) {
+        if ((libGHLo_gv_productionTabPlayer[lp_player].lv_slotContent[lv_slot] == lv_itemAlias) && (libGHLo_gv_productionTabPlayer[lp_player].lv_slotType[lv_slot] == lp_productionType)) {
             lv_foundSlot = lv_slot;
             break;
         }
 
     }
     if ((lv_foundSlot >= 0)) {
-        if ((libGHLo_gv_productionTab[lp_player].lv_slotCount[lv_foundSlot] > 1)) {
-            libGHLo_gv_productionTab[lp_player].lv_slotCount[lv_foundSlot] -= 1;
-            UnitGroupRemove(libGHLo_gv_productionTab[lp_player].lv_slotSelection[lv_foundSlot], lp_relatedUnit);
+        if ((libGHLo_gv_productionTabPlayer[lp_player].lv_slotCount[lv_foundSlot] > 1)) {
+            libGHLo_gv_productionTabPlayer[lp_player].lv_slotCount[lv_foundSlot] -= 1;
+            UnitGroupRemove(libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_foundSlot], lp_relatedUnit);
         }
         else {
-            autoE66D4B06_ae = (libGHLo_gv_productionTab[lp_player].lv_lastUsedSlot - 1);
+            autoE66D4B06_ae = (libGHLo_gv_productionTabPlayer[lp_player].lv_lastUsedSlot - 1);
             lv_slot = lv_foundSlot;
             for ( ; ( (autoE66D4B06_ai >= 0 && lv_slot <= autoE66D4B06_ae) || (autoE66D4B06_ai < 0 && lv_slot >= autoE66D4B06_ae) ) ; lv_slot += autoE66D4B06_ai ) {
                 libGHLo_gf_ProductionTabSwapSlots(lp_player, lv_slot, (lv_slot + 1));
+                if ((lv_slot <= libGHLo_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                    libNtve_gf_SetDialogItemText(libGHLo_gv_productionTabPlayer[lp_player].lv_slotCountLabel[lv_slot], IntToText(libGHLo_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot]), libGHLo_gv_obs);
+                    libNtve_gf_SetDialogItemImage(libGHLo_gv_productionTabPlayer[lp_player].lv_slotImage[lv_slot], libGHLo_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot], libGHLo_gv_obs);
+                    libNtve_gf_SetDialogItemTooltip(libGHLo_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_slot], (libGHLo_gv_productionTabPlayer[lp_player].lv_slotName[lv_slot]), libGHLo_gv_obs);
+                    libNtve_gf_SetDialogItemUnit(libGHLo_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_slot], UnitGroupUnit(libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot], (ModI(libGHLo_gv_productionTabGeneral.lv_selectionIndexTimed, UnitGroupCount(libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot], c_unitCountAll)) + 1)), libGHLo_gv_obs);
+                    libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_productionTabPlayer[lp_player].lv_slotProgressBar[lv_slot], libGHLo_gf_ProductionTabGetCurrentProgress(libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot], libGHLo_gv_productionTabPlayer[lp_player].lv_slotIsMorph[lv_slot], libGHLo_gv_productionTabPlayer[lp_player].lv_slotBuildQueueIndex[lv_slot]), libGHLo_gv_obs);
+                }
+
             }
-            lv_slot = libGHLo_gv_productionTab[lp_player].lv_lastUsedSlot;
-            libGHLo_gv_productionTab[lp_player].lv_slotContent[lv_slot] = null;
-            libGHLo_gv_productionTab[lp_player].lv_slotIconFile[lv_slot] = null;
-            libGHLo_gv_productionTab[lp_player].lv_slotName[lv_slot] = null;
-            UnitGroupClear(libGHLo_gv_productionTab[lp_player].lv_slotSelection[lv_slot]);
-            libGHLo_gv_productionTab[lp_player].lv_lastUsedSlot -= 1;
+            lv_slot = libGHLo_gv_productionTabPlayer[lp_player].lv_lastUsedSlot;
+            libGHLo_gv_productionTabPlayer[lp_player].lv_slotContent[lv_slot] = null;
+            libGHLo_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot] = null;
+            libGHLo_gv_productionTabPlayer[lp_player].lv_slotName[lv_slot] = null;
+            UnitGroupClear(libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot]);
+            libGHLo_gv_productionTabPlayer[lp_player].lv_lastUsedSlot -= 1;
+            if ((lv_slot <= libGHLo_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotPanel[lv_slot], libGHLo_gv_obs, false);
+            }
+            else {
+                if ((lv_slot == libGHLo_gv_productionTabMAX_VISIBLE_SLOTS__1)) {
+                    DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_moreSlotsLabel, libGHLo_gv_obs, false);
+                }
+
+            }
         }
     }
 
@@ -451,124 +498,42 @@ void libGHLo_gf_ProductionTabSwapSlots (int lp_player, int lp_slotA, int lp_slot
     bool lv_slotIsMorph;
     int lv_slotType;
     int lv_slotBuildDurationMax;
+    int lv_slotBuildQueueIndex;
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_slotContent = libGHLo_gv_productionTab[lp_player].lv_slotContent[lp_slotA];
-    lv_slotIcon = libGHLo_gv_productionTab[lp_player].lv_slotIconFile[lp_slotA];
-    lv_slotCount = libGHLo_gv_productionTab[lp_player].lv_slotCount[lp_slotA];
-    lv_slotName = libGHLo_gv_productionTab[lp_player].lv_slotName[lp_slotA];
-    lv_slotSelection = libGHLo_gv_productionTab[lp_player].lv_slotSelection[lp_slotA];
-    lv_slotIsMorph = libGHLo_gv_productionTab[lp_player].lv_slotIsMorph[lp_slotA];
-    lv_slotType = libGHLo_gv_productionTab[lp_player].lv_slotType[lp_slotA];
-    lv_slotBuildDurationMax = libGHLo_gv_productionTab[lp_player].lv_slotBuildDurationMax[lp_slotA];
+    lv_slotContent = libGHLo_gv_productionTabPlayer[lp_player].lv_slotContent[lp_slotA];
+    lv_slotIcon = libGHLo_gv_productionTabPlayer[lp_player].lv_slotIconFile[lp_slotA];
+    lv_slotCount = libGHLo_gv_productionTabPlayer[lp_player].lv_slotCount[lp_slotA];
+    lv_slotName = libGHLo_gv_productionTabPlayer[lp_player].lv_slotName[lp_slotA];
+    lv_slotSelection = libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lp_slotA];
+    lv_slotIsMorph = libGHLo_gv_productionTabPlayer[lp_player].lv_slotIsMorph[lp_slotA];
+    lv_slotType = libGHLo_gv_productionTabPlayer[lp_player].lv_slotType[lp_slotA];
+    lv_slotBuildDurationMax = libGHLo_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lp_slotA];
+    lv_slotBuildQueueIndex = libGHLo_gv_productionTabPlayer[lp_player].lv_slotBuildQueueIndex[lp_slotA];
 
     // Implementation
-    libGHLo_gv_productionTab[lp_player].lv_slotContent[lp_slotA] = libGHLo_gv_productionTab[lp_player].lv_slotContent[lp_slotB];
-    libGHLo_gv_productionTab[lp_player].lv_slotIconFile[lp_slotA] = libGHLo_gv_productionTab[lp_player].lv_slotIconFile[lp_slotB];
-    libGHLo_gv_productionTab[lp_player].lv_slotCount[lp_slotA] = libGHLo_gv_productionTab[lp_player].lv_slotCount[lp_slotB];
-    libGHLo_gv_productionTab[lp_player].lv_slotName[lp_slotA] = libGHLo_gv_productionTab[lp_player].lv_slotName[lp_slotB];
-    libGHLo_gv_productionTab[lp_player].lv_slotSelection[lp_slotA] = libGHLo_gv_productionTab[lp_player].lv_slotSelection[lp_slotB];
-    libGHLo_gv_productionTab[lp_player].lv_slotIsMorph[lp_slotA] = libGHLo_gv_productionTab[lp_player].lv_slotIsMorph[lp_slotB];
-    libGHLo_gv_productionTab[lp_player].lv_slotType[lp_slotA] = libGHLo_gv_productionTab[lp_player].lv_slotType[lp_slotB];
-    libGHLo_gv_productionTab[lp_player].lv_slotBuildDurationMax[lp_slotA] = libGHLo_gv_productionTab[lp_player].lv_slotBuildDurationMax[lp_slotB];
-    libGHLo_gv_productionTab[lp_player].lv_slotContent[lp_slotB] = lv_slotContent;
-    libGHLo_gv_productionTab[lp_player].lv_slotIconFile[lp_slotB] = lv_slotIcon;
-    libGHLo_gv_productionTab[lp_player].lv_slotCount[lp_slotB] = lv_slotCount;
-    libGHLo_gv_productionTab[lp_player].lv_slotName[lp_slotB] = lv_slotName;
-    libGHLo_gv_productionTab[lp_player].lv_slotSelection[lp_slotB] = lv_slotSelection;
-    libGHLo_gv_productionTab[lp_player].lv_slotIsMorph[lp_slotB] = lv_slotIsMorph;
-    libGHLo_gv_productionTab[lp_player].lv_slotType[lp_slotB] = lv_slotType;
-    libGHLo_gv_productionTab[lp_player].lv_slotBuildDurationMax[lp_slotB] = lv_slotBuildDurationMax;
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotContent[lp_slotA] = libGHLo_gv_productionTabPlayer[lp_player].lv_slotContent[lp_slotB];
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotIconFile[lp_slotA] = libGHLo_gv_productionTabPlayer[lp_player].lv_slotIconFile[lp_slotB];
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotCount[lp_slotA] = libGHLo_gv_productionTabPlayer[lp_player].lv_slotCount[lp_slotB];
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotName[lp_slotA] = libGHLo_gv_productionTabPlayer[lp_player].lv_slotName[lp_slotB];
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lp_slotA] = libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lp_slotB];
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotIsMorph[lp_slotA] = libGHLo_gv_productionTabPlayer[lp_player].lv_slotIsMorph[lp_slotB];
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotType[lp_slotA] = libGHLo_gv_productionTabPlayer[lp_player].lv_slotType[lp_slotB];
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lp_slotA] = libGHLo_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lp_slotB];
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotBuildQueueIndex[lp_slotA] = libGHLo_gv_productionTabPlayer[lp_player].lv_slotBuildQueueIndex[lp_slotB];
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotContent[lp_slotB] = lv_slotContent;
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotIconFile[lp_slotB] = lv_slotIcon;
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotCount[lp_slotB] = lv_slotCount;
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotName[lp_slotB] = lv_slotName;
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotSelection[lp_slotB] = lv_slotSelection;
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotIsMorph[lp_slotB] = lv_slotIsMorph;
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotType[lp_slotB] = lv_slotType;
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lp_slotB] = lv_slotBuildDurationMax;
+    libGHLo_gv_productionTabPlayer[lp_player].lv_slotBuildQueueIndex[lp_slotB] = lv_slotBuildQueueIndex;
 }
 
-trigger auto_libGHLo_gf_ProductionTabUpdateUIthreaded_Trigger = null;
-
-void libGHLo_gf_ProductionTabUpdateUIthreaded () {
-    if (auto_libGHLo_gf_ProductionTabUpdateUIthreaded_Trigger == null) {
-        auto_libGHLo_gf_ProductionTabUpdateUIthreaded_Trigger = TriggerCreate("auto_libGHLo_gf_ProductionTabUpdateUIthreaded_TriggerFunc");
-    }
-
-    TriggerExecute(auto_libGHLo_gf_ProductionTabUpdateUIthreaded_Trigger, false, false);
-}
-
-bool auto_libGHLo_gf_ProductionTabUpdateUIthreaded_TriggerFunc (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_player;
-    int lv_slot;
-    int[16] lv_prevLastUsedSlot;
-    int lv_lastUiSlotUsed;
-    int lv_selectionIndexRaw;
-    int lv_selectionIndexTimed;
-
-    // Automatic Variable Declarations
-    playergroup autoC6A44A0E_g;
-    int auto2A63620B_ae;
-    const int auto2A63620B_ai = 1;
-    int autoAE8B7F12_ae;
-    const int autoAE8B7F12_ai = 1;
-    int autoA55DE28B_ae;
-    const int autoA55DE28B_ai = 1;
-
-    // Variable Initialization
-    lv_selectionIndexRaw = -1;
-
-    // Implementation
-    while (true) {
-        Wait(0.0625, c_timeGame);
-        if ((lv_selectionIndexRaw > 4095)) {
-            lv_selectionIndexRaw = 0;
-        }
-        else {
-            lv_selectionIndexRaw += 1;
-        }
-        lv_selectionIndexTimed = (lv_selectionIndexRaw / 4);
-        Wait(0.0, c_timeGame);
-        autoC6A44A0E_g = libGHLo_gv_initial_Active_Players;
-        lv_player = -1;
-        while (true) {
-            lv_player = PlayerGroupNextPlayer(autoC6A44A0E_g, lv_player);
-            if (lv_player < 0) { break; }
-            lv_lastUiSlotUsed = MinI(libGHLo_gv_productionTab[lv_player].lv_lastUsedSlot, libGHLo_gv_productionTabMAX_VISIBLE_SLOTS);
-            if ((libGHLo_gv_productionTab[lv_player].lv_lastUsedSlot >= 0)) {
-                auto2A63620B_ae = lv_lastUiSlotUsed;
-                lv_slot = 0;
-                for ( ; ( (auto2A63620B_ai >= 0 && lv_slot <= auto2A63620B_ae) || (auto2A63620B_ai < 0 && lv_slot >= auto2A63620B_ae) ) ; lv_slot += auto2A63620B_ai ) {
-                    libNtve_gf_SetDialogItemText(libGHLo_gv_productionTab[lv_player].lv_slotCountLabel[lv_slot], IntToText(libGHLo_gv_productionTab[lv_player].lv_slotCount[lv_slot]), libGHLo_gv_obs);
-                    libNtve_gf_SetDialogItemImage(libGHLo_gv_productionTab[lv_player].lv_slotImage[lv_slot], libGHLo_gv_productionTab[lv_player].lv_slotIconFile[lv_slot], libGHLo_gv_obs);
-                    libNtve_gf_SetDialogItemTooltip(libGHLo_gv_productionTab[lv_player].lv_slotUnitTargetFrame[lv_slot], (libGHLo_gv_productionTab[lv_player].lv_slotName[lv_slot]), libGHLo_gv_obs);
-                    libNtve_gf_SetDialogItemUnit(libGHLo_gv_productionTab[lv_player].lv_slotUnitTargetFrame[lv_slot], UnitGroupUnit(libGHLo_gv_productionTab[lv_player].lv_slotSelection[lv_slot], (ModI(lv_selectionIndexRaw, UnitGroupCount(libGHLo_gv_productionTab[lv_player].lv_slotSelection[lv_slot], c_unitCountAll)) + 1)), libGHLo_gv_obs);
-                    libNtve_gf_SetDialogItemMaximumValue(libGHLo_gv_productionTab[lv_player].lv_slotProgressBar[lv_slot], 100.0, libGHLo_gv_obs);
-                    libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_productionTab[lv_player].lv_slotProgressBar[lv_slot], libGHLo_gf_ProductionTabGetCurrentProgress(libGHLo_gv_productionTab[lv_player].lv_slotSelection[lv_slot], libGHLo_gv_productionTab[lv_player].lv_slotIsMorph[lv_slot]), libGHLo_gv_obs);
-                }
-                autoAE8B7F12_ae = lv_lastUiSlotUsed;
-                lv_slot = MaxI(lv_prevLastUsedSlot[lv_player], 0);
-                for ( ; ( (autoAE8B7F12_ai >= 0 && lv_slot <= autoAE8B7F12_ae) || (autoAE8B7F12_ai < 0 && lv_slot >= autoAE8B7F12_ae) ) ; lv_slot += autoAE8B7F12_ai ) {
-                    DialogControlSetVisible(libGHLo_gv_productionTab[lv_player].lv_slotPanel[lv_slot], libGHLo_gv_obs, true);
-                }
-            }
-
-            autoA55DE28B_ae = lv_prevLastUsedSlot[lv_player];
-            lv_slot = (lv_lastUiSlotUsed + 1);
-            for ( ; ( (autoA55DE28B_ai >= 0 && lv_slot <= autoA55DE28B_ae) || (autoA55DE28B_ai < 0 && lv_slot >= autoA55DE28B_ae) ) ; lv_slot += autoA55DE28B_ai ) {
-                DialogControlSetVisible(libGHLo_gv_productionTab[lv_player].lv_slotPanel[lv_slot], libGHLo_gv_obs, false);
-            }
-            if ((libGHLo_gv_productionTab[lv_player].lv_lastUsedSlot > libGHLo_gv_productionTabMAX_VISIBLE_SLOTS) && (lv_prevLastUsedSlot[lv_player] <= libGHLo_gv_productionTabMAX_VISIBLE_SLOTS)) {
-                DialogControlSetVisible(libGHLo_gv_productionTab[lv_player].lv_moreSlotsLabel, libGHLo_gv_obs, true);
-            }
-            else {
-                if ((lv_prevLastUsedSlot[lv_player] > libGHLo_gv_productionTabMAX_VISIBLE_SLOTS) && (libGHLo_gv_productionTab[lv_player].lv_lastUsedSlot <= libGHLo_gv_productionTabMAX_VISIBLE_SLOTS)) {
-                    DialogControlSetVisible(libGHLo_gv_productionTab[lv_player].lv_moreSlotsLabel, libGHLo_gv_obs, false);
-                }
-
-            }
-            lv_prevLastUsedSlot[lv_player] = libGHLo_gv_productionTab[lv_player].lv_lastUsedSlot;
-        }
-    }
-    return true;
-}
-
-fixed libGHLo_gf_ProductionTabGetCurrentProgress (unitgroup lp_units, bool lp_isMorph) {
+fixed libGHLo_gf_ProductionTabGetCurrentProgress (unitgroup lp_units, bool lp_isMorph, int lp_productionSlot) {
     // Variable Declarations
     unit lv_unit;
     fixed lv_maxDur;
@@ -589,7 +554,7 @@ fixed libGHLo_gf_ProductionTabGetCurrentProgress (unitgroup lp_units, bool lp_is
         for (;; auto99F9C4E5_u -= 1) {
             lv_unit = UnitGroupUnitFromEnd(auto99F9C4E5_g, auto99F9C4E5_u);
             if (lv_unit == null) { break; }
-            lv_cur = UnitGetProgressComplete(lv_unit, 1);
+            lv_cur = UnitGetProgressComplete(lv_unit, lp_productionSlot);
             if ((lv_cur > lv_maxDur)) {
                 lv_maxDur = lv_cur;
             }
@@ -610,6 +575,57 @@ fixed libGHLo_gf_ProductionTabGetCurrentProgress (unitgroup lp_units, bool lp_is
         }
     }
     return lv_maxDur;
+}
+
+trigger auto_libGHLo_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_Trigger = null;
+
+void libGHLo_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite () {
+    if (auto_libGHLo_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_Trigger == null) {
+        auto_libGHLo_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_Trigger = TriggerCreate("auto_libGHLo_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_TriggerFunc");
+    }
+
+    TriggerExecute(auto_libGHLo_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_Trigger, false, false);
+}
+
+bool auto_libGHLo_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_TriggerFunc (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    int lv_slot;
+
+    // Automatic Variable Declarations
+    playergroup auto6F237BA6_g;
+    int auto468EFED4_ae;
+    const int auto468EFED4_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    while (true) {
+        Wait(0.0625, c_timeGame);
+        if ((libGHLo_gv_productionTabGeneral.lv_selectionIndexRaw == 4095)) {
+            libGHLo_gv_productionTabGeneral.lv_selectionIndexRaw = 0;
+        }
+        else {
+            libGHLo_gv_productionTabGeneral.lv_selectionIndexRaw += 1;
+        }
+        libGHLo_gv_productionTabGeneral.lv_selectionIndexTimed = (libGHLo_gv_productionTabGeneral.lv_selectionIndexRaw / 4);
+        auto6F237BA6_g = libGHLo_gv_initial_Active_Players;
+        lv_player = -1;
+        while (true) {
+            lv_player = PlayerGroupNextPlayer(auto6F237BA6_g, lv_player);
+            if (lv_player < 0) { break; }
+            if ((libGHLo_gv_productionTabPlayer[lv_player].lv_lastUsedSlot >= 0)) {
+                auto468EFED4_ae = MinI(libGHLo_gv_productionTabPlayer[lv_player].lv_lastUsedSlot, libGHLo_gv_productionTabMAX_VISIBLE_SLOTS);
+                lv_slot = 0;
+                for ( ; ( (auto468EFED4_ai >= 0 && lv_slot <= auto468EFED4_ae) || (auto468EFED4_ai < 0 && lv_slot >= auto468EFED4_ae) ) ; lv_slot += auto468EFED4_ai ) {
+                    libNtve_gf_SetDialogItemUnit(libGHLo_gv_productionTabPlayer[lv_player].lv_slotUnitTargetFrame[lv_slot], UnitGroupUnit(libGHLo_gv_productionTabPlayer[lv_player].lv_slotSelection[lv_slot], (ModI(libGHLo_gv_productionTabGeneral.lv_selectionIndexTimed, UnitGroupCount(libGHLo_gv_productionTabPlayer[lv_player].lv_slotSelection[lv_slot], c_unitCountAll)) + 1)), libGHLo_gv_obs);
+                    libNtve_gf_SetDialogItemCurrentValue(libGHLo_gv_productionTabPlayer[lv_player].lv_slotProgressBar[lv_slot], libGHLo_gf_ProductionTabGetCurrentProgress(libGHLo_gv_productionTabPlayer[lv_player].lv_slotSelection[lv_slot], libGHLo_gv_productionTabPlayer[lv_player].lv_slotIsMorph[lv_slot], libGHLo_gv_productionTabPlayer[lv_player].lv_slotBuildQueueIndex[lv_slot]), libGHLo_gv_obs);
+                }
+            }
+
+        }
+    }
+    return true;
 }
 
 void libGHLo_gf_ObserverUiAssistSetPlayerIdScore (int lp_player) {
@@ -751,10 +767,13 @@ void libGHLo_gf_GraphsDefineGraph (int lp_id, text lp_title, string lp_frameName
     libGHLo_gv_graphsData[lv_graph].lv_rangeIncrement = lp_rangeIncrement;
     libGHLo_gv_graphsData[lv_graph].lv_averageValues = lp_averageValues;
     DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/GraphContainer/" + lp_frameName));
+    DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
     DialogControlSetEnabled(DialogControlLastCreated(), libGHLo_gv_obs, true);
     DialogControlHookupStandard(c_triggerControlTypeGraphFrame, ("UIContainer/FullscreenUpperContainer/GraphContainer/" + lp_frameName + "/Graph/GraphFrame"));
+    DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
     libGHLo_gv_graphsData[lv_graph].lv_graph = DialogControlLastCreated();
     DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/GraphContainer/" + lp_frameName + "/Graph/Title"));
+    DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
     libGHLo_gv_graphsData[lv_graph].lv_title = DialogControlLastCreated();
     libNtve_gf_SetDialogItemText(libGHLo_gv_graphsData[lv_graph].lv_title, lp_title, libGHLo_gv_obs);
     lv_count = (0 - libGHLo_gv_graphsMaxNode);
@@ -2032,61 +2051,6 @@ void libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: ProductionTab - Init
-//--------------------------------------------------------------------------------------------------
-bool libGHLo_gt_ProductionTabInit_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_player;
-    int lv_slot;
-
-    // Automatic Variable Declarations
-    playergroup auto8B571850_g;
-    const int autoB1D95E6C_ae = libGHLo_gv_productionTabMAX_VISIBLE_SLOTS;
-    const int autoB1D95E6C_ai = 1;
-
-    // Variable Initialization
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    auto8B571850_g = libGHLo_gv_initial_Active_Players;
-    lv_player = -1;
-    while (true) {
-        lv_player = PlayerGroupNextPlayer(auto8B571850_g, lv_player);
-        if (lv_player < 0) { break; }
-        lv_slot = 0;
-        for ( ; ( (autoB1D95E6C_ai >= 0 && lv_slot <= autoB1D95E6C_ae) || (autoB1D95E6C_ai < 0 && lv_slot >= autoB1D95E6C_ae) ) ; lv_slot += autoB1D95E6C_ai ) {
-            DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/Contaminated"));
-            libGHLo_gv_productionTab[lv_player].lv_slotContaminated[lv_slot] = DialogControlLastCreated();
-            DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/ChronoBoosted"));
-            libGHLo_gv_productionTab[lv_player].lv_slotChronoBoosted[lv_slot] = DialogControlLastCreated();
-            DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/IconImage"));
-            libGHLo_gv_productionTab[lv_player].lv_slotImage[lv_slot] = DialogControlLastCreated();
-            DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/NumberLabel"));
-            libGHLo_gv_productionTab[lv_player].lv_slotCountLabel[lv_slot] = DialogControlLastCreated();
-            DialogControlHookupStandard(c_triggerControlTypeProgressBar, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/ProgressBar"));
-            libGHLo_gv_productionTab[lv_player].lv_slotProgressBar[lv_slot] = DialogControlLastCreated();
-            DialogControlHookupStandard(c_triggerControlTypeUnitTarget, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/UnitTargetFrame"));
-            libGHLo_gv_productionTab[lv_player].lv_slotUnitTargetFrame[lv_slot] = DialogControlLastCreated();
-            DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot)));
-            libGHLo_gv_productionTab[lv_player].lv_slotPanel[lv_slot] = DialogControlLastCreated();
-        }
-        DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/MoreIconsLabel"));
-        libGHLo_gv_productionTab[lv_player].lv_moreSlotsLabel = DialogControlLastCreated();
-    }
-    libGHLo_gf_ProductionTabUpdateUIthreaded();
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libGHLo_gt_ProductionTabInit_Init () {
-    libGHLo_gt_ProductionTabInit = TriggerCreate("libGHLo_gt_ProductionTabInit_Func");
-    TriggerAddEventMapInit(libGHLo_gt_ProductionTabInit);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: ProductionTab - Construction Started
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_ProductionTabConstructionStarted_Func (bool testConds, bool runActions) {
@@ -2102,7 +2066,7 @@ bool libGHLo_gt_ProductionTabConstructionStarted_Func (bool testConds, bool runA
         return true;
     }
 
-    libGHLo_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_structure), (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Structure, lv_structure, false);
+    libGHLo_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_structure), (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Structure, lv_structure, false, 1);
     return true;
 }
 
@@ -2155,7 +2119,7 @@ bool libGHLo_gt_ProductionTabTrainingStarted_Func (bool testConds, bool runActio
         return true;
     }
 
-    libGHLo_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Unit, lv_producer, false);
+    libGHLo_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Unit, lv_producer, false, 1);
     return true;
 }
 
@@ -2208,7 +2172,7 @@ bool libGHLo_gt_ProductionTabResearchStarted_Func (bool testConds, bool runActio
         return true;
     }
 
-    libGHLo_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUpgrade()), libGHLo_ge_ProductionType_Upgrade, lv_producer, false);
+    libGHLo_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUpgrade()), libGHLo_ge_ProductionType_Upgrade, lv_producer, false, 1);
     return true;
 }
 
@@ -2261,7 +2225,7 @@ bool libGHLo_gt_ProductionTabArmingStarted_Func (bool testConds, bool runActions
         return true;
     }
 
-    libGHLo_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Unit, lv_producer, false);
+    libGHLo_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUnitType()), libGHLo_ge_ProductionType_Unit, lv_producer, false, 1);
     return true;
 }
 
@@ -2332,7 +2296,7 @@ bool libGHLo_gt_ProductionTabMorphStarted_Func (bool testConds, bool runActions)
                 lv_productionType = libGHLo_ge_ProductionType_Structure;
             }
 
-            libGHLo_gf_ProductionTabRegisterProduction(EventPlayer(), lv_targetUnitType, lv_productionType, lv_unit, true);
+            libGHLo_gf_ProductionTabRegisterProduction(EventPlayer(), lv_targetUnitType, lv_productionType, lv_unit, true, 1);
         }
         else {
             return false;
@@ -2401,6 +2365,70 @@ void libGHLo_gt_ProductionTabMorphFinished_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: ProductionTab - Init
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_ProductionTabInit_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    int lv_slot;
+
+    // Automatic Variable Declarations
+    playergroup auto8B571850_g;
+    const int autoB1D95E6C_ae = libGHLo_gv_productionTabMAX_VISIBLE_SLOTS;
+    const int autoB1D95E6C_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto8B571850_g = libGHLo_gv_initial_Active_Players;
+    lv_player = -1;
+    while (true) {
+        lv_player = PlayerGroupNextPlayer(auto8B571850_g, lv_player);
+        if (lv_player < 0) { break; }
+        lv_slot = 0;
+        for ( ; ( (autoB1D95E6C_ai >= 0 && lv_slot <= autoB1D95E6C_ae) || (autoB1D95E6C_ai < 0 && lv_slot >= autoB1D95E6C_ae) ) ; lv_slot += autoB1D95E6C_ai ) {
+            DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/Contaminated"));
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            libGHLo_gv_productionTabPlayer[lv_player].lv_slotContaminated[lv_slot] = DialogControlLastCreated();
+            DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/ChronoBoosted"));
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            libGHLo_gv_productionTabPlayer[lv_player].lv_slotChronoBoosted[lv_slot] = DialogControlLastCreated();
+            DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/IconImage"));
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            libGHLo_gv_productionTabPlayer[lv_player].lv_slotImage[lv_slot] = DialogControlLastCreated();
+            DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/NumberLabel"));
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            libGHLo_gv_productionTabPlayer[lv_player].lv_slotCountLabel[lv_slot] = DialogControlLastCreated();
+            DialogControlHookupStandard(c_triggerControlTypeProgressBar, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/ProgressBar"));
+            libNtve_gf_SetDialogItemMaximumValue(DialogControlLastCreated(), 100.0, libGHLo_gv_obs);
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            libGHLo_gv_productionTabPlayer[lv_player].lv_slotProgressBar[lv_slot] = DialogControlLastCreated();
+            DialogControlHookupStandard(c_triggerControlTypeUnitTarget, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/UnitTargetFrame"));
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            libGHLo_gv_productionTabPlayer[lv_player].lv_slotUnitTargetFrame[lv_slot] = DialogControlLastCreated();
+            DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot)));
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            libGHLo_gv_productionTabPlayer[lv_player].lv_slotPanel[lv_slot] = DialogControlLastCreated();
+        }
+        DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/MoreIconsLabel"));
+        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+        libGHLo_gv_productionTabPlayer[lv_player].lv_moreSlotsLabel = DialogControlLastCreated();
+    }
+    libGHLo_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_ProductionTabInit_Init () {
+    libGHLo_gt_ProductionTabInit = TriggerCreate("libGHLo_gt_ProductionTabInit_Func");
+    TriggerAddEventMapInit(libGHLo_gt_ProductionTabInit);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: ProductionTab - Contaminate Activates
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_ProductionTabContaminateActivates_Func (bool testConds, bool runActions) {
@@ -2419,7 +2447,7 @@ bool libGHLo_gt_ProductionTabContaminateActivates_Func (bool testConds, bool run
         return true;
     }
 
-    UnitGroupAdd(libGHLo_gv_productionTab[lv_player].lv_contanimated, lv_contaminatedStructure);
+    UnitGroupAdd(libGHLo_gv_productionTabPlayer[lv_player].lv_contanimated, lv_contaminatedStructure);
     return true;
 }
 
@@ -2447,7 +2475,7 @@ bool libGHLo_gt_ProductionTabContaminateDeactivates_Func (bool testConds, bool r
         return true;
     }
 
-    UnitGroupRemove(libGHLo_gv_productionTab[lv_player].lv_contanimated, lv_contaminatedStructure);
+    UnitGroupRemove(libGHLo_gv_productionTabPlayer[lv_player].lv_contanimated, lv_contaminatedStructure);
     return true;
 }
 
@@ -2475,7 +2503,7 @@ bool libGHLo_gt_ProductionTabChronoBoostActivates_Func (bool testConds, bool run
         return true;
     }
 
-    UnitGroupAdd(libGHLo_gv_productionTab[lv_player].lv_chronoBoosted, lv_boostedStructure);
+    UnitGroupAdd(libGHLo_gv_productionTabPlayer[lv_player].lv_chronoBoosted, lv_boostedStructure);
     return true;
 }
 
@@ -2503,7 +2531,7 @@ bool libGHLo_gt_ProductionTabChronoBoostDeactivates_Func (bool testConds, bool r
         return true;
     }
 
-    UnitGroupRemove(libGHLo_gv_productionTab[lv_player].lv_chronoBoosted, lv_boostedStructure);
+    UnitGroupRemove(libGHLo_gv_productionTabPlayer[lv_player].lv_chronoBoosted, lv_boostedStructure);
     return true;
 }
 
@@ -2942,6 +2970,7 @@ bool libGHLo_gt_GraphsInitialization_Func (bool testConds, bool runActions) {
             libGHLo_gv_graphsGeneral.lv_teamRight = 1;
         }
         DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/GraphContainer");
+        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         libGHLo_gv_graphsGeneral.lv_container = DialogControlLastCreated();
         libGHLo_gf_GraphsDefineGraph(0, StringExternal("Param/Value/lib_GHLo_8058A929"), "IncomeGraph", "ResourceCollectionRate", libGHLo_ge_GraphStyle_Differential, 350.0, 400.0, 200.0, true);
         libGHLo_gf_GraphsDefineGraph(1, StringExternal("Param/Value/lib_GHLo_31D21183"), "ArmySizeGraph", "FoodUsedArmy", libGHLo_ge_GraphStyle_Comparative, 40.0, 50.0, 50.0, false);
@@ -3451,6 +3480,7 @@ bool libGHLo_gt_UpgradeNotificationsInitialization_Func (bool testConds, bool ru
         for ( ; ( (auto69B01FF3_ai >= 0 && lv_slot <= auto69B01FF3_ae) || (auto69B01FF3_ai < 0 && lv_slot >= auto69B01FF3_ae) ) ; lv_slot += auto69B01FF3_ai ) {
             lv_slotStr = IntToString(lv_slot);
             DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + lv_slotStr));
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libGHLo_gv_upgradeNotifications.lv_itemPanel[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
@@ -3735,6 +3765,7 @@ bool libGHLo_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
     if (((lv_count >= 1) && (lv_count <= 4)) && (UserDataGetInt("GameHeartSettings", "Notifications (Workers Killed)", "Value", 1) == 1)) {
         libGHLo_gv_workersKilledNotifications.lv_active = true;
         DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/WorkerNotificationPanel");
+        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
         DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
         DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
@@ -3742,28 +3773,28 @@ bool libGHLo_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
         for ( ; ( (autoE2BFA55A_ai >= 0 && lv_slot <= autoE2BFA55A_ae) || (autoE2BFA55A_ai < 0 && lv_slot >= autoE2BFA55A_ae) ) ; lv_slot += autoE2BFA55A_ai ) {
             lv_slotStr = IntToString(lv_slot);
             DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + lv_slotStr));
-            lv_panel[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            lv_panel[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerCount")));
-            lv_timeLabel[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libNtve_gf_SetDialogItemText(DialogControlLastCreated(), StringToText(""), libGHLo_gv_obs);
+            lv_timeLabel[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerType")));
-            lv_icon[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_obs, true);
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            lv_icon[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerColor/PlayerFrame/PlayerIdLabel")));
+            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
+            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             lv_workerColor[lv_slot] = DialogControlLastCreated();
-            DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerBackground/PlayerFrame/PlayerIdLabel")));
-            lv_background[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libGHLo_gv_all_Players, false);
             DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
+            lv_background[lv_slot] = DialogControlLastCreated();
         }
         lv_count = 0;
         autoA9BD4D01_g = libGHLo_gv_initial_Active_Players;
@@ -4483,7 +4514,6 @@ void libGHLo_gt_BattleReportNoUiUpdateTimerExpires_Init () {
 void libGHLo_InitTriggers () {
     libGHLo_gt_GameHeartInitialization_Init();
     libGHLo_gt_GameHeartRevealDebrisFromDestructubleTowers_Init();
-    libGHLo_gt_ProductionTabInit_Init();
     libGHLo_gt_ProductionTabConstructionStarted_Init();
     libGHLo_gt_ProductionTabConstructionEnded_Init();
     libGHLo_gt_ProductionTabTrainingStarted_Init();
@@ -4494,6 +4524,7 @@ void libGHLo_InitTriggers () {
     libGHLo_gt_ProductionTabArmingEnded_Init();
     libGHLo_gt_ProductionTabMorphStarted_Init();
     libGHLo_gt_ProductionTabMorphFinished_Init();
+    libGHLo_gt_ProductionTabInit_Init();
     libGHLo_gt_ProductionTabContaminateActivates_Init();
     libGHLo_gt_ProductionTabContaminateDeactivates_Init();
     libGHLo_gt_ProductionTabChronoBoostActivates_Init();
