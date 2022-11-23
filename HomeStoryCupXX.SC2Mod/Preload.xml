@@ -2,6 +2,7 @@
 <Preload>
 <Asset path="assets\textures\black.dds" Type="Image"/>
 <Asset path="assets\textures\blank.dds" Type="Image"/>
+<Asset path="_assets\textures\ui_hots_shared_icon_stat_energy.dds" Type="Image"/>
 <Actor id="SYSTEM_ActorConfig"/>
 <Behavior id="AHLI_fixUnitLostResourcesOfOverlordTransport"/>
 <Behavior id="AHLI_fixUnitLostResourcesOfArchonHTHT"/>

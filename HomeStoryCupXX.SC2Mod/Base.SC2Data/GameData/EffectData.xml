@@ -3,4 +3,6 @@
     <CEffectSet id="AHLI_OverlordTransportDies"/>
     <CEffectSet id="AHLI_ArchonHTHTDies"/>
     <CEffectSet id="AHLI_ArchonDTDTDies"/>
+    <CEffectSet id="AHLI_PowerLevelLost"/>
+    <CEffectSet id="AHLI_PowerLevelGained"/>
 </Catalog>

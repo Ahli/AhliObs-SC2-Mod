@@ -30,64 +30,25 @@
         <Visible val="False"/>
         <CollapseLayout val="True"/>
 
-        <!--<Frame type="Button" name="BackgroundButton">
-            <NormalImage val="NormalImage"/>
-            <HoverImage val="HoverImage"/>
-            <HitTestFrame val="HitTestFrame"/>
-            <ClickSound val="@UI_ActionButtonSelect"/>
+        <Frame type="Image" name="NormalImage">
             <Anchor side="Top" relative="$parent" pos="Min" offset="3"/>
             <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
             <Height val="69"/>
+            <Texture val="@@UI/LeaderPanelButtonNormal"/>
+            <TextureType val="Nineslice"/>
+            <Tiled val="true"/>
             <IgnoreParentColor val="true"/>
+        </Frame>
+        <Frame type="Image" name="HoverImage">
+            <Anchor relative="$parent/NormalImage"/>
+            <Texture val="@@UI/LeaderPanelButtonHover"/>
+            <TextureType val="Nineslice"/>
+            <Tiled val="true"/>
+            <IgnoreParentColor val="true"/>
+            <Visible val="false"/>
+        </Frame>
 
-            <Frame type="Image" name="NormalImage">
-                <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-                <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-                <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-                <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
-                <Texture val="@@UI/LeaderPanelButtonNormal"/>
-                <TextureType val="Nineslice"/>
-                <Tiled val="true"/>
-            </Frame>
-
-            <Frame type="Image" name="HoverImage">
-                <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-                <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-                <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-                <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
-                <Texture val="@@UI/LeaderPanelButtonHover"/>
-                <TextureType val="Nineslice"/>
-                <Tiled val="true"/>
-            </Frame>
-            
-            <Frame type="Frame" name="HitTestFrame">
-                <Anchor side="Top" relative="$parent" pos="Min" offset="6"/>
-                <Anchor side="Bottom" relative="$parent" pos="Max" offset="-6"/>
-                <Anchor side="Left" relative="$parent" pos="Min" offset="6"/>
-                <Anchor side="Right" relative="$parent" pos="Max" offset="-6"/>
-            </Frame>
-        </Frame>-->
-		
-		<Frame type="Image" name="NormalImage">
-            <Anchor side="Top" relative="$parent" pos="Min" offset="3"/>
-			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
-            <Height val="69"/>
-			<Texture val="@@UI/LeaderPanelButtonNormal"/>
-			<TextureType val="Nineslice"/>
-			<Tiled val="true"/>
-            <IgnoreParentColor val="true"/>
-		</Frame>
-		<Frame type="Image" name="HoverImage">
-			<Anchor relative="$parent/NormalImage"/>
-			<Texture val="@@UI/LeaderPanelButtonHover"/>
-			<TextureType val="Nineslice"/>
-			<Tiled val="true"/>
-            <IgnoreParentColor val="true"/>
-			<Visible val="false"/>
-		</Frame>
-		
         <Frame type="Image" name="IconImage">
             <Anchor side="Top" relative="$parent/BackgroundButton" pos="Min" offset="7"/>
             <Anchor side="Bottom" relative="$parent/BackgroundButton" pos="Max" offset="-7"/>
@@ -124,7 +85,7 @@
             <Width val="30"/>
             <IgnoreParentColor val="true"/>
             <Visible val="false"/>
-			<CollapseLayout val="true"/>
+            <CollapseLayout val="true"/>
             <Texture val="Assets\Textures\btn-ability-zerg-contaminate-color.dds"/>
         </Frame>
 
@@ -135,34 +96,34 @@
             <Width val="30"/>
             <IgnoreParentColor val="true"/>
             <Visible val="false"/>
-			<CollapseLayout val="true"/>
+            <CollapseLayout val="true"/>
             <Texture val="Assets\Textures\btn-ability-protoss-protoncharge-color.dds"/>
         </Frame>
 
-		<Frame type="UnitTargetFrame" name="UnitTargetFrame">
+        <Frame type="UnitTargetFrame" name="UnitTargetFrame">
             <Anchor side="Top" relative="$parent" pos="Min" offset="6"/>
             <Anchor side="Left" relative="$parent" pos="Min" offset="6"/>
             <Anchor side="Right" relative="$parent" pos="Max" offset="-6"/>
             <Anchor side="Bottom" relative="$parent/ProgressBar" pos="Max" offset="0"/>
-			<AllowCameraCentering val="True"/>
-			<AllowSelection val="True"/>
-			<AllowTargeting val="False"/>
-			<AllowSmartCommand val="False"/>
-			<AllowCursorChanging val="False"/>
-			
-			<Animation name="Hover">
-				<Event event="OnMouseEnter" action="Play"/>
-				<Event event="OnMouseExit" action="Reset"/>
-				<Controller type="Visibility" end="Pause" frame="$parent/NormalImage">
-					<Key type="Bool" time="0" value="true"/>
-					<Key type="Bool" time="0" value="false"/>
-				</Controller>
-				<Controller type="Visibility" end="Pause" frame="$parent/HoverImage">
-					<Key type="Bool" time="0" value="false"/>
-					<Key type="Bool" time="0" value="true"/>
-				</Controller>
-			</Animation>
-		</Frame>
+            <AllowCameraCentering val="True"/>
+            <AllowSelection val="True"/>
+            <AllowTargeting val="False"/>
+            <AllowSmartCommand val="False"/>
+            <AllowCursorChanging val="False"/>
+            
+            <Animation name="Hover">
+                <Event event="OnMouseEnter" action="Play"/>
+                <Event event="OnMouseExit" action="Reset"/>
+                <Controller type="Visibility" end="Pause" frame="$parent/NormalImage">
+                    <Key type="Bool" time="0" value="true"/>
+                    <Key type="Bool" time="0" value="false"/>
+                </Controller>
+                <Controller type="Visibility" end="Pause" frame="$parent/HoverImage">
+                    <Key type="Bool" time="0" value="false"/>
+                    <Key type="Bool" time="0" value="true"/>
+                </Controller>
+            </Animation>
+        </Frame>
     </Frame>
     
     <Frame type="PlayerFrame" name="PlayerProductionFrameTemplate">
@@ -330,7 +291,7 @@
             <Style val="ResourceValue"/>
             <Text val="..."/>
             <CollapseLayout val="true"/>
-			<Visible val="false"/>
+            <Visible val="false"/>
         </Frame>
     </Frame>
     

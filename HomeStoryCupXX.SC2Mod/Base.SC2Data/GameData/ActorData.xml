@@ -64,7 +64,7 @@
         <FilterPlayers index="11" value="1"/>
         <FilterPlayers index="12" value="1"/>
         <FilterPlayers index="13" value="1"/>
-        <FilterPlayers index="15" value="1"/>
+        <FilterPlayers index="14" value="1"/>
     </CActorDoodad>
     <CActorDoodad id="Logo_PlayerSecondary">
         <FilterPlayers index="0" value="1"/>
@@ -81,7 +81,7 @@
         <FilterPlayers index="11" value="1"/>
         <FilterPlayers index="12" value="1"/>
         <FilterPlayers index="13" value="1"/>
-        <FilterPlayers index="15" value="1"/>
+        <FilterPlayers index="14" value="1"/>
     </CActorDoodad>
     <CActorUnit id="LurkerDenMP">
         <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
@@ -92,6 +92,14 @@
     <CActorUnit id="OrbitalCommand">
         <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,115"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
+    </CActorUnit>
+    <!--                                                                                         -->
+    <!-- Photon Cannon ......................................................................... -->
+    <!--                                                                                         -->
+    <CActorUnit id="PhotonCannon">
+        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusNoProduction"/>
+        <CustomUnitStatusOffset value="0,40"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!-- Planetary Fortress .................................................................... -->
@@ -264,6 +272,11 @@
         <CustomUnitStatusOffset value="0,80"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
+    <CActorUnit id="ShieldBattery">
+        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusNoProduction"/>
+        <CustomUnitStatusOffset value="0,40"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
+    </CActorUnit>
     <!--                                                                                         -->
     <!-- Spawning Pool ......................................................................... -->
     <!--                                                                                         -->
@@ -340,6 +353,11 @@
     <CActorUnit id="DarkShrine">
         <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,135"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
+    </CActorUnit>
+    <CActorUnit id="WarpGate">
+        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,105"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
 </Catalog>

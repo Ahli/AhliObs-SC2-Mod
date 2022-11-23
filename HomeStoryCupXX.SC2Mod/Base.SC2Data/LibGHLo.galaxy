@@ -1142,7 +1142,7 @@ void libGHLo_gf_GraphsUpdateDataComparative (int lp_graphIndex) {
 bool libGHLo_gf_LabelsUnitUsesCustomStatusBar (string lp_unitType) {
     // Automatic Variable Declarations
     // Implementation
-    if (((lp_unitType == "Larva") || (lp_unitType == "Egg") || (lp_unitType == "Gateway") || (lp_unitType == "Barracks") || (lp_unitType == "Nexus") || (lp_unitType == "Hatchery") || (lp_unitType == "CommandCenter") || (lp_unitType == "TechLab") || (lp_unitType == "BarracksTechLab") || (lp_unitType == "FactoryTechLab") || (lp_unitType == "StarportTechLab") || (lp_unitType == "Factory") || (lp_unitType == "Starport") || (lp_unitType == "Stargate") || (lp_unitType == "RoboticsBay") || (lp_unitType == "Forge") || (lp_unitType == "EngineeringBay") || (lp_unitType == "Armory") || (lp_unitType == "EvolutionChamber") || (lp_unitType == "Spire") || (lp_unitType == "CyberneticsCore") || (lp_unitType == "OrbitalCommand") || (lp_unitType == "PlanetaryFortress") || (lp_unitType == "FleetBeacon") || (lp_unitType == "RoboticsFacility") || (lp_unitType == "TemplarArchive") || (lp_unitType == "TwilightCouncil") || (lp_unitType == "FusionCore") || (lp_unitType == "SpawningPool") || (lp_unitType == "RoachWarren") || (lp_unitType == "BanelingNest") || (lp_unitType == "LurkerDenMP") || (lp_unitType == "GhostAcademy") || (lp_unitType == "GreaterSpire") || (lp_unitType == "Lair") || (lp_unitType == "Hive") || (lp_unitType == "HydraliskDen") || (lp_unitType == "InfestationPit") || (lp_unitType == "UltraliskCavern") || (lp_unitType == "DarkShrine"))) {
+    if (((lp_unitType == "Larva") || (lp_unitType == "Egg") || (lp_unitType == "Gateway") || (lp_unitType == "Barracks") || (lp_unitType == "Nexus") || (lp_unitType == "Hatchery") || (lp_unitType == "CommandCenter") || (lp_unitType == "TechLab") || (lp_unitType == "BarracksTechLab") || (lp_unitType == "FactoryTechLab") || (lp_unitType == "StarportTechLab") || (lp_unitType == "Factory") || (lp_unitType == "Starport") || (lp_unitType == "Stargate") || (lp_unitType == "RoboticsBay") || (lp_unitType == "Forge") || (lp_unitType == "EngineeringBay") || (lp_unitType == "Armory") || (lp_unitType == "EvolutionChamber") || (lp_unitType == "Spire") || (lp_unitType == "CyberneticsCore") || (lp_unitType == "OrbitalCommand") || (lp_unitType == "PlanetaryFortress") || (lp_unitType == "FleetBeacon") || (lp_unitType == "RoboticsFacility") || (lp_unitType == "TemplarArchive") || (lp_unitType == "TwilightCouncil") || (lp_unitType == "FusionCore") || (lp_unitType == "SpawningPool") || (lp_unitType == "RoachWarren") || (lp_unitType == "BanelingNest") || (lp_unitType == "LurkerDenMP") || (lp_unitType == "GhostAcademy") || (lp_unitType == "GreaterSpire") || (lp_unitType == "Lair") || (lp_unitType == "Hive") || (lp_unitType == "HydraliskDen") || (lp_unitType == "InfestationPit") || (lp_unitType == "UltraliskCavern") || (lp_unitType == "DarkShrine") || (lp_unitType == "WarpGate"))) {
         return true;
     }
 
@@ -3360,6 +3360,17 @@ bool libGHLo_gt_LabelsUnitCreated_Func (bool testConds, bool runActions) {
             DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
             libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsIcon1 + lv_unitTagString), lv_dialogItem);
+            DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\IconBG", lv_unit);
+            lv_dialogItem = DialogControlLastCreated();
+            DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
+            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
+            libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsDisruptIconBG1 + lv_unitTagString), lv_dialogItem);
+            DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\Icon", lv_unit);
+            lv_dialogItem = DialogControlLastCreated();
+            libNtve_gf_SetDialogItemImage(lv_dialogItem, "Assets\\Textures\\blank.dds", libGHLo_gv_obs);
+            DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
+            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
+            libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsDisruptIcon1 + lv_unitTagString), lv_dialogItem);
             if (((lv_unitType == "Barracks") || (lv_unitType == "Factory") || (lv_unitType == "Starport"))) {
                 DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon2\\IconBG", lv_unit);
                 lv_dialogItem = DialogControlLastCreated();
@@ -3677,6 +3688,86 @@ bool libGHLo_gt_LabelsReactorDestroyed_Func (bool testConds, bool runActions) {
 //--------------------------------------------------------------------------------------------------
 void libGHLo_gt_LabelsReactorDestroyed_Init () {
     libGHLo_gt_LabelsReactorDestroyed = TriggerCreate("libGHLo_gt_LabelsReactorDestroyed_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Labels - Pylon Power Up
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_LabelsPylonPowerUp_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_dialogItem;
+    string lv_unitTagString;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_dialogItem = c_invalidDialogControlId;
+    lv_unitTagString = IntToString(UnitGetTag(EventPlayerEffectUsedUnit(c_effectUnitCaster)));
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIconBG1 + lv_unitTagString));
+    if ((lv_dialogItem != c_invalidDialogControlId)) {
+        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, false);
+        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIcon1 + lv_unitTagString)), libGHLo_gv_obs, false);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_LabelsPylonPowerUp_Init () {
+    libGHLo_gt_LabelsPylonPowerUp = TriggerCreate("libGHLo_gt_LabelsPylonPowerUp_Func");
+    TriggerAddEventPlayerEffectUsed(libGHLo_gt_LabelsPylonPowerUp, c_playerAny, "AHLI_PowerLevelGained");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Labels - Pylon Power Down
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_LabelsPylonPowerDown_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_dialogItem;
+    unit lv_unit;
+    string lv_unitTagString;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_dialogItem = c_invalidDialogControlId;
+    lv_unit = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    lv_unitTagString = IntToString(UnitGetTag(lv_unit));
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIconBG1 + lv_unitTagString));
+    if ((lv_dialogItem == c_invalidDialogControlId)) {
+        DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\Icon", lv_unit);
+        lv_dialogItem = DialogControlLastCreated();
+        DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
+        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
+        libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsDisruptIcon1 + lv_unitTagString), lv_dialogItem);
+        DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\IconBG", lv_unit);
+        lv_dialogItem = DialogControlLastCreated();
+        DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
+        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
+        libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsDisruptIconBG1 + lv_unitTagString), lv_dialogItem);
+    }
+
+    DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
+    lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIcon1 + lv_unitTagString));
+    libNtve_gf_SetDialogItemImage(lv_dialogItem, "_Assets\\Textures\\ui_hots_shared_icon_stat_energy.dds", libGHLo_gv_obs);
+    DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_LabelsPylonPowerDown_Init () {
+    libGHLo_gt_LabelsPylonPowerDown = TriggerCreate("libGHLo_gt_LabelsPylonPowerDown_Func");
+    TriggerAddEventPlayerEffectUsed(libGHLo_gt_LabelsPylonPowerDown, c_playerAny, "AHLI_PowerLevelLost");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4780,6 +4871,8 @@ void libGHLo_InitTriggers () {
     libGHLo_gt_LabelsUnitTrainingStopped_Init();
     libGHLo_gt_LabelsResearchStopped_Init();
     libGHLo_gt_LabelsReactorDestroyed_Init();
+    libGHLo_gt_LabelsPylonPowerUp_Init();
+    libGHLo_gt_LabelsPylonPowerDown_Init();
     libGHLo_gt_UpgradeNotificationsInitialization_Init();
     libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Init();
     libGHLo_gt_UpgradeNotificationsResearchCancelled_Init();

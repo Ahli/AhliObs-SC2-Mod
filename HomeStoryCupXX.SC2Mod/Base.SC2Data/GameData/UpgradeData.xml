@@ -6,7 +6,6 @@
     </CUpgrade>
     <CUpgrade id="BansheeCloak">
         <ScoreAmount value="200"/>
-        <Icon value="_Assets\Textures\btn-ability-terran-cloak-color-banshee.dds"/>
     </CUpgrade>
     <CUpgrade id="BansheeSpeed">
         <ScoreAmount value="300"/>
@@ -16,9 +15,6 @@
     </CUpgrade>
     <CUpgrade id="DrillClaws">
         <ScoreAmount value="150"/>
-    </CUpgrade>
-    <CUpgrade id="PersonalCloaking">
-        <Icon value="_Assets\Textures\btn-ability-terran-cloak-color-ghost.dds"/>
     </CUpgrade>
     <CUpgrade id="SmartServos">
         <ScoreAmount value="200"/>

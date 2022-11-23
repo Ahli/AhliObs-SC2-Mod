@@ -31,4 +31,13 @@
             <ModifyFlags index="Reveal" value="1"/>
         </Modification>
     </CBehaviorBuff>
+    <CBehaviorPowerUser id="PowerUserBaseDefenseSmall">
+        <PowerStageArray index="1" LevelGainEffect="AHLI_PowerLevelGained" LevelLossEffect="AHLI_PowerLevelLost"/>
+    </CBehaviorPowerUser>
+    <CBehaviorPowerUser id="PowerUserQueue">
+        <PowerStageArray index="1" LevelGainEffect="AHLI_PowerLevelGained" LevelLossEffect="AHLI_PowerLevelLost"/>
+    </CBehaviorPowerUser>
+    <CBehaviorPowerUser id="PowerUserQueueSmall">
+        <PowerStageArray index="1" LevelGainEffect="AHLI_PowerLevelGained" LevelLossEffect="AHLI_PowerLevelLost"/>
+    </CBehaviorPowerUser>
 </Catalog>
