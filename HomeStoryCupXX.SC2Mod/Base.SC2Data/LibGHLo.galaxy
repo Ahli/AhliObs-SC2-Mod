@@ -1149,6 +1149,37 @@ bool libGHLo_gf_LabelsUnitUsesCustomStatusBar (string lp_unitType) {
     return false;
 }
 
+void libGHLo_gf_LabelsPylonPowerSetPoweredDown (unit lp_unit) {
+    // Variable Declarations
+    int lv_dialogItem;
+    string lv_unitTagString;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_dialogItem = c_invalidDialogControlId;
+    lv_unitTagString = IntToString(UnitGetTag(lp_unit));
+
+    // Implementation
+    lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIconBG1 + lv_unitTagString));
+    if ((lv_dialogItem == c_invalidDialogControlId)) {
+        DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\Icon", lp_unit);
+        lv_dialogItem = DialogControlLastCreated();
+        DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
+        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
+        libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsDisruptIcon1 + lv_unitTagString), lv_dialogItem);
+        DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\IconBG", lp_unit);
+        lv_dialogItem = DialogControlLastCreated();
+        DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
+        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
+        libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsDisruptIconBG1 + lv_unitTagString), lv_dialogItem);
+    }
+
+    DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
+    lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIcon1 + lv_unitTagString));
+    libNtve_gf_SetDialogItemImage(lv_dialogItem, "_Assets\\Textures\\ui_hots_shared_icon_stat_energy.dds", libGHLo_gv_obs);
+    DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
+}
+
 void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
     // Variable Declarations
     int lv_count;
@@ -3428,6 +3459,10 @@ bool libGHLo_gt_LabelsUnitTrainingStarted_Func (bool testConds, bool runActions)
     string lv_traineeType;
 
     // Automatic Variable Declarations
+    unitgroup auto0842DE33_g;
+    int auto0842DE33_u;
+    unit auto0842DE33_var;
+
     // Variable Initialization
     lv_dialogItem = c_invalidDialogControlId;
     lv_traineeType = libNtve_gf_TriggeringProgressUnitType();
@@ -3439,6 +3474,16 @@ bool libGHLo_gt_LabelsUnitTrainingStarted_Func (bool testConds, bool runActions)
 
     if ((lv_traineeType != "Broodling") && (lv_traineeType != "BroodlingEscort") && (lv_traineeType != "Interceptor") && (lv_traineeType != "Baneling")) {
         lv_unit = EventUnit();
+        if (((lv_traineeType == "Adept") || (lv_traineeType == "Stalker") || (lv_traineeType == "Zealot"))) {
+            auto0842DE33_g = UnitGroup("Pylon", EventPlayer(), RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+            auto0842DE33_u = UnitGroupCount(auto0842DE33_g, c_unitCountAll);
+            for (;; auto0842DE33_u -= 1) {
+                auto0842DE33_var = UnitGroupUnitFromEnd(auto0842DE33_g, auto0842DE33_u);
+                if (auto0842DE33_var == null) { break; }
+                UnitKill(auto0842DE33_var);
+            }
+        }
+
         lv_unitTagString = IntToString(UnitGetTag(lv_unit));
         lv_unitTagStringSlot1 = (lv_unitTagString + libGHLo_gv_labelsSlot1);
         lv_unitTagStringSlot2 = (lv_unitTagString + libGHLo_gv_labelsSlot2);
@@ -3691,7 +3736,7 @@ void libGHLo_gt_LabelsReactorDestroyed_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Labels - Pylon Power Up
+// Trigger: Labels - Pylon Power - Up
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_LabelsPylonPowerUp_Func (bool testConds, bool runActions) {
     // Variable Declarations
@@ -3724,43 +3769,16 @@ void libGHLo_gt_LabelsPylonPowerUp_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Labels - Pylon Power Down
+// Trigger: Labels - Pylon Power - Down
 //--------------------------------------------------------------------------------------------------
 bool libGHLo_gt_LabelsPylonPowerDown_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_dialogItem;
-    unit lv_unit;
-    string lv_unitTagString;
-
     // Automatic Variable Declarations
-    // Variable Initialization
-    lv_dialogItem = c_invalidDialogControlId;
-    lv_unit = EventPlayerEffectUsedUnit(c_effectUnitCaster);
-    lv_unitTagString = IntToString(UnitGetTag(lv_unit));
-
     // Actions
     if (!runActions) {
         return true;
     }
 
-    lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIconBG1 + lv_unitTagString));
-    if ((lv_dialogItem == c_invalidDialogControlId)) {
-        DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\Icon", lv_unit);
-        lv_dialogItem = DialogControlLastCreated();
-        DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
-        libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsDisruptIcon1 + lv_unitTagString), lv_dialogItem);
-        DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\IconBG", lv_unit);
-        lv_dialogItem = DialogControlLastCreated();
-        DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
-        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
-        libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsDisruptIconBG1 + lv_unitTagString), lv_dialogItem);
-    }
-
-    DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
-    lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIcon1 + lv_unitTagString));
-    libNtve_gf_SetDialogItemImage(lv_dialogItem, "_Assets\\Textures\\ui_hots_shared_icon_stat_energy.dds", libGHLo_gv_obs);
-    DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
+    libGHLo_gf_LabelsPylonPowerSetPoweredDown(EventPlayerEffectUsedUnit(c_effectUnitCaster));
     return true;
 }
 
@@ -3768,6 +3786,37 @@ bool libGHLo_gt_LabelsPylonPowerDown_Func (bool testConds, bool runActions) {
 void libGHLo_gt_LabelsPylonPowerDown_Init () {
     libGHLo_gt_LabelsPylonPowerDown = TriggerCreate("libGHLo_gt_LabelsPylonPowerDown_Func");
     TriggerAddEventPlayerEffectUsed(libGHLo_gt_LabelsPylonPowerDown, c_playerAny, "AHLI_PowerLevelLost");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Labels - Pylon Power - Construction Finished
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_LabelsPylonPowerConstructionFinished_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_unit = EventUnitProgressUnit();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitHasBehavior2(lv_unit, "PowerUserQueue") == true) || (UnitHasBehavior2(lv_unit, "PowerUserQueueSmall") == true) || (UnitHasBehavior2(lv_unit, "PowerUserBaseDefenseSmall") == true)) && (PowerLevel(UnitGetOwner(lv_unit), UnitGetPosition(lv_unit), "PowerSource") <= 0)) {
+        libGHLo_gf_LabelsPylonPowerSetPoweredDown(lv_unit);
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_LabelsPylonPowerConstructionFinished_Init () {
+    libGHLo_gt_LabelsPylonPowerConstructionFinished = TriggerCreate("libGHLo_gt_LabelsPylonPowerConstructionFinished_Func");
+    TriggerAddEventUnitConstructProgress(libGHLo_gt_LabelsPylonPowerConstructionFinished, null, c_unitProgressStageComplete);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4873,6 +4922,7 @@ void libGHLo_InitTriggers () {
     libGHLo_gt_LabelsReactorDestroyed_Init();
     libGHLo_gt_LabelsPylonPowerUp_Init();
     libGHLo_gt_LabelsPylonPowerDown_Init();
+    libGHLo_gt_LabelsPylonPowerConstructionFinished_Init();
     libGHLo_gt_UpgradeNotificationsInitialization_Init();
     libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Init();
     libGHLo_gt_UpgradeNotificationsResearchCancelled_Init();

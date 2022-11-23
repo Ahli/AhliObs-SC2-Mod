@@ -100,37 +100,71 @@
         </Frame>
 
         <Frame type="Frame" name="DisruptIcon1" template="ProductionStatusBars/UnitIconTemplate">
-            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Top" relative="$parent" pos="Min" offset="9"/>
             <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+            <Width val="42"/>
+            <Height val="42"/>
 
             <Frame type="Image" name="IconBG">
-                <Height val="41"/>
-                <Width val="41"/>
+                <Height val="42"/>
+                <Width val="42"/>
             </Frame>
 
             <Frame type="Image" name="Icon">
                 <Anchor side="Top" relative="$parent" pos="Min" offset="3"/>
                 <Anchor side="Left" relative="$parent" pos="Min" offset="3"/>
-                <Height val="35"/>
-                <Width val="35"/>
+                <Height val="36"/>
+                <Width val="36"/>
             </Frame>
         </Frame>
+
+		<StateGroup name="Pulse">
+			<DefaultState val="Off"/>
+			<State name="On">
+				<When type="Property" frame="DisruptIcon1/Icon" visible="true"/>
+				<When type="Property" frame="StatusIcon1/IconBG" visible="true"/>
+				<Action type="SendEvent" event="PulseOn"/>
+				<Action type="SetProperty" frame="DisruptIcon1/IconBG" alpha="0"/>
+			</State>
+			<State name="Off">
+				<Action type="SendEvent" event="PulseOff"/>
+			</State>
+		</StateGroup>
+
+		<Animation name="FadeAnim">
+			<Event event="PulseOn" action="Reset,Play"/>
+			<Event event="PulseOff" action="Reset,Pause"/>
+
+			<Controller type="Fade" end="PingPong" frame="DisruptIcon1/Icon">
+				<Key type="Curve" time="0" value="0"/>
+				<Key type="Curve" time="1" value="0"/>
+				<Key type="Curve" time="1.5" value="255"/>
+				<Key type="Curve" time="2.5" value="255"/>
+			</Controller>
+			<Controller type="Fade" end="PingPong" frame="StatusIcon1/Icon">
+				<Key type="Curve" time="0" value="255"/>
+				<Key type="Curve" time="1" value="255"/>
+				<Key type="Curve" time="1.5" value="0"/>
+				<Key type="Curve" time="2.5" value="0"/>
+			</Controller>
+		</Animation>
+
     </Frame>
 
     <Frame type="UnitStatusFrame" name="ProductionStatusEgg" template="ProductionStatusBars/ProductionStatusSingle">
         <Frame type="Frame" name="StatusIcon1">
 
             <Frame type="Image" name="IconBG">
-                <Height val="41"/>
-                <Width val="41"/>
+                <Height val="42"/>
+                <Width val="42"/>
             </Frame>
 
             <Frame type="Image" name="Icon">
                 <Anchor side="Top" relative="$parent" pos="Min" offset="3"/>
                 <Anchor side="Left" relative="$parent" pos="Min" offset="3"/>
-                <Height val="35"/>
-                <Width val="35"/>
+                <Height val="36"/>
+                <Width val="36"/>
             </Frame>
         </Frame>
     </Frame>
@@ -139,22 +173,22 @@
         <Frame type="Frame" name="StatusIcon1">
 
             <Frame type="Image" name="IconBG">
-                <Height val="53"/>
-                <Width val="53"/>
+                <Height val="54"/>
+                <Width val="54"/>
             </Frame>
 
             <Frame type="Image" name="Icon">
                 <Anchor side="Top" relative="$parent" pos="Min" offset="4"/>
                 <Anchor side="Left" relative="$parent" pos="Min" offset="4"/>
-                <Height val="45"/>
-                <Width val="45"/>
+                <Height val="46"/>
+                <Width val="46"/>
             </Frame>
         </Frame>
     </Frame>
 
     <Frame type="UnitStatusFrame" name="ProductionStatusNoProduction">
-        <Height val="60"/>
-        <Width val="60"/>
+        <Height val="42"/>
+        <Width val="42"/>
         <RenderType val="HDR"/>
         
         <Frame type="Frame" name="AttachPointFrame">
@@ -175,15 +209,15 @@
             <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
 
             <Frame type="Image" name="IconBG">
-                <Height val="41"/>
-                <Width val="41"/>
+                <Height val="42"/>
+                <Width val="42"/>
             </Frame>
 
             <Frame type="Image" name="Icon">
                 <Anchor side="Top" relative="$parent" pos="Min" offset="3"/>
                 <Anchor side="Left" relative="$parent" pos="Min" offset="3"/>
-                <Height val="35"/>
-                <Width val="35"/>
+                <Height val="36"/>
+                <Width val="36"/>
             </Frame>
         </Frame>
     </Frame>

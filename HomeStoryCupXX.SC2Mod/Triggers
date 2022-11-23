@@ -6720,6 +6720,8 @@
                 improve/remove cloak image
                 optimize
                 check if observed type needs actually be set or if it can be kept blank (check live, check replay!)
+                
+                TODO had a bug where powering down and chrono boost somehow caused the first production slot (adept) to not disappear and remain visible as chrono-boosted (gateway)
             </Comment>
         </Element>
         <Element Type="Trigger" Id="F50CC398">
@@ -27478,9 +27480,11 @@
             <Item Type="Trigger" Library="GHLo" Id="A08EF3E7"/>
             <Item Type="Trigger" Library="GHLo" Id="5F70E52F"/>
             <Item Type="Trigger" Library="GHLo" Id="69DCD458"/>
+            <Item Type="FunctionDef" Library="GHLo" Id="F497B235"/>
             <Item Type="Trigger" Library="GHLo" Id="F9DB2349"/>
             <Item Type="Trigger" Library="GHLo" Id="40F7FC5E"/>
-            <Item Type="FunctionDef" Library="GHLo" Id="F497B235"/>
+            <Item Type="Trigger" Library="GHLo" Id="44D7EE4D"/>
+            <Item Type="FunctionDef" Library="GHLo" Id="0C80EEC8"/>
             <Item Type="Category" Library="GHLo" Id="E47546C7"/>
         </Element>
         <Element Type="Comment" Id="AB924017">
@@ -29644,6 +29648,7 @@
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="9CD8273C"/>
             <FunctionCall Type="Comment" Library="GHLo" Id="8A084BB9"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="FC10A72B"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="348AA42F"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="EE114796"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="DCF34A6E"/>
             <FunctionCall Type="FunctionCall" Library="GHLo" Id="95ED4AD8"/>
@@ -29760,6 +29765,148 @@
         </Element>
         <Element Type="FunctionCall" Id="D578A8D6">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000092"/>
+        </Element>
+        <Element Type="FunctionCall" Id="348AA42F">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <FunctionCall Type="Comment" Library="GHLo" Id="6FF7F424"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="5F240D36"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="0842DE33"/>
+        </Element>
+        <Element Type="Comment" Id="6FF7F424">
+            <Comment>
+                TESTTTTT REMOVE ME TODO
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+        </Element>
+        <Element Type="FunctionCall" Id="5F240D36">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000133"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="9441C6E0"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="7FA296B6"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="274094D7"/>
+        </Element>
+        <Element Type="FunctionCall" Id="9441C6E0">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001"/>
+            <Parameter Type="Param" Library="GHLo" Id="1565AB6B"/>
+            <Parameter Type="Param" Library="GHLo" Id="8D282D9B"/>
+            <Parameter Type="Param" Library="GHLo" Id="57CBF013"/>
+        </Element>
+        <Element Type="Param" Id="1565AB6B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="GHLo" Id="39FBBE18"/>
+        </Element>
+        <Element Type="Param" Id="8D282D9B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="57CBF013">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>Adept</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Unit"/>
+        </Element>
+        <Element Type="FunctionCall" Id="7FA296B6">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001"/>
+            <Parameter Type="Param" Library="GHLo" Id="19EF3B1F"/>
+            <Parameter Type="Param" Library="GHLo" Id="B4FDD066"/>
+            <Parameter Type="Param" Library="GHLo" Id="E079A95F"/>
+        </Element>
+        <Element Type="Param" Id="19EF3B1F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="GHLo" Id="39FBBE18"/>
+        </Element>
+        <Element Type="Param" Id="B4FDD066">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="E079A95F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>Stalker</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Unit"/>
+        </Element>
+        <Element Type="FunctionCall" Id="274094D7">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001"/>
+            <Parameter Type="Param" Library="GHLo" Id="A46DCDDD"/>
+            <Parameter Type="Param" Library="GHLo" Id="6259AE96"/>
+            <Parameter Type="Param" Library="GHLo" Id="B228C17B"/>
+        </Element>
+        <Element Type="Param" Id="A46DCDDD">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="GHLo" Id="39FBBE18"/>
+        </Element>
+        <Element Type="Param" Id="6259AE96">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="B228C17B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>Zealot</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Unit"/>
+        </Element>
+        <Element Type="FunctionCall" Id="0842DE33">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C4DC760C"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="766CB332"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="28D2903E"/>
+        </Element>
+        <Element Type="Param" Id="766CB332">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="F96B466D"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="7CD82404"/>
+        </Element>
+        <Element Type="FunctionCall" Id="7CD82404">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000359"/>
+            <Parameter Type="Param" Library="GHLo" Id="807C00C5"/>
+            <Parameter Type="Param" Library="GHLo" Id="513C5BD3"/>
+            <Parameter Type="Param" Library="GHLo" Id="A93E9BA0"/>
+            <Parameter Type="Param" Library="GHLo" Id="7A341A51"/>
+            <Parameter Type="Param" Library="GHLo" Id="7B8BCE95"/>
+        </Element>
+        <Element Type="Param" Id="807C00C5">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000691"/>
+            <Value>Pylon</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Unit"/>
+        </Element>
+        <Element Type="Param" Id="513C5BD3">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000692"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="7B2ED265"/>
+        </Element>
+        <Element Type="FunctionCall" Id="7B2ED265">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000053"/>
+        </Element>
+        <Element Type="Param" Id="A93E9BA0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000693"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="F18B7927"/>
+        </Element>
+        <Element Type="FunctionCall" Id="F18B7927">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000356"/>
+        </Element>
+        <Element Type="Param" Id="7A341A51">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000695"/>
+            <Value>-;Missile,Dead,Hidden</Value>
+            <ValueType Type="unitfilter"/>
+        </Element>
+        <Element Type="Param" Id="7B8BCE95">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000694"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1468BD55"/>
+        </Element>
+        <Element Type="FunctionCall" Id="28D2903E">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000077"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="9441B8B5"/>
+            <Parameter Type="Param" Library="GHLo" Id="4B07F7EC"/>
+        </Element>
+        <Element Type="Param" Id="4B07F7EC">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000136"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="2BF8CCAA"/>
+        </Element>
+        <Element Type="FunctionCall" Id="2BF8CCAA">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="19CE733E"/>
         </Element>
         <Element Type="FunctionCall" Id="EE114796">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
@@ -33949,647 +34096,6 @@
             <ValueType Type="gamelink"/>
             <ValueGameType Type="Unit"/>
         </Element>
-        <Element Type="Trigger" Id="F9DB2349">
-            <Variable Type="Variable" Library="GHLo" Id="FC293C81"/>
-            <Variable Type="Variable" Library="GHLo" Id="EF55374D"/>
-            <Event Type="FunctionCall" Library="GHLo" Id="EA3CC1B0"/>
-            <Action Type="FunctionCall" Library="GHLo" Id="BBF69FF5"/>
-            <Action Type="FunctionCall" Library="GHLo" Id="C54F1EE2"/>
-        </Element>
-        <Element Type="Variable" Id="FC293C81">
-            <VariableType>
-                <Type Value="control"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="195E7F22"/>
-        </Element>
-        <Element Type="Param" Id="195E7F22">
-            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
-        </Element>
-        <Element Type="Variable" Id="EF55374D">
-            <VariableType>
-                <Type Value="string"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="A519B44E"/>
-        </Element>
-        <Element Type="Param" Id="A519B44E">
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="DA2D1267"/>
-        </Element>
-        <Element Type="FunctionCall" Id="DA2D1267">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000002"/>
-            <Parameter Type="Param" Library="GHLo" Id="22C2DFF2"/>
-        </Element>
-        <Element Type="Param" Id="22C2DFF2">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000002"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="33CCD479"/>
-        </Element>
-        <Element Type="FunctionCall" Id="33CCD479">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="AF2CDB5E"/>
-            <Parameter Type="Param" Library="GHLo" Id="20FFE90B"/>
-        </Element>
-        <Element Type="Param" Id="20FFE90B">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="B20BE351"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="7D1C1D99"/>
-        </Element>
-        <Element Type="FunctionCall" Id="7D1C1D99">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="BADA9C08"/>
-            <Parameter Type="Param" Library="GHLo" Id="4C1966C4"/>
-        </Element>
-        <Element Type="Param" Id="4C1966C4">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="F6C0132E"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="090AE922"/>
-        </Element>
-        <Element Type="FunctionCall" Id="EA3CC1B0">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="9FFA06A7"/>
-            <Parameter Type="Param" Library="GHLo" Id="A9D60D61"/>
-            <Parameter Type="Param" Library="GHLo" Id="97754234"/>
-        </Element>
-        <Element Type="Param" Id="A9D60D61">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="44A8E2B6"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="2999701E"/>
-        </Element>
-        <Element Type="Param" Id="97754234">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="6FB1C942"/>
-            <Value>AHLI_PowerLevelGained</Value>
-            <ValueType Type="gamelink"/>
-            <ValueGameType Type="Effect"/>
-        </Element>
-        <Element Type="FunctionCall" Id="BBF69FF5">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <Parameter Type="Param" Library="GHLo" Id="59AB9B00"/>
-            <Parameter Type="Param" Library="GHLo" Id="AAE37600"/>
-        </Element>
-        <Element Type="Param" Id="59AB9B00">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="GHLo" Id="FC293C81"/>
-        </Element>
-        <Element Type="Param" Id="AAE37600">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="188DB13C"/>
-        </Element>
-        <Element Type="FunctionCall" Id="188DB13C">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="2CB55863"/>
-            <Parameter Type="Param" Library="GHLo" Id="C3FEF273"/>
-            <Parameter Type="Param" Library="GHLo" Id="68B8960E"/>
-        </Element>
-        <Element Type="Param" Id="C3FEF273">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="DE362105"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="F7FDF14F"/>
-        </Element>
-        <Element Type="Param" Id="68B8960E">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="09571DCF"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="A6721786"/>
-        </Element>
-        <Element Type="FunctionCall" Id="A6721786">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000130"/>
-            <Parameter Type="Param" Library="GHLo" Id="05A010A7"/>
-            <Parameter Type="Param" Library="GHLo" Id="1E588781"/>
-        </Element>
-        <Element Type="Param" Id="05A010A7">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
-            <Variable Type="Variable" Library="GHLo" Id="BE4F07EB"/>
-        </Element>
-        <Element Type="Param" Id="1E588781">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
-            <Variable Type="Variable" Library="GHLo" Id="EF55374D"/>
-        </Element>
-        <Element Type="FunctionCall" Id="C54F1EE2">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="7A040B0E"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="D56366FA"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="8CC68F30"/>
-        </Element>
-        <Element Type="FunctionCall" Id="7A040B0E">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="GHLo" Id="031B98FE"/>
-            <Parameter Type="Param" Library="GHLo" Id="1144FE47"/>
-            <Parameter Type="Param" Library="GHLo" Id="4EDBD4A7"/>
-        </Element>
-        <Element Type="Param" Id="031B98FE">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
-            <Variable Type="Variable" Library="GHLo" Id="94CCCFEB"/>
-        </Element>
-        <Element Type="Param" Id="1144FE47">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="00000121"/>
-        </Element>
-        <Element Type="Param" Id="4EDBD4A7">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
-            <Variable Type="Variable" Library="GHLo" Id="FC293C81"/>
-        </Element>
-        <Element Type="FunctionCall" Id="D56366FA">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="GHLo" Id="CA4DDC71"/>
-            <Parameter Type="Param" Library="GHLo" Id="57B56CA7"/>
-            <Parameter Type="Param" Library="GHLo" Id="877E027F"/>
-        </Element>
-        <Element Type="Param" Id="CA4DDC71">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
-            <Variable Type="Variable" Library="GHLo" Id="94CCCFEB"/>
-        </Element>
-        <Element Type="Param" Id="57B56CA7">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="00000121"/>
-        </Element>
-        <Element Type="Param" Id="877E027F">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="B88ECFF0"/>
-        </Element>
-        <Element Type="FunctionCall" Id="B88ECFF0">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="2CB55863"/>
-            <Parameter Type="Param" Library="GHLo" Id="D3450295"/>
-            <Parameter Type="Param" Library="GHLo" Id="2CE24000"/>
-        </Element>
-        <Element Type="Param" Id="D3450295">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="DE362105"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="F7FDF14F"/>
-        </Element>
-        <Element Type="Param" Id="2CE24000">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="09571DCF"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="D8210ADB"/>
-        </Element>
-        <Element Type="FunctionCall" Id="D8210ADB">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000130"/>
-            <Parameter Type="Param" Library="GHLo" Id="D9F91202"/>
-            <Parameter Type="Param" Library="GHLo" Id="D6289DCE"/>
-        </Element>
-        <Element Type="Param" Id="D9F91202">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
-            <Variable Type="Variable" Library="GHLo" Id="F85C5010"/>
-        </Element>
-        <Element Type="Param" Id="D6289DCE">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
-            <Variable Type="Variable" Library="GHLo" Id="EF55374D"/>
-        </Element>
-        <Element Type="FunctionCall" Id="8CC68F30">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
-            <Parameter Type="Param" Library="GHLo" Id="D8672CCE"/>
-            <Parameter Type="Param" Library="GHLo" Id="D31EF66B"/>
-            <Parameter Type="Param" Library="GHLo" Id="5034AC56"/>
-        </Element>
-        <Element Type="Param" Id="D8672CCE">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
-            <Variable Type="Variable" Library="GHLo" Id="FC293C81"/>
-        </Element>
-        <Element Type="Param" Id="D31EF66B">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="500677B2"/>
-        </Element>
-        <Element Type="Param" Id="5034AC56">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
-        </Element>
-        <Element Type="Trigger" Id="40F7FC5E">
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-            <Variable Type="Variable" Library="GHLo" Id="462D3AA3"/>
-            <Variable Type="Variable" Library="GHLo" Id="8A3D7739"/>
-            <Event Type="FunctionCall" Library="GHLo" Id="EA40D111"/>
-            <Action Type="FunctionCall" Library="GHLo" Id="E2E63360"/>
-            <Action Type="FunctionCall" Library="GHLo" Id="266BA8F0"/>
-            <Action Type="FunctionCall" Library="GHLo" Id="457F41FC"/>
-            <Action Type="FunctionCall" Library="GHLo" Id="3C60D29C"/>
-            <Action Type="FunctionCall" Library="GHLo" Id="F2306BFA"/>
-            <Action Type="FunctionCall" Library="GHLo" Id="764D0F38"/>
-        </Element>
-        <Element Type="Variable" Id="98FAE761">
-            <VariableType>
-                <Type Value="control"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="1A3CC68E"/>
-        </Element>
-        <Element Type="Param" Id="1A3CC68E">
-            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
-        </Element>
-        <Element Type="Variable" Id="462D3AA3">
-            <VariableType>
-                <Type Value="unit"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="5E170736"/>
-        </Element>
-        <Element Type="Param" Id="5E170736">
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="F1DD18D4"/>
-        </Element>
-        <Element Type="FunctionCall" Id="F1DD18D4">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="BADA9C08"/>
-            <Parameter Type="Param" Library="GHLo" Id="6F3ED0AC"/>
-        </Element>
-        <Element Type="Param" Id="6F3ED0AC">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="F6C0132E"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="090AE922"/>
-        </Element>
-        <Element Type="Variable" Id="8A3D7739">
-            <VariableType>
-                <Type Value="string"/>
-            </VariableType>
-            <Value Type="Param" Library="GHLo" Id="A4443743"/>
-        </Element>
-        <Element Type="Param" Id="A4443743">
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="EFF34BCB"/>
-        </Element>
-        <Element Type="FunctionCall" Id="EFF34BCB">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000002"/>
-            <Parameter Type="Param" Library="GHLo" Id="3BBDE486"/>
-        </Element>
-        <Element Type="Param" Id="3BBDE486">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000002"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="A72E693D"/>
-        </Element>
-        <Element Type="FunctionCall" Id="A72E693D">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="AF2CDB5E"/>
-            <Parameter Type="Param" Library="GHLo" Id="DE704FFF"/>
-        </Element>
-        <Element Type="Param" Id="DE704FFF">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="B20BE351"/>
-            <Variable Type="Variable" Library="GHLo" Id="462D3AA3"/>
-        </Element>
-        <Element Type="FunctionCall" Id="EA40D111">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="9FFA06A7"/>
-            <Parameter Type="Param" Library="GHLo" Id="0820B95A"/>
-            <Parameter Type="Param" Library="GHLo" Id="8E957BE6"/>
-        </Element>
-        <Element Type="Param" Id="0820B95A">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="44A8E2B6"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="2999701E"/>
-        </Element>
-        <Element Type="Param" Id="8E957BE6">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="6FB1C942"/>
-            <Value>AHLI_PowerLevelLost</Value>
-            <ValueType Type="gamelink"/>
-            <ValueGameType Type="Effect"/>
-        </Element>
-        <Element Type="FunctionCall" Id="E2E63360">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <Parameter Type="Param" Library="GHLo" Id="59CAC73C"/>
-            <Parameter Type="Param" Library="GHLo" Id="B80161E7"/>
-        </Element>
-        <Element Type="Param" Id="59CAC73C">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="Param" Id="B80161E7">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="9E3984D1"/>
-        </Element>
-        <Element Type="FunctionCall" Id="9E3984D1">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="2CB55863"/>
-            <Parameter Type="Param" Library="GHLo" Id="5F20FC39"/>
-            <Parameter Type="Param" Library="GHLo" Id="4F9BF058"/>
-        </Element>
-        <Element Type="Param" Id="5F20FC39">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="DE362105"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="F7FDF14F"/>
-        </Element>
-        <Element Type="Param" Id="4F9BF058">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="09571DCF"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="DD77D95F"/>
-        </Element>
-        <Element Type="FunctionCall" Id="DD77D95F">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000130"/>
-            <Parameter Type="Param" Library="GHLo" Id="B2668FD1"/>
-            <Parameter Type="Param" Library="GHLo" Id="2EEB217E"/>
-        </Element>
-        <Element Type="Param" Id="B2668FD1">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
-            <Variable Type="Variable" Library="GHLo" Id="BE4F07EB"/>
-        </Element>
-        <Element Type="Param" Id="2EEB217E">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
-            <Variable Type="Variable" Library="GHLo" Id="8A3D7739"/>
-        </Element>
-        <Element Type="FunctionCall" Id="266BA8F0">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="B3FFCAA6"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="909A40E3"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="56654962"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="D8CC4107"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="371F7234"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="6CEB30C5"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="315A05FA"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="3256B66E"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="2D243756"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="61B2E906"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="C343AFB6"/>
-        </Element>
-        <Element Type="FunctionCall" Id="B3FFCAA6">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="CABF8271"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="GHLo" Id="CEF22ED8"/>
-            <Parameter Type="Param" Library="GHLo" Id="6237EB60"/>
-            <Parameter Type="Param" Library="GHLo" Id="A731BAD1"/>
-        </Element>
-        <Element Type="Param" Id="CEF22ED8">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="66FA399A"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="79B4987E"/>
-        </Element>
-        <Element Type="Param" Id="6237EB60">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="CD4F3F9C"/>
-            <Value>DisruptIcon1\Icon</Value>
-            <ValueType Type="string"/>
-        </Element>
-        <Element Type="Param" Id="A731BAD1">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="0AD4D3A0"/>
-            <Variable Type="Variable" Library="GHLo" Id="462D3AA3"/>
-        </Element>
-        <Element Type="FunctionCall" Id="909A40E3">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="GHLo" Id="32692231"/>
-            <Parameter Type="Param" Library="GHLo" Id="E8FDDFCE"/>
-        </Element>
-        <Element Type="Param" Id="32692231">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="5EC8FD85"/>
-        </Element>
-        <Element Type="FunctionCall" Id="5EC8FD85">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
-        </Element>
-        <Element Type="Param" Id="E8FDDFCE">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="FunctionCall" Id="56654962">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="EED3AF00"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="GHLo" Id="6EC91052"/>
-            <Parameter Type="Param" Library="GHLo" Id="CF1163BA"/>
-        </Element>
-        <Element Type="Param" Id="6EC91052">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="07012039"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="AE93A3CC"/>
-        </Element>
-        <Element Type="Param" Id="CF1163BA">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="22617857"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="FunctionCall" Id="D8CC4107">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="GHLo" Id="9E9CA312"/>
-            <Parameter Type="Param" Library="GHLo" Id="17306B3D"/>
-            <Parameter Type="Param" Library="GHLo" Id="EC7B53B6"/>
-        </Element>
-        <Element Type="Param" Id="9E9CA312">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
-            <Variable Type="Variable" Library="GHLo" Id="35514AC2"/>
-        </Element>
-        <Element Type="Param" Id="17306B3D">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="00000121"/>
-        </Element>
-        <Element Type="Param" Id="EC7B53B6">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="FunctionCall" Id="371F7234">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="7295AB42"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="GHLo" Id="D9BBA841"/>
-            <Parameter Type="Param" Library="GHLo" Id="4F21A5DE"/>
-            <Parameter Type="Param" Library="GHLo" Id="20A152F6"/>
-        </Element>
-        <Element Type="Param" Id="D9BBA841">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="F64BE22C"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="F7FDF14F"/>
-        </Element>
-        <Element Type="Param" Id="4F21A5DE">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="53C70DF6"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="D6B6B7CA"/>
-        </Element>
-        <Element Type="FunctionCall" Id="D6B6B7CA">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000130"/>
-            <Parameter Type="Param" Library="GHLo" Id="4C6F8430"/>
-            <Parameter Type="Param" Library="GHLo" Id="42F99659"/>
-        </Element>
-        <Element Type="Param" Id="4C6F8430">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
-            <Variable Type="Variable" Library="GHLo" Id="F85C5010"/>
-        </Element>
-        <Element Type="Param" Id="42F99659">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
-            <Variable Type="Variable" Library="GHLo" Id="8A3D7739"/>
-        </Element>
-        <Element Type="Param" Id="20A152F6">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="07F61AC9"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="FunctionCall" Id="6CEB30C5">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
-            <Parameter Type="Param" Library="GHLo" Id="07000D54"/>
-            <Parameter Type="Param" Library="GHLo" Id="EE7CAFF9"/>
-            <Parameter Type="Param" Library="GHLo" Id="7F5B4161"/>
-        </Element>
-        <Element Type="Param" Id="07000D54">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="Param" Id="EE7CAFF9">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
-        </Element>
-        <Element Type="Param" Id="7F5B4161">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
-        </Element>
-        <Element Type="FunctionCall" Id="315A05FA">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="CABF8271"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="GHLo" Id="E26E46DA"/>
-            <Parameter Type="Param" Library="GHLo" Id="F2D56B6B"/>
-            <Parameter Type="Param" Library="GHLo" Id="9E6E7D77"/>
-        </Element>
-        <Element Type="Param" Id="E26E46DA">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="66FA399A"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="79B4987E"/>
-        </Element>
-        <Element Type="Param" Id="F2D56B6B">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="CD4F3F9C"/>
-            <Value>DisruptIcon1\IconBG</Value>
-            <ValueType Type="string"/>
-        </Element>
-        <Element Type="Param" Id="9E6E7D77">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="0AD4D3A0"/>
-            <Variable Type="Variable" Library="GHLo" Id="462D3AA3"/>
-        </Element>
-        <Element Type="FunctionCall" Id="3256B66E">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="GHLo" Id="B52BD7C6"/>
-            <Parameter Type="Param" Library="GHLo" Id="53AEE3F6"/>
-        </Element>
-        <Element Type="Param" Id="B52BD7C6">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="Param" Id="53AEE3F6">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="27D4866E"/>
-        </Element>
-        <Element Type="FunctionCall" Id="27D4866E">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
-        </Element>
-        <Element Type="FunctionCall" Id="2D243756">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="EED3AF00"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="GHLo" Id="2593C8E6"/>
-            <Parameter Type="Param" Library="GHLo" Id="EF0B0C25"/>
-        </Element>
-        <Element Type="Param" Id="2593C8E6">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="22617857"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="Param" Id="EF0B0C25">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="07012039"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="AE93A3CC"/>
-        </Element>
-        <Element Type="FunctionCall" Id="61B2E906">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="GHLo" Id="E943A7D6"/>
-            <Parameter Type="Param" Library="GHLo" Id="5C7957C4"/>
-            <Parameter Type="Param" Library="GHLo" Id="DC99FDFF"/>
-        </Element>
-        <Element Type="Param" Id="E943A7D6">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
-            <Variable Type="Variable" Library="GHLo" Id="35514AC2"/>
-        </Element>
-        <Element Type="Param" Id="5C7957C4">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="00000121"/>
-        </Element>
-        <Element Type="Param" Id="DC99FDFF">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="FunctionCall" Id="C343AFB6">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="7295AB42"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="GHLo" Id="E499F8A0"/>
-            <Parameter Type="Param" Library="GHLo" Id="759C574A"/>
-            <Parameter Type="Param" Library="GHLo" Id="52CFE4C7"/>
-        </Element>
-        <Element Type="Param" Id="E499F8A0">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="F64BE22C"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="F7FDF14F"/>
-        </Element>
-        <Element Type="Param" Id="759C574A">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="07F61AC9"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="Param" Id="52CFE4C7">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="53C70DF6"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="EE97F512"/>
-        </Element>
-        <Element Type="FunctionCall" Id="EE97F512">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000130"/>
-            <Parameter Type="Param" Library="GHLo" Id="AEF3BFC7"/>
-            <Parameter Type="Param" Library="GHLo" Id="1D5D2466"/>
-        </Element>
-        <Element Type="Param" Id="AEF3BFC7">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
-            <Variable Type="Variable" Library="GHLo" Id="BE4F07EB"/>
-        </Element>
-        <Element Type="Param" Id="1D5D2466">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
-            <Variable Type="Variable" Library="GHLo" Id="8A3D7739"/>
-        </Element>
-        <Element Type="FunctionCall" Id="457F41FC">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
-            <Parameter Type="Param" Library="GHLo" Id="5E30EADD"/>
-            <Parameter Type="Param" Library="GHLo" Id="CB0FA615"/>
-            <Parameter Type="Param" Library="GHLo" Id="9ABC81F4"/>
-        </Element>
-        <Element Type="Param" Id="5E30EADD">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="00000120"/>
-        </Element>
-        <Element Type="Param" Id="CB0FA615">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="Param" Id="9ABC81F4">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
-            <Variable Type="Variable" Library="GHLo" Id="94CCCFEB"/>
-        </Element>
-        <Element Type="FunctionCall" Id="3C60D29C">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <Parameter Type="Param" Library="GHLo" Id="81DDD44C"/>
-            <Parameter Type="Param" Library="GHLo" Id="114E240E"/>
-        </Element>
-        <Element Type="Param" Id="81DDD44C">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="Param" Id="114E240E">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="E0A43B01"/>
-        </Element>
-        <Element Type="FunctionCall" Id="E0A43B01">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="2CB55863"/>
-            <Parameter Type="Param" Library="GHLo" Id="F19A622C"/>
-            <Parameter Type="Param" Library="GHLo" Id="686DD876"/>
-        </Element>
-        <Element Type="Param" Id="F19A622C">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="DE362105"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="F7FDF14F"/>
-        </Element>
-        <Element Type="Param" Id="686DD876">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="09571DCF"/>
-            <FunctionCall Type="FunctionCall" Library="GHLo" Id="A99A970E"/>
-        </Element>
-        <Element Type="FunctionCall" Id="A99A970E">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000130"/>
-            <Parameter Type="Param" Library="GHLo" Id="B48AE62C"/>
-            <Parameter Type="Param" Library="GHLo" Id="D065A096"/>
-        </Element>
-        <Element Type="Param" Id="B48AE62C">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
-            <Variable Type="Variable" Library="GHLo" Id="F85C5010"/>
-        </Element>
-        <Element Type="Param" Id="D065A096">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
-            <Variable Type="Variable" Library="GHLo" Id="8A3D7739"/>
-        </Element>
-        <Element Type="FunctionCall" Id="F2306BFA">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="D5F9189A"/>
-            <Parameter Type="Param" Library="GHLo" Id="8C7CD7F3"/>
-            <Parameter Type="Param" Library="GHLo" Id="3B2FEDEF"/>
-            <Parameter Type="Param" Library="GHLo" Id="F8F7D367"/>
-        </Element>
-        <Element Type="Param" Id="8C7CD7F3">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="9735F524"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="Param" Id="3B2FEDEF">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="24AFC666"/>
-            <Variable Type="Variable" Library="GHLo" Id="94CCCFEB"/>
-        </Element>
-        <Element Type="Param" Id="F8F7D367">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="E9EB3E48"/>
-            <Value>_Assets\Textures\ui_hots_shared_icon_stat_energy.dds</Value>
-            <ValueType Type="filepath"/>
-            <ValueTypeInfo Value="5"/>
-        </Element>
-        <Element Type="FunctionCall" Id="764D0F38">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
-            <Parameter Type="Param" Library="GHLo" Id="A243A6F6"/>
-            <Parameter Type="Param" Library="GHLo" Id="9F46F36D"/>
-            <Parameter Type="Param" Library="GHLo" Id="BC4E1671"/>
-        </Element>
-        <Element Type="Param" Id="A243A6F6">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="00000120"/>
-        </Element>
-        <Element Type="Param" Id="9F46F36D">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
-            <Variable Type="Variable" Library="GHLo" Id="98FAE761"/>
-        </Element>
-        <Element Type="Param" Id="BC4E1671">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
-            <Variable Type="Variable" Library="GHLo" Id="94CCCFEB"/>
-        </Element>
         <Element Type="FunctionDef" Id="F497B235">
             <FlagCall/>
             <ReturnType>
@@ -35556,6 +35062,893 @@
             <ParameterDef Type="ParamDef" Library="Ntve" Id="00000488"/>
             <Value>false</Value>
             <ValueType Type="bool"/>
+        </Element>
+        <Element Type="Trigger" Id="F9DB2349">
+            <Variable Type="Variable" Library="GHLo" Id="FC293C81"/>
+            <Variable Type="Variable" Library="GHLo" Id="EF55374D"/>
+            <Event Type="FunctionCall" Library="GHLo" Id="EA3CC1B0"/>
+            <Action Type="FunctionCall" Library="GHLo" Id="BBF69FF5"/>
+            <Action Type="FunctionCall" Library="GHLo" Id="C54F1EE2"/>
+        </Element>
+        <Element Type="Variable" Id="FC293C81">
+            <VariableType>
+                <Type Value="control"/>
+            </VariableType>
+            <Value Type="Param" Library="GHLo" Id="195E7F22"/>
+        </Element>
+        <Element Type="Param" Id="195E7F22">
+            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
+        </Element>
+        <Element Type="Variable" Id="EF55374D">
+            <VariableType>
+                <Type Value="string"/>
+            </VariableType>
+            <Value Type="Param" Library="GHLo" Id="A519B44E"/>
+        </Element>
+        <Element Type="Param" Id="A519B44E">
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="DA2D1267"/>
+        </Element>
+        <Element Type="FunctionCall" Id="DA2D1267">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000002"/>
+            <Parameter Type="Param" Library="GHLo" Id="22C2DFF2"/>
+        </Element>
+        <Element Type="Param" Id="22C2DFF2">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000002"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="33CCD479"/>
+        </Element>
+        <Element Type="FunctionCall" Id="33CCD479">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="AF2CDB5E"/>
+            <Parameter Type="Param" Library="GHLo" Id="20FFE90B"/>
+        </Element>
+        <Element Type="Param" Id="20FFE90B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="B20BE351"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="7D1C1D99"/>
+        </Element>
+        <Element Type="FunctionCall" Id="7D1C1D99">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="BADA9C08"/>
+            <Parameter Type="Param" Library="GHLo" Id="4C1966C4"/>
+        </Element>
+        <Element Type="Param" Id="4C1966C4">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="F6C0132E"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="090AE922"/>
+        </Element>
+        <Element Type="FunctionCall" Id="EA3CC1B0">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="9FFA06A7"/>
+            <Parameter Type="Param" Library="GHLo" Id="A9D60D61"/>
+            <Parameter Type="Param" Library="GHLo" Id="97754234"/>
+        </Element>
+        <Element Type="Param" Id="A9D60D61">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="44A8E2B6"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="2999701E"/>
+        </Element>
+        <Element Type="Param" Id="97754234">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="6FB1C942"/>
+            <Value>AHLI_PowerLevelGained</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Effect"/>
+        </Element>
+        <Element Type="FunctionCall" Id="BBF69FF5">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="GHLo" Id="59AB9B00"/>
+            <Parameter Type="Param" Library="GHLo" Id="AAE37600"/>
+        </Element>
+        <Element Type="Param" Id="59AB9B00">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="GHLo" Id="FC293C81"/>
+        </Element>
+        <Element Type="Param" Id="AAE37600">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="188DB13C"/>
+        </Element>
+        <Element Type="FunctionCall" Id="188DB13C">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="2CB55863"/>
+            <Parameter Type="Param" Library="GHLo" Id="C3FEF273"/>
+            <Parameter Type="Param" Library="GHLo" Id="68B8960E"/>
+        </Element>
+        <Element Type="Param" Id="C3FEF273">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="DE362105"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="F7FDF14F"/>
+        </Element>
+        <Element Type="Param" Id="68B8960E">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="09571DCF"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="A6721786"/>
+        </Element>
+        <Element Type="FunctionCall" Id="A6721786">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000130"/>
+            <Parameter Type="Param" Library="GHLo" Id="05A010A7"/>
+            <Parameter Type="Param" Library="GHLo" Id="1E588781"/>
+        </Element>
+        <Element Type="Param" Id="05A010A7">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
+            <Variable Type="Variable" Library="GHLo" Id="BE4F07EB"/>
+        </Element>
+        <Element Type="Param" Id="1E588781">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
+            <Variable Type="Variable" Library="GHLo" Id="EF55374D"/>
+        </Element>
+        <Element Type="FunctionCall" Id="C54F1EE2">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="7A040B0E"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="D56366FA"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="8CC68F30"/>
+        </Element>
+        <Element Type="FunctionCall" Id="7A040B0E">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="031B98FE"/>
+            <Parameter Type="Param" Library="GHLo" Id="1144FE47"/>
+            <Parameter Type="Param" Library="GHLo" Id="4EDBD4A7"/>
+        </Element>
+        <Element Type="Param" Id="031B98FE">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
+            <Variable Type="Variable" Library="GHLo" Id="94CCCFEB"/>
+        </Element>
+        <Element Type="Param" Id="1144FE47">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000121"/>
+        </Element>
+        <Element Type="Param" Id="4EDBD4A7">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
+            <Variable Type="Variable" Library="GHLo" Id="FC293C81"/>
+        </Element>
+        <Element Type="FunctionCall" Id="D56366FA">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="CA4DDC71"/>
+            <Parameter Type="Param" Library="GHLo" Id="57B56CA7"/>
+            <Parameter Type="Param" Library="GHLo" Id="877E027F"/>
+        </Element>
+        <Element Type="Param" Id="CA4DDC71">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
+            <Variable Type="Variable" Library="GHLo" Id="94CCCFEB"/>
+        </Element>
+        <Element Type="Param" Id="57B56CA7">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000121"/>
+        </Element>
+        <Element Type="Param" Id="877E027F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="B88ECFF0"/>
+        </Element>
+        <Element Type="FunctionCall" Id="B88ECFF0">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="2CB55863"/>
+            <Parameter Type="Param" Library="GHLo" Id="D3450295"/>
+            <Parameter Type="Param" Library="GHLo" Id="2CE24000"/>
+        </Element>
+        <Element Type="Param" Id="D3450295">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="DE362105"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="F7FDF14F"/>
+        </Element>
+        <Element Type="Param" Id="2CE24000">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="09571DCF"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="D8210ADB"/>
+        </Element>
+        <Element Type="FunctionCall" Id="D8210ADB">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000130"/>
+            <Parameter Type="Param" Library="GHLo" Id="D9F91202"/>
+            <Parameter Type="Param" Library="GHLo" Id="D6289DCE"/>
+        </Element>
+        <Element Type="Param" Id="D9F91202">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
+            <Variable Type="Variable" Library="GHLo" Id="F85C5010"/>
+        </Element>
+        <Element Type="Param" Id="D6289DCE">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
+            <Variable Type="Variable" Library="GHLo" Id="EF55374D"/>
+        </Element>
+        <Element Type="FunctionCall" Id="8CC68F30">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="GHLo" Id="D8672CCE"/>
+            <Parameter Type="Param" Library="GHLo" Id="D31EF66B"/>
+            <Parameter Type="Param" Library="GHLo" Id="5034AC56"/>
+        </Element>
+        <Element Type="Param" Id="D8672CCE">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="GHLo" Id="FC293C81"/>
+        </Element>
+        <Element Type="Param" Id="D31EF66B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="500677B2"/>
+        </Element>
+        <Element Type="Param" Id="5034AC56">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
+        </Element>
+        <Element Type="Trigger" Id="40F7FC5E">
+            <Event Type="FunctionCall" Library="GHLo" Id="EA40D111"/>
+            <Action Type="FunctionCall" Library="GHLo" Id="D477C50E"/>
+        </Element>
+        <Element Type="FunctionCall" Id="EA40D111">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="9FFA06A7"/>
+            <Parameter Type="Param" Library="GHLo" Id="0820B95A"/>
+            <Parameter Type="Param" Library="GHLo" Id="8E957BE6"/>
+        </Element>
+        <Element Type="Param" Id="0820B95A">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="44A8E2B6"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="2999701E"/>
+        </Element>
+        <Element Type="Param" Id="8E957BE6">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="6FB1C942"/>
+            <Value>AHLI_PowerLevelLost</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Effect"/>
+        </Element>
+        <Element Type="FunctionCall" Id="D477C50E">
+            <FunctionDef Type="FunctionDef" Library="GHLo" Id="0C80EEC8"/>
+            <Parameter Type="Param" Library="GHLo" Id="258479BA"/>
+        </Element>
+        <Element Type="Param" Id="258479BA">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="7CD09A49"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="A62DD418"/>
+        </Element>
+        <Element Type="FunctionCall" Id="A62DD418">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="BADA9C08"/>
+            <Parameter Type="Param" Library="GHLo" Id="C3E3D712"/>
+        </Element>
+        <Element Type="Param" Id="C3E3D712">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="F6C0132E"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="090AE922"/>
+        </Element>
+        <Element Type="Trigger" Id="44D7EE4D">
+            <Variable Type="Variable" Library="GHLo" Id="30F10C17"/>
+            <Event Type="FunctionCall" Library="GHLo" Id="0AE09592"/>
+            <Action Type="FunctionCall" Library="GHLo" Id="073DDDDE"/>
+        </Element>
+        <Element Type="Variable" Id="30F10C17">
+            <VariableType>
+                <Type Value="unit"/>
+            </VariableType>
+            <Value Type="Param" Library="GHLo" Id="C999D78C"/>
+        </Element>
+        <Element Type="Param" Id="C999D78C">
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="F8AF66BD"/>
+        </Element>
+        <Element Type="FunctionCall" Id="F8AF66BD">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000419"/>
+        </Element>
+        <Element Type="FunctionCall" Id="0AE09592">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="B0FA20B6"/>
+            <Parameter Type="Param" Library="GHLo" Id="581EF988"/>
+            <Parameter Type="Param" Library="GHLo" Id="04DBA03D"/>
+        </Element>
+        <Element Type="Param" Id="581EF988">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="9B14445A"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78"/>
+        </Element>
+        <Element Type="Param" Id="04DBA03D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="5E741589"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000060"/>
+        </Element>
+        <Element Type="FunctionCall" Id="073DDDDE">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <FunctionCall Type="Comment" Library="GHLo" Id="B230C1EB"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="1E05D029"/>
+            <FunctionCall Type="Comment" Library="GHLo" Id="C22045FD"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="9C7ECAD9"/>
+            <FunctionCall Type="Comment" Library="GHLo" Id="98D73349"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="BD731FB7"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="1F7EA43C"/>
+        </Element>
+        <Element Type="Comment" Id="B230C1EB">
+            <Comment>
+                init as powered down
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+        </Element>
+        <Element Type="FunctionCall" Id="1E05D029">
+            <FunctionDef Type="FunctionDef" Library="GHLo" Id="0C80EEC8"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="7539ADDB"/>
+        </Element>
+        <Element Type="Param" Id="7539ADDB">
+            <ParameterDef Type="ParamDef" Library="GHLo" Id="7CD09A49"/>
+            <Variable Type="Variable" Library="GHLo" Id="30F10C17"/>
+        </Element>
+        <Element Type="Comment" Id="C22045FD">
+            <Comment>
+                is power-user
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+        </Element>
+        <Element Type="FunctionCall" Id="9C7ECAD9">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000133"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="46D39694"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="2A9EAF99"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="A674737E"/>
+        </Element>
+        <Element Type="FunctionCall" Id="46D39694">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001"/>
+            <Parameter Type="Param" Library="GHLo" Id="8D92A097"/>
+            <Parameter Type="Param" Library="GHLo" Id="6D801DDF"/>
+            <Parameter Type="Param" Library="GHLo" Id="61A88F49"/>
+        </Element>
+        <Element Type="Param" Id="8D92A097">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="05279D40"/>
+        </Element>
+        <Element Type="FunctionCall" Id="05279D40">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="142FF15A"/>
+            <Parameter Type="Param" Library="GHLo" Id="85C031EE"/>
+            <Parameter Type="Param" Library="GHLo" Id="C41C0102"/>
+        </Element>
+        <Element Type="Param" Id="85C031EE">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="033DFD05"/>
+            <Variable Type="Variable" Library="GHLo" Id="30F10C17"/>
+        </Element>
+        <Element Type="Param" Id="C41C0102">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="B29EDD13"/>
+            <Value>PowerUserQueue</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Behavior"/>
+        </Element>
+        <Element Type="Param" Id="6D801DDF">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="61A88F49">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>true</Value>
+            <ValueType Type="bool"/>
+        </Element>
+        <Element Type="FunctionCall" Id="2A9EAF99">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001"/>
+            <Parameter Type="Param" Library="GHLo" Id="DD143DC0"/>
+            <Parameter Type="Param" Library="GHLo" Id="F8069DF0"/>
+            <Parameter Type="Param" Library="GHLo" Id="E86D810A"/>
+        </Element>
+        <Element Type="Param" Id="DD143DC0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="BE4F68DF"/>
+        </Element>
+        <Element Type="FunctionCall" Id="BE4F68DF">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="142FF15A"/>
+            <Parameter Type="Param" Library="GHLo" Id="2FAD0595"/>
+            <Parameter Type="Param" Library="GHLo" Id="F3F3A533"/>
+        </Element>
+        <Element Type="Param" Id="2FAD0595">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="033DFD05"/>
+            <Variable Type="Variable" Library="GHLo" Id="30F10C17"/>
+        </Element>
+        <Element Type="Param" Id="F3F3A533">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="B29EDD13"/>
+            <Value>PowerUserQueueSmall</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Behavior"/>
+        </Element>
+        <Element Type="Param" Id="F8069DF0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="E86D810A">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>true</Value>
+            <ValueType Type="bool"/>
+        </Element>
+        <Element Type="FunctionCall" Id="A674737E">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001"/>
+            <Parameter Type="Param" Library="GHLo" Id="9280C0D2"/>
+            <Parameter Type="Param" Library="GHLo" Id="8994518D"/>
+            <Parameter Type="Param" Library="GHLo" Id="4E29696C"/>
+        </Element>
+        <Element Type="Param" Id="9280C0D2">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="3F07B139"/>
+        </Element>
+        <Element Type="FunctionCall" Id="3F07B139">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="142FF15A"/>
+            <Parameter Type="Param" Library="GHLo" Id="BB5908F6"/>
+            <Parameter Type="Param" Library="GHLo" Id="102B2307"/>
+        </Element>
+        <Element Type="Param" Id="BB5908F6">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="033DFD05"/>
+            <Variable Type="Variable" Library="GHLo" Id="30F10C17"/>
+        </Element>
+        <Element Type="Param" Id="102B2307">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="B29EDD13"/>
+            <Value>PowerUserBaseDefenseSmall</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Behavior"/>
+        </Element>
+        <Element Type="Param" Id="8994518D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="4E29696C">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>true</Value>
+            <ValueType Type="bool"/>
+        </Element>
+        <Element Type="Comment" Id="98D73349">
+            <Comment>
+                has no power
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+        </Element>
+        <Element Type="FunctionCall" Id="BD731FB7">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="GHLo" Id="B9605189"/>
+            <Parameter Type="Param" Library="GHLo" Id="577E6D4E"/>
+            <Parameter Type="Param" Library="GHLo" Id="06A19580"/>
+        </Element>
+        <Element Type="Param" Id="B9605189">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="5F55122C"/>
+        </Element>
+        <Element Type="FunctionCall" Id="5F55122C">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="2E7FB833"/>
+            <Parameter Type="Param" Library="GHLo" Id="B9658E2E"/>
+            <Parameter Type="Param" Library="GHLo" Id="155DAB88"/>
+            <Parameter Type="Param" Library="GHLo" Id="A92647A3"/>
+        </Element>
+        <Element Type="Param" Id="B9658E2E">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="AB6FE2EA"/>
+            <Value>PowerSource</Value>
+            <ValueType Type="string"/>
+        </Element>
+        <Element Type="Param" Id="155DAB88">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="1BABB68E"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="D6ADCADE"/>
+        </Element>
+        <Element Type="FunctionCall" Id="D6ADCADE">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000081"/>
+            <Parameter Type="Param" Library="GHLo" Id="6150B4E4"/>
+        </Element>
+        <Element Type="Param" Id="6150B4E4">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000140"/>
+            <Variable Type="Variable" Library="GHLo" Id="30F10C17"/>
+        </Element>
+        <Element Type="Param" Id="A92647A3">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="6AA17D3E"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="8A3FBAA6"/>
+        </Element>
+        <Element Type="FunctionCall" Id="8A3FBAA6">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000083"/>
+            <Parameter Type="Param" Library="GHLo" Id="955242F7"/>
+        </Element>
+        <Element Type="Param" Id="955242F7">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000144"/>
+            <Variable Type="Variable" Library="GHLo" Id="30F10C17"/>
+        </Element>
+        <Element Type="Param" Id="577E6D4E">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="E123C832"/>
+        </Element>
+        <Element Type="Param" Id="06A19580">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="FunctionCall" Id="1F7EA43C">
+            <FunctionDef Type="FunctionDef" Library="GHLo" Id="01F23C90"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005"/>
+        </Element>
+        <Element Type="FunctionDef" Id="0C80EEC8">
+            <FlagAction/>
+            <Parameter Type="ParamDef" Library="GHLo" Id="7CD09A49"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+            <Variable Type="Variable" Library="GHLo" Id="EA9F5352"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="0FD112A5"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="19AA1D04"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="607C4778"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="3517546D"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="41893773"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="2520AE5A"/>
+        </Element>
+        <Element Type="ParamDef" Id="7CD09A49">
+            <ParameterType>
+                <Type Value="unit"/>
+            </ParameterType>
+        </Element>
+        <Element Type="Variable" Id="9831BC30">
+            <VariableType>
+                <Type Value="control"/>
+            </VariableType>
+            <Value Type="Param" Library="GHLo" Id="3CBBE168"/>
+        </Element>
+        <Element Type="Param" Id="3CBBE168">
+            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
+        </Element>
+        <Element Type="Variable" Id="EA9F5352">
+            <VariableType>
+                <Type Value="string"/>
+            </VariableType>
+            <Value Type="Param" Library="GHLo" Id="00343AB0"/>
+        </Element>
+        <Element Type="Param" Id="00343AB0">
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="29F12EDE"/>
+        </Element>
+        <Element Type="FunctionCall" Id="29F12EDE">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000002"/>
+            <Parameter Type="Param" Library="GHLo" Id="FA5A1BEF"/>
+        </Element>
+        <Element Type="Param" Id="FA5A1BEF">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000002"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="70E9B74A"/>
+        </Element>
+        <Element Type="FunctionCall" Id="70E9B74A">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="AF2CDB5E"/>
+            <Parameter Type="Param" Library="GHLo" Id="27F4B20C"/>
+        </Element>
+        <Element Type="Param" Id="27F4B20C">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="B20BE351"/>
+            <Parameter Type="ParamDef" Library="GHLo" Id="7CD09A49"/>
+        </Element>
+        <Element Type="FunctionCall" Id="0FD112A5">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="GHLo" Id="B4D0FE01"/>
+            <Parameter Type="Param" Library="GHLo" Id="31A93FE5"/>
+        </Element>
+        <Element Type="Param" Id="B4D0FE01">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="Param" Id="31A93FE5">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="C323D89F"/>
+        </Element>
+        <Element Type="FunctionCall" Id="C323D89F">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="2CB55863"/>
+            <Parameter Type="Param" Library="GHLo" Id="E6E1D888"/>
+            <Parameter Type="Param" Library="GHLo" Id="1FF72E81"/>
+        </Element>
+        <Element Type="Param" Id="E6E1D888">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="DE362105"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="F7FDF14F"/>
+        </Element>
+        <Element Type="Param" Id="1FF72E81">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="09571DCF"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="86141AB9"/>
+        </Element>
+        <Element Type="FunctionCall" Id="86141AB9">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000130"/>
+            <Parameter Type="Param" Library="GHLo" Id="3B8EBDC0"/>
+            <Parameter Type="Param" Library="GHLo" Id="4AB23AC3"/>
+        </Element>
+        <Element Type="Param" Id="3B8EBDC0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
+            <Variable Type="Variable" Library="GHLo" Id="BE4F07EB"/>
+        </Element>
+        <Element Type="Param" Id="4AB23AC3">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
+            <Variable Type="Variable" Library="GHLo" Id="EA9F5352"/>
+        </Element>
+        <Element Type="FunctionCall" Id="19AA1D04">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="0086C887"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="DBB5C24B"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="097A0AD2"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="C373C861"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="24B75FD9"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="0F3829AC"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="70E93298"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="ABFDAFC2"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="73AA5FD8"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="3C47512A"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="2D1B8240"/>
+        </Element>
+        <Element Type="FunctionCall" Id="0086C887">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="CABF8271"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="DD082377"/>
+            <Parameter Type="Param" Library="GHLo" Id="BD11854B"/>
+            <Parameter Type="Param" Library="GHLo" Id="1E3DCD02"/>
+        </Element>
+        <Element Type="Param" Id="DD082377">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="66FA399A"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="79B4987E"/>
+        </Element>
+        <Element Type="Param" Id="BD11854B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="CD4F3F9C"/>
+            <Value>DisruptIcon1\Icon</Value>
+            <ValueType Type="string"/>
+        </Element>
+        <Element Type="Param" Id="1E3DCD02">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0AD4D3A0"/>
+            <Parameter Type="ParamDef" Library="GHLo" Id="7CD09A49"/>
+        </Element>
+        <Element Type="FunctionCall" Id="DBB5C24B">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="5C4222F0"/>
+            <Parameter Type="Param" Library="GHLo" Id="AD9D37D7"/>
+        </Element>
+        <Element Type="Param" Id="5C4222F0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="670414F5"/>
+        </Element>
+        <Element Type="FunctionCall" Id="670414F5">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="Param" Id="AD9D37D7">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="FunctionCall" Id="097A0AD2">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="EED3AF00"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="075B1FC2"/>
+            <Parameter Type="Param" Library="GHLo" Id="BF25D289"/>
+        </Element>
+        <Element Type="Param" Id="075B1FC2">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="07012039"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="AE93A3CC"/>
+        </Element>
+        <Element Type="Param" Id="BF25D289">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="22617857"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="FunctionCall" Id="C373C861">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="662D9CA5"/>
+            <Parameter Type="Param" Library="GHLo" Id="81DB97C4"/>
+            <Parameter Type="Param" Library="GHLo" Id="D0E0CBBD"/>
+        </Element>
+        <Element Type="Param" Id="662D9CA5">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
+            <Variable Type="Variable" Library="GHLo" Id="35514AC2"/>
+        </Element>
+        <Element Type="Param" Id="81DB97C4">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000121"/>
+        </Element>
+        <Element Type="Param" Id="D0E0CBBD">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="FunctionCall" Id="24B75FD9">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="7295AB42"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="88631D75"/>
+            <Parameter Type="Param" Library="GHLo" Id="AC0AE26F"/>
+            <Parameter Type="Param" Library="GHLo" Id="0DFBE1DB"/>
+        </Element>
+        <Element Type="Param" Id="88631D75">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="F64BE22C"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="F7FDF14F"/>
+        </Element>
+        <Element Type="Param" Id="AC0AE26F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="53C70DF6"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="938147AD"/>
+        </Element>
+        <Element Type="FunctionCall" Id="938147AD">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000130"/>
+            <Parameter Type="Param" Library="GHLo" Id="F92BC4BC"/>
+            <Parameter Type="Param" Library="GHLo" Id="8CABBB01"/>
+        </Element>
+        <Element Type="Param" Id="F92BC4BC">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
+            <Variable Type="Variable" Library="GHLo" Id="F85C5010"/>
+        </Element>
+        <Element Type="Param" Id="8CABBB01">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
+            <Variable Type="Variable" Library="GHLo" Id="EA9F5352"/>
+        </Element>
+        <Element Type="Param" Id="0DFBE1DB">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="07F61AC9"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="FunctionCall" Id="0F3829AC">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="GHLo" Id="1445CD46"/>
+            <Parameter Type="Param" Library="GHLo" Id="AC0959C1"/>
+            <Parameter Type="Param" Library="GHLo" Id="A1A14941"/>
+        </Element>
+        <Element Type="Param" Id="1445CD46">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="Param" Id="AC0959C1">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="A1A14941">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
+        </Element>
+        <Element Type="FunctionCall" Id="70E93298">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="CABF8271"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="2B1FFE57"/>
+            <Parameter Type="Param" Library="GHLo" Id="6DBA8E7A"/>
+            <Parameter Type="Param" Library="GHLo" Id="2C2268A6"/>
+        </Element>
+        <Element Type="Param" Id="2B1FFE57">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="66FA399A"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="79B4987E"/>
+        </Element>
+        <Element Type="Param" Id="6DBA8E7A">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="CD4F3F9C"/>
+            <Value>DisruptIcon1\IconBG</Value>
+            <ValueType Type="string"/>
+        </Element>
+        <Element Type="Param" Id="2C2268A6">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0AD4D3A0"/>
+            <Parameter Type="ParamDef" Library="GHLo" Id="7CD09A49"/>
+        </Element>
+        <Element Type="FunctionCall" Id="ABFDAFC2">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="8ACAFAAB"/>
+            <Parameter Type="Param" Library="GHLo" Id="868C5CB2"/>
+        </Element>
+        <Element Type="Param" Id="8ACAFAAB">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="Param" Id="868C5CB2">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="C43ED749"/>
+        </Element>
+        <Element Type="FunctionCall" Id="C43ED749">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="FunctionCall" Id="73AA5FD8">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="EED3AF00"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="25CEB163"/>
+            <Parameter Type="Param" Library="GHLo" Id="4F693DCF"/>
+        </Element>
+        <Element Type="Param" Id="25CEB163">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="22617857"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="Param" Id="4F693DCF">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="07012039"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="AE93A3CC"/>
+        </Element>
+        <Element Type="FunctionCall" Id="3C47512A">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="510AB7C3"/>
+            <Parameter Type="Param" Library="GHLo" Id="E1D2256B"/>
+            <Parameter Type="Param" Library="GHLo" Id="75B95535"/>
+        </Element>
+        <Element Type="Param" Id="510AB7C3">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
+            <Variable Type="Variable" Library="GHLo" Id="35514AC2"/>
+        </Element>
+        <Element Type="Param" Id="E1D2256B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000121"/>
+        </Element>
+        <Element Type="Param" Id="75B95535">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="FunctionCall" Id="2D1B8240">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="7295AB42"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="GHLo" Id="3C5C7604"/>
+            <Parameter Type="Param" Library="GHLo" Id="50701A39"/>
+            <Parameter Type="Param" Library="GHLo" Id="697A2F12"/>
+        </Element>
+        <Element Type="Param" Id="3C5C7604">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="F64BE22C"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="F7FDF14F"/>
+        </Element>
+        <Element Type="Param" Id="50701A39">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="07F61AC9"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="Param" Id="697A2F12">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="53C70DF6"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="F354DB8F"/>
+        </Element>
+        <Element Type="FunctionCall" Id="F354DB8F">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000130"/>
+            <Parameter Type="Param" Library="GHLo" Id="9D3775BC"/>
+            <Parameter Type="Param" Library="GHLo" Id="8D4B5F44"/>
+        </Element>
+        <Element Type="Param" Id="9D3775BC">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
+            <Variable Type="Variable" Library="GHLo" Id="BE4F07EB"/>
+        </Element>
+        <Element Type="Param" Id="8D4B5F44">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
+            <Variable Type="Variable" Library="GHLo" Id="EA9F5352"/>
+        </Element>
+        <Element Type="FunctionCall" Id="607C4778">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
+            <Parameter Type="Param" Library="GHLo" Id="570F077D"/>
+            <Parameter Type="Param" Library="GHLo" Id="4F542AB3"/>
+            <Parameter Type="Param" Library="GHLo" Id="512C9664"/>
+        </Element>
+        <Element Type="Param" Id="570F077D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000120"/>
+        </Element>
+        <Element Type="Param" Id="4F542AB3">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="Param" Id="512C9664">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
+            <Variable Type="Variable" Library="GHLo" Id="94CCCFEB"/>
+        </Element>
+        <Element Type="FunctionCall" Id="3517546D">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="GHLo" Id="E35BD61C"/>
+            <Parameter Type="Param" Library="GHLo" Id="C6CE2B37"/>
+        </Element>
+        <Element Type="Param" Id="E35BD61C">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="Param" Id="C6CE2B37">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="3EA7E84D"/>
+        </Element>
+        <Element Type="FunctionCall" Id="3EA7E84D">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="2CB55863"/>
+            <Parameter Type="Param" Library="GHLo" Id="CCB03216"/>
+            <Parameter Type="Param" Library="GHLo" Id="ACCAEF56"/>
+        </Element>
+        <Element Type="Param" Id="CCB03216">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="DE362105"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="F7FDF14F"/>
+        </Element>
+        <Element Type="Param" Id="ACCAEF56">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="09571DCF"/>
+            <FunctionCall Type="FunctionCall" Library="GHLo" Id="6CF6CC15"/>
+        </Element>
+        <Element Type="FunctionCall" Id="6CF6CC15">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000130"/>
+            <Parameter Type="Param" Library="GHLo" Id="E7D907FE"/>
+            <Parameter Type="Param" Library="GHLo" Id="BA5A1A9E"/>
+        </Element>
+        <Element Type="Param" Id="E7D907FE">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
+            <Variable Type="Variable" Library="GHLo" Id="F85C5010"/>
+        </Element>
+        <Element Type="Param" Id="BA5A1A9E">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000211"/>
+            <Variable Type="Variable" Library="GHLo" Id="EA9F5352"/>
+        </Element>
+        <Element Type="FunctionCall" Id="41893773">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="D5F9189A"/>
+            <Parameter Type="Param" Library="GHLo" Id="8E738705"/>
+            <Parameter Type="Param" Library="GHLo" Id="B15AB132"/>
+            <Parameter Type="Param" Library="GHLo" Id="2B74C882"/>
+        </Element>
+        <Element Type="Param" Id="8E738705">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="9735F524"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="Param" Id="B15AB132">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="24AFC666"/>
+            <Variable Type="Variable" Library="GHLo" Id="94CCCFEB"/>
+        </Element>
+        <Element Type="Param" Id="2B74C882">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="E9EB3E48"/>
+            <Value>_Assets\Textures\ui_hots_shared_icon_stat_energy.dds</Value>
+            <ValueType Type="filepath"/>
+            <ValueTypeInfo Value="5"/>
+        </Element>
+        <Element Type="FunctionCall" Id="2520AE5A">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
+            <Parameter Type="Param" Library="GHLo" Id="9D5E3A9C"/>
+            <Parameter Type="Param" Library="GHLo" Id="5B3CE507"/>
+            <Parameter Type="Param" Library="GHLo" Id="1C399456"/>
+        </Element>
+        <Element Type="Param" Id="9D5E3A9C">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000120"/>
+        </Element>
+        <Element Type="Param" Id="5B3CE507">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
+            <Variable Type="Variable" Library="GHLo" Id="9831BC30"/>
+        </Element>
+        <Element Type="Param" Id="1C399456">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
+            <Variable Type="Variable" Library="GHLo" Id="94CCCFEB"/>
         </Element>
         <Element Type="Category" Id="E47546C7">
             <Label Type="Label" Library="Ntve" Id="CE915C5A"/>
