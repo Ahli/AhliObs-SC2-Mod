@@ -7,9 +7,6 @@
     <CUpgrade id="BansheeCloak">
         <ScoreAmount value="200"/>
     </CUpgrade>
-    <CUpgrade id="BansheeSpeed">
-        <ScoreAmount value="300"/>
-    </CUpgrade>
     <CUpgrade id="HighCapacityBarrels">
         <ScoreAmount value="200"/>
     </CUpgrade>
