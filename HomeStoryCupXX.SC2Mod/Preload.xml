@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Preload>
+<Asset path="_assets\textures\btn-ability-zerg-fungalgrowth.dds" Type="Image"/>
 <Asset path="assets\textures\black.dds" Type="Image"/>
 <Asset path="assets\textures\blank.dds" Type="Image"/>
 <Asset path="_assets\textures\ui_hots_shared_icon_stat_energy.dds" Type="Image"/>

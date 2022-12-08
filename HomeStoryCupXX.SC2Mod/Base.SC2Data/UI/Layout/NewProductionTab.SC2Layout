@@ -86,7 +86,7 @@
             <IgnoreParentColor val="true"/>
             <Visible val="false"/>
             <CollapseLayout val="true"/>
-            <Texture val="Assets\Textures\btn-ability-zerg-contaminate-color.dds"/>
+            <Texture val="_Assets\Textures\btn-ability-zerg-fungalgrowth.dds"/>
         </Frame>
 
         <Frame type="Image" name="ChronoBoosted">

@@ -247,7 +247,8 @@ int libGHLo_gf_GetFixedUnitResourceCost (unit lp_unit, int lp_resource, int lp_p
 void libGHLo_gf_GraphsDefineGraph (int lp_id, text lp_title, string lp_frameName, string lp_scoreType, int lp_style, fixed lp_minimumValue, fixed lp_rangeBase, fixed lp_rangeIncrement, bool lp_averageValues);
 void libGHLo_gf_GraphsUpdateDataDifferential (int lp_graphIndex);
 void libGHLo_gf_GraphsUpdateDataComparative (int lp_graphIndex);
-bool libGHLo_gf_LabelsUnitUsesCustomStatusBar (string lp_unitType);
+bool libGHLo_gf_LabelsUnitUsesCustomStatusBarforProduction (string lp_unitType);
+bool libGHLo_gf_LabelsUnitCanEffectivelyBeContaminated (string lp_unitType);
 void libGHLo_gf_LabelsPylonPowerSetPoweredDown (unit lp_unit);
 void libGHLo_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot);
 int libGHLo_gf_UpgradeNotificationsSearchFacilitySlot (unit lp_facility);
@@ -314,6 +315,8 @@ trigger libGHLo_gt_LabelsReactorDestroyed;
 trigger libGHLo_gt_LabelsPylonPowerUp;
 trigger libGHLo_gt_LabelsPylonPowerDown;
 trigger libGHLo_gt_LabelsPylonPowerConstructionFinished;
+trigger libGHLo_gt_LabelsContaminateActivate;
+trigger libGHLo_gt_LabelsContaminateDeactivate;
 trigger libGHLo_gt_UpgradeNotificationsInitialization;
 trigger libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut;
 trigger libGHLo_gt_UpgradeNotificationsResearchCancelled;

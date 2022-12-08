@@ -119,36 +119,36 @@
             </Frame>
         </Frame>
 
-		<StateGroup name="Pulse">
-			<DefaultState val="Off"/>
-			<State name="On">
-				<When type="Property" frame="DisruptIcon1/Icon" visible="true"/>
-				<When type="Property" frame="StatusIcon1/IconBG" visible="true"/>
-				<Action type="SendEvent" event="PulseOn"/>
-				<Action type="SetProperty" frame="DisruptIcon1/IconBG" alpha="0"/>
-			</State>
-			<State name="Off">
-				<Action type="SendEvent" event="PulseOff"/>
-			</State>
-		</StateGroup>
+        <StateGroup name="Pulse">
+            <DefaultState val="Off"/>
+            <State name="On">
+                <When type="Property" frame="DisruptIcon1/Icon" visible="true"/>
+                <When type="Property" frame="StatusIcon1/IconBG" visible="true"/>
+                <Action type="SendEvent" event="PulseOn"/>
+                <Action type="SetProperty" frame="DisruptIcon1/IconBG" alpha="0"/>
+            </State>
+            <State name="Off">
+                <Action type="SendEvent" event="PulseOff"/>
+            </State>
+        </StateGroup>
 
-		<Animation name="FadeAnim">
-			<Event event="PulseOn" action="Reset,Play"/>
-			<Event event="PulseOff" action="Reset,Pause"/>
+        <Animation name="FadeAnim">
+            <Event event="PulseOn" action="Reset,Play"/>
+            <Event event="PulseOff" action="Reset,Pause"/>
 
-			<Controller type="Fade" end="PingPong" frame="DisruptIcon1/Icon">
-				<Key type="Curve" time="0" value="0"/>
-				<Key type="Curve" time="1" value="0"/>
-				<Key type="Curve" time="1.5" value="255"/>
-				<Key type="Curve" time="2.5" value="255"/>
-			</Controller>
-			<Controller type="Fade" end="PingPong" frame="StatusIcon1/Icon">
-				<Key type="Curve" time="0" value="255"/>
-				<Key type="Curve" time="1" value="255"/>
-				<Key type="Curve" time="1.5" value="0"/>
-				<Key type="Curve" time="2.5" value="0"/>
-			</Controller>
-		</Animation>
+            <Controller type="Fade" end="PingPong" frame="StatusIcon1/Icon">
+                <Key type="Curve" time="0" value="255"/>
+                <Key type="Curve" time="1" value="255"/>
+                <Key type="Curve" time="1.5" value="0"/>
+                <Key type="Curve" time="2.5" value="0"/>
+            </Controller>
+            <Controller type="Fade" end="PingPong" frame="DisruptIcon1/Icon">
+                <Key type="Curve" time="0" value="0"/>
+                <Key type="Curve" time="1" value="0"/>
+                <Key type="Curve" time="1.5" value="255"/>
+                <Key type="Curve" time="2.5" value="255"/>
+            </Controller>
+        </Animation>
 
     </Frame>
 

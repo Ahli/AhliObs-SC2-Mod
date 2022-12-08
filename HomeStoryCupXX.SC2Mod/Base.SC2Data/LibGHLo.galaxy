@@ -1139,10 +1139,20 @@ void libGHLo_gf_GraphsUpdateDataComparative (int lp_graphIndex) {
     }
 }
 
-bool libGHLo_gf_LabelsUnitUsesCustomStatusBar (string lp_unitType) {
+bool libGHLo_gf_LabelsUnitUsesCustomStatusBarforProduction (string lp_unitType) {
     // Automatic Variable Declarations
     // Implementation
     if (((lp_unitType == "Larva") || (lp_unitType == "Egg") || (lp_unitType == "Gateway") || (lp_unitType == "Barracks") || (lp_unitType == "Nexus") || (lp_unitType == "Hatchery") || (lp_unitType == "CommandCenter") || (lp_unitType == "TechLab") || (lp_unitType == "BarracksTechLab") || (lp_unitType == "FactoryTechLab") || (lp_unitType == "StarportTechLab") || (lp_unitType == "Factory") || (lp_unitType == "Starport") || (lp_unitType == "Stargate") || (lp_unitType == "RoboticsBay") || (lp_unitType == "Forge") || (lp_unitType == "EngineeringBay") || (lp_unitType == "Armory") || (lp_unitType == "EvolutionChamber") || (lp_unitType == "Spire") || (lp_unitType == "CyberneticsCore") || (lp_unitType == "OrbitalCommand") || (lp_unitType == "PlanetaryFortress") || (lp_unitType == "FleetBeacon") || (lp_unitType == "RoboticsFacility") || (lp_unitType == "TemplarArchive") || (lp_unitType == "TwilightCouncil") || (lp_unitType == "FusionCore") || (lp_unitType == "SpawningPool") || (lp_unitType == "RoachWarren") || (lp_unitType == "BanelingNest") || (lp_unitType == "LurkerDenMP") || (lp_unitType == "GhostAcademy") || (lp_unitType == "GreaterSpire") || (lp_unitType == "Lair") || (lp_unitType == "Hive") || (lp_unitType == "HydraliskDen") || (lp_unitType == "InfestationPit") || (lp_unitType == "UltraliskCavern") || (lp_unitType == "DarkShrine") || (lp_unitType == "WarpGate"))) {
+        return true;
+    }
+
+    return false;
+}
+
+bool libGHLo_gf_LabelsUnitCanEffectivelyBeContaminated (string lp_unitType) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((lp_unitType == "Gateway") || (lp_unitType == "Barracks") || (lp_unitType == "Nexus") || (lp_unitType == "Hatchery") || (lp_unitType == "CommandCenter") || (lp_unitType == "TechLab") || (lp_unitType == "BarracksTechLab") || (lp_unitType == "FactoryTechLab") || (lp_unitType == "StarportTechLab") || (lp_unitType == "Factory") || (lp_unitType == "Starport") || (lp_unitType == "Stargate") || (lp_unitType == "RoboticsBay") || (lp_unitType == "Forge") || (lp_unitType == "EngineeringBay") || (lp_unitType == "Armory") || (lp_unitType == "EvolutionChamber") || (lp_unitType == "Spire") || (lp_unitType == "CyberneticsCore") || (lp_unitType == "OrbitalCommand") || (lp_unitType == "PlanetaryFortress") || (lp_unitType == "FleetBeacon") || (lp_unitType == "RoboticsFacility") || (lp_unitType == "TemplarArchive") || (lp_unitType == "TwilightCouncil") || (lp_unitType == "FusionCore") || (lp_unitType == "SpawningPool") || (lp_unitType == "RoachWarren") || (lp_unitType == "BanelingNest") || (lp_unitType == "LurkerDenMP") || (lp_unitType == "GhostAcademy") || (lp_unitType == "GreaterSpire") || (lp_unitType == "Lair") || (lp_unitType == "Hive") || (lp_unitType == "HydraliskDen") || (lp_unitType == "InfestationPit") || (lp_unitType == "UltraliskCavern") || (lp_unitType == "DarkShrine") || (lp_unitType == "WarpGate"))) {
         return true;
     }
 
@@ -3376,7 +3386,7 @@ bool libGHLo_gt_LabelsUnitCreated_Func (bool testConds, bool runActions) {
 
     if ((UnitFilterMatch(lv_unit, UnitGetOwner(lv_unit), UnitFilter(0, 0, (1 << c_targetFilterMissile), 0)) == true)) {
         lv_unitType = UnitGetType(lv_unit);
-        if ((libGHLo_gf_LabelsUnitUsesCustomStatusBar(lv_unitType) == true)) {
+        if ((libGHLo_gf_LabelsUnitUsesCustomStatusBarforProduction(lv_unitType) == true)) {
             lv_unitTagString = IntToString(UnitGetTag(lv_unit));
             DataTableSetString(true, (lv_unitTagString + libGHLo_gv_labelsSlot1), "");
             DataTableSetString(true, (lv_unitTagString + libGHLo_gv_labelsSlot2), "");
@@ -3758,7 +3768,9 @@ bool libGHLo_gt_LabelsPylonPowerUp_Func (bool testConds, bool runActions) {
         DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, false);
         DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIcon1 + lv_unitTagString)), libGHLo_gv_obs, false);
     }
-
+    else {
+        return false;
+    }
     return true;
 }
 
@@ -3817,6 +3829,100 @@ bool libGHLo_gt_LabelsPylonPowerConstructionFinished_Func (bool testConds, bool 
 void libGHLo_gt_LabelsPylonPowerConstructionFinished_Init () {
     libGHLo_gt_LabelsPylonPowerConstructionFinished = TriggerCreate("libGHLo_gt_LabelsPylonPowerConstructionFinished_Func");
     TriggerAddEventUnitConstructProgress(libGHLo_gt_LabelsPylonPowerConstructionFinished, null, c_unitProgressStageComplete);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Labels - Contaminate - Activate
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_LabelsContaminateActivate_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_dialogItem;
+    unit lv_unit;
+    string lv_unitTagString;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_dialogItem = c_invalidDialogControlId;
+    lv_unit = EventUnit();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libGHLo_gf_LabelsUnitCanEffectivelyBeContaminated(UnitGetType(lv_unit)) == true)) {
+        lv_unitTagString = IntToString(UnitGetTag(lv_unit));
+        lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIconBG1 + lv_unitTagString));
+        if ((lv_dialogItem == c_invalidDialogControlId)) {
+            DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\Icon", lv_unit);
+            lv_dialogItem = DialogControlLastCreated();
+            DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
+            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
+            libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsDisruptIcon1 + lv_unitTagString), lv_dialogItem);
+            DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\IconBG", lv_unit);
+            lv_dialogItem = DialogControlLastCreated();
+            DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
+            DialogControlSetVisible(lv_dialogItem, libGHLo_gv_all_Players, false);
+            libNtve_gf_SaveDataTableValueDialogItem(true, (libGHLo_gv_labelsDisruptIconBG1 + lv_unitTagString), lv_dialogItem);
+        }
+        else {
+            if ((DialogControlIsVisible(lv_dialogItem, libGHLo_gv_obsID) == true)) {
+                return false;
+            }
+
+        }
+        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
+        lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIcon1 + lv_unitTagString));
+        libNtve_gf_SetDialogItemImage(lv_dialogItem, "_Assets\\Textures\\btn-ability-zerg-fungalgrowth.dds", libGHLo_gv_obs);
+        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, true);
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_LabelsContaminateActivate_Init () {
+    libGHLo_gt_LabelsContaminateActivate = TriggerCreate("libGHLo_gt_LabelsContaminateActivate_Func");
+    TriggerAddEventUnitBehaviorChange(libGHLo_gt_LabelsContaminateActivate, null, "Contaminated", c_unitBehaviorChangeActivate);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Labels - Contaminate - Deactivate
+//--------------------------------------------------------------------------------------------------
+bool libGHLo_gt_LabelsContaminateDeactivate_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_dialogItem;
+    unit lv_unit;
+    string lv_unitTagString;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_dialogItem = c_invalidDialogControlId;
+    lv_unit = EventUnit();
+    lv_unitTagString = IntToString(UnitGetTag(lv_unit));
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIconBG1 + lv_unitTagString));
+    if ((lv_dialogItem != c_invalidDialogControlId) && (!(((UnitHasBehavior2(lv_unit, "PowerUserQueue") == true) || (UnitHasBehavior2(lv_unit, "PowerUserQueueSmall") == true) || (UnitHasBehavior2(lv_unit, "PowerUserBaseDefenseSmall") == true)) || (PowerLevel(UnitGetOwner(lv_unit), UnitGetPosition(lv_unit), "PowerSource") <= 0)))) {
+        DialogControlSetVisible(lv_dialogItem, libGHLo_gv_obs, false);
+        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libGHLo_gv_labelsDisruptIcon1 + lv_unitTagString)), libGHLo_gv_obs, false);
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libGHLo_gt_LabelsContaminateDeactivate_Init () {
+    libGHLo_gt_LabelsContaminateDeactivate = TriggerCreate("libGHLo_gt_LabelsContaminateDeactivate_Func");
+    TriggerAddEventUnitBehaviorChange(libGHLo_gt_LabelsContaminateDeactivate, null, "Contaminated", c_unitBehaviorChangeDeactivate);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4923,6 +5029,8 @@ void libGHLo_InitTriggers () {
     libGHLo_gt_LabelsPylonPowerUp_Init();
     libGHLo_gt_LabelsPylonPowerDown_Init();
     libGHLo_gt_LabelsPylonPowerConstructionFinished_Init();
+    libGHLo_gt_LabelsContaminateActivate_Init();
+    libGHLo_gt_LabelsContaminateDeactivate_Init();
     libGHLo_gt_UpgradeNotificationsInitialization_Init();
     libGHLo_gt_UpgradeNotificationsDestructionTimerRunsOut_Init();
     libGHLo_gt_UpgradeNotificationsResearchCancelled_Init();
