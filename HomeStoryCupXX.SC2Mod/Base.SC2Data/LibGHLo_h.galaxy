@@ -260,6 +260,7 @@ void libGHLo_gf_UpgradeNotificationsSetSlotData (int lp_slot, text lp_name, stri
 int libGHLo_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne (int lp_minUncheckedSlot, int lp_slot);
 void libGHLo_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_slotB);
 void libGHLo_gf_UpgradeNotificationsUpdateProgressData (int lp_slot);
+bool libGHLo_gf_WorkersKilledNotificationsIsinDistanceofMainBuilding (point lp_point, int lp_player, fixed lp_distance);
 bool libGHLo_gf_MapNotificationsCargoUnitshaveFullHealth (unit lp_transportunit);
 int libGHLo_gf_BattleReportGetPlayerSideIndex (int lp_player);
 int libGHLo_gf_BattleReportGetOpposingPlayerSideIndex (int lp_player);
