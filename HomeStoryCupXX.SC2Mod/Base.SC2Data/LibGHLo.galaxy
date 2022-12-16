@@ -145,12 +145,6 @@ void libGHLo_InitVariables () {
 
 // Presets
 // Functions
-bool libGHLo_gf_ConvertBooleanToShowHide (bool lp_show) {
-    // Automatic Variable Declarations
-    // Implementation
-    return lp_show;
-}
-
 string libGHLo_gf_IconofProduction (string lp_item, bool lp_isUnit) {
     // Automatic Variable Declarations
     // Implementation
@@ -501,14 +495,14 @@ void libGHLo_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, in
                     if ((lv_slot < libGHLo_gv_productionTabMAX_VISIBLE_SLOTS)) {
                         lv_visibleChrono = DialogControlIsVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libGHLo_gv_obsID);
                         lv_visibleContaminate = DialogControlIsVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot], libGHLo_gv_obsID);
-                        DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libGHLo_gv_obs, libGHLo_gf_ConvertBooleanToShowHide(DialogControlIsVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot1], libGHLo_gv_obsID)));
-                        DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot], libGHLo_gv_obs, libGHLo_gf_ConvertBooleanToShowHide(DialogControlIsVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot1], libGHLo_gv_obsID)));
-                        DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot1], libGHLo_gv_obs, libGHLo_gf_ConvertBooleanToShowHide(lv_visibleChrono));
-                        DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot1], libGHLo_gv_obs, libGHLo_gf_ConvertBooleanToShowHide(lv_visibleContaminate));
+                        DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libGHLo_gv_obs, (DialogControlIsVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot1], libGHLo_gv_obsID)));
+                        DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot], libGHLo_gv_obs, (DialogControlIsVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot1], libGHLo_gv_obsID)));
+                        DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot1], libGHLo_gv_obs, (lv_visibleChrono));
+                        DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot1], libGHLo_gv_obs, (lv_visibleContaminate));
                     }
                     else {
-                        DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libGHLo_gv_obs, libGHLo_gf_ConvertBooleanToShowHide(DialogControlIsVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot1], libGHLo_gv_obsID)));
-                        DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot], libGHLo_gv_obs, libGHLo_gf_ConvertBooleanToShowHide(DialogControlIsVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot1], libGHLo_gv_obsID)));
+                        DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libGHLo_gv_obs, (DialogControlIsVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot1], libGHLo_gv_obsID)));
+                        DialogControlSetVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot], libGHLo_gv_obs, (DialogControlIsVisible(libGHLo_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot1], libGHLo_gv_obsID)));
                     }
                 }
 

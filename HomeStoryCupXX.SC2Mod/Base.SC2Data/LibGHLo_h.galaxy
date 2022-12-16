@@ -213,7 +213,6 @@ libGHLo_gs_BattleReport libGHLo_gv_battleReport;
 libGHLo_gs_BattleReportSide[2] libGHLo_gv_battleReportSideData;
 
 // Function Declarations
-bool libGHLo_gf_ConvertBooleanToShowHide (bool lp_show);
 string libGHLo_gf_IconofProduction (string lp_item, bool lp_isUnit);
 string libGHLo_gf_IconofUnit (string lp_unitType);
 string libGHLo_gf_IconofUpgrade (string lp_upgrade);

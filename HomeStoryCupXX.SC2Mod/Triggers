@@ -4964,6 +4964,7 @@
         </Element>
         <Element Type="FunctionDef" Id="D39560C9">
             <FlagCall/>
+            <FlagOperator/>
             <ReturnType>
                 <Type Value="preset"/>
                 <TypeElement Type="Preset" Library="Ntve" Id="00000043"/>
