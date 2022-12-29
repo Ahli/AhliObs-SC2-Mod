@@ -1,25 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
-    <CUpgrade id="GameHeartActive">
-        <EditorCategories value="Race:Terran,UpgradeType:Talents"/>
-        <LeaderAlias value=""/>
-    </CUpgrade>
-    <CUpgrade id="BansheeCloak">
-        <ScoreAmount value="200"/>
-    </CUpgrade>
-    <CUpgrade id="HighCapacityBarrels">
-        <ScoreAmount value="200"/>
-    </CUpgrade>
-    <CUpgrade id="DrillClaws">
-        <ScoreAmount value="150"/>
-    </CUpgrade>
-    <CUpgrade id="SmartServos">
-        <ScoreAmount value="200"/>
-    </CUpgrade>
-    <CUpgrade id="TunnelingClaws">
-        <ScoreAmount value="200"/>
-    </CUpgrade>
-    <CUpgrade id="ExtendedThermalLance">
-        <ScoreAmount value="300"/>
-    </CUpgrade>
+    <CUpgrade id="GameHeartActive"/>
 </Catalog>

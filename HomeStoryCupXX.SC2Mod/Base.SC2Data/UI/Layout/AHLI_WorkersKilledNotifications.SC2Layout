@@ -109,19 +109,19 @@
             <Frame type="Frame" name="ToggledContent">
                 <Anchor relative="$parent"/>
 
-                <Frame type="Frame" name="WorkerFrame3" template="WorkersKilledNotifications/WorkerFrameTemplate">
+                <Frame type="Frame" name="WorkerFrame3" template="AHLI_WorkersKilledNotifications/WorkerFrameTemplate">
                     <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
                 </Frame>
 
-                <Frame type="Frame" name="WorkerFrame2" template="WorkersKilledNotifications/WorkerFrameTemplate">
+                <Frame type="Frame" name="WorkerFrame2" template="AHLI_WorkersKilledNotifications/WorkerFrameTemplate">
                     <Anchor side="Bottom" relative="$parent/WorkerFrame3" pos="Min" offset="#PanelGap"/>
                 </Frame>
 
-                <Frame type="Frame" name="WorkerFrame1" template="WorkersKilledNotifications/WorkerFrameTemplate">
+                <Frame type="Frame" name="WorkerFrame1" template="AHLI_WorkersKilledNotifications/WorkerFrameTemplate">
                     <Anchor side="Bottom" relative="$parent/WorkerFrame2" pos="Min" offset="#PanelGap"/>
                 </Frame>
 
-                <Frame type="Frame" name="WorkerFrame0" template="WorkersKilledNotifications/WorkerFrameTemplate">
+                <Frame type="Frame" name="WorkerFrame0" template="AHLI_WorkersKilledNotifications/WorkerFrameTemplate">
                     <Anchor side="Bottom" relative="$parent/WorkerFrame1" pos="Min" offset="#PanelGap"/>
                 </Frame>
             </Frame>

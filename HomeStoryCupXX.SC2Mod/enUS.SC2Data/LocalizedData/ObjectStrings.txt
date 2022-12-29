@@ -15,4 +15,3 @@ Texture/Name/LogoPlayerSecondary13=Logo - Player Secondary 13
 Texture/Name/LogoPlayerSecondary14=Logo - Player Secondary 14
 Texture/Name/LogoPlayerSecondary15=Logo - Player Secondary 15
 User/Name/GameHeartSettings=GameHeart Settings
-User/Name/SC2SkinSets=SC2 Skin Sets

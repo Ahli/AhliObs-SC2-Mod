@@ -4,25 +4,16 @@
         <Value>ExtensionMod</Value>
     </Flags>
     <Dependencies>
-        <Value>bnet:Void Multi (Mod)/0.0/999,file:Mods/VoidMulti.SC2Mod</Value>
+        <Value>bnet:5.0.11 BalanceTest/0.0/314444,file:Mods\CommunityBalance.SC2Mod</Value>
     </Dependencies>
     <Screenshot>
         <File>
-            <Value>HSC XX.png</Value>
-            <Value>HSC XX.png</Value>
-            <Value>HSC XX.png</Value>
-            <Value>HSC XX.png</Value>
+            <Value>ahliObsEyeLarge800x600.tga</Value>
         </File>
         <CaptionId>
-            <Value>3</Value>
             <Value>1</Value>
-            <Value>2</Value>
-            <Value>4</Value>
         </CaptionId>
         <Flags>
-            <Value> </Value>
-            <Value> </Value>
-            <Value> </Value>
             <Value> </Value>
         </Flags>
     </Screenshot>
@@ -65,7 +56,7 @@
             <Value>6/8/2022</Value>
             <Value>6/26/2022</Value>
             <Value>9/2/2022</Value>
-            <Value>12/8/2022</Value>
+            <Value>12/29/2022</Value>
         </Date>
         <Notes>
             <Value>1,31</Value>
@@ -85,7 +76,7 @@
             <Value>139,140,141,142,143</Value>
             <Value>144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163</Value>
             <Value>164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186</Value>
-            <Value>187,188,189,190,191</Value>
+            <Value>187,188,189,190,191,192,193</Value>
         </Notes>
     </PatchNote>
 </DocInfo>

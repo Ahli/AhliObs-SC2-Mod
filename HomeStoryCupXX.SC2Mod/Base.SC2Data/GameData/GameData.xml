@@ -3,6 +3,8 @@
     <CGame id="Dflt">
         <!-- Replace VoidMulti trigger library with own, edited one -->
         <TriggerLibs index="1" Id="FixD" IncludePath=""/>
-        <TriggerLibs Id="GHLo"/>
+        <TriggerLibs index="2" Id="AHLI"/>
+        <TriggerLibs index="3" removed="1"/>
+        <TriggerLibs index="4" removed="1"/>
     </CGame>
 </Catalog>

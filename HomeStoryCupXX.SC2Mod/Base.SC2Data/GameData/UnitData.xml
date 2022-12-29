@@ -3,14 +3,8 @@
     <CUnit id="AssimilatorRich">
         <LeaderAlias value="Assimilator"/>
     </CUnit>
-    <CUnit id="Carrier">
-        <ScoreMake value="540"/>
-        <ScoreKill value="540"/>
-    </CUnit>
-    <CUnit id="CommandCenter"/>
     <CUnit id="ExtractorRich">
         <LeaderAlias value="Extractor"/>
-        <ScoreKill value="75"/>
     </CUnit>
     <CUnit id="KD8Charge">
         <LeaderAlias value=""/>

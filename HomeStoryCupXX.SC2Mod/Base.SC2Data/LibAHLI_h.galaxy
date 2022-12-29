@@ -1,0 +1,287 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: AhliObs
+//--------------------------------------------------------------------------------------------------
+// Preset Declarations
+const int libAHLI_ge_PlayerStatusScoreValue_UnusedNotPlaying = 0;
+const int libAHLI_ge_PlayerStatusScoreValue_Playing = 1;
+const int libAHLI_ge_PlayerStatusScoreValue_LeftGameinVictory = 2;
+const int libAHLI_ge_PlayerStatusScoreValue_LeftGameinTie = 3;
+const int libAHLI_ge_PlayerStatusScoreValue_LeftGameinDefeat = 4;
+const int libAHLI_ge_PlayerStatusScoreValue_DroppedbeforeMapInitialization = 5;
+const int libAHLI_ge_GraphStyle_Comparative = 0;
+const int libAHLI_ge_GraphStyle_Differential = 1;
+const int libAHLI_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade = 0;
+const int libAHLI_ge_UpgradeNotificationsSlotStatus_VisibleOccupiedwithrunningUpgrade = 1;
+const int libAHLI_ge_UpgradeNotificationsSlotStatus_OccupiedwithdestroyedcompletedUpgrade = 2;
+const int libAHLI_ge_UpgradeNotificationsSlotStatus_NoUpgrade = 3;
+const int libAHLI_ge_WorkersKilledNotificationsSlotStatus_Hidden = 0;
+const int libAHLI_ge_WorkersKilledNotificationsSlotStatus_Visible = 1;
+
+// Constants
+const int libAHLI_gv_chronoBoostMAX_SLOTS = 17;
+const int libAHLI_gv_graphsMaxNode = 100;
+const int libAHLI_gv_graphsMaxGraphId = 3;
+const int libAHLI_gv_graphsIntervalLength = 6;
+const string libAHLI_gv_labelsSlot1 = "-slot1";
+const string libAHLI_gv_labelsSlot2 = "-slot2";
+const string libAHLI_gv_labelsIconBG1 = "IconBG1-";
+const string libAHLI_gv_labelsIconBG2 = "IconBG2-";
+const string libAHLI_gv_labelsIconBG3 = "IconBG3-";
+const string libAHLI_gv_labelsIcon1 = "Icon1-";
+const string libAHLI_gv_labelsIcon2 = "Icon2-";
+const string libAHLI_gv_labelsIcon3 = "Icon3-";
+const int libAHLI_gv_upgradeNotificationsMaxUISlots = 50;
+const int libAHLI_gv_upgradeNotificationsMaxFacilitySlots = 100;
+const fixed libAHLI_gv_upgradeNotificationsVisibleTime = 15.0;
+const int libAHLI_gv_workersKilledNotificationsMaxUISlots = 15;
+const fixed libAHLI_gv_battleReportBattleEndingTimerGameTimeDuration = 12.0;
+const fixed libAHLI_gv_battleReportAfterBattleEndedNoUiUpdateTimerGameTimeDuration = 25.0;
+const int libAHLI_gv_battleReportMaxAbilitySlot = 11;
+const int libAHLI_gv_battleReportMaxKilledUnitTypeSlot = 17;
+
+// Structures
+struct libAHLI_gs_ChronoBoost {
+    int[libAHLI_gv_chronoBoostMAX_SLOTS + 1] lv_slots;
+    string[libAHLI_gv_chronoBoostMAX_SLOTS + 1] lv_slotContents;
+    int lv_lastUsedSlot;
+    unitgroup lv_boosted;
+};
+
+struct libAHLI_gs_GraphsGeneral {
+    bool lv_active;
+    int lv_playerLeft;
+    int lv_playerRight;
+    int lv_teamLeft;
+    int lv_teamRight;
+    int lv_currentInterval;
+    int lv_container;
+    int lv_currentNode;
+};
+
+struct libAHLI_gs_GraphsData {
+    int lv_graph;
+    int lv_title;
+    string lv_scoreType;
+    int lv_style;
+    fixed lv_minimumValue;
+    fixed lv_rangeBase;
+    fixed lv_rangeIncrement;
+    int lv_maxValue;
+    int[3][libAHLI_gv_graphsIntervalLength + 1] lv_tempValues;
+    int[3] lv_value;
+    int lv_team;
+    bool lv_averageValues;
+};
+
+struct libAHLI_gs_Labels {
+    bool lv_active;
+};
+
+struct libAHLI_gs_UpgradeNotifications {
+    bool lv_active;
+    bool lv_updateThreadRunning;
+    int[libAHLI_gv_upgradeNotificationsMaxUISlots + 1] lv_itemIcon;
+    int[libAHLI_gv_upgradeNotificationsMaxUISlots + 1] lv_itemName;
+    int[libAHLI_gv_upgradeNotificationsMaxUISlots + 1] lv_itemPanel;
+    int[libAHLI_gv_upgradeNotificationsMaxUISlots + 1] lv_itemPlayerIdLabel;
+    int[libAHLI_gv_upgradeNotificationsMaxUISlots + 1] lv_itemProgressBar;
+    int[libAHLI_gv_upgradeNotificationsMaxUISlots + 1] lv_itemTimerStatus;
+    int[libAHLI_gv_upgradeNotificationsMaxUISlots + 1] lv_itemTimerLabel;
+    int[libAHLI_gv_upgradeNotificationsMaxUISlots + 1] lv_itemUnitTargetFrame;
+    timer[libAHLI_gv_upgradeNotificationsMaxUISlots + 1] lv_timerDestruction;
+    int[libAHLI_gv_upgradeNotificationsMaxUISlots + 1] lv_slotStatus;
+    unit[libAHLI_gv_upgradeNotificationsMaxFacilitySlots + 1] lv_slotFacility;
+    int lv_slotLastUsed;
+    int lv_slotLastClearedInputForUpdateThread;
+};
+
+struct libAHLI_gs_WorkersKilledNotifications {
+    bool lv_active;
+    int[libAHLI_gv_workersKilledNotificationsMaxUISlots + 1] lv_slotStatus;
+    int[libAHLI_gv_workersKilledNotificationsMaxUISlots + 1] lv_intKilledAmount;
+    int[libAHLI_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemPanel;
+    int[libAHLI_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemKillerPlayerIdLabel;
+    int[libAHLI_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemWorkerPlayerIdLabel;
+    int[libAHLI_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemIcon;
+    int[libAHLI_gv_workersKilledNotificationsMaxUISlots + 1] lv_itemCountLabel;
+    timer[libAHLI_gv_workersKilledNotificationsMaxUISlots + 1] lv_timerDestruction;
+    int lv_slotLastUsed;
+};
+
+struct libAHLI_gs_MapNotifications {
+    fixed lv_minimumPickupSpacing;
+    fixed lv_scannerSweepDuration;
+    fixed lv_pingDuration;
+    point lv_mostRecentPingLocation;
+    timer lv_mostRecentTimer;
+};
+
+struct libAHLI_gs_MinimapFrustum {
+    int[3] lv_ping;
+    bool lv_active;
+    int lv_playerOne;
+    int lv_playerTwo;
+};
+
+struct libAHLI_gs_BattleReport {
+    bool lv_active;
+    bool lv_battleActive;
+    int lv_battleNr;
+    fixed lv_battleGameTimeDuration;
+    timer lv_battleEndingTimer;
+    int[2] lv_playerIdSide;
+    bool lv_updateDueToDamage;
+    bool lv_updateDueToDeathAll;
+    bool lv_updateDueToDeathOnlyLabels;
+    bool lv_updateDueToDeathResources;
+    bool lv_updateDueToAbilityAll;
+    bool lv_updateDueToAbilityOnlyLabels;
+    bool lv_resetBattleEndingTimer;
+    bool lv_resetUnusedSlots;
+    int lv_uiBattleDurationLabel;
+    int lv_uiBattleActiveIndicator;
+    timer lv_noUiUpdateTimer;
+    bool lv_noUiUpdates;
+};
+
+struct libAHLI_gs_BattleReportSide {
+    int lv_killedUnitTypeLastUsedSlot;
+    string[libAHLI_gv_battleReportMaxKilledUnitTypeSlot + 1] lv_killedUnitType;
+    int[libAHLI_gv_battleReportMaxKilledUnitTypeSlot + 1] lv_killedUnitTypeCount;
+    string[libAHLI_gv_battleReportMaxKilledUnitTypeSlot + 1] lv_killedUnitTypeIcon;
+    text[libAHLI_gv_battleReportMaxKilledUnitTypeSlot + 1] lv_killedUnitTypeName;
+    int lv_abilitiesCastedLastUsedSlot;
+    abilcmd[libAHLI_gv_battleReportMaxAbilitySlot + 1] lv_abilitiesCasted;
+    int[libAHLI_gv_battleReportMaxAbilitySlot + 1] lv_abilitiesCastedCount;
+    string[libAHLI_gv_battleReportMaxAbilitySlot + 1] lv_abilitiesCastedIcon;
+    text[libAHLI_gv_battleReportMaxAbilitySlot + 1] lv_abilitiesCastedName;
+    fixed lv_damageDealt;
+    int[2] lv_resourcesDestroyed;
+    int[libAHLI_gv_battleReportMaxKilledUnitTypeSlot + 1] lv_uiUnitTypeButton;
+    int[libAHLI_gv_battleReportMaxAbilitySlot + 1] lv_uiAbilityButton;
+    int lv_uiDamageLabel;
+    int lv_uiMineralsLabel;
+    int lv_uiVespeneLabel;
+};
+
+// Variable Declarations
+playergroup libAHLI_gv_all_Players;
+playergroup libAHLI_gv_initial_Active_Players;
+int libAHLI_gv_obsID;
+playergroup libAHLI_gv_obs;
+fixed libAHLI_gv_gameSpeedFactor;
+libAHLI_gs_ChronoBoost[16] libAHLI_gv_chronoBoost;
+libAHLI_gs_GraphsGeneral libAHLI_gv_graphsGeneral;
+libAHLI_gs_GraphsData[libAHLI_gv_graphsMaxGraphId + 1] libAHLI_gv_graphsData;
+libAHLI_gs_Labels libAHLI_gv_labels;
+libAHLI_gs_UpgradeNotifications libAHLI_gv_upgradeNotifications;
+libAHLI_gs_WorkersKilledNotifications libAHLI_gv_workersKilledNotifications;
+fixed libAHLI_gv_workersKilledNotificationsVisibleGameTime;
+libAHLI_gs_MapNotifications libAHLI_gv_mapNotifications;
+libAHLI_gs_MinimapFrustum libAHLI_gv_minimapFrustum;
+libAHLI_gs_BattleReport libAHLI_gv_battleReport;
+libAHLI_gs_BattleReportSide[2] libAHLI_gv_battleReportSideData;
+
+// Function Declarations
+void libAHLI_gf_RegisterCameraMoveEvent (trigger lp_trigger, int lp_playerId, int lp_cameraMoveReason);
+void libAHLI_gf_RegisterPeriodicEvent (trigger lp_trigger, fixed lp_interval, int lp_time);
+void libAHLI_gf_RegisterTimerRunsOutEvent (trigger lp_trigger, timer lp_timer);
+void libAHLI_gf_RegisterUnitCreatedEvent (trigger lp_trigger, unit lp_unit, string lp_ability, string lp_behavior);
+void libAHLI_gf_RegisterUnitTrainingProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage);
+void libAHLI_gf_RegisterUnitArmingProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage);
+void libAHLI_gf_RegisterUnitResearchProgressEvent (trigger lp_trigger, unit lp_unit, int lp_progressStage);
+void libAHLI_gf_RegisterUnitDiesEvent (trigger lp_trigger, unit lp_unit);
+void libAHLI_gf_RegisterPlayerLeavesEvent (trigger lp_trigger, int lp_player, int lp_gameResult);
+void libAHLI_gf_RegisterAbilityUsedEvent (trigger lp_trigger, unit lp_unit, abilcmd lp_abilityCommand, int lp_stage, bool lp_includeSharedAbilities);
+void libAHLI_gf_RegisterUnitTakesDamageEvent (trigger lp_trigger, unit lp_unit, int lp_damageType, int lp_fatal, string lp_effect);
+void libAHLI_gf_RegisterTimerExpiresEvent (trigger lp_trigger, timer lp_timer);
+void libAHLI_gf_ChronoBoostregisterboosteditem (int lp_player, string lp_item);
+void libAHLI_gf_ChronoBoostremoveboosteditem (int lp_player, string lp_item);
+void libAHLI_gf_ObserverUiAssistSetPlayerIdScore (int lp_player);
+void libAHLI_gf_ObserverUiAssistSetPlayerStatusScore (int lp_player, int lp_status);
+int libAHLI_gf_GetFixedUnitResourceCost (unit lp_unit, int lp_resource, int lp_player);
+void libAHLI_gf_GraphsDefineGraph (int lp_id, text lp_title, string lp_frameName, string lp_scoreType, int lp_style, fixed lp_minimumValue, fixed lp_rangeBase, fixed lp_rangeIncrement, bool lp_averageValues);
+void libAHLI_gf_GraphsUpdateDataDifferential (int lp_graphIndex);
+void libAHLI_gf_GraphsUpdateDataComparative (int lp_graphIndex);
+bool libAHLI_gf_LabelsUnitUsesCustomStatusBar (string lp_unitType);
+void libAHLI_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot);
+int libAHLI_gf_UpgradeNotificationsSearchFacilitySlot (unit lp_facility);
+string libAHLI_gf_UpgradeNotificationsUpgradeImage (string lp_upgrade);
+text libAHLI_gf_UpgradeNotificationsUpgradeName (string lp_upgrade);
+bool libAHLI_gf_UpgradeNotificationsUpgradeNeedsToBeVisible (fixed lp_remainingTime);
+void libAHLI_gf_UpgradeNotificationsUpdateUIthreaded ();
+void libAHLI_gf_UpgradeNotificationsSetStatusLabel (int lp_slot, text lp_status);
+void libAHLI_gf_UpgradeNotificationsSetSlotData (int lp_slot, text lp_name, string lp_icon, int lp_player, bool lp_visible, unit lp_facility);
+int libAHLI_gf_UpgradeNotificationsSwapSlotWithLowestInvisibleOne (int lp_minUncheckedSlot, int lp_slot);
+void libAHLI_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_slotB);
+void libAHLI_gf_UpgradeNotificationsUpdateProgressData (int lp_slot);
+bool libAHLI_gf_MapNotificationsCargoUnitshaveFullHealth (unit lp_transportunit);
+int libAHLI_gf_BattleReportGetPlayerSideIndex (int lp_player);
+int libAHLI_gf_BattleReportGetOpposingPlayerSideIndex (int lp_player);
+bool libAHLI_gf_BattleReportHasBattleStarted ();
+bool libAHLI_gf_BattleReportIsTrackedUnitType (unit lp_unit, string lp_unitType);
+void libAHLI_gf_BattleReportStartBattle ();
+void libAHLI_gf_BattleReportStartBattleActiveDurationCounterthreaded (int lp_battleNr);
+void libAHLI_gf_BattleReportUpdateUIthreaded (int lp_battleNr);
+void libAHLI_gf_BattleReportUpdateUI ();
+void libAHLI_gf_BattleReportResetBattleEndingTimer ();
+void libAHLI_gf_BattleReportIncrementDamage (int lp_sideIndex, fixed lp_damage);
+void libAHLI_gf_BattleReportIncrementAbilityUsage (int lp_sideIndex, abilcmd lp_abilityCommand);
+void libAHLI_gf_BattleReportIncrementUnitTypeKill (int lp_sideIndex, string lp_unitType);
+void libAHLI_gf_BattleReportIncrementResourceDamage (int lp_sideIndex, int lp_minerals, int lp_vespene);
+void libAHLI_gf_BattleReportEndBattle ();
+void libAHLI_gf_BattleReportClearBattleData ();
+
+// Trigger Declarations
+trigger libAHLI_gt_GameHeartInitialization;
+trigger libAHLI_gt_GameHeartRevealDebrisFromDestructubleTowers;
+trigger libAHLI_gt_ChronoBoostInit;
+trigger libAHLI_gt_ChronoBoostActivates;
+trigger libAHLI_gt_ChronoBoostDeactivates;
+trigger libAHLI_gt_ChronoBoostTrainingStarted;
+trigger libAHLI_gt_ChronoBoostTrainingStopped;
+trigger libAHLI_gt_ChronoBoostResearchStarted;
+trigger libAHLI_gt_ChronoBoostResearchStopped;
+trigger libAHLI_gt_ObserverUiAssistInitialization;
+trigger libAHLI_gt_ObserverUiAssistPlayerLeavesGameDefeat;
+trigger libAHLI_gt_ObserverUiAssistPlayerLeavesGameTie;
+trigger libAHLI_gt_ObserverUiAssistPlayerLeavesGameVictory;
+trigger libAHLI_gt_ArchonMergeSaveResourceOffset;
+trigger libAHLI_gt_ArchonDuplicatedTemplarsDied;
+trigger libAHLI_gt_OverlordTransportMorphCompleted;
+trigger libAHLI_gt_OverseerFromOverlordTransportDied;
+trigger libAHLI_gt_GraphsInitialization;
+trigger libAHLI_gt_GraphsTimer;
+trigger libAHLI_gt_LabelsInitialization;
+trigger libAHLI_gt_LabelsUnitCreated;
+trigger libAHLI_gt_LabelsUnitTrainingStarted;
+trigger libAHLI_gt_LabelsResearchStarted;
+trigger libAHLI_gt_LabelsUnitTrainingStopped;
+trigger libAHLI_gt_LabelsResearchStopped;
+trigger libAHLI_gt_LabelsReactorDestroyed;
+trigger libAHLI_gt_UpgradeNotificationsInitialization;
+trigger libAHLI_gt_UpgradeNotificationsDestructionTimerRunsOut;
+trigger libAHLI_gt_UpgradeNotificationsResearchCancelled;
+trigger libAHLI_gt_UpgradeNotificationsResearchCompleted;
+trigger libAHLI_gt_UpgradeNotificationsResearchStarted;
+trigger libAHLI_gt_WorkersKilledNotificationsInitialization;
+trigger libAHLI_gt_WorkersKilledNotificationsTimerRunsOut;
+trigger libAHLI_gt_WorkersKilledNotificationsWorkerKilled;
+trigger libAHLI_gt_MapNotificationsDrop;
+trigger libAHLI_gt_MapNotificationsScannerSweep;
+trigger libAHLI_gt_MinimapFrustumInitialization;
+trigger libAHLI_gt_MinimapFrustumPlayerCameraMoved;
+trigger libAHLI_gt_MinimapFrustumPlayerLeaves;
+trigger libAHLI_gt_BattleReportInitialization;
+trigger libAHLI_gt_BattleReportUnitIsDamaged;
+trigger libAHLI_gt_BattleReportUnitDies;
+trigger libAHLI_gt_BattleReportTrackedAbilityUsedAbattlestarting;
+trigger libAHLI_gt_BattleReportTrackedAbilityUsedBnobattlestart;
+trigger libAHLI_gt_BattleReportBattleEndingTimerExpires;
+trigger libAHLI_gt_BattleReportNoUiUpdateTimerExpires;
+
+// Library Initialization
+void libAHLI_InitVariables ();
+
