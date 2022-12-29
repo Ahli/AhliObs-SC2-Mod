@@ -5,8 +5,9 @@
         <Type Value="Player"/>
         <Name Value="Attribute/Name/SkinSet"/>
         <Availability Value="All"/>
-        <Visibility Value="Host"/>
-        <Access Value="Host"/>
+        <Visibility Value="None"/>
+        <Access Value="None"/>
+        <Hidden/>
         <Value>
             <Id Value="1"/>
             <Name Value="SkinSet/Name/PlayerSetting"/>

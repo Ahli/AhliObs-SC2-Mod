@@ -287,72 +287,72 @@
             <Anchor side="Right" relative="$parent" pos="Max" offset="-15"/>
             <Height val="120"/>
 
-            <Frame type="Button" name="Unit0" template="BattleReport/UnitLostButtonTemplate"/>
-            <Frame type="Button" name="Unit1" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit0" template="AHLI_BattleReport/UnitLostButtonTemplate"/>
+            <Frame type="Button" name="Unit1" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Unit0" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Unit2" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit2" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Unit1" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Unit3" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit3" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Unit2" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Unit4" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit4" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Unit3" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Unit5" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit5" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Unit4" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Unit6" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit6" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Unit0" pos="Min" offset="0"/>
             </Frame>
-            <Frame type="Button" name="Unit7" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit7" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Unit6" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Unit8" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit8" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Unit7" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Unit9" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit9" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Unit8" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Unit10" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit10" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Unit9" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Unit11" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit11" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Unit0" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Unit10" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Unit12" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit12" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Unit6" pos="Min" offset="0"/>
                 <Visible val="false"/>
             </Frame>
-            <Frame type="Button" name="Unit13" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit13" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Unit12" pos="Max" offset="5"/>
                 <Visible val="{$parent/Unit12/@Visible}"/>
             </Frame>
-            <Frame type="Button" name="Unit14" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit14" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Unit13" pos="Max" offset="5"/>
                 <Visible val="{$parent/Unit12/@Visible}"/>
             </Frame>
-            <Frame type="Button" name="Unit15" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit15" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Unit14" pos="Max" offset="5"/>
                 <Visible val="{$parent/Unit12/@Visible}"/>
             </Frame>
-            <Frame type="Button" name="Unit16" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit16" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Unit15" pos="Max" offset="5"/>
                 <Visible val="{$parent/Unit12/@Visible}"/>
             </Frame>
-            <Frame type="Button" name="Unit17" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Unit17" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Unit6" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Unit16" pos="Max" offset="5"/>
                 <Visible val="{$parent/Unit12/@Visible}"/>
@@ -365,48 +365,48 @@
             <Anchor side="Right" relative="$parent/UnitButtons" pos="Max" offset="0"/>
             <Height val="52"/>
 
-            <Frame type="Button" name="Abil0" template="BattleReport/UnitLostButtonTemplate"/>
-            <Frame type="Button" name="Abil1" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Abil0" template="AHLI_BattleReport/UnitLostButtonTemplate"/>
+            <Frame type="Button" name="Abil1" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Abil0" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Abil2" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Abil2" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Abil1" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Abil3" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Abil3" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Abil2" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Abil4" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Abil4" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Abil3" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Abil5" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Abil5" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Left" relative="$parent/Abil4" pos="Max" offset="5"/>
             </Frame>
-            <Frame type="Button" name="Abil6" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Abil6" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Abil0" pos="Max" offset="5"/>
                 <Anchor side="Left" relative="$parent/Abil0" pos="Min" offset="0"/>
                 <Visible val="false"/>
             </Frame>
-            <Frame type="Button" name="Abil7" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Abil7" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Abil6" pos="Min" offset="0"/>
                 <Anchor side="Left" relative="$parent/Abil6" pos="Max" offset="5"/>
                 <Visible val="{$parent/Abil6/@Visible}"/>
             </Frame>
-            <Frame type="Button" name="Abil8" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Abil8" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Abil6" pos="Min" offset="0"/>
                 <Anchor side="Left" relative="$parent/Abil7" pos="Max" offset="5"/>
                 <Visible val="{$parent/Abil6/@Visible}"/>
             </Frame>
-            <Frame type="Button" name="Abil9" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Abil9" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Abil6" pos="Min" offset="0"/>
                 <Anchor side="Left" relative="$parent/Abil8" pos="Max" offset="5"/>
                 <Visible val="{$parent/Abil6/@Visible}"/>
             </Frame>
-            <Frame type="Button" name="Abil10" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Abil10" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Abil6" pos="Min" offset="0"/>
                 <Anchor side="Left" relative="$parent/Abil9" pos="Max" offset="5"/>
                 <Visible val="{$parent/Abil6/@Visible}"/>
             </Frame>
-            <Frame type="Button" name="Abil11" template="BattleReport/UnitLostButtonTemplate">
+            <Frame type="Button" name="Abil11" template="AHLI_BattleReport/UnitLostButtonTemplate">
                 <Anchor side="Top" relative="$parent/Abil6" pos="Min" offset="0"/>
                 <Anchor side="Left" relative="$parent/Abil10" pos="Max" offset="5"/>
                 <Visible val="{$parent/Abil6/@Visible}"/>
@@ -483,13 +483,13 @@
 
     <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
 
-        <Frame type="Frame" name="BattleReport">
+        <Frame type="Frame" name="BattleReport2">
             <Anchor side="Top" relative="$parent" pos="Mid" offset="-370"/>
             <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
             <Anchor side="Bottom" relative="ButtonsL" pos="Max" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
             <Width val="790"/>
-            <Handle val="BattleReport"/>
+            <Handle val="BattleReport2"/>
             <Visible val="False"/>
 
             <Frame type="Frame" name="Background" template="StandardExtendedExperienceTemplates/StandardSizeExtendedExperienceTemplate">
@@ -599,52 +599,52 @@
                 <PlayerId val="{$parent/PlayerB/@PlayerId}"/>
             </Frame>
 
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP0" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP0" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="0"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP1" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP1" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="1"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP2" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP2" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="2"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP3" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP3" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="3"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP4" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP4" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="4"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP5" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP5" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="5"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP6" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP6" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="6"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP7" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP7" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="7"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP8" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP8" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="8"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP9" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP9" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="9"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP10" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP10" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="10"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP11" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP11" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="11"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP12" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP12" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="12"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP13" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP13" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="13"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP14" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP14" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="14"/>
             </Frame>
-            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP15" template="BattleReport/VersusModeSideDetectorTemplate">
+            <Frame type="PlayerScoreValueFrame" name="VersusModeSlotDetectorP15" template="AHLI_BattleReport/VersusModeSideDetectorTemplate">
                 <PlayerId val="15"/>
             </Frame>
 
@@ -843,7 +843,7 @@
                 </StateGroup>
             </Frame>
 
-            <Frame type="Frame" name="PlayerNameL" template="BattleReport/PlayerHeaderTemplate">
+            <Frame type="Frame" name="PlayerNameL" template="AHLI_BattleReport/PlayerHeaderTemplate">
                 <Anchor side="Left" relative="$parent" pos="Min" offset="15"/>
                 <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
                 <Height val="40"/>
@@ -859,16 +859,16 @@
                 </Frame>
 
                 <Frame type="PlayerLogoTextFrame" name="PlayerLogoTextFrame">
-                    <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                    <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                 </Frame>
                 <Frame type="DataRefFrame" name="RefPlayerName">
-                    <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                    <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                 </Frame>
                 <Frame type="PlayerRaceIconFrame" name="PlayerRaceIcon">
-                    <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                    <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                 </Frame>
             </Frame>
-            <Frame type="Frame" name="PlayerNameR" template="BattleReport/PlayerHeaderTemplate">
+            <Frame type="Frame" name="PlayerNameR" template="AHLI_BattleReport/PlayerHeaderTemplate">
                 <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
                 <Anchor side="Right" relative="$parent" pos="Max" offset="-15"/>
                 <Height val="40"/>
@@ -882,41 +882,41 @@
                     <Anchor side="Right" relative="$parent" pos="Max" offset="-20"/>
                 </Frame>
                 <Frame type="PlayerLogoTextFrame" name="PlayerLogoTextFrame">
-                    <PlayerId val="{$BattleReport/PlayerR/@PlayerId}"/>
+                    <PlayerId val="{$BattleReport2/PlayerR/@PlayerId}"/>
                 </Frame>
                 <Frame type="DataRefFrame" name="RefPlayerName">
-                    <PlayerId val="{$BattleReport/PlayerR/@PlayerId}"/>
+                    <PlayerId val="{$BattleReport2/PlayerR/@PlayerId}"/>
                 </Frame>
                 <Frame type="PlayerRaceIconFrame" name="PlayerRaceIcon">
-                    <PlayerId val="{$BattleReport/PlayerR/@PlayerId}"/>
+                    <PlayerId val="{$BattleReport2/PlayerR/@PlayerId}"/>
                 </Frame>
             </Frame>
 
-            <Frame type="Frame" name="StatsL" template="BattleReport/StatsTemplate">
+            <Frame type="Frame" name="StatsL" template="AHLI_BattleReport/StatsTemplate">
                 <Anchor side="Left" relative="$parent" pos="Min" offset="15"/>
                 <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
 
                 <Frame type="Frame" name="ResourcesLostFrame">
                     <Frame type="PlayerScoreValueFrame" name="ResourcesLostMineralsValue">
-                        <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                     </Frame>
                     <Frame type="PlayerRaceIconFrame" name="ResourcesLostGas">
-                        <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                     </Frame>
                     <Frame type="PlayerScoreValueFrame" name="ResourcesLostGasValue">
-                        <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                     </Frame>
                 </Frame>
                 <Frame type="Frame" name="DmgValue">
                     <Frame type="PlayerScoreValueFrame" name="FormattedScoreText">
-                        <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                     </Frame>
                     <Frame type="DataRefFrame" name="Value_Percent">
-                        <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                     </Frame>
                 </Frame>
             </Frame>
-            <Frame type="Frame" name="StatsR" template="BattleReport/StatsTemplate">
+            <Frame type="Frame" name="StatsR" template="AHLI_BattleReport/StatsTemplate">
                 <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
                 <Anchor side="Right" relative="$parent" pos="Max" offset="-15"/>
 
@@ -928,7 +928,7 @@
                     <Frame type="PlayerScoreValueFrame" name="ResourcesLostMineralsValue">
                         <Anchor side="Left" relative="$this" pos="Min" offset="0"/>
                         <Anchor side="Right" relative="$parent/ResourcesLostMinerals" pos="Min" offset="-10"/>
-                        <PlayerId val="{$BattleReport/PlayerR/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerR/@PlayerId}"/>
 
                         <Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
                             <Frame type="Label" name="Label">
@@ -939,12 +939,12 @@
                     <Frame type="PlayerRaceIconFrame" name="ResourcesLostGas">
                         <Anchor side="Left" relative="$this" pos="Min" offset="0"/>
                         <Anchor side="Right" relative="$parent/ResourcesLostMinerals" pos="Max" offset="0"/>
-                        <PlayerId val="{$BattleReport/PlayerR/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerR/@PlayerId}"/>
                     </Frame>
                     <Frame type="PlayerScoreValueFrame" name="ResourcesLostGasValue">
                         <Anchor side="Left" relative="$this" pos="Min" offset="0"/>
                         <Anchor side="Right" relative="$parent/ResourcesLostGas" pos="Min" offset="-10"/>
-                        <PlayerId val="{$BattleReport/PlayerR/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerR/@PlayerId}"/>
                         
                         <Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
                             <Frame type="Label" name="Label">
@@ -962,15 +962,15 @@
                         <Style val="BattleReportStatR"/>
                     </Frame>
                     <Frame type="PlayerScoreValueFrame" name="FormattedScoreText">
-                        <PlayerId val="{$BattleReport/PlayerR/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerR/@PlayerId}"/>
                     </Frame>
                     <Frame type="DataRefFrame" name="Value_Percent">
-                        <PlayerId val="{$BattleReport/PlayerR/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerR/@PlayerId}"/>
                     </Frame>
                 </Frame>
             </Frame>
 
-            <Frame type="Frame" name="ButtonsL" template="BattleReport/ButtonsTemplate">
+            <Frame type="Frame" name="ButtonsL" template="AHLI_BattleReport/ButtonsTemplate">
                 <Anchor side="Top" relative="$parent/PlayerNameL" pos="Max" offset="0"/>
                 <Anchor side="Bottom" relative="AbilityButtons" pos="Max" offset="0"/>
                 <Anchor side="Left" relative="$parent" pos="Min" offset="15"/>
@@ -1010,7 +1010,7 @@
                     </State>
                 </StateGroup>
             </Frame>
-            <Frame type="Frame" name="ButtonsR" template="BattleReport/ButtonsTemplate">
+            <Frame type="Frame" name="ButtonsR" template="AHLI_BattleReport/ButtonsTemplate">
                 <Anchor side="Top" relative="$parent/PlayerNameL" pos="Max" offset="0"/>
                 <Anchor side="Bottom" relative="AbilityButtons" pos="Max" offset="0"/>
                 <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
@@ -1023,7 +1023,7 @@
                 <RenderType val="LDR"/>
                 <Alpha val="224"/>
 
-                <Frame type="Frame" name="DamageDealtBarGraph" template="BattleReport/ComparisonBarTemplate">
+                <Frame type="Frame" name="DamageDealtBarGraph" template="AHLI_BattleReport/ComparisonBarTemplate">
                     <Anchor side="Top" relative="$parent/$parent/SubtitlesFrame/DmgLabel" pos="Max" offset="5"/>
                     <Anchor side="Left" relative="$parent/$parent/StatsL/DmgValue" pos="Max" offset="10"/>
                     <Anchor side="Right" relative="$parent/$parent/StatsR/DmgValue" pos="Min" offset="-15"/>
@@ -1031,27 +1031,27 @@
 
                     <Frame type="DataRefFrame" name="ValueL">
                         <Argument name="Score" val="BattleReportDamageDealtPercent"/>
-                        <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                     </Frame>
                     <Frame type="DataRefFrame" name="ValueTotal">
                         <Argument name="Score" val="BattleReportDamageDealtTotal"/>
-                        <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                     </Frame>
 
                     <Frame type="ProgressBar" name="ProgressBarL">
                         <Frame type="Frame" name="FillImageContainer">
                             <Frame type="Image" name="FillImage">
-                                <DesaturationColor val="{$BattleReport/PlayerL/@Color}"/>
+                                <DesaturationColor val="{$BattleReport2/PlayerL/@Color}"/>
                             </Frame>
                         </Frame>
                     </Frame>
 
                     <Frame type="Image" name="FillImageR">
-                        <DesaturationColor val="{$BattleReport/PlayerR/@Color}"/>
+                        <DesaturationColor val="{$BattleReport2/PlayerR/@Color}"/>
                     </Frame>
                 </Frame>
 
-                <Frame type="Frame" name="MineralsLostBarGraph" template="BattleReport/ComparisonBarTemplate">
+                <Frame type="Frame" name="MineralsLostBarGraph" template="AHLI_BattleReport/ComparisonBarTemplate">
                     <Anchor side="Top" relative="$parent/$parent/SubtitlesFrame/ResourcesLostLabel" pos="Max" offset="5"/>
                     <Anchor side="Left" relative="$parent/DamageDealtBarGraph" pos="Min" offset="0"/>
                     <Anchor side="Right" relative="$parent/DamageDealtBarGraph" pos="Max" offset="0"/>
@@ -1059,27 +1059,27 @@
 
                     <Frame type="DataRefFrame" name="ValueL">
                         <Argument name="Score" val="BattleReportMineralsDestroyedPercent"/>
-                        <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                     </Frame>
                     <Frame type="DataRefFrame" name="ValueTotal">
                         <Argument name="Score" val="BattleReportMineralsDestroyedTotal"/>
-                        <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                     </Frame>
 
                     <Frame type="ProgressBar" name="ProgressBarL">
                         <Frame type="Frame" name="FillImageContainer">
                             <Frame type="Image" name="FillImage">
-                                <DesaturationColor val="{$BattleReport/PlayerL/@Color}"/>
+                                <DesaturationColor val="{$BattleReport2/PlayerL/@Color}"/>
                             </Frame>
                         </Frame>
                     </Frame>
 
                     <Frame type="Image" name="FillImageR">
-                        <DesaturationColor val="{$BattleReport/PlayerR/@Color}"/>
+                        <DesaturationColor val="{$BattleReport2/PlayerR/@Color}"/>
                     </Frame>
                 </Frame>
 
-                <Frame type="Frame" name="GasLostBarGraph" template="BattleReport/ComparisonBarTemplate">
+                <Frame type="Frame" name="GasLostBarGraph" template="AHLI_BattleReport/ComparisonBarTemplate">
                     <Anchor side="Top" relative="$parent/MineralsLostBarGraph" pos="Max" offset="15"/>
                     <Anchor side="Left" relative="$parent/DamageDealtBarGraph" pos="Min" offset="0"/>
                     <Anchor side="Right" relative="$parent/DamageDealtBarGraph" pos="Max" offset="0"/>
@@ -1087,23 +1087,23 @@
 
                     <Frame type="DataRefFrame" name="ValueL">
                         <Argument name="Score" val="BattleReportVespeneDestroyedPercent"/>
-                        <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                     </Frame>
                     <Frame type="DataRefFrame" name="ValueTotal">
                         <Argument name="Score" val="BattleReportVespeneDestroyedTotal"/>
-                        <PlayerId val="{$BattleReport/PlayerL/@PlayerId}"/>
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
                     </Frame>
 
                     <Frame type="ProgressBar" name="ProgressBarL">
                         <Frame type="Frame" name="FillImageContainer">
                             <Frame type="Image" name="FillImage">
-                                <DesaturationColor val="{$BattleReport/PlayerL/@Color}"/>
+                                <DesaturationColor val="{$BattleReport2/PlayerL/@Color}"/>
                             </Frame>
                         </Frame>
                     </Frame>
 
                     <Frame type="Image" name="FillImageR">
-                        <DesaturationColor val="{$BattleReport/PlayerR/@Color}"/>
+                        <DesaturationColor val="{$BattleReport2/PlayerR/@Color}"/>
                     </Frame>
                 </Frame>
             </Frame>
@@ -1165,30 +1165,30 @@
 
             <Animation name="Show">
                 <Event event="OnShown" action="Reset,Play" />
-                <Controller type="Fade" end="Pause" frame="$BattleReport">
+                <Controller type="Fade" end="Pause" frame="$BattleReport2">
                     <Key type="Curve" time="0" value="0" />
                     <Key type="Curve" time="0.125" value="255"/>
                 </Controller>
-                <Controller type="Anchor" end="Pause" side="Top" relative="true" frame="$BattleReport">
+                <Controller type="Anchor" end="Pause" side="Top" relative="true" frame="$BattleReport2">
                     <Key type="Curve" time="0" value="30" inout="Linear" />
                     <Key type="Curve" time="0.125" value="0" inout="Slow,Linear"/>
                 </Controller>
-                <Controller type="Visibility" end="Pause" frame="$BattleReport">
+                <Controller type="Visibility" end="Pause" frame="$BattleReport2">
                     <Key type="Bool" time="0" value="true"/>
                 </Controller>
             </Animation>
 
             <Animation name="Hide">
                 <Event event="OnHidden" action="Reset,Play"/>
-                <Controller type="Fade" end="Pause" frame="$BattleReport">
+                <Controller type="Fade" end="Pause" frame="$BattleReport2">
                     <Key type="Curve" time="0" value="255"/>
                     <Key type="Curve" time="0.125" value="0"/>
                 </Controller>
-                <Controller type="Anchor" end="Pause" side="Top" relative="true" frame="$BattleReport">
+                <Controller type="Anchor" end="Pause" side="Top" relative="true" frame="$BattleReport2">
                     <Key type="Curve" time="0" value="0" inout="Linear"/>
                     <Key type="Curve" time="0.125" value="30" inout="Slow,Linear"/>
                 </Controller>
-                <Controller type="Visibility" end="Pause" frame="$BattleReport">
+                <Controller type="Visibility" end="Pause" frame="$BattleReport2">
                     <Key type="Bool" time="0" value="True"/>
                     <Key type="Bool" time="0.125" value="False"/>
                 </Controller>

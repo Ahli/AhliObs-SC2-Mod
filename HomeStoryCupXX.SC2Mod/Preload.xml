@@ -14,5 +14,5 @@
 <Effect id="BattlecruiserChasingRB"/>
 <Model id="ScannerSweepModel"/>
 <Model id="PingBonus"/>
-<Model id="GameHeartPlayerCameraModel"/>
+<Model id="AHLI_PlayerCameraModel"/>
 </Preload>

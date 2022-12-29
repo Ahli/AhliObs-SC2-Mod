@@ -41,23 +41,23 @@
             <PlayerId val="{$parent/@ControlPlayerId}"/>
         </Frame>
 
-        <Frame type="Frame" name="StatusIcon1" template="ProductionStatusBars/UnitIconTemplate">
+        <Frame type="Frame" name="StatusIcon1" template="AHLI_ProductionStatusBars/UnitIconTemplate">
             <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
         </Frame>
 
-        <Frame type="Frame" name="StatusIcon2" template="ProductionStatusBars/UnitIconTemplate">
+        <Frame type="Frame" name="StatusIcon2" template="AHLI_ProductionStatusBars/UnitIconTemplate">
             <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
         </Frame>
 
-        <Frame type="Frame" name="StatusIcon3" template="ProductionStatusBars/UnitIconTemplate">
+        <Frame type="Frame" name="StatusIcon3" template="AHLI_ProductionStatusBars/UnitIconTemplate">
             <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
         </Frame>
 
-        <Frame type="Frame" name="DisruptIcon1" template="ProductionStatusBars/UnitIconTemplate">
+        <Frame type="Frame" name="DisruptIcon1" template="AHLI_ProductionStatusBars/UnitIconTemplate">
             <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
@@ -93,13 +93,13 @@
             <PlayerId val="{$parent/@ControlPlayerId}"/>
         </Frame>
 
-        <Frame type="Frame" name="StatusIcon1" template="ProductionStatusBars/UnitIconTemplate">
+        <Frame type="Frame" name="StatusIcon1" template="AHLI_ProductionStatusBars/UnitIconTemplate">
             <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
         </Frame>
 
-        <Frame type="Frame" name="DisruptIcon1" template="ProductionStatusBars/UnitIconTemplate">
+        <Frame type="Frame" name="DisruptIcon1" template="AHLI_ProductionStatusBars/UnitIconTemplate">
             <Anchor side="Top" relative="$parent" pos="Min" offset="9"/>
             <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
@@ -152,7 +152,7 @@
 
     </Frame>
 
-    <Frame type="UnitStatusFrame" name="ProductionStatusEgg" template="ProductionStatusBars/ProductionStatusSingle">
+    <Frame type="UnitStatusFrame" name="ProductionStatusEgg" template="AHLI_ProductionStatusBars/ProductionStatusSingle">
         <Frame type="Frame" name="StatusIcon1">
 
             <Frame type="Image" name="IconBG">
@@ -169,7 +169,7 @@
         </Frame>
     </Frame>
 
-    <Frame type="UnitStatusFrame" name="ProductionStatusTechLab" template="ProductionStatusBars/ProductionStatusSingle">
+    <Frame type="UnitStatusFrame" name="ProductionStatusTechLab" template="AHLI_ProductionStatusBars/ProductionStatusSingle">
         <Frame type="Frame" name="StatusIcon1">
 
             <Frame type="Image" name="IconBG">
@@ -203,7 +203,7 @@
             <PlayerId val="{$parent/@ControlPlayerId}"/>
         </Frame>
 
-        <Frame type="Frame" name="DisruptIcon1" template="ProductionStatusBars/UnitIconTemplate">
+        <Frame type="Frame" name="DisruptIcon1" template="AHLI_ProductionStatusBars/UnitIconTemplate">
             <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>

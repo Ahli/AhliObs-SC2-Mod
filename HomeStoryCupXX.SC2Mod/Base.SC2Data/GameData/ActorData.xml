@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
     <CActorUnit id="DroneBurrowed" parent="GenericUnitStandard">
-        <EditorCategories value=""/>
         <UnitIcon value="Assets\Textures\btn-unit-zerg-drone.dds"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Egg ................................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="Egg">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusEgg"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusEgg"/>
         <CustomUnitStatusOffset value="8,40"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -16,12 +15,12 @@
     <!-- Engineering Bay ....................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="EngineeringBay">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,80"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <CActorUnit id="Factory">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatus"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatus"/>
         <CustomUnitStatusAttachment value="Ref_Center"/>
         <CustomUnitStatusOffset value="0,125"/>
     </CActorUnit>
@@ -29,7 +28,7 @@
     <!-- Hive .................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Hive">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,140"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -37,7 +36,7 @@
     <!-- Lair .................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Lair">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,135"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -45,7 +44,7 @@
     <!-- Larva ................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Larva">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusEgg"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusEgg"/>
         <CustomUnitStatusOffset value="-50,0"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -84,13 +83,13 @@
         <FilterPlayers index="14" value="1"/>
     </CActorDoodad>
     <CActorUnit id="LurkerDenMP">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,100"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!-- Orbital Command ....................................................................... -->
     <CActorUnit id="OrbitalCommand">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,115"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -98,13 +97,13 @@
     <!-- Photon Cannon ......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="PhotonCannon">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusNoProduction"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusNoProduction"/>
         <CustomUnitStatusOffset value="0,40"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!-- Planetary Fortress .................................................................... -->
     <CActorUnit id="PlanetaryFortress">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,130"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -112,7 +111,7 @@
     <!-- Armory ................................................................................ -->
     <!--                                                                                         -->
     <CActorUnit id="Armory">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,90"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -120,7 +119,7 @@
     <!-- Nest .................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="BanelingNest">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,140"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -128,13 +127,13 @@
     <!-- Barracks .............................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Barracks">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatus"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatus"/>
         <CustomUnitStatusOffset value="0,95"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!-- Barracks Tech Lab -->
     <CActorUnit id="BarracksTechLab">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusTechLab"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusTechLab"/>
         <CustomUnitStatusOffset value="0,60"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -142,7 +141,7 @@
     <!-- Command Center (and its morphs) ....................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="CommandCenter">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,115"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -150,7 +149,7 @@
     <!-- Cybernetics Core ...................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="CyberneticsCore">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,100"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -158,13 +157,13 @@
     <!-- Evolution Chamber ..................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="EvolutionChamber">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,65"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!-- Factory Tech Lab -->
     <CActorUnit id="FactoryTechLab">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusTechLab"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusTechLab"/>
         <CustomUnitStatusOffset value="0,60"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -172,7 +171,7 @@
     <!-- Fleet Beacon .......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="FleetBeacon">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,95"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -180,7 +179,7 @@
     <!-- Forge ................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Forge">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
         <CustomUnitStatusOffset value="0,75"/>
     </CActorUnit>
@@ -188,7 +187,7 @@
     <!-- Fusion Core ........................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="FusionCore">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,80"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -196,7 +195,7 @@
     <!-- Gateway / Warp Gate.................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="Gateway">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,105"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -204,7 +203,7 @@
     <!-- Ghost Academy ......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="GhostAcademy">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,85"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -212,7 +211,7 @@
     <!-- Greater Spire ......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="GreaterSpire">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,130"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -220,7 +219,7 @@
     <!-- Hatchery .............................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Hatchery">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,95"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -228,7 +227,7 @@
     <!-- Hydralisk Den ......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="HydraliskDen">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,100"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -236,7 +235,7 @@
     <!-- Infestation Pit ....................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="InfestationPit">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,65"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -244,7 +243,7 @@
     <!-- Nexus ................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Nexus">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,125"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -252,7 +251,7 @@
     <!-- Roach Warren .......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="RoachWarren">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,105"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -260,7 +259,7 @@
     <!-- Robotics Support Bay .................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="RoboticsBay">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,95"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -268,12 +267,12 @@
     <!-- Robotics Facility ..................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="RoboticsFacility">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,80"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <CActorUnit id="ShieldBattery">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusNoProduction"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusNoProduction"/>
         <CustomUnitStatusOffset value="0,40"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -281,7 +280,7 @@
     <!-- Spawning Pool ......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="SpawningPool">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,70"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -289,7 +288,7 @@
     <!-- Spire ................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Spire">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,135"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -297,7 +296,7 @@
     <!-- Stargate .............................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Stargate">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,120"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -305,13 +304,13 @@
     <!-- Starport .............................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Starport">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatus"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatus"/>
         <CustomUnitStatusOffset value="0,95"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!-- Starport Tech Lab -->
     <CActorUnit id="StarportTechLab">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusTechLab"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusTechLab"/>
         <CustomUnitStatusOffset value="0,60"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -319,7 +318,7 @@
     <!-- Tech Lab .............................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="TechLab">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusTechLab"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusTechLab"/>
         <CustomUnitStatusOffset value="0,60"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -327,7 +326,7 @@
     <!-- Templar Archive ....................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="TemplarArchive">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,95"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -335,7 +334,7 @@
     <!-- Twilight Council ...................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="TwilightCouncil">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,95"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -343,7 +342,7 @@
     <!-- Ultralisk Cavern ...................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="UltraliskCavern">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,100"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
@@ -351,12 +350,12 @@
     <!-- Dark Shrine ........................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="DarkShrine">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,135"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <CActorUnit id="WarpGate">
-        <CustomUnitStatusFrame value="ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,105"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
