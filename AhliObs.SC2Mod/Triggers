@@ -16649,7 +16649,7 @@
         </Element>
         <Element Type="Param" Id="3472B320">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="8912C924"/>
-            <Parameter Type="ParamDef" Library="AHLI" Id="4B32BB77"/>
+            <Variable Type="Variable" Library="AHLI" Id="D00F38F6"/>
         </Element>
         <Element Type="Param" Id="DAB67E8D">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="45500AC7"/>
@@ -17870,7 +17870,7 @@
         </Element>
         <Element Type="Param" Id="44939629">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="8912C924"/>
-            <Parameter Type="ParamDef" Library="AHLI" Id="959A38F1"/>
+            <Variable Type="Variable" Library="AHLI" Id="10DC5F6D"/>
         </Element>
         <Element Type="Param" Id="C5D50A69">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="45500AC7"/>

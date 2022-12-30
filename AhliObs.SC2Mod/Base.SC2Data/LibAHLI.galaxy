@@ -699,7 +699,7 @@ void libAHLI_gf_ProductionTabUnregisterChronoBoost (unit lp_boostedStructure) {
         for (;; auto43863427_u -= 1) {
             lv_unit = UnitGroupUnitFromEnd(auto43863427_g, auto43863427_u);
             if (lv_unit == null) { break; }
-            if ((lv_boostedUpgradeOrUnit == libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(lp_boostedStructure, 1, 1))) {
+            if ((lv_boostedUpgradeOrUnit == libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(lv_unit, 1, 1))) {
                 return ;
             }
 
@@ -807,7 +807,7 @@ void libAHLI_gf_ProductionTabUnregisterContaminate (unit lp_haltedStructure) {
                 for (;; auto3DBE4EFE_u -= 1) {
                     lv_unit = UnitGroupUnitFromEnd(auto3DBE4EFE_g, auto3DBE4EFE_u);
                     if (lv_unit == null) { break; }
-                    if ((lv_haltedUpgradeOrUnit == libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(lp_haltedStructure, 1, 1))) {
+                    if ((lv_haltedUpgradeOrUnit == libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(lv_unit, 1, 1))) {
                         lv_usedByOther = true;
                         break;
                     }
