@@ -340,7 +340,7 @@
                 <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
                 <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
                 <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-                <TickDesc val="GraphTemplate/VerticalTickFrameLeft"/>
+                <TickDesc val="AHLI_GraphTemplate/VerticalTickFrameLeft"/>
                 <TickDistribution val="16"/>
                 <Vertical val="true"/>
             </Frame>
@@ -350,7 +350,7 @@
                 <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
                 <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
                 <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-                <TickDesc val="GraphTemplate/VerticalTickFrameRight"/>
+                <TickDesc val="AHLI_GraphTemplate/VerticalTickFrameRight"/>
                 <TickDistribution val="16"/>
                 <Vertical val="true"/>
             </Frame>
@@ -372,7 +372,7 @@
                     <Anchor side="Right" relative="$parent/$parent/GraphAxisYRight" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/$parent/GraphAxisYLeft" pos="Max" offset="0"/>
                     <Anchor side="Bottom" relative="$parent/$parent" pos="Max" offset="0"/>
-                    <ItemDesc val="GraphTemplate/GraphLineItemFrameDifferentialLeftPlayer"/>
+                    <ItemDesc val="AHLI_GraphTemplate/GraphLineItemFrameDifferentialLeftPlayer"/>
                     <StartOffset val="-2"/>
                     <EndOffset val="2"/>
                     <ItemCount val="200"/>
@@ -396,7 +396,7 @@
                     <Anchor side="Right" relative="$parent/$parent/GraphAxisYRight" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/$parent/GraphAxisYLeft" pos="Max" offset="0"/>
                     <Anchor side="Bottom" relative="$parent/$parent" pos="Max" offset="0"/>
-                    <ItemDesc val="GraphTemplate/GraphLineItemFrameDifferentialRightPlayer"/>
+                    <ItemDesc val="AHLI_GraphTemplate/GraphLineItemFrameDifferentialRightPlayer"/>
                     <StartOffset val="-2"/>
                     <EndOffset val="2"/>
                     <ItemCount val="200"/>
@@ -503,7 +503,7 @@
                 <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
                 <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
                 <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-                <TickDesc val="GraphTemplate/VerticalTickFrameLeft"/>
+                <TickDesc val="AHLI_GraphTemplate/VerticalTickFrameLeft"/>
                 <TickDistribution val="10"/>
                 <Vertical val="true"/>
             </Frame>
@@ -513,7 +513,7 @@
                 <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
                 <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
                 <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-                <TickDesc val="GraphTemplate/VerticalTickFrameRight"/>
+                <TickDesc val="AHLI_GraphTemplate/VerticalTickFrameRight"/>
                 <TickDistribution val="10"/>
                 <Vertical val="true"/>
             </Frame>
@@ -529,7 +529,7 @@
                     <Anchor side="Right" relative="$parent/$parent/GraphAxisYRight" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/$parent/GraphAxisYLeft" pos="Max" offset="0"/>
                     <Anchor side="Bottom" relative="$parent/$parent" pos="Max" offset="0"/>
-                    <ItemDesc val="GraphTemplate/GraphLineItemFrameComparativeLeftPlayer"/>
+                    <ItemDesc val="AHLI_GraphTemplate/GraphLineItemFrameComparativeLeftPlayer"/>
                     <StartOffset val="-2"/>
                     <EndOffset val="2"/>
                     <ItemCount val="100"/>
@@ -547,7 +547,7 @@
                     <Anchor side="Right" relative="$parent/$parent/GraphAxisYRight" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/$parent/GraphAxisYLeft" pos="Max" offset="0"/>
                     <Anchor side="Bottom" relative="$parent/$parent" pos="Max" offset="0"/>
-                    <ItemDesc val="GraphTemplate/GraphLineItemFrameComparativeRightPlayer"/>
+                    <ItemDesc val="AHLI_GraphTemplate/GraphLineItemFrameComparativeRightPlayer"/>
                     <StartOffset val="-2"/>
                     <EndOffset val="2"/>
                     <ItemCount val="100"/>
