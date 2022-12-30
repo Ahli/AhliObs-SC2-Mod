@@ -372,6 +372,8 @@ void libAHLI_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, in
     const int autoE66D4B06_ai = 1;
     unitgroup auto6237CDFF_g;
     int auto6237CDFF_u;
+    unitgroup auto204DDE52_g;
+    int auto204DDE52_u;
 
     // Variable Initialization
     lv_foundSlot = -1;
@@ -406,16 +408,41 @@ void libAHLI_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, in
             }
 
             if ((UnitGroupHasUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_chronoBoosted, lp_relatedUnit) == true)) {
+                lv_visibleChrono = false;
                 auto6237CDFF_g = libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_foundSlot];
                 auto6237CDFF_u = UnitGroupCount(auto6237CDFF_g, c_unitCountAll);
                 for (;; auto6237CDFF_u -= 1) {
                     lv_unit = UnitGroupUnitFromEnd(auto6237CDFF_g, auto6237CDFF_u);
                     if (lv_unit == null) { break; }
-                    if ((lp_item == (libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(lp_relatedUnit, 1, 1)))) {
-                        return ;
+                    if ((UnitGroupHasUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_chronoBoosted, lv_unit) == true)) {
+                        lv_visibleChrono = true;
+                        break;
                     }
 
                 }
+                if ((lv_visibleChrono == false)) {
+                    DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obs, false);
+                }
+
+            }
+
+            if ((UnitGroupHasUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_contanimated, lp_relatedUnit) == true)) {
+                lv_visibleContaminate = false;
+                auto204DDE52_g = libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_foundSlot];
+                auto204DDE52_u = UnitGroupCount(auto204DDE52_g, c_unitCountAll);
+                for (;; auto204DDE52_u -= 1) {
+                    lv_unit = UnitGroupUnitFromEnd(auto204DDE52_g, auto204DDE52_u);
+                    if (lv_unit == null) { break; }
+                    if ((UnitGroupHasUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_contanimated, lv_unit) == true)) {
+                        lv_visibleContaminate = true;
+                        break;
+                    }
+
+                }
+                if ((lv_visibleContaminate == false)) {
+                    DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot], libAHLI_gv_obs, false);
+                }
+
             }
 
         }
@@ -677,10 +704,7 @@ void libAHLI_gf_ProductionTabUnregisterChronoBoost (unit lp_boostedStructure) {
             }
 
         }
-    }
-
-    if ((libAHLI_gv_productionTabPlayer[lv_player].lv_lastUsedSlot >= 0)) {
-        if ((lv_boostedUpgradeOrUnit != null)) {
+        if ((libAHLI_gv_productionTabPlayer[lv_player].lv_lastUsedSlot >= 0)) {
             autoB4BA23C9_ae = libAHLI_gv_productionTabPlayer[lv_player].lv_lastUsedSlot;
             lv_slot = 0;
             for ( ; ( (autoB4BA23C9_ai >= 0 && lv_slot <= autoB4BA23C9_ae) || (autoB4BA23C9_ai < 0 && lv_slot >= autoB4BA23C9_ae) ) ; lv_slot += autoB4BA23C9_ai ) {
