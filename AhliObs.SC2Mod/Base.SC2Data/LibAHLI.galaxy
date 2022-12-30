@@ -3449,19 +3449,21 @@ bool libAHLI_gt_LabelsUnitTrainingStarted_Func (bool testConds, bool runActions)
     string lv_savedTypeSlot2;
     string lv_traineeType;
     unit lv_unit;
+    string lv_unitType;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_dialogItem = c_invalidDialogControlId;
     lv_traineeType = libNtve_gf_TriggeringProgressUnitType();
     lv_unit = EventUnit();
+    lv_unitType = UnitGetType(lv_unit);
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    if ((UnitTypeTestAttribute(UnitGetType(lv_unit), c_unitAttributeStructure) == true)) {
+    if (((UnitTypeTestAttribute(lv_unitType, c_unitAttributeStructure) == true) || (lv_unitType == "Egg"))) {
         lv_unitTagString = IntToString(UnitGetTag(lv_unit));
         lv_unitTagStringSlot1 = (lv_unitTagString + libAHLI_gv_labelsSlot1);
         lv_unitTagStringSlot2 = (lv_unitTagString + libAHLI_gv_labelsSlot2);

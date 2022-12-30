@@ -50,10 +50,10 @@
         </Frame>
 
         <Frame type="Image" name="IconImage">
-            <Anchor side="Top" relative="$parent/BackgroundButton" pos="Min" offset="7"/>
-            <Anchor side="Bottom" relative="$parent/BackgroundButton" pos="Max" offset="-7"/>
-            <Anchor side="Left" relative="$parent/BackgroundButton" pos="Min" offset="7"/>
-            <Anchor side="Right" relative="$parent/BackgroundButton" pos="Max" offset="-7"/>
+            <Anchor side="Top" relative="$parent/NormalImage" pos="Min" offset="7"/>
+            <Anchor side="Bottom" relative="$parent/NormalImage" pos="Max" offset="-7"/>
+            <Anchor side="Left" relative="$parent/NormalImage" pos="Min" offset="7"/>
+            <Anchor side="Right" relative="$parent/NormalImage" pos="Max" offset="-7"/>
             <Texture val="@@UI/LeaderPanelUnitBackground" layer="0"/>
             <TextureType val="Normal" layer="0"/>
             <IgnoreParentColor val="true"/>
@@ -70,7 +70,7 @@
             <Texture val="@@UI/ProgressQueue"/>
             <MinValue val="0.000000"/>
             <FillInset val="0.03125"/>
-            <Anchor side="Top" relative="$parent/BackgroundButton" pos="Max" offset="-5"/>
+            <Anchor side="Top" relative="$parent/NormalImage" pos="Max" offset="-5"/>
             <Anchor side="Left" relative="$parent/IconImage" pos="Min" offset="0"/>
             <Anchor side="Right" relative="$parent/IconImage" pos="Max" offset="0"/>
             <Height val="8"/>
