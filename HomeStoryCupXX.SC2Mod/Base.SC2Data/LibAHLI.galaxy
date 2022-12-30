@@ -3416,7 +3416,6 @@ void libAHLI_gt_LabelsUnitCreated_Init () {
 //--------------------------------------------------------------------------------------------------
 bool libAHLI_gt_LabelsUnitTrainingStarted_Func (bool testConds, bool runActions) {
     // Variable Declarations
-    unit lv_unit;
     string lv_unitTagString;
     string lv_unitTagStringSlot1;
     string lv_unitTagStringSlot2;
@@ -3425,33 +3424,20 @@ bool libAHLI_gt_LabelsUnitTrainingStarted_Func (bool testConds, bool runActions)
     string lv_savedTypeSlot1;
     string lv_savedTypeSlot2;
     string lv_traineeType;
+    unit lv_unit;
 
     // Automatic Variable Declarations
-    unitgroup auto0842DE33_g;
-    int auto0842DE33_u;
-    unit auto0842DE33_var;
-
     // Variable Initialization
     lv_dialogItem = c_invalidDialogControlId;
     lv_traineeType = libNtve_gf_TriggeringProgressUnitType();
+    lv_unit = EventUnit();
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    if ((lv_traineeType != "Broodling") && (lv_traineeType != "BroodlingEscort") && (lv_traineeType != "Interceptor") && (lv_traineeType != "Baneling")) {
-        lv_unit = EventUnit();
-        if (((lv_traineeType == "Adept") || (lv_traineeType == "Stalker") || (lv_traineeType == "Zealot"))) {
-            auto0842DE33_g = UnitGroup("Pylon", EventPlayer(), RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
-            auto0842DE33_u = UnitGroupCount(auto0842DE33_g, c_unitCountAll);
-            for (;; auto0842DE33_u -= 1) {
-                auto0842DE33_var = UnitGroupUnitFromEnd(auto0842DE33_g, auto0842DE33_u);
-                if (auto0842DE33_var == null) { break; }
-                UnitKill(auto0842DE33_var);
-            }
-        }
-
+    if ((UnitTypeTestAttribute(UnitGetType(lv_unit), c_unitAttributeStructure) == true)) {
         lv_unitTagString = IntToString(UnitGetTag(lv_unit));
         lv_unitTagStringSlot1 = (lv_unitTagString + libAHLI_gv_labelsSlot1);
         lv_unitTagStringSlot2 = (lv_unitTagString + libAHLI_gv_labelsSlot2);
@@ -3709,12 +3695,14 @@ void libAHLI_gt_LabelsReactorDestroyed_Init () {
 bool libAHLI_gt_LabelsPylonPowerUp_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_dialogItem;
+    unit lv_unit;
     string lv_unitTagString;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_dialogItem = c_invalidDialogControlId;
-    lv_unitTagString = IntToString(UnitGetTag(EventPlayerEffectUsedUnit(c_effectUnitCaster)));
+    lv_unit = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    lv_unitTagString = IntToString(UnitGetTag(lv_unit));
 
     // Actions
     if (!runActions) {
@@ -3723,8 +3711,13 @@ bool libAHLI_gt_LabelsPylonPowerUp_Func (bool testConds, bool runActions) {
 
     lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libAHLI_gv_labelsDisruptIconBG1 + lv_unitTagString));
     if ((lv_dialogItem != c_invalidDialogControlId)) {
-        DialogControlSetVisible(lv_dialogItem, libAHLI_gv_obs, false);
-        DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libAHLI_gv_labelsDisruptIcon1 + lv_unitTagString)), libAHLI_gv_obs, false);
+        if ((UnitHasBehavior2(lv_unit, "Contaminated") == true)) {
+            libNtve_gf_SetDialogItemImage(libNtve_gf_ValueFromDataTableDialogItem(true, (libAHLI_gv_labelsDisruptIcon1 + lv_unitTagString)), "_Assets\\Textures\\btn-ability-zerg-fungalgrowth.dds", libAHLI_gv_obs);
+        }
+        else {
+            DialogControlSetVisible(lv_dialogItem, libAHLI_gv_obs, false);
+            DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libAHLI_gv_labelsDisruptIcon1 + lv_unitTagString)), libAHLI_gv_obs, false);
+        }
     }
     else {
         return false;
@@ -3867,7 +3860,7 @@ bool libAHLI_gt_LabelsContaminateDeactivate_Func (bool testConds, bool runAction
     }
 
     lv_dialogItem = libNtve_gf_ValueFromDataTableDialogItem(true, (libAHLI_gv_labelsDisruptIconBG1 + lv_unitTagString));
-    if ((lv_dialogItem != c_invalidDialogControlId) && (!(((UnitHasBehavior2(lv_unit, "PowerUserQueue") == true) || (UnitHasBehavior2(lv_unit, "PowerUserQueueSmall") == true) || (UnitHasBehavior2(lv_unit, "PowerUserBaseDefenseSmall") == true)) || (PowerLevel(UnitGetOwner(lv_unit), UnitGetPosition(lv_unit), "PowerSource") <= 0)))) {
+    if ((lv_dialogItem != c_invalidDialogControlId) && (((UnitHasBehavior2(lv_unit, "PowerUserQueue") == false) && (UnitHasBehavior2(lv_unit, "PowerUserQueueSmall") == false) && (UnitHasBehavior2(lv_unit, "PowerUserBaseDefenseSmall") == false)) || (PowerLevel(UnitGetOwner(lv_unit), UnitGetPosition(lv_unit), "PowerSource") > 0))) {
         DialogControlSetVisible(lv_dialogItem, libAHLI_gv_obs, false);
         DialogControlSetVisible(libNtve_gf_ValueFromDataTableDialogItem(true, (libAHLI_gv_labelsDisruptIcon1 + lv_unitTagString)), libAHLI_gv_obs, false);
     }

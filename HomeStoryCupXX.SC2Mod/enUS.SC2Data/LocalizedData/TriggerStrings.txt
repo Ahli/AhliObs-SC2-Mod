@@ -349,6 +349,7 @@ Trigger/Name/lib_FixD_FFED4F65=Battlecruiser Execute Attack Abil
 Variable/Name/lib_AHLI_01A4EE1B=slot
 Variable/Name/lib_AHLI_01D33312=slotCategory
 Variable/Name/lib_AHLI_0215C1DE=producer
+Variable/Name/lib_AHLI_02843BB6=unit
 Variable/Name/lib_AHLI_0377A0C5=Active
 Variable/Name/lib_AHLI_039D874F=slotName
 Variable/Name/lib_AHLI_03CD1AB7=lastUsedSlot
