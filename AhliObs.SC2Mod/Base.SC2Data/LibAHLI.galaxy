@@ -2749,34 +2749,41 @@ bool libAHLI_gt_ProductionTabMorphStarted_Func (bool testConds, bool runActions)
     // Variable Declarations
     string lv_targetUnitType;
     int lv_lastInfoArrayIndex;
-    unit lv_unit;
     string lv_sourceUnitType;
+    int lv_productionType;
+    unit lv_unit;
+    int lv_player;
     abilcmd lv_abilCmd;
     string lv_ability;
-    int lv_productionType;
 
     // Automatic Variable Declarations
     // Variable Initialization
+    lv_productionType = libAHLI_ge_ProductionTabCategory_Unit;
     lv_abilCmd = EventUnitAbility();
     lv_ability = AbilityCommandGetAbility(lv_abilCmd);
-    lv_productionType = libAHLI_ge_ProductionTabCategory_Unit;
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    if ((AbilityCommandGetCommand(lv_abilCmd) == 0) && (CatalogFieldValueGet(c_gameCatalogAbil, (lv_ability), "Flags[" + IntToString(18) + "]", c_playerAny) == "1")) {
+    if ((AbilityCommandGetCommand(lv_abilCmd) == 0)) {
         lv_unit = EventUnit();
-        lv_sourceUnitType = UnitGetType(lv_unit);
-        lv_lastInfoArrayIndex = (CatalogFieldValueCount(c_gameCatalogAbil, lv_ability, "InfoArray", c_playerAny) - 1);
-        if (((lv_lastInfoArrayIndex == 0) || (lv_sourceUnitType != (CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(0) + "].Unit", c_playerAny))))) {
-            lv_targetUnitType = CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(lv_lastInfoArrayIndex) + "].Unit", c_playerAny);
-            if ((UnitTypeTestAttribute(lv_sourceUnitType, c_unitAttributeStructure) == true)) {
-                lv_productionType = libAHLI_ge_ProductionTabCategory_Structure;
-            }
+        lv_player = UnitGetOwner(lv_unit);
+        if ((CatalogFieldValueGet(c_gameCatalogAbil, (lv_ability), "Flags[" + IntToString(18) + "]", lv_player) == "1")) {
+            lv_sourceUnitType = UnitGetType(lv_unit);
+            lv_lastInfoArrayIndex = (CatalogFieldValueCount(c_gameCatalogAbil, lv_ability, "InfoArray", lv_player) - 1);
+            if (((lv_lastInfoArrayIndex == 0) || (lv_sourceUnitType != (CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(0) + "].Unit", lv_player))))) {
+                lv_targetUnitType = CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(lv_lastInfoArrayIndex) + "].Unit", lv_player);
+                if ((UnitTypeTestAttribute(lv_sourceUnitType, c_unitAttributeStructure) == true)) {
+                    lv_productionType = libAHLI_ge_ProductionTabCategory_Structure;
+                }
 
-            libAHLI_gf_ProductionTabRegisterProduction(EventPlayer(), lv_targetUnitType, lv_productionType, lv_unit, true, true, null, lv_abilCmd);
+                libAHLI_gf_ProductionTabRegisterProduction(lv_player, lv_targetUnitType, lv_productionType, lv_unit, true, true, null, lv_abilCmd);
+            }
+            else {
+                return false;
+            }
         }
         else {
             return false;
@@ -2801,40 +2808,45 @@ bool libAHLI_gt_ProductionTabMorphFinished_Func (bool testConds, bool runActions
     // Variable Declarations
     string lv_targetUnitType;
     int lv_lastInfoArrayIndex;
+    int lv_productionType;
     unit lv_unit;
+    int lv_player;
     abilcmd lv_abilCmd;
     string lv_ability;
-    int lv_productionType;
 
     // Automatic Variable Declarations
     // Variable Initialization
+    lv_productionType = libAHLI_ge_ProductionTabCategory_Unit;
     lv_abilCmd = EventUnitAbility();
     lv_ability = AbilityCommandGetAbility(lv_abilCmd);
-    lv_productionType = libAHLI_ge_ProductionTabCategory_Unit;
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    if ((AbilityCommandGetCommand(lv_abilCmd) == 0) && (CatalogFieldValueGet(c_gameCatalogAbil, (lv_ability), "Flags[" + IntToString(18) + "]", c_playerAny) == "1")) {
-        lv_lastInfoArrayIndex = (CatalogFieldValueCount(c_gameCatalogAbil, lv_ability, "InfoArray", c_playerAny) - 1);
-        lv_targetUnitType = CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(lv_lastInfoArrayIndex) + "].Unit", c_playerAny);
+    if ((AbilityCommandGetCommand(lv_abilCmd) == 0)) {
         lv_unit = EventUnit();
-        if ((lv_targetUnitType == (UnitGetType(lv_unit)))) {
-            if ((UnitTypeTestAttribute((lv_targetUnitType), c_unitAttributeStructure) == true)) {
-                lv_productionType = libAHLI_ge_ProductionTabCategory_Structure;
-            }
+        lv_player = UnitGetOwner(lv_unit);
+        if ((CatalogFieldValueGet(c_gameCatalogAbil, (lv_ability), "Flags[" + IntToString(18) + "]", lv_player) == "1")) {
+            lv_lastInfoArrayIndex = (CatalogFieldValueCount(c_gameCatalogAbil, lv_ability, "InfoArray", lv_player) - 1);
+            lv_targetUnitType = CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(lv_lastInfoArrayIndex) + "].Unit", lv_player);
+            if ((lv_targetUnitType == (UnitGetType(lv_unit)))) {
+                if ((UnitTypeTestAttribute((lv_targetUnitType), c_unitAttributeStructure) == true)) {
+                    lv_productionType = libAHLI_ge_ProductionTabCategory_Structure;
+                }
 
-            libAHLI_gf_ProductionTabRemoveProduction(EventPlayer(), lv_targetUnitType, lv_productionType, lv_unit);
+                libAHLI_gf_ProductionTabRemoveProduction(lv_player, lv_targetUnitType, lv_productionType, lv_unit);
+            }
+            else {
+                return false;
+            }
         }
         else {
             return false;
         }
     }
-    else {
-        return false;
-    }
+
     return true;
 }
 
