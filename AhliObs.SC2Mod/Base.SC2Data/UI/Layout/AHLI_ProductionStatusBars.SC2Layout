@@ -49,12 +49,12 @@
 
         <Frame type="Frame" name="StatusIcon2" template="AHLI_ProductionStatusBars/UnitIconTemplate">
             <Anchor side="Top" relative="$parent" pos="Min" offset="10"/>
-            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="10"/>
         </Frame>
 
         <Frame type="Frame" name="StatusIcon3" template="AHLI_ProductionStatusBars/UnitIconTemplate">
             <Anchor side="Top" relative="$parent" pos="Min" offset="10"/>
-            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="-10"/>
         </Frame>
 
         <Frame type="Frame" name="DisruptIcon1" template="AHLI_ProductionStatusBars/UnitIconTemplate">

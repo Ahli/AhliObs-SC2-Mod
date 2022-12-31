@@ -277,7 +277,7 @@ void libAHLI_gf_RegisterTimerExpiresEvent (trigger lp_trigger, timer lp_timer) {
     TriggerAddEventTimer(lp_trigger, lp_timer);
 }
 
-void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, int lp_productionCategory, unit lp_relatedUnit, bool lp_useCurrentOrderProgress) {
+void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, int lp_productionCategory, unit lp_relatedUnit, bool lp_useCurrentOrderProgress, bool lp_isMorphAbility, string lp_constructorUnitTypeonlyForConstructionsLikeProbe, abilcmd lp_morphAbilCmd) {
     // Variable Declarations
     int lv_slot;
     bool lv_isUnit;
@@ -329,11 +329,19 @@ void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, 
         }
         libAHLI_gv_productionTabPlayer[lp_player].lv_slotUseCurrentOrderProgress[lv_slot] = lp_useCurrentOrderProgress;
         libAHLI_gv_productionTabPlayer[lp_player].lv_slotCategory[lv_slot] = lp_productionCategory;
+        if ((lp_useCurrentOrderProgress == true)) {
+            if ((lp_isMorphAbility == true)) {
+                libAHLI_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lv_slot] = libAHLI_gf_ProductionTabGetMaxDurationOfMorph(lp_morphAbilCmd, lp_player);
+            }
+            else {
+                libAHLI_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lv_slot] = libAHLI_gf_ProductionTabGetMaxDurationOfConstruction(lp_constructorUnitTypeonlyForConstructionsLikeProbe, (lp_item), lp_player);
+            }
+        }
+
         libNtve_gf_SetDialogItemText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCountLabel[lv_slot], IntToText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot]), libAHLI_gv_obs);
         libNtve_gf_SetDialogItemImage(libAHLI_gv_productionTabPlayer[lp_player].lv_slotImage[lv_slot], libAHLI_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot], libAHLI_gv_obs);
-        libNtve_gf_SetDialogItemTooltip(libAHLI_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_slot], (libAHLI_gv_productionTabPlayer[lp_player].lv_slotName[lv_slot]), libAHLI_gv_obs);
         libNtve_gf_SetDialogItemUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_slot], lp_relatedUnit, libAHLI_gv_obs);
-        libNtve_gf_SetDialogItemCurrentValue(libAHLI_gv_productionTabPlayer[lp_player].lv_slotProgressBar[lv_slot], 0.0, libAHLI_gv_obs);
+        libAHLI_gf_ProductionTabUpdateUICurrentProgressPercentAndTooltip(lp_player, lv_slot);
         if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
             DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotPanel[lv_slot], libAHLI_gv_obs, true);
         }
@@ -455,9 +463,8 @@ void libAHLI_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, in
                 if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
                     libNtve_gf_SetDialogItemText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCountLabel[lv_slot], IntToText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot]), libAHLI_gv_obs);
                     libNtve_gf_SetDialogItemImage(libAHLI_gv_productionTabPlayer[lp_player].lv_slotImage[lv_slot], libAHLI_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot], libAHLI_gv_obs);
-                    libNtve_gf_SetDialogItemTooltip(libAHLI_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_slot], (libAHLI_gv_productionTabPlayer[lp_player].lv_slotName[lv_slot]), libAHLI_gv_obs);
                     libNtve_gf_SetDialogItemUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_slot], UnitGroupUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot], (ModI(libAHLI_gv_productionTabGeneral.lv_selectionIndexTimed, UnitGroupCount(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot], c_unitCountAll)) + 1)), libAHLI_gv_obs);
-                    libNtve_gf_SetDialogItemCurrentValue(libAHLI_gv_productionTabPlayer[lp_player].lv_slotProgressBar[lv_slot], libAHLI_gf_ProductionTabGetCurrentProgressPercent(lp_player, lv_slot), libAHLI_gv_obs);
+                    libAHLI_gf_ProductionTabUpdateUICurrentProgressPercentAndTooltip(lp_player, lv_slot);
                     if ((lv_slot < libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
                         lv_visibleChrono = DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obsID);
                         lv_visibleContaminate = DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot], libAHLI_gv_obsID);
@@ -477,6 +484,7 @@ void libAHLI_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, in
             libAHLI_gv_productionTabPlayer[lp_player].lv_slotContent[lv_slot] = null;
             libAHLI_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot] = null;
             libAHLI_gv_productionTabPlayer[lp_player].lv_slotName[lv_slot] = null;
+            libAHLI_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lv_slot] = 0.0;
             UnitGroupClear(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot]);
             libAHLI_gv_productionTabPlayer[lp_player].lv_lastUsedSlot -= 1;
             if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
@@ -504,7 +512,7 @@ void libAHLI_gf_ProductionTabSwapSlots (int lp_player, int lp_slotA, int lp_slot
     unitgroup lv_slotSelection;
     bool lv_slotUseCurrentOrderProgress;
     int lv_slotCategory;
-    int lv_slotBuildDurationMax;
+    fixed lv_slotBuildDurationMax;
 
     // Automatic Variable Declarations
     // Variable Initialization
@@ -536,68 +544,120 @@ void libAHLI_gf_ProductionTabSwapSlots (int lp_player, int lp_slotA, int lp_slot
     libAHLI_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lp_slotB] = lv_slotBuildDurationMax;
 }
 
-fixed libAHLI_gf_ProductionTabGetCurrentProgressPercent (int lp_player, int lp_slot) {
+fixed libAHLI_gf_ProductionTabGetMaxDurationOfConstruction (string lp_constructor, string lp_constructed, int lp_player) {
     // Variable Declarations
-    unit lv_unit;
-    fixed lv_maxDur;
-    fixed lv_cur;
-    int lv_queueIndex;
+    int lv_slot;
+    string lv_catalogEntry;
 
     // Automatic Variable Declarations
-    unitgroup auto6325BDED_g;
-    int auto6325BDED_u;
-    unitgroup auto99F9C4E5_g;
-    int auto99F9C4E5_u;
-    int auto7A406B3F_ae;
-    const int auto7A406B3F_ai = 1;
+    const int autoFAD7A9A9_ae = 29;
+    const int autoFAD7A9A9_ai = 1;
 
     // Variable Initialization
 
     // Implementation
-    if ((libAHLI_gv_productionTabPlayer[lp_player].lv_slotUseCurrentOrderProgress[lp_slot] == false)) {
-        auto99F9C4E5_g = libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lp_slot];
-        auto99F9C4E5_u = UnitGroupCount(auto99F9C4E5_g, c_unitCountAll);
-        for (;; auto99F9C4E5_u -= 1) {
-            lv_unit = UnitGroupUnitFromEnd(auto99F9C4E5_g, auto99F9C4E5_u);
-            if (lv_unit == null) { break; }
-            auto7A406B3F_ae = UnitQueueGetProperty(lv_unit, c_unitQueuePropertyCount);
-            lv_queueIndex = 1;
-            for ( ; ( (auto7A406B3F_ai >= 0 && lv_queueIndex <= auto7A406B3F_ae) || (auto7A406B3F_ai < 0 && lv_queueIndex >= auto7A406B3F_ae) ) ; lv_queueIndex += auto7A406B3F_ai ) {
-                lv_cur = UnitGetProgressComplete(lv_unit, lv_queueIndex);
-                if ((lv_cur > lv_maxDur) && (libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lv_unit, lv_queueIndex, 1) == (libAHLI_gv_productionTabPlayer[lp_player].lv_slotContent[lp_slot]))) {
-                    lv_maxDur = lv_cur;
-                }
-
-            }
-        }
+    if ((lp_constructor == "WarpGate")) {
+        lv_catalogEntry = ("WarpGateTrain");
     }
     else {
-        auto6325BDED_g = libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lp_slot];
-        auto6325BDED_u = UnitGroupCount(auto6325BDED_g, c_unitCountAll);
-        for (;; auto6325BDED_u -= 1) {
-            lv_unit = UnitGroupUnitFromEnd(auto6325BDED_g, auto6325BDED_u);
-            if (lv_unit == null) { break; }
-            lv_cur = UnitOrderGetProgress(lv_unit);
-            if ((lv_cur > lv_maxDur)) {
-                lv_maxDur = lv_cur;
+        if ((lp_constructor == "SCV")) {
+            lv_catalogEntry = ("TerranBuild");
+        }
+        else {
+            if ((lp_constructor == "Probe")) {
+                lv_catalogEntry = ("ProtossBuild");
+            }
+            else {
+                if ((lp_constructor == "Drone")) {
+                    lv_catalogEntry = ("ZergBuild");
+                }
+                else {
+                    if ((lp_constructed == "Archon")) {
+                        return libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogAbil, "ArchonWarp", "Info.Time", lp_player);
+                    }
+                    else {
+                        if (((lp_constructed == "BarracksTechLab") || (lp_constructed == "BarracksReactor"))) {
+                            lv_catalogEntry = ("BarracksAddOns");
+                        }
+                        else {
+                            if (((lp_constructed == "FactoryTechLab") || (lp_constructed == "FactoryReactor"))) {
+                                lv_catalogEntry = ("FactoryAddOns");
+                            }
+                            else {
+                                if (((lp_constructed == "StarportTechLab") || (lp_constructed == "StarportReactor"))) {
+                                    lv_catalogEntry = ("StarportAddOns");
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if ((lv_catalogEntry != null)) {
+        lv_slot = 0;
+        for ( ; ( (autoFAD7A9A9_ai >= 0 && lv_slot <= autoFAD7A9A9_ae) || (autoFAD7A9A9_ai < 0 && lv_slot >= autoFAD7A9A9_ae) ) ; lv_slot += autoFAD7A9A9_ai ) {
+            if ((CatalogFieldValueGet(c_gameCatalogAbil, lv_catalogEntry, "InfoArray[" + IntToString(lv_slot) + "].Unit", lp_player) == (lp_constructed))) {
+                return libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogAbil, lv_catalogEntry, "InfoArray[" + IntToString(lv_slot) + "].Time", lp_player);
             }
 
         }
     }
-    return lv_maxDur;
+
+    TextExpressionSetToken("Param/Expression/lib_AHLI_6FB00989", "A", StringToText((lp_constructed)));
+    TextExpressionSetToken("Param/Expression/lib_AHLI_6FB00989", "B", StringToText((lp_constructor)));
+    TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_AHLI_6FB00989"), true);
+    return 0.0;
 }
 
-trigger auto_libAHLI_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_Trigger = null;
+fixed libAHLI_gf_ProductionTabGetMaxDurationOfMorph (abilcmd lp_abilCmd, int lp_player) {
+    // Variable Declarations
+    string lv_ability;
+    int lv_infoArrayIndex;
+    int lv_sectionIndex;
+    fixed lv_maxSectionTime;
+    fixed lv_maxDurationTime;
+    fixed lv_accumulatedTime;
 
-void libAHLI_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite () {
-    if (auto_libAHLI_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_Trigger == null) {
-        auto_libAHLI_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_Trigger = TriggerCreate("auto_libAHLI_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_TriggerFunc");
+    // Automatic Variable Declarations
+    int auto7C0C384E_ae;
+    const int auto7C0C384E_ai = 1;
+    const int auto9BF94CC2_ae = 5;
+    const int auto9BF94CC2_ai = 1;
+
+    // Variable Initialization
+    lv_ability = AbilityCommandGetAbility(lp_abilCmd);
+
+    // Implementation
+    auto7C0C384E_ae = (CatalogFieldValueCount(c_gameCatalogAbil, lv_ability, "InfoArray", lp_player) - 1);
+    lv_infoArrayIndex = 0;
+    for ( ; ( (auto7C0C384E_ai >= 0 && lv_infoArrayIndex <= auto7C0C384E_ae) || (auto7C0C384E_ai < 0 && lv_infoArrayIndex >= auto7C0C384E_ae) ) ; lv_infoArrayIndex += auto7C0C384E_ai ) {
+        lv_maxSectionTime = 0.0;
+        lv_sectionIndex = 0;
+        for ( ; ( (auto9BF94CC2_ai >= 0 && lv_sectionIndex <= auto9BF94CC2_ae) || (auto9BF94CC2_ai < 0 && lv_sectionIndex >= auto9BF94CC2_ae) ) ; lv_sectionIndex += auto9BF94CC2_ai ) {
+            lv_maxDurationTime = MaxF(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(lv_infoArrayIndex) + "].SectionArray[" + IntToString(lv_sectionIndex) + "].DurationArray[" + IntToString(0) + "]", lp_player), libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(lv_infoArrayIndex) + "].SectionArray[" + IntToString(lv_sectionIndex) + "].DurationArray[" + IntToString(1) + "]", lp_player));
+            if ((lv_maxDurationTime > lv_maxSectionTime)) {
+                lv_maxSectionTime = lv_maxDurationTime;
+            }
+
+        }
+        lv_accumulatedTime += lv_maxSectionTime;
+    }
+    return lv_accumulatedTime;
+}
+
+trigger auto_libAHLI_gf_ProductionTabUpdateUIProgressSelectionthreadedinfinite_Trigger = null;
+
+void libAHLI_gf_ProductionTabUpdateUIProgressSelectionthreadedinfinite () {
+    if (auto_libAHLI_gf_ProductionTabUpdateUIProgressSelectionthreadedinfinite_Trigger == null) {
+        auto_libAHLI_gf_ProductionTabUpdateUIProgressSelectionthreadedinfinite_Trigger = TriggerCreate("auto_libAHLI_gf_ProductionTabUpdateUIProgressSelectionthreadedinfinite_TriggerFunc");
     }
 
-    TriggerExecute(auto_libAHLI_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_Trigger, false, false);
+    TriggerExecute(auto_libAHLI_gf_ProductionTabUpdateUIProgressSelectionthreadedinfinite_Trigger, false, false);
 }
 
-bool auto_libAHLI_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_TriggerFunc (bool testConds, bool runActions) {
+bool auto_libAHLI_gf_ProductionTabUpdateUIProgressSelectionthreadedinfinite_TriggerFunc (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_player;
     int lv_slot;
@@ -629,13 +689,79 @@ bool auto_libAHLI_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite_Trig
                 lv_slot = 0;
                 for ( ; ( (auto468EFED4_ai >= 0 && lv_slot <= auto468EFED4_ae) || (auto468EFED4_ai < 0 && lv_slot >= auto468EFED4_ae) ) ; lv_slot += auto468EFED4_ai ) {
                     libNtve_gf_SetDialogItemUnit(libAHLI_gv_productionTabPlayer[lv_player].lv_slotUnitTargetFrame[lv_slot], UnitGroupUnit(libAHLI_gv_productionTabPlayer[lv_player].lv_slotSelection[lv_slot], (ModI(libAHLI_gv_productionTabGeneral.lv_selectionIndexTimed, UnitGroupCount(libAHLI_gv_productionTabPlayer[lv_player].lv_slotSelection[lv_slot], c_unitCountAll)) + 1)), libAHLI_gv_obs);
-                    libNtve_gf_SetDialogItemCurrentValue(libAHLI_gv_productionTabPlayer[lv_player].lv_slotProgressBar[lv_slot], libAHLI_gf_ProductionTabGetCurrentProgressPercent(lv_player, lv_slot), libAHLI_gv_obs);
+                    libAHLI_gf_ProductionTabUpdateUICurrentProgressPercentAndTooltip(lv_player, lv_slot);
                 }
             }
 
         }
     }
     return true;
+}
+
+void libAHLI_gf_ProductionTabUpdateUICurrentProgressPercentAndTooltip (int lp_player, int lp_slot) {
+    // Variable Declarations
+    unit lv_unit;
+    fixed lv_maxProgressPercent;
+    fixed lv_curProgressPercent;
+    int lv_queueIndex;
+    fixed lv_elapsed;
+    fixed lv_total;
+
+    // Automatic Variable Declarations
+    unitgroup auto4A08C1CA_g;
+    int auto4A08C1CA_u;
+    unitgroup auto937889DA_g;
+    int auto937889DA_u;
+    int auto1BB8275C_ae;
+    const int auto1BB8275C_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((libAHLI_gv_productionTabPlayer[lp_player].lv_slotUseCurrentOrderProgress[lp_slot] == false)) {
+        auto937889DA_g = libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lp_slot];
+        auto937889DA_u = UnitGroupCount(auto937889DA_g, c_unitCountAll);
+        for (;; auto937889DA_u -= 1) {
+            lv_unit = UnitGroupUnitFromEnd(auto937889DA_g, auto937889DA_u);
+            if (lv_unit == null) { break; }
+            auto1BB8275C_ae = UnitQueueGetProperty(lv_unit, c_unitQueuePropertyCount);
+            lv_queueIndex = 1;
+            for ( ; ( (auto1BB8275C_ai >= 0 && lv_queueIndex <= auto1BB8275C_ae) || (auto1BB8275C_ai < 0 && lv_queueIndex >= auto1BB8275C_ae) ) ; lv_queueIndex += auto1BB8275C_ai ) {
+                lv_curProgressPercent = UnitGetProgressComplete(lv_unit, lv_queueIndex);
+                if ((lv_curProgressPercent > lv_maxProgressPercent) && (libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lv_unit, lv_queueIndex, 1) == (libAHLI_gv_productionTabPlayer[lp_player].lv_slotContent[lp_slot]))) {
+                    lv_maxProgressPercent = lv_curProgressPercent;
+                    lv_elapsed = UnitQueueItemTime(lv_unit, c_unitQueueTimeElapsed, lv_queueIndex);
+                    lv_total = UnitQueueItemTime(lv_unit, c_unitQueueTimeTotal, lv_queueIndex);
+                }
+
+            }
+        }
+    }
+    else {
+        auto4A08C1CA_g = libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lp_slot];
+        auto4A08C1CA_u = UnitGroupCount(auto4A08C1CA_g, c_unitCountAll);
+        for (;; auto4A08C1CA_u -= 1) {
+            lv_unit = UnitGroupUnitFromEnd(auto4A08C1CA_g, auto4A08C1CA_u);
+            if (lv_unit == null) { break; }
+            lv_curProgressPercent = UnitOrderGetProgress(lv_unit);
+            if ((lv_curProgressPercent > lv_maxProgressPercent)) {
+                lv_maxProgressPercent = lv_curProgressPercent;
+            }
+
+        }
+        lv_total = libAHLI_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lp_slot];
+        lv_elapsed = ((lv_maxProgressPercent * lv_total) / 100.0);
+    }
+    libNtve_gf_SetDialogItemCurrentValue(libAHLI_gv_productionTabPlayer[lp_player].lv_slotProgressBar[lp_slot], lv_maxProgressPercent, libAHLI_gv_obs);
+    if ((lv_total > 0.0)) {
+        TextExpressionSetToken("Param/Expression/lib_AHLI_0ABE02E7", "A", libAHLI_gv_productionTabPlayer[lp_player].lv_slotName[lp_slot]);
+        TextExpressionSetToken("Param/Expression/lib_AHLI_0ABE02E7", "B", FixedToText(Round((lv_elapsed / libAHLI_gv_gameSpeedFactor)), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_AHLI_0ABE02E7", "C", FixedToText(Round((lv_total / libAHLI_gv_gameSpeedFactor)), c_fixedPrecisionAny));
+        libNtve_gf_SetDialogItemTooltip(libAHLI_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lp_slot], TextExpressionAssemble("Param/Expression/lib_AHLI_0ABE02E7"), libAHLI_gv_obs);
+    }
+    else {
+        libNtve_gf_SetDialogItemTooltip(libAHLI_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lp_slot], libAHLI_gv_productionTabPlayer[lp_player].lv_slotName[lp_slot], libAHLI_gv_obs);
+    }
 }
 
 void libAHLI_gf_ProductionTabRegisterChronoBoost (unit lp_structure) {
@@ -2378,7 +2504,7 @@ bool libAHLI_gt_ProductionTabInit_Func (bool testConds, bool runActions) {
         libAHLI_gv_productionTabPlayer[lv_player].lv_chronoBoosted = UnitGroupEmpty();
         libAHLI_gv_productionTabPlayer[lv_player].lv_contanimated = UnitGroupEmpty();
     }
-    libAHLI_gf_ProductionTabUpdateUIprogressselectionthreadedinfinite();
+    libAHLI_gf_ProductionTabUpdateUIProgressSelectionthreadedinfinite();
     return true;
 }
 
@@ -2412,7 +2538,7 @@ bool libAHLI_gt_ProductionTabConstructionUnitWarpMergeStarted_Func (bool testCon
         lv_productionType = libAHLI_ge_ProductionTabCategory_Structure;
     }
 
-    libAHLI_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_constructedUnit), (lv_constructedUnitType), lv_productionType, lv_constructedUnit, true);
+    libAHLI_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_constructedUnit), (lv_constructedUnitType), lv_productionType, lv_constructedUnit, true, false, UnitGetType(EventUnit()), null);
     return true;
 }
 
@@ -2473,7 +2599,7 @@ bool libAHLI_gt_ProductionTabTrainingStarted_Func (bool testConds, bool runActio
         return true;
     }
 
-    libAHLI_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUnitType()), libAHLI_ge_ProductionTabCategory_Unit, lv_producer, false);
+    libAHLI_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUnitType()), libAHLI_ge_ProductionTabCategory_Unit, lv_producer, false, false, null, null);
     return true;
 }
 
@@ -2526,7 +2652,7 @@ bool libAHLI_gt_ProductionTabResearchStarted_Func (bool testConds, bool runActio
         return true;
     }
 
-    libAHLI_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUpgrade()), libAHLI_ge_ProductionTabCategory_Upgrade, lv_producer, false);
+    libAHLI_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUpgrade()), libAHLI_ge_ProductionTabCategory_Upgrade, lv_producer, false, false, null, null);
     return true;
 }
 
@@ -2579,7 +2705,7 @@ bool libAHLI_gt_ProductionTabArmingStarted_Func (bool testConds, bool runActions
         return true;
     }
 
-    libAHLI_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUnitType()), libAHLI_ge_ProductionTabCategory_Unit, lv_producer, false);
+    libAHLI_gf_ProductionTabRegisterProduction(UnitGetOwner(lv_producer), (libNtve_gf_TriggeringProgressUnitType()), libAHLI_ge_ProductionTabCategory_Unit, lv_producer, false, false, null, null);
     return true;
 }
 
@@ -2650,7 +2776,7 @@ bool libAHLI_gt_ProductionTabMorphStarted_Func (bool testConds, bool runActions)
                 lv_productionType = libAHLI_ge_ProductionTabCategory_Structure;
             }
 
-            libAHLI_gf_ProductionTabRegisterProduction(EventPlayer(), lv_targetUnitType, lv_productionType, lv_unit, true);
+            libAHLI_gf_ProductionTabRegisterProduction(EventPlayer(), lv_targetUnitType, lv_productionType, lv_unit, true, true, null, lv_abilCmd);
         }
         else {
             return false;
