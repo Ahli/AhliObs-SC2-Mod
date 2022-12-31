@@ -291,6 +291,7 @@ trigger libAHLI_gt_ProductionTabArmingStarted;
 trigger libAHLI_gt_ProductionTabArmingEnded;
 trigger libAHLI_gt_ProductionTabMorphStarted;
 trigger libAHLI_gt_ProductionTabMorphFinished;
+trigger libAHLI_gt_ProductionTabMorphCanceled;
 trigger libAHLI_gt_ProductionTabChronoBoostActivates;
 trigger libAHLI_gt_ProductionTabChronoBoostDeactivates;
 trigger libAHLI_gt_ProductionTabContaminateActivates;
