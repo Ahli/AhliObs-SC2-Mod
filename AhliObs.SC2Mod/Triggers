@@ -6721,12 +6721,13 @@
                 - what if morphing unit/structure dies?
                 - what if reactor is destroyed and 2 diff unit types are produced?
                 - what if a structure dies with unit in queue when it was not starting production due to supply block?
-                duration in tooltip
                 add no pylon power
                 add missing scv
                 fix gameheart ctrl+shift+O
                 optimize if necessary
                 check if observed type needs actually be set or if it can be kept blank (check live, check replay!)
+                
+                player being defeated not clearing production tab? Overlord morph finished while player was defeated =&gt; wasn&apos;t removed (maybe now?)
             </Comment>
         </Element>
         <Element Type="Trigger" Id="F50CC398">
@@ -15419,9 +15420,68 @@
         <Element Type="FunctionCall" Id="B682085F">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005"/>
-            <FunctionCall Type="FunctionCall" Library="AHLI" Id="3ECEF5C4"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="BC343D4A"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="F6402DA2"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="C846E05C"/>
+        </Element>
+        <Element Type="FunctionCall" Id="BC343D4A">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="04C07C5D"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="70EE7F27"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="285A8FA6"/>
+        </Element>
+        <Element Type="FunctionCall" Id="04C07C5D">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="AHLI" Id="86038D2B"/>
+            <Parameter Type="Param" Library="AHLI" Id="32E2B633"/>
+            <Parameter Type="Param" Library="AHLI" Id="415AC43A"/>
+        </Element>
+        <Element Type="Param" Id="86038D2B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="32E2B633">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>CreepTumorBurrowed</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Unit"/>
+        </Element>
+        <Element Type="Param" Id="415AC43A">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Parameter Type="ParamDef" Library="AHLI" Id="64FA30DA"/>
+        </Element>
+        <Element Type="FunctionCall" Id="70EE7F27">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="AHLI" Id="04EE8A5F"/>
+            <Parameter Type="Param" Library="AHLI" Id="63D5AA72"/>
+        </Element>
+        <Element Type="Param" Id="04EE8A5F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="AHLI" Id="5DCD755D"/>
+        </Element>
+        <Element Type="Param" Id="63D5AA72">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="1AF8816C"/>
+        </Element>
+        <Element Type="FunctionCall" Id="1AF8816C">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E4B86923"/>
+            <Parameter Type="Param" Library="AHLI" Id="C2AEBC10"/>
+        </Element>
+        <Element Type="Param" Id="C2AEBC10">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="711D5A26"/>
+            <Value>CreepTumorBuild</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Abil"/>
+        </Element>
+        <Element Type="FunctionCall" Id="285A8FA6">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="3ECEF5C4"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="A31C05C8"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="DB9C904D"/>
         </Element>
         <Element Type="FunctionCall" Id="3ECEF5C4">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
@@ -15721,6 +15781,51 @@
         <Element Type="Param" Id="0403CCC0">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
             <Parameter Type="ParamDef" Library="AHLI" Id="9F02223B"/>
+        </Element>
+        <Element Type="FunctionCall" Id="A31C05C8">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="AHLI" Id="809CE09B"/>
+            <Parameter Type="Param" Library="AHLI" Id="94E71259"/>
+        </Element>
+        <Element Type="Param" Id="809CE09B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="AHLI" Id="5DCD755D"/>
+        </Element>
+        <Element Type="Param" Id="94E71259">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="05001216"/>
+        </Element>
+        <Element Type="FunctionCall" Id="05001216">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E4B86923"/>
+            <Parameter Type="Param" Library="AHLI" Id="5E34C381"/>
+        </Element>
+        <Element Type="Param" Id="5E34C381">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="711D5A26"/>
+            <Value>QueenBuild</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Abil"/>
+        </Element>
+        <Element Type="FunctionCall" Id="DB9C904D">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="AHLI" Id="B665CDD4"/>
+            <Parameter Type="Param" Library="AHLI" Id="92900134"/>
+            <Parameter Type="Param" Library="AHLI" Id="7C888C00"/>
+        </Element>
+        <Element Type="Param" Id="B665CDD4">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="92900134">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>Queen</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Unit"/>
+        </Element>
+        <Element Type="Param" Id="7C888C00">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Parameter Type="ParamDef" Library="AHLI" Id="64FA30DA"/>
         </Element>
         <Element Type="FunctionCall" Id="F6402DA2">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
@@ -17129,6 +17234,7 @@
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005"/>
             <Parameter Type="Param" Library="AHLI" Id="02CE43CA"/>
             <Parameter Type="Param" Library="AHLI" Id="64B8FF81"/>
+            <FunctionCall Type="Comment" Library="AHLI" Id="BA2BC650"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="84986305"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="8DAD1783"/>
         </Element>
@@ -17151,6 +17257,12 @@
         </Element>
         <Element Type="Param" Id="90CDC438">
             <Parameter Type="ParamDef" Library="AHLI" Id="A7774680"/>
+        </Element>
+        <Element Type="Comment" Id="BA2BC650">
+            <Comment>
+                0.002
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000007"/>
         </Element>
         <Element Type="FunctionCall" Id="84986305">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
@@ -17324,6 +17436,7 @@
             <Parameter Type="Param" Library="AHLI" Id="B23C5D9E"/>
             <Parameter Type="Param" Library="AHLI" Id="7AABFA9F"/>
             <Parameter Type="Param" Library="AHLI" Id="4AD815E3"/>
+            <FunctionCall Type="Comment" Library="AHLI" Id="87AF7510"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="DCB87AFA"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="CD5D6334"/>
         </Element>
@@ -17358,6 +17471,12 @@
             <ParameterDef Type="ParamDef" Library="Ntve" Id="8CB41668"/>
             <Variable Type="Variable" Library="AHLI" Id="6269712E"/>
         </Element>
+        <Element Type="Comment" Id="87AF7510">
+            <Comment>
+                0.002
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="DAF49931"/>
+        </Element>
         <Element Type="FunctionCall" Id="DCB87AFA">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="DAF49931"/>
@@ -17389,9 +17508,12 @@
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="DAF49931"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="5D0C39B7"/>
+            <FunctionCall Type="Comment" Library="AHLI" Id="06414F6E"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="4651B5E2"/>
+            <FunctionCall Type="Comment" Library="AHLI" Id="ABCDA04A"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="A9FFE06F"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="1E5549DB"/>
+            <FunctionCall Type="Comment" Library="AHLI" Id="75F9D28F"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="0251DC30"/>
         </Element>
         <Element Type="FunctionCall" Id="5D0C39B7">
@@ -17407,6 +17529,12 @@
         <Element Type="Param" Id="5FF27012">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
             <Variable Type="Variable" Library="AHLI" Id="A24B7C3C"/>
+        </Element>
+        <Element Type="Comment" Id="06414F6E">
+            <Comment>
+                0.001
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
         </Element>
         <Element Type="FunctionCall" Id="4651B5E2">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
@@ -17439,6 +17567,12 @@
         <Element Type="Param" Id="5E6D5534">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="BED20794"/>
             <Variable Type="Variable" Library="AHLI" Id="6269712E"/>
+        </Element>
+        <Element Type="Comment" Id="ABCDA04A">
+            <Comment>
+                0.001
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
         </Element>
         <Element Type="FunctionCall" Id="A9FFE06F">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
@@ -17490,6 +17624,12 @@
         <Element Type="Param" Id="ABBDC414">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
             <Variable Type="Variable" Library="AHLI" Id="B0B182D5"/>
+        </Element>
+        <Element Type="Comment" Id="75F9D28F">
+            <Comment>
+                0.001
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
         </Element>
         <Element Type="FunctionCall" Id="0251DC30">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
@@ -22235,25 +22375,7 @@
         <Element Type="PresetValue" Id="8EEFF976">
         </Element>
         <Element Type="Category" Id="6FADEF80">
-            <Item Type="Comment" Library="AHLI" Id="A8D6FE9A"/>
             <Item Type="Category" Library="AHLI" Id="4977F7D2"/>
-        </Element>
-        <Element Type="Comment" Id="A8D6FE9A">
-            <Comment>
-                Bugs not fixed as they might influence gameplay:
-                - Thor&apos;s 2nd mode is missing the Locust collision
-                There are some structures that potentially should receive a collision with Adepts and Locusts:
-                - Rich Extractor are missing the Phased and Locust collisions
-                - Shield Battery is missing Phased collision
-                - Warpgate is missing Phased and Locust collision
-                - destructible rocks are missing Phased and Locust collision
-                - unattached TechLab is missing Phased and Locust collision
-                - unattached Reactor is missing Phased and Locust collision
-                - attached Reactor is missing Phased collision
-                - geysers and mineral fields
-                =&gt; it is most likely fine as the
-                some unit scores are wrong (morphs, cocoons, etc)
-            </Comment>
         </Element>
         <Element Type="Category" Id="4977F7D2">
             <Item Type="FunctionDef" Library="AHLI" Id="FC55AE9A"/>
@@ -56120,6 +56242,7 @@
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="4DFF6710"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="114BBCB2"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="DF8970CF"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="3D2C527E"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="8012EDC0"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="A0121905"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="36D649D8"/>
@@ -57430,6 +57553,37 @@
             <ValueElement Type="Trigger" Library="AHLI" Id="DC458993"/>
         </Element>
         <Element Type="Param" Id="2A1A4202">
+            <ParameterDef Type="ParamDef" Library="AHLI" Id="AEBC796F"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="03977D39"/>
+        </Element>
+        <Element Type="FunctionCall" Id="3D2C527E">
+            <FunctionDef Type="FunctionDef" Library="AHLI" Id="A0555A75"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="AHLI" Id="DAD0E577"/>
+            <Parameter Type="Param" Library="AHLI" Id="61C64F19"/>
+            <Parameter Type="Param" Library="AHLI" Id="AE2F37AF"/>
+            <Parameter Type="Param" Library="AHLI" Id="CA3D4DBE"/>
+            <Parameter Type="Param" Library="AHLI" Id="6D157B52"/>
+        </Element>
+        <Element Type="Param" Id="DAD0E577">
+            <ParameterDef Type="ParamDef" Library="AHLI" Id="7ED477E3"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="D6EA4D09"/>
+        </Element>
+        <Element Type="Param" Id="61C64F19">
+            <ParameterDef Type="ParamDef" Library="AHLI" Id="D8A66502"/>
+            <Value>LockOn</Value>
+            <ValueType Type="abilcmd"/>
+        </Element>
+        <Element Type="Param" Id="AE2F37AF">
+            <ParameterDef Type="ParamDef" Library="AHLI" Id="D66C0C54"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000259"/>
+        </Element>
+        <Element Type="Param" Id="CA3D4DBE">
+            <ParameterDef Type="ParamDef" Library="AHLI" Id="70573FE9"/>
+            <ValueType Type="trigger"/>
+            <ValueElement Type="Trigger" Library="AHLI" Id="36E5DCE4"/>
+        </Element>
+        <Element Type="Param" Id="6D157B52">
             <ParameterDef Type="ParamDef" Library="AHLI" Id="AEBC796F"/>
             <Preset Type="PresetValue" Library="Ntve" Id="03977D39"/>
         </Element>

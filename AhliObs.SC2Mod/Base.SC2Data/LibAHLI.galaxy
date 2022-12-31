@@ -572,22 +572,32 @@ fixed libAHLI_gf_ProductionTabGetMaxDurationOfConstruction (string lp_constructo
                     lv_catalogEntry = ("ZergBuild");
                 }
                 else {
-                    if ((lp_constructed == "Archon")) {
-                        return libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogAbil, "ArchonWarp", "Info.Time", lp_player);
+                    if ((lp_constructor == "CreepTumorBurrowed")) {
+                        lv_catalogEntry = ("CreepTumorBuild");
                     }
                     else {
-                        if (((lp_constructed == "BarracksTechLab") || (lp_constructed == "BarracksReactor"))) {
-                            lv_catalogEntry = ("BarracksAddOns");
+                        if ((lp_constructor == "Queen")) {
+                            lv_catalogEntry = ("QueenBuild");
                         }
                         else {
-                            if (((lp_constructed == "FactoryTechLab") || (lp_constructed == "FactoryReactor"))) {
-                                lv_catalogEntry = ("FactoryAddOns");
+                            if ((lp_constructed == "Archon")) {
+                                return libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogAbil, "ArchonWarp", "Info.Time", lp_player);
                             }
                             else {
-                                if (((lp_constructed == "StarportTechLab") || (lp_constructed == "StarportReactor"))) {
-                                    lv_catalogEntry = ("StarportAddOns");
+                                if (((lp_constructed == "BarracksTechLab") || (lp_constructed == "BarracksReactor"))) {
+                                    lv_catalogEntry = ("BarracksAddOns");
                                 }
+                                else {
+                                    if (((lp_constructed == "FactoryTechLab") || (lp_constructed == "FactoryReactor"))) {
+                                        lv_catalogEntry = ("FactoryAddOns");
+                                    }
+                                    else {
+                                        if (((lp_constructed == "StarportTechLab") || (lp_constructed == "StarportReactor"))) {
+                                            lv_catalogEntry = ("StarportAddOns");
+                                        }
 
+                                    }
+                                }
                             }
                         }
                     }
@@ -4772,6 +4782,7 @@ bool libAHLI_gt_BattleReportInitialization_Func (bool testConds, bool runActions
         libAHLI_gf_RegisterAbilityUsedEvent(libAHLI_gt_BattleReportTrackedAbilityUsedAbattlestarting, null, AbilityCommand("RavenScramblerMissile", 0), c_unitAbilStageExecute, false);
         libAHLI_gf_RegisterAbilityUsedEvent(libAHLI_gt_BattleReportTrackedAbilityUsedAbattlestarting, null, AbilityCommand("RavenShredderMissile", 0), c_unitAbilStageExecute, false);
         libAHLI_gf_RegisterAbilityUsedEvent(libAHLI_gt_BattleReportTrackedAbilityUsedBnobattlestart, null, AbilityCommand("Hyperjump", 0), c_unitAbilStageExecute, false);
+        libAHLI_gf_RegisterAbilityUsedEvent(libAHLI_gt_BattleReportTrackedAbilityUsedAbattlestarting, null, AbilityCommand("LockOn", 0), c_unitAbilStageExecute, false);
         libAHLI_gf_RegisterAbilityUsedEvent(libAHLI_gt_BattleReportTrackedAbilityUsedAbattlestarting, null, AbilityCommand("RavagerCorrosiveBile", 0), c_unitAbilStageExecute, false);
         libAHLI_gf_RegisterAbilityUsedEvent(libAHLI_gt_BattleReportTrackedAbilityUsedBnobattlestart, null, AbilityCommand("ViperConsumeStructure", 0), c_unitAbilStageExecute, false);
         libAHLI_gf_RegisterAbilityUsedEvent(libAHLI_gt_BattleReportTrackedAbilityUsedBnobattlestart, null, AbilityCommand("Yoink", 0), c_unitAbilStageExecute, false);
