@@ -212,7 +212,7 @@
     </Frame>
 
     <Frame type="UnitStatusFrame" name="ProductionStatusTechLab" template="AHLI_ProductionStatusBars/ProductionStatusSingle">
-		
+
         <Frame type="Frame" name="StatusIcon1">
             <Anchor side="Top" relative="$parent" pos="Min" offset="13"/>
 			<Height val="54"/>

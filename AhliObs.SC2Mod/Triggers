@@ -4016,10 +4016,8 @@
                 - WCS GameHeart (official extension Mod published by Blizzard):
                 - - Ryan Schutter, Christoph Ahlers, Philip Tan, Nick Mohr, The MIT Game Lab, Milov Vasya and Pedro Zea for their amazing work on the original GameHeart Mod. Portions contributed by the MIT Game Lab
                 - Observer Plus
-                - - nice__username ( https://www.twitter.com/nice__username )
-                - HomeStoryCup Logo and Name:
-                - - TakeTV ( https://taketv.net )
-                You can find this mod&apos;s source code here: https://github.com/Ahli/HomeStoryCup-mod
+                - - Joseph &quot;nice__username&quot; Haygood ( https://www.twitter.com/nice__username )
+                You can find this mod&apos;s source code here: https://github.com/Ahli/AhliObs-SC2-Mod
             </Comment>
         </Element>
         <Element Type="Variable" Id="35514AC2">
@@ -6726,7 +6724,6 @@
                 fix gameheart ctrl+shift+O
                 optimize if necessary
                 check if observed type needs actually be set or if it can be kept blank (check live, check replay!)
-                
                 player being defeated not clearing production tab? Overlord morph finished while player was defeated =&gt; wasn&apos;t removed (maybe now?)
             </Comment>
         </Element>
