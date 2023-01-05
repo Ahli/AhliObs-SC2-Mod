@@ -5,8 +5,8 @@ It is recommended to use a compatible Observer UI to use the new features (see b
 
 ### Observer UIs supporting this mod's features:
 
-- [GameHeart 3.6](https://www.dropbox.com/s/1edtu9ci9z767cg/GameHeart_3.6.SC2Interface?dl=1)
-- [Pro2020 AhliMod 1.2](https://www.dropbox.com/s/1efcfpgb7m9fk9n/Pro2020ahliMod_1.2.SC2Interface?dl=1)
+- [GameHeart 3.6](https://ahli.github.io/Galaxy-Observer-UI/#/gameheart/v3/changelog)
+- [Pro2020 AhliMod 1.2](https://ahli.github.io/Galaxy-Observer-UI/#/pro2020ahlimod/changelog)
 
 Editor to edit settings/hotkeys:
 - [Settings Editor (Windows only)](https://www.dropbox.com/s/3f2a9ta6sbjzmrs/Observer%20UI%20Settings%20Editor%20Setup.exe?dl=1)
