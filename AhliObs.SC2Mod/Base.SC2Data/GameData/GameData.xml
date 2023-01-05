@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CGame id="Dflt">
+        <!-- Replace VoidMulti trigger library with own, edited one -->
+        <TriggerLibs index="1" Id="FixD" IncludePath=""/>
+        <TriggerLibs Id="AHLI"/>
+    </CGame>
+</Catalog>
