@@ -6717,14 +6717,12 @@
         </Element>
         <Element Type="Comment" Id="EB430E5B">
             <Comment>
-                - what if reactor is destroyed and 2 diff unit types are produced?
-                - what if a structure dies with unit in queue when it was not starting production due to supply block?
                 add no pylon power
                 add missing scv
                 fix gameheart ctrl+shift+O
+                fix battle report and replay time jumps and open/close state
                 optimize if necessary
                 check if observed type needs actually be set or if it can be kept blank (check live, check replay!)
-                player being defeated not clearing production tab? Overlord morph finished while player was defeated =&gt; wasn&apos;t removed (maybe now?)
             </Comment>
         </Element>
         <Element Type="Trigger" Id="F50CC398">
@@ -61010,7 +61008,6 @@
                 - Hive/Lair/Spire morphing correctly refunds, even if killed
                 - Zerg unit morphs refund correctly, even if killed
                 - Protoss warp in units correctly refunds if power field is lost (does not refund if unit is killed with damage)
-                
                 TODO
                 - Carrier with interceptors dies =&gt; resource cost of the carrier should be lower as there are 4 interceptors already included for free
             </Comment>
