@@ -1,35 +1,39 @@
-# HomeStoryCup XX - extension mod
+# AhliObs - SC2 esport extension mod
 
-A StarCraft II extension mod implementing WCS GameHeart with bug fixes and performance improvements.
-Available on Americas, Europe and Korean servers.
-
-![Find HomeStoryCup XX extension mod](https://pbs.twimg.com/media/FUlMat4WQAItXQm?format=jpg&name=medium)
+A StarCraft II extension mod implementing WCS GameHeart with bug fixes, performance improvements and new features.
+It is recommended to use a compatible Observer UI to use the new features (see below)!
 
 ### Observer UIs supporting this mod's features:
 
-- [GameHeart 3.5](https://www.dropbox.com/s/egixonbgilk3no8/GameHeart_3.5.SC2Interface?dl=1)
-- [Pro2020 AhliMod 1.1](https://www.dropbox.com/s/g47yvccechvmiqn/Pro2020ahliMod_1.1.SC2Interface?dl=1)
+- [GameHeart 3.6](https://www.dropbox.com/s/1edtu9ci9z767cg/GameHeart_3.6.SC2Interface?dl=1)
+- [Pro2020 AhliMod 1.2](https://www.dropbox.com/s/1efcfpgb7m9fk9n/Pro2020ahliMod_1.2.SC2Interface?dl=1)
 
 Editor to edit settings/hotkeys:
 - [Settings Editor (Windows only)](https://www.dropbox.com/s/3f2a9ta6sbjzmrs/Observer%20UI%20Settings%20Editor%20Setup.exe?dl=1)
 
+The extension mod is available on Americas, Europe and Korean servers.
+
+![Find AhliObs on battlenet](https://user-images.githubusercontent.com/5763784/210896520-b8f97d19-8e9b-4d10-b00a-3daae1612d1f.png)
+
+
+
 ### All Changes compared to WCS GameHeart 1.25/Americas
 - **Changes**
   - Battle Report:
-    - added Battle Reports based on nice__username's Observer Plus extension mod
+    - added Battle Reports based on nice__username's Observer Plus (powered by Shopify) extension mod
       - damage includes damage on all units and structures of the enemy
-      - resource damage includes units and structures
+      - resource damage includes all resources lost (death, cancel, salvage)
       - current limitations:
         - damage does not track friendly fire, yet
-        - resource damage does not track refunds of (forcefully) cancelled morphs (Orbital, Planetary, Zerg), yet
   - Upgrade Notifications:
     - icon can now be clicked to select the facility researching it
     - now dynamically change to reflect alliance colors
     - are now enabled in games with 1-4 players
     - labels will resize to make their text fit
-  - Workers killed Notifications:
+  - Workers lost Notifications:
     - are now enabled when there are 2-4 players
     - now dynamically change to reflect alliance colors
+    - now display the first worker lost when it was within range 50 of a main building to only ignore scouts
   - Graphs:
     - added Resources Lost differential graph on Hotkey Numpad3
     - added Resources Gathered comparative graph on Hotkey Numpad4
@@ -39,12 +43,21 @@ Editor to edit settings/hotkeys:
   - World:
     - neutral units are selectable through the fog
   - Leaderpanel:
-    - added production tab that allows observer interfaces to display information near unit icons. Supported are:
-      - Chrono Boost
-    - removed Reaper's KD8 Charges from the structures tab
-    - fixed Reactors, Tech Labs and rich Refineries/Assimilators/Extractors creating multiple buttons
+    - new Production Tab implementation:
+      - observer UIs need to opt-in to display it
+      - new information in the icons:
+        - Chrono Boost
+        - Contaminated
+      - the order of slots is now deterministic instead of random
+      - clicking the slot selects only one unit. Which one is changed every few milliseconds as the engine does not support more than one unit
+    - removed Reaper's KD8 Charges from the structures and production tab
+    - combined Reactors, Tech Labs and rich Refineries/Assimilators/Extractors into single buttons instead of creating duplicates
+  - Labels in 3D world:
+    - added label to unpowered Protoss structures
+    - added label to contaminated structures where Contaminate can have an effect
   - General:
     - moved default observed player from 14 to 15 (Hostile). This allows 14 player FFAs
+    - disabled skin sets as esports does not want this feature
   - Features for Observer Interfaces:
     - saves the player slot number of each player to the PlayerId score
       - this assists observer interfaces in figuring out which Player Id is the left/right player in 1vs1 matches
@@ -59,8 +72,10 @@ Editor to edit settings/hotkeys:
         - this was 25/25 too low
       - Archons will report their actual resource worth on death instead of assuming the Archon was created by one HT and one DT
     - corrected score amount of Upgrades to match resource costs:
-      - Cloaking Field, Hyperflight Rotors, Infernal Pre-Igniter, Drilling Claws, Smart Servos,
-      - Tunneling Claws, Charge, Extended Thermal Lance, Flux Vanes
+      - Cloaking Field, Hyperflight Rotors, Infernal Pre-Igniter, Drilling Claws, Smart Servos, Tunneling Claws, Charge, Extended Thermal Lance, Flux Vanes
+    - corrected produce and kill score of the following units to match resource costs:
+      - Immortal, Warp Prism, Tempest Shield Battery, Robotics Facility, Robotics Bay, Nydus Worm, Nydus Network, Lurker Den
+      - corrected produce score type of Reactor build by a Starport
   - WCS GameHeart:
     - fixed Dark Shrine not showing upgrades in research on a tag
     - fixed potential bug when worker is killed at the same time as that player's notification timer expires resulting in a hidden notification and subsequently resulting in a wrong displayed count when the next one is killed
@@ -93,3 +108,14 @@ Editor to edit settings/hotkeys:
   - removed superfluous upgrade name overrides
   - more general trigger optimizations based on the trigger debugger's execution duration
     - all failed conditions will now appear in failed executions instead of only the initial checks (triggers return 0)
+
+
+### Credits
+Author:
+- Christoph "Ahli" Ahlers ( https://twitter.com/AhliSC2 )  
+
+This mod is based on the work from:
+- WCS GameHeart (official extension Mod published by Blizzard Entertainment):
+  - Ryan Schutter, Christoph Ahlers, Philip Tan, Nick Mohr, The MIT Game Lab, Milov Vasya and Pedro Zea for their amazing work on the original GameHeart Mod. Portions contributed by the MIT Game Lab
+- Observer Plus (powered by Shopify)
+  - Joseph "nice__username" Haygood ( https://www.twitter.com/nice__username )
