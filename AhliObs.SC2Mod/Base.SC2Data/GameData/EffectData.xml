@@ -5,4 +5,7 @@
     <CEffectSet id="AHLI_ArchonDTDTDies"/>
     <CEffectSet id="AHLI_PowerLevelLost"/>
     <CEffectSet id="AHLI_PowerLevelGained"/>
+    <CEffectDamage id="MULEFate">
+        <Death value="Timeout"/>
+    </CEffectDamage>
 </Catalog>
