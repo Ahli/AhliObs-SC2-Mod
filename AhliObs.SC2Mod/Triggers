@@ -75143,7 +75143,7 @@
             <Value Type="Param" Library="AHLI" Id="8D86B5B8"/>
         </Element>
         <Element Type="Param" Id="8D86B5B8">
-            <Value>9912.0</Value>
+            <Value>12.0</Value>
             <ValueType Type="fixed"/>
         </Element>
         <Element Type="Variable" Id="EBE990F6">
