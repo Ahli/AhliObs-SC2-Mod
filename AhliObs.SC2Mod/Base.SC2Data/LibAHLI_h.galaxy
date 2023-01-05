@@ -213,10 +213,10 @@ libAHLI_gs_BattleReport libAHLI_gv_battleReport;
 libAHLI_gs_BattleReportSide[2] libAHLI_gv_battleReportSideData;
 
 // Function Declarations
-string libAHLI_gf_IconofProduction (string lp_item, bool lp_isUnit);
-string libAHLI_gf_IconofUnit (string lp_unitType);
-string libAHLI_gf_IconofUpgrade (string lp_upgrade);
-text libAHLI_gf_NameofProduction (string lp_item, bool lp_isUnit);
+string libAHLI_gf_IconofProduction (string lp_item, bool lp_isUnit, int lp_player);
+string libAHLI_gf_IconofUnit (string lp_unitType, int lp_player);
+string libAHLI_gf_IconofUpgrade (string lp_upgrade, int lp_player);
+text libAHLI_gf_NameofProduction (string lp_item, bool lp_isUnit, int lp_player);
 void libAHLI_gf_RegisterCameraMoveEvent (trigger lp_trigger, int lp_playerId, int lp_cameraMoveReason);
 void libAHLI_gf_RegisterPeriodicEvent (trigger lp_trigger, fixed lp_interval, int lp_time);
 void libAHLI_gf_RegisterTimerRunsOutEvent (trigger lp_trigger, timer lp_timer);

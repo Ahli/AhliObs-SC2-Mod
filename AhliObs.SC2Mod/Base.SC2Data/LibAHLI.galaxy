@@ -142,15 +142,15 @@ void libAHLI_InitVariables () {
 
 // Presets
 // Functions
-string libAHLI_gf_IconofProduction (string lp_item, bool lp_isUnit) {
+string libAHLI_gf_IconofProduction (string lp_item, bool lp_isUnit, int lp_player) {
     // Automatic Variable Declarations
     // Implementation
     if ((lp_isUnit == true)) {
-        return libAHLI_gf_IconofUnit((lp_item));
+        return libAHLI_gf_IconofUnit((lp_item), lp_player);
     }
     else {
         if ((CatalogEntryIsValid(c_gameCatalogUpgrade, lp_item) == true)) {
-            return (CatalogFieldValueGet(c_gameCatalogUpgrade, (lp_item), "Icon", libAHLI_gv_obsID));
+            return libAHLI_gf_IconofUpgrade((lp_item), lp_player);
         }
         else {
             TextExpressionSetToken("Param/Expression/lib_AHLI_DD90EB18", "A", StringToText(lp_item));
@@ -160,15 +160,15 @@ string libAHLI_gf_IconofProduction (string lp_item, bool lp_isUnit) {
     }
 }
 
-string libAHLI_gf_IconofUnit (string lp_unitType) {
+string libAHLI_gf_IconofUnit (string lp_unitType, int lp_player) {
     // Automatic Variable Declarations
     // Implementation
     if ((CatalogEntryIsValid(c_gameCatalogButton, lp_unitType) == true)) {
-        return (CatalogFieldValueGet(c_gameCatalogButton, lp_unitType, "Icon", c_playerAny));
+        return (CatalogFieldValueGet(c_gameCatalogButton, lp_unitType, "Icon", lp_player));
     }
     else {
         if ((CatalogEntryIsValid(c_gameCatalogActor, lp_unitType) == true)) {
-            return (CatalogFieldValueGet(c_gameCatalogActor, lp_unitType, "UnitIcon", c_playerAny));
+            return (CatalogFieldValueGet(c_gameCatalogActor, lp_unitType, "UnitIcon", lp_player));
         }
         else {
             TextExpressionSetToken("Param/Expression/lib_AHLI_DCC6FE9D", "A", StringToText((lp_unitType)));
@@ -178,13 +178,13 @@ string libAHLI_gf_IconofUnit (string lp_unitType) {
     }
 }
 
-string libAHLI_gf_IconofUpgrade (string lp_upgrade) {
+string libAHLI_gf_IconofUpgrade (string lp_upgrade, int lp_player) {
     // Automatic Variable Declarations
     // Implementation
-    return (CatalogFieldValueGet(c_gameCatalogUpgrade, lp_upgrade, "Icon", libAHLI_gv_obsID));
+    return (CatalogFieldValueGet(c_gameCatalogUpgrade, lp_upgrade, "Icon", lp_player));
 }
 
-text libAHLI_gf_NameofProduction (string lp_item, bool lp_isUnit) {
+text libAHLI_gf_NameofProduction (string lp_item, bool lp_isUnit, int lp_player) {
     // Automatic Variable Declarations
     // Implementation
     if ((lp_isUnit == true)) {
@@ -192,7 +192,7 @@ text libAHLI_gf_NameofProduction (string lp_item, bool lp_isUnit) {
     }
     else {
         if ((CatalogEntryIsValid(c_gameCatalogUpgrade, lp_item) == true)) {
-            return StringExternal(CatalogFieldValueGet(c_gameCatalogUpgrade, lp_item, "Name", c_playerAny));
+            return StringExternal(CatalogFieldValueGet(c_gameCatalogUpgrade, lp_item, "Name", lp_player));
         }
         else {
             TextExpressionSetToken("Param/Expression/lib_AHLI_611EC01F", "A", StringToText(lp_item));
@@ -319,8 +319,8 @@ void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, 
         lv_slot = libAHLI_gv_productionTabPlayer[lp_player].lv_lastUsedSlot;
         libAHLI_gv_productionTabPlayer[lp_player].lv_slotContent[lv_slot] = lv_itemAlias;
         libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot] = 1;
-        libAHLI_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot] = libAHLI_gf_IconofProduction(lv_itemAlias, lv_isUnit);
-        libAHLI_gv_productionTabPlayer[lp_player].lv_slotName[lv_slot] = libAHLI_gf_NameofProduction(lv_itemAlias, lv_isUnit);
+        libAHLI_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot] = libAHLI_gf_IconofProduction(lv_itemAlias, lv_isUnit, lp_player);
+        libAHLI_gv_productionTabPlayer[lp_player].lv_slotName[lv_slot] = libAHLI_gf_NameofProduction(lv_itemAlias, lv_isUnit, lp_player);
         if ((libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot] != null)) {
             UnitGroupAdd(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot], lp_relatedUnit);
         }
@@ -1108,13 +1108,10 @@ void libAHLI_gf_GraphsDefineGraph (int lp_id, text lp_title, string lp_frameName
     libAHLI_gv_graphsData[lv_graph].lv_rangeIncrement = lp_rangeIncrement;
     libAHLI_gv_graphsData[lv_graph].lv_averageValues = lp_averageValues;
     DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/GraphContainer/" + lp_frameName));
-    DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
     DialogControlSetEnabled(DialogControlLastCreated(), libAHLI_gv_obs, true);
     DialogControlHookupStandard(c_triggerControlTypeGraphFrame, ("UIContainer/FullscreenUpperContainer/GraphContainer/" + lp_frameName + "/Graph/GraphFrame"));
-    DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
     libAHLI_gv_graphsData[lv_graph].lv_graph = DialogControlLastCreated();
     DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/GraphContainer/" + lp_frameName + "/Graph/Title"));
-    DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
     libAHLI_gv_graphsData[lv_graph].lv_title = DialogControlLastCreated();
     libNtve_gf_SetDialogItemText(libAHLI_gv_graphsData[lv_graph].lv_title, lp_title, libAHLI_gv_obs);
     lv_count = (0 - libAHLI_gv_graphsMaxNode);
@@ -1268,12 +1265,10 @@ void libAHLI_gf_LabelsPylonPowerSetPoweredDown (unit lp_unit) {
     if ((lv_dialogItem == c_invalidDialogControlId)) {
         DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\Icon", lp_unit);
         lv_dialogItem = DialogControlLastCreated();
-        DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
         DialogControlSetVisible(lv_dialogItem, libAHLI_gv_all_Players, false);
         libNtve_gf_SaveDataTableValueDialogItem(true, (libAHLI_gv_labelsDisruptIcon1 + lv_unitTagString), lv_dialogItem);
         DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\IconBG", lp_unit);
         lv_dialogItem = DialogControlLastCreated();
-        DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
         DialogControlSetVisible(lv_dialogItem, libAHLI_gv_all_Players, false);
         libNtve_gf_SaveDataTableValueDialogItem(true, (libAHLI_gv_labelsDisruptIconBG1 + lv_unitTagString), lv_dialogItem);
     }
@@ -1291,6 +1286,7 @@ void libAHLI_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
     int lv_sLOT_MAX_INDEX1;
     int lv_count1;
     bool lv_visible;
+    int lv_player;
 
     // Automatic Variable Declarations
     int auto85411229_ae;
@@ -1320,7 +1316,8 @@ void libAHLI_gf_UpgradeNotificationsRemoveRunningUpgrade (int lp_slot) {
             if ((lv_count == lv_sLOT_MAX_INDEX1)) {
                 lv_count1 = (lv_count - 1);
                 lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(libAHLI_gv_upgradeNotifications.lv_slotFacility[lv_count], 1, 1);
-                libAHLI_gf_UpgradeNotificationsSetSlotData(lv_count1, libAHLI_gf_UpgradeNotificationsUpgradeName(lv_upgrade), (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_upgrade, "Icon", libAHLI_gv_obsID)), UnitGetOwner(libAHLI_gv_upgradeNotifications.lv_slotFacility[lv_count]), ((UnitQueueItemTime(libAHLI_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1) / libAHLI_gv_gameSpeedFactor) <= libAHLI_gv_upgradeNotificationsVisibleTime), libAHLI_gv_upgradeNotifications.lv_slotFacility[lv_count]);
+                lv_player = UnitGetOwner(libAHLI_gv_upgradeNotifications.lv_slotFacility[lv_count]);
+                libAHLI_gf_UpgradeNotificationsSetSlotData(lv_count1, libAHLI_gf_UpgradeNotificationsUpgradeName(lv_upgrade), libAHLI_gf_IconofUpgrade(lv_upgrade, lv_player), lv_player, ((UnitQueueItemTime(libAHLI_gv_upgradeNotifications.lv_slotFacility[lv_count], c_unitQueueTimeRemaining, 1) / libAHLI_gv_gameSpeedFactor) <= libAHLI_gv_upgradeNotificationsVisibleTime), libAHLI_gv_upgradeNotifications.lv_slotFacility[lv_count]);
                 libAHLI_gv_upgradeNotifications.lv_slotStatus[lv_count1] = libAHLI_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
                 libNtve_gf_SetDialogItemText(libAHLI_gv_upgradeNotifications.lv_itemTimerStatus[lv_count1], StringToText(""), libAHLI_gv_obs);
                 DialogControlSetVisible(libAHLI_gv_upgradeNotifications.lv_itemTimerLabel[lv_count1], libAHLI_gv_obs, true);
@@ -1676,16 +1673,17 @@ void libAHLI_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_sl
         lv_value[0] = libNtve_gf_DialogItemValue(libAHLI_gv_upgradeNotifications.lv_itemProgressBar[lp_slotA], libAHLI_gv_obsID);
         lv_timer[0] = libAHLI_gv_upgradeNotifications.lv_timerDestruction[lp_slotA];
         lv_facility[0] = libAHLI_gv_upgradeNotifications.lv_slotFacility[lp_slotA];
+        lv_player[0] = UnitGetOwner(libAHLI_gv_upgradeNotifications.lv_slotFacility[lp_slotA]);
     }
     else {
         lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(libAHLI_gv_upgradeNotifications.lv_slotFacility[lp_slotA], 1, 1);
         lv_status[0] = libAHLI_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
-        lv_name[0] = libAHLI_gf_UpgradeNotificationsUpgradeName(lv_upgrade);
-        lv_icon[0] = (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_upgrade, "Icon", libAHLI_gv_obsID));
         lv_timer[0] = TimerCreate();
         lv_facility[0] = libAHLI_gv_upgradeNotifications.lv_slotFacility[lp_slotA];
+        lv_player[0] = UnitGetOwner(libAHLI_gv_upgradeNotifications.lv_slotFacility[lp_slotA]);
+        lv_name[0] = libAHLI_gf_UpgradeNotificationsUpgradeName(lv_upgrade);
+        lv_icon[0] = libAHLI_gf_IconofUpgrade(lv_upgrade, lv_player[0]);
     }
-    lv_player[0] = UnitGetOwner(libAHLI_gv_upgradeNotifications.lv_slotFacility[lp_slotA]);
     if ((lp_slotB <= libAHLI_gv_upgradeNotificationsMaxUISlots)) {
         lv_status[1] = libAHLI_gv_upgradeNotifications.lv_slotStatus[lp_slotB];
         lv_panelVisibility[1] = DialogControlIsVisible(libAHLI_gv_upgradeNotifications.lv_itemPanel[lp_slotB], libAHLI_gv_obsID);
@@ -1696,16 +1694,17 @@ void libAHLI_gf_UpgradeNotificationsSwapSlotInformation (int lp_slotA, int lp_sl
         lv_value[1] = libNtve_gf_DialogItemValue(libAHLI_gv_upgradeNotifications.lv_itemProgressBar[lp_slotB], libAHLI_gv_obsID);
         lv_timer[1] = libAHLI_gv_upgradeNotifications.lv_timerDestruction[lp_slotB];
         lv_facility[1] = libAHLI_gv_upgradeNotifications.lv_slotFacility[lp_slotB];
+        lv_player[1] = UnitGetOwner(libAHLI_gv_upgradeNotifications.lv_slotFacility[lp_slotB]);
     }
     else {
         lv_upgrade = libNtve_gf_QueuedUpgradeTypeInTrainingQueueSlot(libAHLI_gv_upgradeNotifications.lv_slotFacility[lp_slotB], 1, 1);
         lv_status[1] = libAHLI_ge_UpgradeNotificationsSlotStatus_HiddenOccupiedwithrunningUpgrade;
-        lv_name[1] = libAHLI_gf_UpgradeNotificationsUpgradeName(lv_upgrade);
-        lv_icon[1] = (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_upgrade, "Icon", libAHLI_gv_obsID));
         lv_timer[1] = TimerCreate();
         lv_facility[1] = libAHLI_gv_upgradeNotifications.lv_slotFacility[lp_slotB];
+        lv_player[1] = UnitGetOwner(libAHLI_gv_upgradeNotifications.lv_slotFacility[lp_slotB]);
+        lv_name[1] = libAHLI_gf_UpgradeNotificationsUpgradeName(lv_upgrade);
+        lv_icon[1] = libAHLI_gf_IconofUpgrade(lv_upgrade, lv_player[1]);
     }
-    lv_player[1] = UnitGetOwner(libAHLI_gv_upgradeNotifications.lv_slotFacility[lp_slotB]);
     if ((lp_slotA <= libAHLI_gv_upgradeNotificationsMaxUISlots)) {
         libAHLI_gv_upgradeNotifications.lv_slotStatus[lp_slotA] = lv_status[1];
         libAHLI_gf_UpgradeNotificationsSetSlotData(lp_slotA, lv_name[1], lv_icon[1], lv_player[1], lv_panelVisibility[1], lv_facility[1]);
@@ -2330,7 +2329,7 @@ void libAHLI_gf_BattleReportIncrementUnitTypeKill (int lp_sideIndex, string lp_u
         libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitTypeCount[lv_lastUsedSlot] = 1;
         libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitTypeLastUsedSlot += 1;
         libAHLI_gv_battleReport.lv_updateDueToDeathAll = true;
-        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitTypeIcon[lv_lastUsedSlot] = libAHLI_gf_IconofUnit(lp_unitType);
+        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitTypeIcon[lv_lastUsedSlot] = libAHLI_gf_IconofUnit(lp_unitType, libAHLI_gv_battleReport.lv_playerIdSide[lp_sideIndex]);
         libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitTypeName[lv_lastUsedSlot] = UnitTypeGetName(lp_unitType);
     }
     else {
@@ -2535,31 +2534,23 @@ bool libAHLI_gt_ProductionTabInit_Func (bool testConds, bool runActions) {
         for ( ; ( (autoB1D95E6C_ai >= 0 && lv_slot <= autoB1D95E6C_ae) || (autoB1D95E6C_ai < 0 && lv_slot >= autoB1D95E6C_ae) ) ; lv_slot += autoB1D95E6C_ai ) {
             DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/Contaminated"));
             DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), false);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libAHLI_gv_productionTabPlayer[lv_player].lv_slotContaminated[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/ChronoBoosted"));
             DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), false);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libAHLI_gv_productionTabPlayer[lv_player].lv_slotChronoBoosted[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/IconImage"));
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libAHLI_gv_productionTabPlayer[lv_player].lv_slotImage[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/NumberLabel"));
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libAHLI_gv_productionTabPlayer[lv_player].lv_slotCountLabel[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeProgressBar, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/ProgressBar"));
             libNtve_gf_SetDialogItemMaximumValue(DialogControlLastCreated(), 100.0, libAHLI_gv_obs);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libAHLI_gv_productionTabPlayer[lv_player].lv_slotProgressBar[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeUnitTarget, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/UnitTargetFrame"));
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libAHLI_gv_productionTabPlayer[lv_player].lv_slotUnitTargetFrame[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot)));
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libAHLI_gv_productionTabPlayer[lv_player].lv_slotPanel[lv_slot] = DialogControlLastCreated();
         }
         DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/MoreIconsLabel"));
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         libAHLI_gv_productionTabPlayer[lv_player].lv_moreSlotsLabel = DialogControlLastCreated();
         libAHLI_gv_productionTabPlayer[lv_player].lv_chronoBoosted = UnitGroupEmpty();
         libAHLI_gv_productionTabPlayer[lv_player].lv_contanimated = UnitGroupEmpty();
@@ -3488,7 +3479,6 @@ bool libAHLI_gt_GraphsInitialization_Func (bool testConds, bool runActions) {
             libAHLI_gv_graphsGeneral.lv_teamRight = 1;
         }
         DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/GraphContainer");
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         libAHLI_gv_graphsGeneral.lv_container = DialogControlLastCreated();
         libAHLI_gf_GraphsDefineGraph(0, StringExternal("Param/Value/lib_AHLI_8058A929"), "IncomeGraph", "ResourceCollectionRate", libAHLI_ge_GraphStyle_Differential, 350.0, 400.0, 200.0, true);
         libAHLI_gf_GraphsDefineGraph(1, StringExternal("Param/Value/lib_AHLI_31D21183"), "ArmySizeGraph", "FoodUsedArmy", libAHLI_ge_GraphStyle_Comparative, 40.0, 50.0, 50.0, false);
@@ -3635,47 +3625,39 @@ bool libAHLI_gt_LabelsUnitCreated_Func (bool testConds, bool runActions) {
             DataTableSetString(true, (lv_unitTagString + libAHLI_gv_labelsSlot2), "");
             DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon1\\IconBG", lv_unit);
             lv_dialogItem = DialogControlLastCreated();
-            DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlSetVisible(lv_dialogItem, libAHLI_gv_all_Players, false);
             libNtve_gf_SaveDataTableValueDialogItem(true, (libAHLI_gv_labelsIconBG1 + lv_unitTagString), lv_dialogItem);
             DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon1\\Icon", lv_unit);
             lv_dialogItem = DialogControlLastCreated();
             libNtve_gf_SetDialogItemImage(lv_dialogItem, "Assets\\Textures\\blank.dds", libAHLI_gv_obs);
-            DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlSetVisible(lv_dialogItem, libAHLI_gv_all_Players, false);
             libNtve_gf_SaveDataTableValueDialogItem(true, (libAHLI_gv_labelsIcon1 + lv_unitTagString), lv_dialogItem);
             DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\IconBG", lv_unit);
             lv_dialogItem = DialogControlLastCreated();
-            DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlSetVisible(lv_dialogItem, libAHLI_gv_all_Players, false);
             libNtve_gf_SaveDataTableValueDialogItem(true, (libAHLI_gv_labelsDisruptIconBG1 + lv_unitTagString), lv_dialogItem);
             DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\Icon", lv_unit);
             lv_dialogItem = DialogControlLastCreated();
             libNtve_gf_SetDialogItemImage(lv_dialogItem, "Assets\\Textures\\blank.dds", libAHLI_gv_obs);
-            DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlSetVisible(lv_dialogItem, libAHLI_gv_all_Players, false);
             libNtve_gf_SaveDataTableValueDialogItem(true, (libAHLI_gv_labelsDisruptIcon1 + lv_unitTagString), lv_dialogItem);
             if (((lv_unitType == "Barracks") || (lv_unitType == "Factory") || (lv_unitType == "Starport"))) {
                 DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon2\\IconBG", lv_unit);
                 lv_dialogItem = DialogControlLastCreated();
-                DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
                 DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
                 libNtve_gf_SaveDataTableValueDialogItem(true, (libAHLI_gv_labelsIconBG2 + lv_unitTagString), DialogControlLastCreated());
                 DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon2\\Icon", lv_unit);
                 lv_dialogItem = DialogControlLastCreated();
                 libNtve_gf_SetDialogItemImage(lv_dialogItem, "Assets\\Textures\\blank.dds", libAHLI_gv_obs);
-                DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
                 DialogControlSetVisible(lv_dialogItem, libAHLI_gv_all_Players, false);
                 libNtve_gf_SaveDataTableValueDialogItem(true, (libAHLI_gv_labelsIcon2 + lv_unitTagString), lv_dialogItem);
                 DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon3\\IconBG", lv_unit);
                 lv_dialogItem = DialogControlLastCreated();
-                DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
                 DialogControlSetVisible(lv_dialogItem, libAHLI_gv_all_Players, false);
                 libNtve_gf_SaveDataTableValueDialogItem(true, (libAHLI_gv_labelsIconBG3 + lv_unitTagString), lv_dialogItem);
                 DialogControlHookupUnitStatus(c_triggerControlTypeImage, "StatusIcon3\\Icon", lv_unit);
                 lv_dialogItem = DialogControlLastCreated();
                 libNtve_gf_SetDialogItemImage(lv_dialogItem, "Assets\\Textures\\blank.dds", libAHLI_gv_obs);
-                DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
                 DialogControlSetVisible(lv_dialogItem, libAHLI_gv_all_Players, false);
                 libNtve_gf_SaveDataTableValueDialogItem(true, (libAHLI_gv_labelsIcon3 + lv_unitTagString), lv_dialogItem);
             }
@@ -4094,12 +4076,10 @@ bool libAHLI_gt_LabelsContaminateActivate_Func (bool testConds, bool runActions)
         if ((lv_dialogItem == c_invalidDialogControlId)) {
             DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\Icon", lv_unit);
             lv_dialogItem = DialogControlLastCreated();
-            DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlSetVisible(lv_dialogItem, libAHLI_gv_all_Players, false);
             libNtve_gf_SaveDataTableValueDialogItem(true, (libAHLI_gv_labelsDisruptIcon1 + lv_unitTagString), lv_dialogItem);
             DialogControlHookupUnitStatus(c_triggerControlTypeImage, "DisruptIcon1\\IconBG", lv_unit);
             lv_dialogItem = DialogControlLastCreated();
-            DialogControlSetObservedType(lv_dialogItem, c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlSetVisible(lv_dialogItem, libAHLI_gv_all_Players, false);
             libNtve_gf_SaveDataTableValueDialogItem(true, (libAHLI_gv_labelsDisruptIconBG1 + lv_unitTagString), lv_dialogItem);
         }
@@ -4193,52 +4173,42 @@ bool libAHLI_gt_UpgradeNotificationsInitialization_Func (bool testConds, bool ru
         DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/TimerNotificationPanel");
         DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
         DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_obs, true);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         lv_slot = 0;
         for ( ; ( (auto69B01FF3_ai >= 0 && lv_slot <= auto69B01FF3_ae) || (auto69B01FF3_ai < 0 && lv_slot >= auto69B01FF3_ae) ) ; lv_slot += auto69B01FF3_ai ) {
             lv_slotStr = IntToString(lv_slot);
             DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + lv_slotStr));
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libAHLI_gv_upgradeNotifications.lv_itemPanel[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/PlayerFrame/PlayerIdLabel")));
             libAHLI_gv_upgradeNotifications.lv_itemPlayerIdLabel[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlHookupStandard(c_triggerControlTypeUnitTarget, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/TimerWindow/UnitTargetFrame")));
             libAHLI_gv_upgradeNotifications.lv_itemUnitTargetFrame[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_obs, true);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/TimerWindow/TimerStatus")));
             libAHLI_gv_upgradeNotifications.lv_itemTimerStatus[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_obs, true);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             DialogControlHookupStandard(c_triggerControlTypeProgressBar, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/TimerWindow/TimerBar")));
             libAHLI_gv_upgradeNotifications.lv_itemProgressBar[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_obs, true);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libNtve_gf_SetDialogItemMaximumValue(DialogControlLastCreated(), libAHLI_gv_upgradeNotificationsVisibleTime, libAHLI_gv_obs);
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/TimerWindow/TimerCountdown")));
             libAHLI_gv_upgradeNotifications.lv_itemTimerLabel[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_obs, true);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libNtve_gf_SetDialogItemText(DialogControlLastCreated(), StringToText(""), libAHLI_gv_obs);
             DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/TimerWindow/TimerIcon")));
             libAHLI_gv_upgradeNotifications.lv_itemIcon[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_obs, true);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), "Assets\\Textures\\black.dds", libAHLI_gv_obs);
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/TimerNotificationPanel/ToggledContent/TimerFrame" + (lv_slotStr + "/TimerWindow/TimerType")));
             libAHLI_gv_upgradeNotifications.lv_itemName[lv_slot] = DialogControlLastCreated();
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_obs, true);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libNtve_gf_SetDialogItemText(DialogControlLastCreated(), StringToText(""), libAHLI_gv_obs);
         }
     }
@@ -4390,6 +4360,7 @@ bool libAHLI_gt_UpgradeNotificationsResearchStarted_Func (bool testConds, bool r
     unit lv_facility;
     string lv_upgrade;
     int lv_slot;
+    int lv_player;
 
     // Automatic Variable Declarations
     // Variable Initialization
@@ -4408,7 +4379,8 @@ bool libAHLI_gt_UpgradeNotificationsResearchStarted_Func (bool testConds, bool r
             libAHLI_gv_upgradeNotifications.lv_slotFacility[lv_slot] = lv_facility;
             if ((lv_slot <= libAHLI_gv_upgradeNotificationsMaxUISlots)) {
                 lv_upgrade = libNtve_gf_TriggeringProgressUpgrade();
-                libAHLI_gf_UpgradeNotificationsSetSlotData(lv_slot, libAHLI_gf_UpgradeNotificationsUpgradeName(lv_upgrade), (CatalogFieldValueGet(c_gameCatalogUpgrade, lv_upgrade, "Icon", libAHLI_gv_obsID)), EventPlayer(), false, lv_facility);
+                lv_player = EventPlayer();
+                libAHLI_gf_UpgradeNotificationsSetSlotData(lv_slot, libAHLI_gf_UpgradeNotificationsUpgradeName(lv_upgrade), libAHLI_gf_IconofUpgrade(lv_upgrade, lv_player), lv_player, false, lv_facility);
                 if ((libAHLI_gv_upgradeNotifications.lv_updateThreadRunning == false)) {
                     libAHLI_gv_upgradeNotifications.lv_updateThreadRunning = true;
                     libAHLI_gf_UpgradeNotificationsUpdateUIthreaded();
@@ -4483,35 +4455,28 @@ bool libAHLI_gt_WorkersKilledNotificationsInitialization_Func (bool testConds, b
     if (((lv_count >= 1) && (lv_count <= 4)) && (UserDataGetInt("GameHeartSettings", "Notifications (Workers Killed)", "Value", 1) == 1)) {
         libAHLI_gv_workersKilledNotifications.lv_active = true;
         DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/WorkerNotificationPanel");
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
         DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_obs, true);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         lv_slot = 0;
         for ( ; ( (autoE2BFA55A_ai >= 0 && lv_slot <= autoE2BFA55A_ae) || (autoE2BFA55A_ai < 0 && lv_slot >= autoE2BFA55A_ae) ) ; lv_slot += autoE2BFA55A_ai ) {
             lv_slotStr = IntToString(lv_slot);
             DialogControlHookupStandard(c_triggerControlTypePanel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + lv_slotStr));
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             lv_panel[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerCount")));
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_obs, true);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libNtve_gf_SetDialogItemText(DialogControlLastCreated(), StringToText(""), libAHLI_gv_obs);
             lv_timeLabel[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerType")));
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_obs, true);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             lv_icon[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerColor/PlayerFrame/PlayerIdLabel")));
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             lv_workerColor[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/WorkerNotificationPanel/ToggledContent/WorkerFrame" + (lv_slotStr + "/WorkerBackground/PlayerFrame/PlayerIdLabel")));
             DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             lv_background[lv_slot] = DialogControlLastCreated();
         }
         lv_count = 0;
@@ -4613,7 +4578,7 @@ bool libAHLI_gt_WorkersKilledNotificationsWorkerKilled_Func (bool testConds, boo
                     libAHLI_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] = 1;
                 }
                 libNtve_gf_SetDialogItemText(libAHLI_gv_workersKilledNotifications.lv_itemCountLabel[lv_deadUnitOwner], IntToText(libAHLI_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner]), libAHLI_gv_obs);
-                libNtve_gf_SetDialogItemImage(libAHLI_gv_workersKilledNotifications.lv_itemIcon[lv_deadUnitOwner], (CatalogFieldValueGet(c_gameCatalogActor, lv_unitType, "UnitIcon", c_playerAny)), libAHLI_gv_obs);
+                libNtve_gf_SetDialogItemImage(libAHLI_gv_workersKilledNotifications.lv_itemIcon[lv_deadUnitOwner], libAHLI_gf_IconofUnit(lv_unitType, lv_deadUnitOwner), libAHLI_gv_obs);
                 if ((UnitIsValid(lv_killingUnit) == true)) {
                     libNtve_gf_SetDialogItemText(libAHLI_gv_workersKilledNotifications.lv_itemKillerPlayerIdLabel[lv_deadUnitOwner], IntToText(UnitGetOwner(lv_killingUnit)), libAHLI_gv_obs);
                 }
@@ -4917,38 +4882,29 @@ bool libAHLI_gt_BattleReportInitialization_Func (bool testConds, bool runActions
         libAHLI_gv_battleReport.lv_playerIdSide[1] = PlayerGroupPlayer(GameAttributePlayersForTeam(2), 1);
         DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/BattleReport2");
         DialogControlSetVisible(DialogControlLastCreated(), libAHLI_gv_all_Players, false);
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         DialogControlHookupStandard(c_triggerControlTypeLabel, "UIContainer/FullscreenUpperContainer/BattleReport2/PlayerA/PlayerIdInput");
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         libNtve_gf_SetDialogItemText(DialogControlLastCreated(), IntToText(libAHLI_gv_battleReport.lv_playerIdSide[0]), libAHLI_gv_obs);
         DialogControlHookupStandard(c_triggerControlTypeLabel, "UIContainer/FullscreenUpperContainer/BattleReport2/PlayerB/PlayerIdInput");
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         libNtve_gf_SetDialogItemText(DialogControlLastCreated(), IntToText(libAHLI_gv_battleReport.lv_playerIdSide[1]), libAHLI_gv_obs);
         DialogControlHookupStandard(c_triggerControlTypeLabel, "UIContainer/FullscreenUpperContainer/BattleReport2/Header/BattleLengthLabel");
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         libAHLI_gv_battleReport.lv_uiBattleDurationLabel = DialogControlLastCreated();
         DialogControlHookupStandard(c_triggerControlTypeImage, "UIContainer/FullscreenUpperContainer/BattleReport2/Header/BattleActiveIndicator");
-        DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
         libAHLI_gv_battleReport.lv_uiBattleActiveIndicator = DialogControlLastCreated();
         lv_i = 0;
         for ( ; ( (auto90DBBF1F_ai >= 0 && lv_i <= auto90DBBF1F_ae) || (auto90DBBF1F_ai < 0 && lv_i >= auto90DBBF1F_ae) ) ; lv_i += auto90DBBF1F_ai ) {
             DialogControlHookupStandard(c_triggerControlTypeButton, ("UIContainer/FullscreenUpperContainer/BattleReport2/ButtonsL/UnitButtons/Unit" + IntToString(lv_i)));
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), null, libAHLI_gv_obs);
             libAHLI_gv_battleReportSideData[0].lv_uiUnitTypeButton[lv_i] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeButton, ("UIContainer/FullscreenUpperContainer/BattleReport2/ButtonsR/UnitButtons/Unit" + IntToString(lv_i)));
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), null, libAHLI_gv_obs);
             libAHLI_gv_battleReportSideData[1].lv_uiUnitTypeButton[lv_i] = DialogControlLastCreated();
         }
         lv_i = 0;
         for ( ; ( (auto3089C34C_ai >= 0 && lv_i <= auto3089C34C_ae) || (auto3089C34C_ai < 0 && lv_i >= auto3089C34C_ae) ) ; lv_i += auto3089C34C_ai ) {
             DialogControlHookupStandard(c_triggerControlTypeButton, ("UIContainer/FullscreenUpperContainer/BattleReport2/ButtonsL/AbilityButtons/Abil" + IntToString(lv_i)));
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), null, libAHLI_gv_obs);
             libAHLI_gv_battleReportSideData[0].lv_uiAbilityButton[lv_i] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeButton, ("UIContainer/FullscreenUpperContainer/BattleReport2/ButtonsR/AbilityButtons/Abil" + IntToString(lv_i)));
-            DialogControlSetObservedType(DialogControlLastCreated(), c_triggerObservedTypeDefaultObservedPlayerId);
             libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), null, libAHLI_gv_obs);
             libAHLI_gv_battleReportSideData[1].lv_uiAbilityButton[lv_i] = DialogControlLastCreated();
         }
