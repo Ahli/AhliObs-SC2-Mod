@@ -53,9 +53,6 @@ void libAHLI_InitVariables () {
         }
         libAHLI_gv_productionTabPlayer[init_i].lv_moreSlotsLabel = c_invalidDialogControlId;
         for (init_i1 = 0; init_i1 <= libAHLI_gv_productionTabMAX_SLOTS; init_i1 += 1) {
-            libAHLI_gv_productionTabPlayer[init_i].lv_slotContent[init_i1] = "";
-        }
-        for (init_i1 = 0; init_i1 <= libAHLI_gv_productionTabMAX_SLOTS; init_i1 += 1) {
             libAHLI_gv_productionTabPlayer[init_i].lv_slotCategory[init_i1] = libAHLI_ge_ProductionTabCategory_Upgrade;
         }
         libAHLI_gv_productionTabPlayer[init_i].lv_lastUsedSlot = -1;

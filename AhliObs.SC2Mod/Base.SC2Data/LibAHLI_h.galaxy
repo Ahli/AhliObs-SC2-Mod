@@ -24,7 +24,7 @@ const int libAHLI_ge_WorkersKilledNotificationsSlotStatus_Visible = 1;
 
 // Constants
 const int libAHLI_gv_productionTabMAX_VISIBLE_SLOTS = 17;
-const int libAHLI_gv_productionTabMAX_SLOTS = 30;
+const int libAHLI_gv_productionTabMAX_SLOTS = 50;
 const int libAHLI_gv_graphsMaxNode = 100;
 const int libAHLI_gv_graphsMaxGraphId = 3;
 const int libAHLI_gv_graphsIntervalLength = 6;
