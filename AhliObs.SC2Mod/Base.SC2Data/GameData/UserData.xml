@@ -46,4 +46,78 @@
         </Instances>
         <Instances Id="Battle Report"/>
     </CUser>
+    <CUser id="SC2SkinSets">
+        <Fields Id="SkinSet" Type="String" EditorColumn="1"/>
+        <Instances Id="[Default]"/>
+        <Instances Id="0001">
+            <String>
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0002">
+            <String String="CovertOps">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0003">
+            <String String="Webby">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0004">
+            <String String="Forged">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0005">
+            <String String="Junker">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0006">
+            <String String="Primal">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0007">
+            <String String="Purifier">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0008">
+            <String String="Umojan">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0009">
+            <String String="Mecha">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0010">
+            <String String="Golden">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0011">
+            <String String="Silver">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0012">
+            <String String="RCZ">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0013">
+            <String String="Ihanrii">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+        <Instances Id="0014">
+            <String String="Remastered">
+                <Field Id="SkinSet"/>
+            </String>
+        </Instances>
+    </CUser>
 </Catalog>

@@ -8,226 +8,343 @@
     <!--                                                                                         -->
     <CActorUnit id="Egg">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusEgg"/>
+        <CustomUnitStatusOffset value="8,40"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Engineering Bay ....................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="EngineeringBay">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,80"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <CActorUnit id="Factory">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatus"/>
+        <CustomUnitStatusAttachment value="Ref_Center"/>
+        <CustomUnitStatusOffset value="0,125"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Hive .................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Hive">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,140"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Lair .................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Lair">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,135"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Larva ................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Larva">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusEgg"/>
+        <CustomUnitStatusOffset value="-50,0"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <CActorDoodad id="Logo_PlayerPrimary">
+        <FilterPlayers index="0" value="1"/>
+        <FilterPlayers index="1" value="1"/>
+        <FilterPlayers index="2" value="1"/>
+        <FilterPlayers index="3" value="1"/>
+        <FilterPlayers index="4" value="1"/>
+        <FilterPlayers index="5" value="1"/>
+        <FilterPlayers index="6" value="1"/>
+        <FilterPlayers index="7" value="1"/>
+        <FilterPlayers index="8" value="1"/>
+        <FilterPlayers index="9" value="1"/>
+        <FilterPlayers index="10" value="1"/>
+        <FilterPlayers index="11" value="1"/>
+        <FilterPlayers index="12" value="1"/>
+        <FilterPlayers index="13" value="1"/>
         <FilterPlayers index="14" value="1"/>
-        <FilterPlayers index="15" value="0"/>
     </CActorDoodad>
     <CActorDoodad id="Logo_PlayerSecondary">
+        <FilterPlayers index="0" value="1"/>
+        <FilterPlayers index="1" value="1"/>
+        <FilterPlayers index="2" value="1"/>
+        <FilterPlayers index="3" value="1"/>
+        <FilterPlayers index="4" value="1"/>
+        <FilterPlayers index="5" value="1"/>
+        <FilterPlayers index="6" value="1"/>
+        <FilterPlayers index="7" value="1"/>
+        <FilterPlayers index="8" value="1"/>
+        <FilterPlayers index="9" value="1"/>
+        <FilterPlayers index="10" value="1"/>
+        <FilterPlayers index="11" value="1"/>
+        <FilterPlayers index="12" value="1"/>
+        <FilterPlayers index="13" value="1"/>
         <FilterPlayers index="14" value="1"/>
-        <FilterPlayers index="15" value="0"/>
     </CActorDoodad>
     <CActorUnit id="LurkerDenMP">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,100"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!-- Orbital Command ....................................................................... -->
     <CActorUnit id="OrbitalCommand">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,115"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
+    </CActorUnit>
+    <!--                                                                                         -->
+    <!-- Photon Cannon ......................................................................... -->
+    <!--                                                                                         -->
+    <CActorUnit id="PhotonCannon">
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusNoProduction"/>
+        <CustomUnitStatusOffset value="0,40"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!-- Planetary Fortress .................................................................... -->
     <CActorUnit id="PlanetaryFortress">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,130"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Armory ................................................................................ -->
     <!--                                                                                         -->
     <CActorUnit id="Armory">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,90"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Nest .................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="BanelingNest">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,140"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Barracks .............................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Barracks">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatus"/>
+        <CustomUnitStatusOffset value="0,95"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!-- Barracks Tech Lab -->
     <CActorUnit id="BarracksTechLab">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusTechLab"/>
+        <CustomUnitStatusOffset value="0,60"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Command Center (and its morphs) ....................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="CommandCenter">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,115"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Cybernetics Core ...................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="CyberneticsCore">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,100"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Evolution Chamber ..................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="EvolutionChamber">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,65"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!-- Factory Tech Lab -->
     <CActorUnit id="FactoryTechLab">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusTechLab"/>
+        <CustomUnitStatusOffset value="0,60"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Fleet Beacon .......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="FleetBeacon">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,95"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Forge ................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Forge">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
+        <CustomUnitStatusOffset value="0,75"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Fusion Core ........................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="FusionCore">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,80"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Gateway / Warp Gate.................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="Gateway">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,105"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Ghost Academy ......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="GhostAcademy">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,85"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Greater Spire ......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="GreaterSpire">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,130"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Hatchery .............................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Hatchery">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,95"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Hydralisk Den ......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="HydraliskDen">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,100"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Infestation Pit ....................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="InfestationPit">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,65"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Nexus ................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Nexus">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,125"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Roach Warren .......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="RoachWarren">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,105"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Robotics Support Bay .................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="RoboticsBay">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,95"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Robotics Facility ..................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="RoboticsFacility">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,80"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
+    </CActorUnit>
+    <CActorUnit id="ShieldBattery">
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusNoProduction"/>
+        <CustomUnitStatusOffset value="0,40"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Spawning Pool ......................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="SpawningPool">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,70"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Spire ................................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Spire">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,135"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Stargate .............................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Stargate">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,120"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Starport .............................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="Starport">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatus"/>
+        <CustomUnitStatusOffset value="0,95"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!-- Starport Tech Lab -->
     <CActorUnit id="StarportTechLab">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusTechLab"/>
+        <CustomUnitStatusOffset value="0,60"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Tech Lab .............................................................................. -->
     <!--                                                                                         -->
     <CActorUnit id="TechLab">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusTechLab"/>
+        <CustomUnitStatusOffset value="0,60"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Templar Archive ....................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="TemplarArchive">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,95"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Twilight Council ...................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="TwilightCouncil">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,95"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Ultralisk Cavern ...................................................................... -->
     <!--                                                                                         -->
     <CActorUnit id="UltraliskCavern">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,100"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
     <!--                                                                                         -->
     <!-- Dark Shrine ........................................................................... -->
@@ -235,6 +352,11 @@
     <CActorUnit id="DarkShrine">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
         <CustomUnitStatusOffset value="0,135"/>
+        <CustomUnitStatusAttachment value="Ref_Origin"/>
+    </CActorUnit>
+    <CActorUnit id="WarpGate">
+        <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusSingle"/>
+        <CustomUnitStatusOffset value="0,105"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
 </Catalog>

@@ -7,4 +7,5 @@
     <Include path="UI/Layout/AHLI_GraphTemplate.SC2Layout"/>
     <Include path="UI/Layout/AHLI_NewProductionTab.SC2Layout"/>
     <Include path="UI/Layout/AHLI_BattleReport.SC2Layout"/>
+    <Include path="UI/Layout/FIX_DisableObserverPlusBattleReport.SC2Layout"/>
 </Desc>

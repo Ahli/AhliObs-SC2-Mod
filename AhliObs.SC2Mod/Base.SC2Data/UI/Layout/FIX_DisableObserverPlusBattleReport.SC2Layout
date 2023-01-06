@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+	<!-- Disable ObserverPlus' hotkey -->
+	<Frame type="Button" name="GameUI/UIContainer/FullscreenUpperContainer/ShowHideUI" file="GameUI">
+		<Enabled val="false"/>
+	</Frame>
+</Desc>

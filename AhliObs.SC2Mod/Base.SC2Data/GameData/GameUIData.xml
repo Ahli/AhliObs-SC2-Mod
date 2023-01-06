@@ -2,5 +2,7 @@
 <Catalog>
     <CGameUI id="Dflt">
         <DefaultObservedPlayerId value="15"/>
+        <SuppressSkinsForParticipants value="1"/>
+        <SuppressSkinsInReplay value="1"/>
     </CGameUI>
 </Catalog>
