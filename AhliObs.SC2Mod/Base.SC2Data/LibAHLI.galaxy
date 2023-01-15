@@ -1013,6 +1013,53 @@ void libAHLI_gf_ObserverUiAssistSetPlayerStatusScore (int lp_player, int lp_stat
     }
 }
 
+void libAHLI_gf_ObserverUiAssistCountCreepableMapTiles () {
+    // Variable Declarations
+    fixed lv_x;
+    fixed lv_y;
+    int lv_pathingType;
+    int lv_pathable;
+    region lv_playableArea;
+    point lv_botLeft;
+    point lv_topRight;
+    fixed lv_minX;
+    fixed lv_maxX;
+    fixed lv_minY;
+    fixed lv_maxY;
+
+    // Automatic Variable Declarations
+    fixed auto18B8193B_ae;
+    const fixed auto18B8193B_ai = 1.0;
+    fixed auto589F720F_ae;
+    const fixed auto589F720F_ai = 1.0;
+
+    // Variable Initialization
+    lv_playableArea = RegionPlayableMap();
+    lv_botLeft = RegionGetBoundsMin(lv_playableArea);
+    lv_topRight = RegionGetBoundsMax(lv_playableArea);
+    lv_minX = PointGetX(lv_botLeft);
+    lv_maxX = PointGetX(lv_topRight);
+    lv_minY = PointGetY(lv_botLeft);
+    lv_maxY = PointGetY(lv_topRight);
+
+    // Implementation
+    auto18B8193B_ae = lv_maxX;
+    lv_x = lv_minX;
+    for ( ; ( (auto18B8193B_ai >= 0 && lv_x <= auto18B8193B_ae) || (auto18B8193B_ai < 0 && lv_x >= auto18B8193B_ae) ) ; lv_x += auto18B8193B_ai ) {
+        auto589F720F_ae = lv_maxY;
+        lv_y = lv_minY;
+        for ( ; ( (auto589F720F_ai >= 0 && lv_y <= auto589F720F_ae) || (auto589F720F_ai < 0 && lv_y >= auto589F720F_ae) ) ; lv_y += auto589F720F_ai ) {
+            lv_pathingType = PathingType(Point(lv_x, lv_y));
+            if (((lv_pathingType == c_pathingGround) || (lv_pathingType == c_pathingBuilding))) {
+                libAHLI_gv_observerUiAssistGeneralData.lv_creepableMapTiles += 1;
+            }
+
+        }
+    }
+    TextExpressionSetToken("Param/Expression/lib_AHLI_62638DD3", "A", IntToText(libAHLI_gv_observerUiAssistGeneralData.lv_creepableMapTiles));
+    TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_AHLI_62638DD3"), false);
+}
+
 int libAHLI_gf_GetFixedUnitResourceCost (unit lp_unit, int lp_resource, int lp_player) {
     // Variable Declarations
     string lv_unitType;
@@ -3164,6 +3211,7 @@ bool libAHLI_gt_ObserverUiAssistInitialization_Func (bool testConds, bool runAct
 
         }
     }
+    libAHLI_gf_ObserverUiAssistCountCreepableMapTiles();
     return true;
 }
 
@@ -3282,6 +3330,20 @@ bool libAHLI_gt_ObserverUiAssistPlayerLeavesGameVictory_Func (bool testConds, bo
 void libAHLI_gt_ObserverUiAssistPlayerLeavesGameVictory_Init () {
     libAHLI_gt_ObserverUiAssistPlayerLeavesGameVictory = TriggerCreate("libAHLI_gt_ObserverUiAssistPlayerLeavesGameVictory_Func");
     TriggerAddEventPlayerLeft(libAHLI_gt_ObserverUiAssistPlayerLeavesGameVictory, c_playerAny, c_gameResultVictory);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ObserverUiAssist - CreepPercentage
+//--------------------------------------------------------------------------------------------------
+bool libAHLI_gt_ObserverUiAssistCreepPercentage_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libAHLI_gt_ObserverUiAssistCreepPercentage_Init () {
+    libAHLI_gt_ObserverUiAssistCreepPercentage = TriggerCreate("libAHLI_gt_ObserverUiAssistCreepPercentage_Func");
+    TriggerAddEventTimePeriodic(libAHLI_gt_ObserverUiAssistCreepPercentage, 5.0, c_timeGame);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5216,6 +5278,7 @@ void libAHLI_InitTriggers () {
     libAHLI_gt_ObserverUiAssistPlayerLeavesGameDefeat_Init();
     libAHLI_gt_ObserverUiAssistPlayerLeavesGameTie_Init();
     libAHLI_gt_ObserverUiAssistPlayerLeavesGameVictory_Init();
+    libAHLI_gt_ObserverUiAssistCreepPercentage_Init();
     libAHLI_gt_ArchonMergeSaveResourceOffset_Init();
     libAHLI_gt_ArchonDuplicatedTemplarsDied_Init();
     libAHLI_gt_OverlordTransportMorphCompleted_Init();

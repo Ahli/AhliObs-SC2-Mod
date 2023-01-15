@@ -75,6 +75,10 @@ struct libAHLI_gs_ProductionTabPlayer {
     unitgroup lv_chronoBoosted;
 };
 
+struct libAHLI_gs_ObserverUiAssistGeneralData {
+    int lv_creepableMapTiles;
+};
+
 struct libAHLI_gs_GraphsGeneral {
     bool lv_active;
     int lv_playerLeft;
@@ -201,6 +205,7 @@ fixed libAHLI_gv_gameSpeedFactor;
 libAHLI_gs_ProductionTabGeneral libAHLI_gv_productionTabGeneral;
 libAHLI_gs_ProductionTabPlayer[16] libAHLI_gv_productionTabPlayer;
 int libAHLI_gv_productionTabMAX_VISIBLE_SLOTS__1;
+libAHLI_gs_ObserverUiAssistGeneralData libAHLI_gv_observerUiAssistGeneralData;
 libAHLI_gs_GraphsGeneral libAHLI_gv_graphsGeneral;
 libAHLI_gs_GraphsData[libAHLI_gv_graphsMaxGraphId + 1] libAHLI_gv_graphsData;
 libAHLI_gs_Labels libAHLI_gv_labels;
@@ -242,6 +247,7 @@ void libAHLI_gf_ProductionTabRegisterContaminate (unit lp_haltedStructure);
 void libAHLI_gf_ProductionTabUnregisterContaminate (unit lp_haltedStructure);
 void libAHLI_gf_ObserverUiAssistSetPlayerIdScore (int lp_player);
 void libAHLI_gf_ObserverUiAssistSetPlayerStatusScore (int lp_player, int lp_status);
+void libAHLI_gf_ObserverUiAssistCountCreepableMapTiles ();
 int libAHLI_gf_GetFixedUnitResourceCost (unit lp_unit, int lp_resource, int lp_player);
 void libAHLI_gf_GraphsDefineGraph (int lp_id, text lp_title, string lp_frameName, string lp_scoreType, int lp_style, fixed lp_minimumValue, fixed lp_rangeBase, fixed lp_rangeIncrement, bool lp_averageValues);
 void libAHLI_gf_GraphsUpdateDataDifferential (int lp_graphIndex);
@@ -301,6 +307,7 @@ trigger libAHLI_gt_ObserverUiAssistInitialization;
 trigger libAHLI_gt_ObserverUiAssistPlayerLeavesGameDefeat;
 trigger libAHLI_gt_ObserverUiAssistPlayerLeavesGameTie;
 trigger libAHLI_gt_ObserverUiAssistPlayerLeavesGameVictory;
+trigger libAHLI_gt_ObserverUiAssistCreepPercentage;
 trigger libAHLI_gt_ArchonMergeSaveResourceOffset;
 trigger libAHLI_gt_ArchonDuplicatedTemplarsDied;
 trigger libAHLI_gt_OverlordTransportMorphCompleted;

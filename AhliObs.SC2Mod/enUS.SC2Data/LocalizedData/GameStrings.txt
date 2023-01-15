@@ -251,6 +251,7 @@ Param/Expression/lib_AHLI_496D498B=morph production end: ~A~
 Param/Expression/lib_AHLI_53A4BEDF=check morph cancel: ~A~, desiredIndex: ~B~, abilCmdIndex: ~C~
 Param/Expression/lib_AHLI_5DED4BB9=dmg taken: ~A~, source: ~B~, target: ~C~, effect ~D~ - ignored self/0 damage
 Param/Expression/lib_AHLI_611EC01F=Upgrade not in catalog - ~A~
+Param/Expression/lib_AHLI_62638DD3=pathable map tiles: ~A~
 Param/Expression/lib_AHLI_65C589CA=remove from selection - tag: ~D~ queues: ~A~, type1: ~B~, type2: ~C~
 Param/Expression/lib_AHLI_69C60887=morph duration - abil ~A~, duration: ~B~, durationReal: ~C~
 Param/Expression/lib_AHLI_6FB00989=unhandled construction duration - constructed: ~A~, constructor: ~B~
