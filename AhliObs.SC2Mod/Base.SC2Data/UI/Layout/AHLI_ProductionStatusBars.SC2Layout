@@ -271,8 +271,8 @@
         <RenderType val="HDR"/>
         
         <Frame type="Frame" name="AttachPointFrame">
-            <Anchor side="Top" relative="$parent" pos="Min" offset="30"/>
-            <Anchor side="Left" relative="$parent" pos="Min" offset="30"/>
+            <Anchor side="Top" relative="$parent" pos="Min" offset="21"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="21"/>
             <Height val="0"/>
             <Width val="0"/>
         </Frame>
@@ -286,6 +286,8 @@
             <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+            <Height val="42"/>
+            <Width val="42"/>
 
             <Frame type="Image" name="IconBG">
                 <Height val="42"/>

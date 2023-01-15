@@ -23024,6 +23024,7 @@
             <Preset Type="PresetValue" Library="Ntve" Id="BDB5734E"/>
         </Element>
         <Element Type="FunctionCall" Id="D4839AA5">
+            <Disabled/>
             <FunctionDef Type="FunctionDef" Library="AHLI" Id="D201A851"/>
         </Element>
         <Element Type="Trigger" Id="E53115D4">
@@ -23686,6 +23687,7 @@
             <ValueType Type="int"/>
         </Element>
         <Element Type="FunctionDef" Id="D201A851">
+            <Disabled/>
             <FlagAction/>
             <Variable Type="Variable" Library="AHLI" Id="7F7F2C65"/>
             <Variable Type="Variable" Library="AHLI" Id="07D1C87A"/>
@@ -24054,6 +24056,7 @@
             <Item Type="Preset" Library="AHLI" Id="C582FA93"/>
         </Element>
         <Element Type="Structure" Id="458AF04C">
+            <Disabled/>
             <Variable Type="Variable" Library="AHLI" Id="56F3BF21"/>
         </Element>
         <Element Type="Variable" Id="56F3BF21">
@@ -24067,6 +24070,7 @@
             <ValueType Type="int"/>
         </Element>
         <Element Type="Variable" Id="9F7690A9">
+            <Disabled/>
             <VariableType>
                 <Type Value="struct"/>
                 <TypeElement Type="Structure" Library="AHLI" Id="458AF04C"/>
