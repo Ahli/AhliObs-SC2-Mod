@@ -55326,60 +55326,45 @@
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="91EB6B98"/>
         </Element>
         <Element Type="FunctionCall" Id="91EB6B98">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="7C654029"/>
-            <Parameter Type="Param" Library="AHLI" Id="8347FBE4"/>
-            <Parameter Type="Param" Library="AHLI" Id="00DE55A0"/>
-            <Parameter Type="Param" Library="AHLI" Id="AE6E006C"/>
-            <Parameter Type="Param" Library="AHLI" Id="767E8BD6"/>
-            <Parameter Type="Param" Library="AHLI" Id="27D03FA8"/>
-            <Parameter Type="Param" Library="AHLI" Id="C8F07C55"/>
-            <Parameter Type="Param" Library="AHLI" Id="E15071B8"/>
-            <Parameter Type="Param" Library="AHLI" Id="6B880CAC"/>
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000359"/>
+            <Parameter Type="Param" Library="AHLI" Id="83D9D786"/>
+            <Parameter Type="Param" Library="AHLI" Id="32867581"/>
+            <Parameter Type="Param" Library="AHLI" Id="A193DE55"/>
+            <Parameter Type="Param" Library="AHLI" Id="2CA10917"/>
+            <Parameter Type="Param" Library="AHLI" Id="F1D0C333"/>
         </Element>
-        <Element Type="Param" Id="8347FBE4">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="4E2629A1"/>
+        <Element Type="Param" Id="83D9D786">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000691"/>
             <Preset Type="PresetValue" Library="Ntve" Id="00000231"/>
         </Element>
-        <Element Type="Param" Id="00DE55A0">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="D4E1FD8A"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="4D99E7A5"/>
-        </Element>
-        <Element Type="Param" Id="AE6E006C">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="33AEEF7A"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="4D99E7A5"/>
-        </Element>
-        <Element Type="Param" Id="767E8BD6">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="8674779E"/>
+        <Element Type="Param" Id="32867581">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000692"/>
             <Parameter Type="ParamDef" Library="AHLI" Id="25236B71"/>
         </Element>
-        <Element Type="Param" Id="27D03FA8">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="C558498B"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="7F5960CE"/>
+        <Element Type="Param" Id="A193DE55">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000693"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="60C7BC25"/>
         </Element>
-        <Element Type="Param" Id="C8F07C55">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="D9C9E225"/>
-            <FunctionCall Type="FunctionCall" Library="AHLI" Id="EACE7F13"/>
-        </Element>
-        <Element Type="FunctionCall" Id="EACE7F13">
+        <Element Type="FunctionCall" Id="60C7BC25">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000030"/>
-            <Parameter Type="Param" Library="AHLI" Id="B2E23239"/>
-            <Parameter Type="Param" Library="AHLI" Id="9679D7DB"/>
+            <Parameter Type="Param" Library="AHLI" Id="F4AF015D"/>
+            <Parameter Type="Param" Library="AHLI" Id="0EE23FFA"/>
         </Element>
-        <Element Type="Param" Id="B2E23239">
+        <Element Type="Param" Id="F4AF015D">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="00000049"/>
             <Parameter Type="ParamDef" Library="AHLI" Id="ED98081C"/>
         </Element>
-        <Element Type="Param" Id="9679D7DB">
+        <Element Type="Param" Id="0EE23FFA">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="00000050"/>
             <Parameter Type="ParamDef" Library="AHLI" Id="94EA1A1F"/>
         </Element>
-        <Element Type="Param" Id="E15071B8">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="49D0F240"/>
+        <Element Type="Param" Id="2CA10917">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000695"/>
             <Value>Structure;Missile,Dead,Hidden,Hallucination</Value>
             <ValueType Type="unitfilter"/>
         </Element>
-        <Element Type="Param" Id="6B880CAC">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="55BD11D8"/>
+        <Element Type="Param" Id="F1D0C333">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000694"/>
             <Preset Type="PresetValue" Library="Ntve" Id="1468BD55"/>
         </Element>
         <Element Type="Param" Id="41D47D2D">
