@@ -73,6 +73,7 @@ struct libAHLI_gs_ProductionTabPlayer {
     int lv_lastUsedSlot;
     unitgroup lv_contanimated;
     unitgroup lv_chronoBoosted;
+    unitgroup lv_ignoreArmingCompletedEvents;
 };
 
 struct libAHLI_gs_GraphsGeneral {
@@ -285,10 +286,12 @@ trigger libAHLI_gt_ProductionTabInit;
 trigger libAHLI_gt_ProductionTabConstructionUnitWarpMergeStarted;
 trigger libAHLI_gt_ProductionTabConstructionUnitWarpMergeEnded;
 trigger libAHLI_gt_ProductionTabTrainingStarted;
-trigger libAHLI_gt_ProductionTabTrainingEnded;
+trigger libAHLI_gt_ProductionTabTrainingCancelled;
+trigger libAHLI_gt_ProductionTabTrainingCompleted;
 trigger libAHLI_gt_ProductionTabResearchStarted;
 trigger libAHLI_gt_ProductionTabResearchEnded;
 trigger libAHLI_gt_ProductionTabArmingStarted;
+trigger libAHLI_gt_ProductionTabArmingCancelled;
 trigger libAHLI_gt_ProductionTabArmingEnded;
 trigger libAHLI_gt_ProductionTabMorphStarted;
 trigger libAHLI_gt_ProductionTabMorphFinished;

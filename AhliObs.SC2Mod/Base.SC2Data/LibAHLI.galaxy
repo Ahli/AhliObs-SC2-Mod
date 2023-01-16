@@ -282,7 +282,7 @@ void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, 
     int lv_queueIndex;
 
     // Automatic Variable Declarations
-    const int auto98AE4297_ae = libAHLI_gv_productionTabMAX_SLOTS;
+    int auto98AE4297_ae;
     const int auto98AE4297_ai = 1;
     int autoBFAAAB5D_ae;
     const int autoBFAAAB5D_ai = 1;
@@ -300,6 +300,7 @@ void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, 
 
     }
 
+    auto98AE4297_ae = libAHLI_gv_productionTabPlayer[lp_player].lv_lastUsedSlot;
     lv_slot = 0;
     for ( ; ( (auto98AE4297_ai >= 0 && lv_slot <= auto98AE4297_ae) || (auto98AE4297_ai < 0 && lv_slot >= auto98AE4297_ae) ) ; lv_slot += auto98AE4297_ai ) {
         if ((libAHLI_gv_productionTabPlayer[lp_player].lv_slotContent[lv_slot] == lv_itemAlias) && (libAHLI_gv_productionTabPlayer[lp_player].lv_slotCategory[lv_slot] == lp_productionCategory)) {
@@ -1757,7 +1758,7 @@ bool libAHLI_gf_WorkersKilledNotificationsIsinDistanceofMainBuilding (point lp_p
     // Variable Initialization
 
     // Implementation
-    auto07402EB3_g = UnitGroupSearch(null, lp_player, lp_point, lp_distance, UnitFilter((1 << c_targetFilterStructure), 0, 0, (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto07402EB3_g = UnitGroup(null, lp_player, RegionCircle(lp_point, lp_distance), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32)) | (1 << (c_targetFilterHallucination - 32))), 0);
     auto07402EB3_u = UnitGroupCount(auto07402EB3_g, c_unitCountAll);
     for (;; auto07402EB3_u -= 1) {
         lv_unit = UnitGroupUnitFromEnd(auto07402EB3_g, auto07402EB3_u);
@@ -2554,6 +2555,7 @@ bool libAHLI_gt_ProductionTabInit_Func (bool testConds, bool runActions) {
         libAHLI_gv_productionTabPlayer[lv_player].lv_moreSlotsLabel = DialogControlLastCreated();
         libAHLI_gv_productionTabPlayer[lv_player].lv_chronoBoosted = UnitGroupEmpty();
         libAHLI_gv_productionTabPlayer[lv_player].lv_contanimated = UnitGroupEmpty();
+        libAHLI_gv_productionTabPlayer[lv_player].lv_ignoreArmingCompletedEvents = UnitGroupEmpty();
     }
     libAHLI_gf_ProductionTabUpdateUIProgressSelectionthreadedinfinite();
     return true;
@@ -2661,9 +2663,9 @@ void libAHLI_gt_ProductionTabTrainingStarted_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: ProductionTab - Training Ended
+// Trigger: ProductionTab - Training Cancelled
 //--------------------------------------------------------------------------------------------------
-bool libAHLI_gt_ProductionTabTrainingEnded_Func (bool testConds, bool runActions) {
+bool libAHLI_gt_ProductionTabTrainingCancelled_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_producer;
 
@@ -2681,10 +2683,46 @@ bool libAHLI_gt_ProductionTabTrainingEnded_Func (bool testConds, bool runActions
 }
 
 //--------------------------------------------------------------------------------------------------
-void libAHLI_gt_ProductionTabTrainingEnded_Init () {
-    libAHLI_gt_ProductionTabTrainingEnded = TriggerCreate("libAHLI_gt_ProductionTabTrainingEnded_Func");
-    TriggerAddEventUnitTrainProgress(libAHLI_gt_ProductionTabTrainingEnded, null, c_unitProgressStageComplete);
-    TriggerAddEventUnitTrainProgress(libAHLI_gt_ProductionTabTrainingEnded, null, c_unitProgressStageCancel);
+void libAHLI_gt_ProductionTabTrainingCancelled_Init () {
+    libAHLI_gt_ProductionTabTrainingCancelled = TriggerCreate("libAHLI_gt_ProductionTabTrainingCancelled_Func");
+    TriggerAddEventUnitTrainProgress(libAHLI_gt_ProductionTabTrainingCancelled, null, c_unitProgressStageCancel);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ProductionTab - Training Completed
+//--------------------------------------------------------------------------------------------------
+bool libAHLI_gt_ProductionTabTrainingCompleted_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_producer;
+    string lv_unitType;
+    int lv_owner;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_producer = EventUnit();
+    lv_unitType = libNtve_gf_TriggeringProgressUnitType();
+    lv_owner = UnitGetOwner(lv_producer);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libAHLI_gf_ProductionTabRemoveProduction(lv_owner, (lv_unitType), libAHLI_ge_ProductionTabCategory_Unit, lv_producer);
+    if ((lv_unitType == "Carrier")) {
+        lv_producer = EventUnitProgressUnit();
+        UnitGroupAdd(libAHLI_gv_productionTabPlayer[lv_owner].lv_ignoreArmingCompletedEvents, lv_producer);
+        Wait(0.125, c_timeGame);
+        UnitGroupRemove(libAHLI_gv_productionTabPlayer[lv_owner].lv_ignoreArmingCompletedEvents, lv_producer);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libAHLI_gt_ProductionTabTrainingCompleted_Init () {
+    libAHLI_gt_ProductionTabTrainingCompleted = TriggerCreate("libAHLI_gt_ProductionTabTrainingCompleted_Func");
+    TriggerAddEventUnitTrainProgress(libAHLI_gt_ProductionTabTrainingCompleted, null, c_unitProgressStageComplete);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2767,9 +2805,9 @@ void libAHLI_gt_ProductionTabArmingStarted_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: ProductionTab - Arming Ended
+// Trigger: ProductionTab - Arming Cancelled
 //--------------------------------------------------------------------------------------------------
-bool libAHLI_gt_ProductionTabArmingEnded_Func (bool testConds, bool runActions) {
+bool libAHLI_gt_ProductionTabArmingCancelled_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_producer;
 
@@ -2787,10 +2825,42 @@ bool libAHLI_gt_ProductionTabArmingEnded_Func (bool testConds, bool runActions) 
 }
 
 //--------------------------------------------------------------------------------------------------
+void libAHLI_gt_ProductionTabArmingCancelled_Init () {
+    libAHLI_gt_ProductionTabArmingCancelled = TriggerCreate("libAHLI_gt_ProductionTabArmingCancelled_Func");
+    TriggerAddEventUnitArmMagazineProgress(libAHLI_gt_ProductionTabArmingCancelled, null, c_unitProgressStageCancel);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ProductionTab - Arming Ended
+//--------------------------------------------------------------------------------------------------
+bool libAHLI_gt_ProductionTabArmingEnded_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_producer;
+    int lv_owner;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_producer = EventUnit();
+    lv_owner = UnitGetOwner(lv_producer);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGroupHasUnit(libAHLI_gv_productionTabPlayer[lv_owner].lv_ignoreArmingCompletedEvents, lv_producer) == false)) {
+        libAHLI_gf_ProductionTabRemoveProduction(lv_owner, (libNtve_gf_TriggeringProgressUnitType()), libAHLI_ge_ProductionTabCategory_Unit, lv_producer);
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
 void libAHLI_gt_ProductionTabArmingEnded_Init () {
     libAHLI_gt_ProductionTabArmingEnded = TriggerCreate("libAHLI_gt_ProductionTabArmingEnded_Func");
     TriggerAddEventUnitArmMagazineProgress(libAHLI_gt_ProductionTabArmingEnded, null, c_unitProgressStageComplete);
-    TriggerAddEventUnitArmMagazineProgress(libAHLI_gt_ProductionTabArmingEnded, null, c_unitProgressStageCancel);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5214,10 +5284,12 @@ void libAHLI_InitTriggers () {
     libAHLI_gt_ProductionTabConstructionUnitWarpMergeStarted_Init();
     libAHLI_gt_ProductionTabConstructionUnitWarpMergeEnded_Init();
     libAHLI_gt_ProductionTabTrainingStarted_Init();
-    libAHLI_gt_ProductionTabTrainingEnded_Init();
+    libAHLI_gt_ProductionTabTrainingCancelled_Init();
+    libAHLI_gt_ProductionTabTrainingCompleted_Init();
     libAHLI_gt_ProductionTabResearchStarted_Init();
     libAHLI_gt_ProductionTabResearchEnded_Init();
     libAHLI_gt_ProductionTabArmingStarted_Init();
+    libAHLI_gt_ProductionTabArmingCancelled_Init();
     libAHLI_gt_ProductionTabArmingEnded_Init();
     libAHLI_gt_ProductionTabMorphStarted_Init();
     libAHLI_gt_ProductionTabMorphFinished_Init();
