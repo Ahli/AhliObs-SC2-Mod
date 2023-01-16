@@ -282,7 +282,7 @@ void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, 
     int lv_queueIndex;
 
     // Automatic Variable Declarations
-    const int auto98AE4297_ae = libAHLI_gv_productionTabMAX_SLOTS;
+    int auto98AE4297_ae;
     const int auto98AE4297_ai = 1;
     int autoBFAAAB5D_ae;
     const int autoBFAAAB5D_ai = 1;
@@ -300,6 +300,7 @@ void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, 
 
     }
 
+    auto98AE4297_ae = libAHLI_gv_productionTabPlayer[lp_player].lv_lastUsedSlot;
     lv_slot = 0;
     for ( ; ( (auto98AE4297_ai >= 0 && lv_slot <= auto98AE4297_ae) || (auto98AE4297_ai < 0 && lv_slot >= auto98AE4297_ae) ) ; lv_slot += auto98AE4297_ai ) {
         if ((libAHLI_gv_productionTabPlayer[lp_player].lv_slotContent[lv_slot] == lv_itemAlias) && (libAHLI_gv_productionTabPlayer[lp_player].lv_slotCategory[lv_slot] == lp_productionCategory)) {

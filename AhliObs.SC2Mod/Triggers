@@ -11609,7 +11609,15 @@
         </Element>
         <Element Type="Param" Id="601BDC2E">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="C25E6187"/>
-            <Variable Type="Variable" Library="AHLI" Id="38E9896F"/>
+            <Variable Type="Variable" Library="AHLI" Id="6E6F7901"/>
+            <StructMember Type="Param" Library="AHLI" Id="5D63BAA3"/>
+            <Array Type="Param" Library="AHLI" Id="8595DC8A"/>
+        </Element>
+        <Element Type="Param" Id="5D63BAA3">
+            <Variable Type="Variable" Library="AHLI" Id="8C40E355"/>
+        </Element>
+        <Element Type="Param" Id="8595DC8A">
+            <Parameter Type="ParamDef" Library="AHLI" Id="31DE8810"/>
         </Element>
         <Element Type="Param" Id="F7D9523B">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="F3144A4A"/>
