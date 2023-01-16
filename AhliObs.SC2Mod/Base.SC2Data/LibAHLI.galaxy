@@ -1757,7 +1757,7 @@ bool libAHLI_gf_WorkersKilledNotificationsIsinDistanceofMainBuilding (point lp_p
     // Variable Initialization
 
     // Implementation
-    auto07402EB3_g = UnitGroupSearch(null, lp_player, lp_point, lp_distance, UnitFilter((1 << c_targetFilterStructure), 0, 0, (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto07402EB3_g = libNtve_gf_UnitsInRegionWithAllianceToPlayerMatchingCondition(null, "", "", lp_player, -1, RegionCircle(lp_point, lp_distance), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32)) | (1 << (c_targetFilterHallucination - 32))), 0);
     auto07402EB3_u = UnitGroupCount(auto07402EB3_g, c_unitCountAll);
     for (;; auto07402EB3_u -= 1) {
         lv_unit = UnitGroupUnitFromEnd(auto07402EB3_g, auto07402EB3_u);
