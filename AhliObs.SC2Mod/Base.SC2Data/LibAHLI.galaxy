@@ -2896,6 +2896,9 @@ bool libAHLI_gt_ProductionTabMorphStarted_Func (bool testConds, bool runActions)
             lv_lastInfoArrayIndex = (CatalogFieldValueCount(c_gameCatalogAbil, lv_ability, "InfoArray", lv_player) - 1);
             if (((lv_lastInfoArrayIndex == 0) || (lv_sourceUnitType != (CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(0) + "].Unit", lv_player))))) {
                 lv_targetUnitType = CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(lv_lastInfoArrayIndex) + "].Unit", lv_player);
+                TextExpressionSetToken("Param/Expression/lib_AHLI_04EC4953", "A", StringToText((lv_sourceUnitType)));
+                TextExpressionSetToken("Param/Expression/lib_AHLI_04EC4953", "B", StringToText(lv_targetUnitType));
+                TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_AHLI_04EC4953"), false);
                 if ((UnitTypeTestAttribute(lv_sourceUnitType, c_unitAttributeStructure) == true)) {
                     lv_productionType = libAHLI_ge_ProductionTabCategory_Structure;
                 }
@@ -2903,6 +2906,9 @@ bool libAHLI_gt_ProductionTabMorphStarted_Func (bool testConds, bool runActions)
                 libAHLI_gf_ProductionTabRegisterProduction(lv_player, lv_targetUnitType, lv_productionType, lv_unit, true, true, null, lv_abilCmd);
             }
             else {
+                TextExpressionSetToken("Param/Expression/lib_AHLI_B570FD3E", "A", StringToText((lv_sourceUnitType)));
+                TextExpressionSetToken("Param/Expression/lib_AHLI_B570FD3E", "B", IntToText(lv_lastInfoArrayIndex));
+                TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_AHLI_B570FD3E"), false);
                 return false;
             }
         }
