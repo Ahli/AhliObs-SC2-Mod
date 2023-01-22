@@ -74,6 +74,7 @@ struct libAHLI_gs_ProductionTabPlayer {
     unitgroup lv_contanimated;
     unitgroup lv_chronoBoosted;
     unitgroup lv_ignoreArmingCompletedEvents;
+    unitgroup lv_morphingUnitsWithoutMorphDelay;
 };
 
 struct libAHLI_gs_GraphsGeneral {
@@ -230,6 +231,7 @@ void libAHLI_gf_RegisterPlayerLeavesEvent (trigger lp_trigger, int lp_player, in
 void libAHLI_gf_RegisterAbilityUsedEvent (trigger lp_trigger, unit lp_unit, abilcmd lp_abilityCommand, int lp_stage, bool lp_includeSharedAbilities);
 void libAHLI_gf_RegisterUnitTakesDamageEvent (trigger lp_trigger, unit lp_unit, int lp_damageType, int lp_fatal, string lp_effect);
 void libAHLI_gf_RegisterTimerExpiresEvent (trigger lp_trigger, timer lp_timer);
+bool libAHLI_gf_ProductionTabUnitTypeIsPartOfMorph (string lp_unitType, string lp_ability, int lp_player, int lp_lastInfoArrayIndex);
 void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, int lp_productionCategory, unit lp_relatedUnit, bool lp_useCurrentOrderProgress, bool lp_isMorphAbility, string lp_constructorUnitTypeonlyForConstructionsLikeProbe, abilcmd lp_morphAbilCmd);
 void libAHLI_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, int lp_productionType, unit lp_relatedUnit);
 void libAHLI_gf_ProductionTabSwapSlots (int lp_player, int lp_slotA, int lp_slotB);

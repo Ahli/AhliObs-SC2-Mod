@@ -274,6 +274,28 @@ void libAHLI_gf_RegisterTimerExpiresEvent (trigger lp_trigger, timer lp_timer) {
     TriggerAddEventTimer(lp_trigger, lp_timer);
 }
 
+bool libAHLI_gf_ProductionTabUnitTypeIsPartOfMorph (string lp_unitType, string lp_ability, int lp_player, int lp_lastInfoArrayIndex) {
+    // Variable Declarations
+    int lv_i;
+
+    // Automatic Variable Declarations
+    int auto9AE44A85_ae;
+    const int auto9AE44A85_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    auto9AE44A85_ae = lp_lastInfoArrayIndex;
+    lv_i = 0;
+    for ( ; ( (auto9AE44A85_ai >= 0 && lv_i <= auto9AE44A85_ae) || (auto9AE44A85_ai < 0 && lv_i >= auto9AE44A85_ae) ) ; lv_i += auto9AE44A85_ai ) {
+        if ((lp_unitType == (CatalogFieldValueGet(c_gameCatalogAbil, lp_ability, "InfoArray[" + IntToString(0) + "].Unit", lp_player)))) {
+            return true;
+        }
+
+    }
+    return false;
+}
+
 void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, int lp_productionCategory, unit lp_relatedUnit, bool lp_useCurrentOrderProgress, bool lp_isMorphAbility, string lp_constructorUnitTypeonlyForConstructionsLikeProbe, abilcmd lp_morphAbilCmd) {
     // Variable Declarations
     int lv_slot;
@@ -2556,6 +2578,7 @@ bool libAHLI_gt_ProductionTabInit_Func (bool testConds, bool runActions) {
         libAHLI_gv_productionTabPlayer[lv_player].lv_chronoBoosted = UnitGroupEmpty();
         libAHLI_gv_productionTabPlayer[lv_player].lv_contanimated = UnitGroupEmpty();
         libAHLI_gv_productionTabPlayer[lv_player].lv_ignoreArmingCompletedEvents = UnitGroupEmpty();
+        libAHLI_gv_productionTabPlayer[lv_player].lv_morphingUnitsWithoutMorphDelay = UnitGroupEmpty();
     }
     libAHLI_gf_ProductionTabUpdateUIProgressSelectionthreadedinfinite();
     return true;
@@ -2894,23 +2917,21 @@ bool libAHLI_gt_ProductionTabMorphStarted_Func (bool testConds, bool runActions)
         if ((CatalogFieldValueGet(c_gameCatalogAbil, (lv_ability), "Flags[" + IntToString(18) + "]", lv_player) == "1")) {
             lv_sourceUnitType = UnitGetType(lv_unit);
             lv_lastInfoArrayIndex = (CatalogFieldValueCount(c_gameCatalogAbil, lv_ability, "InfoArray", lv_player) - 1);
-            if (((lv_lastInfoArrayIndex == 0) || (lv_sourceUnitType != (CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(0) + "].Unit", lv_player))))) {
-                lv_targetUnitType = CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(lv_lastInfoArrayIndex) + "].Unit", lv_player);
-                TextExpressionSetToken("Param/Expression/lib_AHLI_04EC4953", "A", StringToText((lv_sourceUnitType)));
-                TextExpressionSetToken("Param/Expression/lib_AHLI_04EC4953", "B", StringToText(lv_targetUnitType));
-                TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_AHLI_04EC4953"), false);
-                if ((UnitTypeTestAttribute(lv_sourceUnitType, c_unitAttributeStructure) == true)) {
-                    lv_productionType = libAHLI_ge_ProductionTabCategory_Structure;
+            if ((lv_lastInfoArrayIndex != 0) && (libAHLI_gf_ProductionTabUnitTypeIsPartOfMorph(lv_sourceUnitType, lv_ability, lv_player, lv_lastInfoArrayIndex) == true)) {
+                if ((libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(0) + "].RandomDelayMin", lv_player) <= 0.0001) && (UnitGroupHasUnit(libAHLI_gv_productionTabPlayer[lv_player].lv_morphingUnitsWithoutMorphDelay, lv_unit) == false)) {
+                    UnitGroupAdd(libAHLI_gv_productionTabPlayer[lv_player].lv_morphingUnitsWithoutMorphDelay, lv_unit);
                 }
+                else {
+                    return false;
+                }
+            }
 
-                libAHLI_gf_ProductionTabRegisterProduction(lv_player, lv_targetUnitType, lv_productionType, lv_unit, true, true, null, lv_abilCmd);
+            lv_targetUnitType = CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(lv_lastInfoArrayIndex) + "].Unit", lv_player);
+            if ((UnitTypeTestAttribute(lv_sourceUnitType, c_unitAttributeStructure) == true)) {
+                lv_productionType = libAHLI_ge_ProductionTabCategory_Structure;
             }
-            else {
-                TextExpressionSetToken("Param/Expression/lib_AHLI_B570FD3E", "A", StringToText((lv_sourceUnitType)));
-                TextExpressionSetToken("Param/Expression/lib_AHLI_B570FD3E", "B", IntToText(lv_lastInfoArrayIndex));
-                TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_AHLI_B570FD3E"), false);
-                return false;
-            }
+
+            libAHLI_gf_ProductionTabRegisterProduction(lv_player, lv_targetUnitType, lv_productionType, lv_unit, true, true, null, lv_abilCmd);
         }
         else {
             return false;
@@ -2964,6 +2985,7 @@ bool libAHLI_gt_ProductionTabMorphFinished_Func (bool testConds, bool runActions
                 }
 
                 libAHLI_gf_ProductionTabRemoveProduction(lv_player, lv_targetUnitType, lv_productionType, lv_unit);
+                UnitGroupRemove(libAHLI_gv_productionTabPlayer[lv_player].lv_morphingUnitsWithoutMorphDelay, lv_unit);
             }
             else {
                 return false;
@@ -3021,6 +3043,7 @@ bool libAHLI_gt_ProductionTabMorphCanceled_Func (bool testConds, bool runActions
                 }
 
                 libAHLI_gf_ProductionTabRemoveProduction(lv_player, lv_targetUnitType, lv_productionType, lv_unit);
+                UnitGroupRemove(libAHLI_gv_productionTabPlayer[lv_player].lv_morphingUnitsWithoutMorphDelay, lv_unit);
                 if (libAHLI_gv_battleReport.lv_battleActive) {
                     libAHLI_gf_BattleReportMorphCanceled((lv_targetUnitType), UnitGetType(lv_unit), lv_player, lv_ability);
                 }
