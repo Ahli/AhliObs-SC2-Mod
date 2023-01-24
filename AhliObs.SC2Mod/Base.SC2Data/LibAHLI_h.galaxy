@@ -59,8 +59,8 @@ struct libAHLI_gs_ProductionTabPlayer {
     int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotProgressBar;
     int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotUnitTargetFrame;
     int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotPanel;
-    int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotChronoBoosted;
-    int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotContaminated;
+    int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotChronoBoostedIcon;
+    int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotContaminatedIcon;
     int lv_moreSlotsLabel;
     string[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotContent;
     string[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotIconFile;
@@ -70,6 +70,8 @@ struct libAHLI_gs_ProductionTabPlayer {
     bool[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotUseCurrentOrderProgress;
     int[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotCategory;
     fixed[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotBuildDurationMax;
+    bool[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotIsChronoBoosted;
+    bool[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotIsContaminated;
     int lv_lastUsedSlot;
     unitgroup lv_contanimated;
     unitgroup lv_chronoBoosted;
@@ -231,7 +233,6 @@ void libAHLI_gf_RegisterPlayerLeavesEvent (trigger lp_trigger, int lp_player, in
 void libAHLI_gf_RegisterAbilityUsedEvent (trigger lp_trigger, unit lp_unit, abilcmd lp_abilityCommand, int lp_stage, bool lp_includeSharedAbilities);
 void libAHLI_gf_RegisterUnitTakesDamageEvent (trigger lp_trigger, unit lp_unit, int lp_damageType, int lp_fatal, string lp_effect);
 void libAHLI_gf_RegisterTimerExpiresEvent (trigger lp_trigger, timer lp_timer);
-bool libAHLI_gf_ProductionTabUnitTypeIsPartOfMorph (string lp_unitType, string lp_ability, int lp_player, int lp_lastInfoArrayIndex);
 void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, int lp_productionCategory, unit lp_relatedUnit, bool lp_useCurrentOrderProgress, bool lp_isMorphAbility, string lp_constructorUnitTypeonlyForConstructionsLikeProbe, abilcmd lp_morphAbilCmd);
 void libAHLI_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, int lp_productionType, unit lp_relatedUnit);
 void libAHLI_gf_ProductionTabSwapSlots (int lp_player, int lp_slotA, int lp_slotB);
