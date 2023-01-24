@@ -59,8 +59,8 @@ struct libAHLI_gs_ProductionTabPlayer {
     int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotProgressBar;
     int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotUnitTargetFrame;
     int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotPanel;
-    int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotChronoBoosted;
-    int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotContaminated;
+    int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotChronoBoostedIcon;
+    int[libAHLI_gv_productionTabMAX_VISIBLE_SLOTS + 1] lv_slotContaminatedIcon;
     int lv_moreSlotsLabel;
     string[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotContent;
     string[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotIconFile;
@@ -70,10 +70,13 @@ struct libAHLI_gs_ProductionTabPlayer {
     bool[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotUseCurrentOrderProgress;
     int[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotCategory;
     fixed[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotBuildDurationMax;
+    bool[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotIsChronoBoosted;
+    bool[libAHLI_gv_productionTabMAX_SLOTS + 1] lv_slotIsContaminated;
     int lv_lastUsedSlot;
     unitgroup lv_contanimated;
     unitgroup lv_chronoBoosted;
     unitgroup lv_ignoreArmingCompletedEvents;
+    unitgroup lv_morphingUnitsWithoutMorphDelay;
 };
 
 struct libAHLI_gs_GraphsGeneral {

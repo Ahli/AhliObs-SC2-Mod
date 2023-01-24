@@ -46,10 +46,10 @@ void libAHLI_InitVariables () {
             libAHLI_gv_productionTabPlayer[init_i].lv_slotPanel[init_i1] = c_invalidDialogControlId;
         }
         for (init_i1 = 0; init_i1 <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS; init_i1 += 1) {
-            libAHLI_gv_productionTabPlayer[init_i].lv_slotChronoBoosted[init_i1] = c_invalidDialogControlId;
+            libAHLI_gv_productionTabPlayer[init_i].lv_slotChronoBoostedIcon[init_i1] = c_invalidDialogControlId;
         }
         for (init_i1 = 0; init_i1 <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS; init_i1 += 1) {
-            libAHLI_gv_productionTabPlayer[init_i].lv_slotContaminated[init_i1] = c_invalidDialogControlId;
+            libAHLI_gv_productionTabPlayer[init_i].lv_slotContaminatedIcon[init_i1] = c_invalidDialogControlId;
         }
         libAHLI_gv_productionTabPlayer[init_i].lv_moreSlotsLabel = c_invalidDialogControlId;
         for (init_i1 = 0; init_i1 <= libAHLI_gv_productionTabMAX_SLOTS; init_i1 += 1) {
@@ -306,9 +306,16 @@ void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, 
         if ((libAHLI_gv_productionTabPlayer[lp_player].lv_slotContent[lv_slot] == lv_itemAlias) && (libAHLI_gv_productionTabPlayer[lp_player].lv_slotCategory[lv_slot] == lp_productionCategory)) {
             libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot] += 1;
             UnitGroupAdd(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot], lp_relatedUnit);
-            libNtve_gf_SetDialogItemText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCountLabel[lv_slot], IntToText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot]), libAHLI_gv_obs);
-            if ((UnitGroupHasUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_chronoBoosted, lp_relatedUnit) == true) && (DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obsID) == false)) {
-                DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obs, true);
+            if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                libNtve_gf_SetDialogItemText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCountLabel[lv_slot], IntToText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot]), libAHLI_gv_obs);
+            }
+
+            if ((UnitGroupHasUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_chronoBoosted, lp_relatedUnit) == true)) {
+                libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsChronoBoosted[lv_slot] = true;
+                if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                    DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoostedIcon[lv_slot], libAHLI_gv_obs, true);
+                }
+
             }
 
             return ;
@@ -349,11 +356,11 @@ void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, 
 
             }
         }
-        libNtve_gf_SetDialogItemText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCountLabel[lv_slot], IntToText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot]), libAHLI_gv_obs);
-        libNtve_gf_SetDialogItemImage(libAHLI_gv_productionTabPlayer[lp_player].lv_slotImage[lv_slot], libAHLI_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot], libAHLI_gv_obs);
-        libNtve_gf_SetDialogItemUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_slot], lp_relatedUnit, libAHLI_gv_obs);
-        libAHLI_gf_ProductionTabUpdateUICurrentProgressPercentAndTooltip(lp_player, lv_slot);
         if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
+            libNtve_gf_SetDialogItemText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCountLabel[lv_slot], IntToText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot]), libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage(libAHLI_gv_productionTabPlayer[lp_player].lv_slotImage[lv_slot], libAHLI_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_slot], lp_relatedUnit, libAHLI_gv_obs);
+            libAHLI_gf_ProductionTabUpdateUICurrentProgressPercentAndTooltip(lp_player, lv_slot);
             DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotPanel[lv_slot], libAHLI_gv_obs, true);
         }
         else {
@@ -362,8 +369,12 @@ void libAHLI_gf_ProductionTabRegisterProduction (int lp_player, string lp_item, 
             }
 
         }
-        if ((UnitGroupHasUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_chronoBoosted, lp_relatedUnit) == true) && (DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obsID) == false)) {
-            DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obs, true);
+        if ((UnitGroupHasUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_chronoBoosted, lp_relatedUnit) == true)) {
+            libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsChronoBoosted[lv_slot] = true;
+            if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoostedIcon[lv_slot], libAHLI_gv_obs, true);
+            }
+
         }
 
     }
@@ -382,7 +393,6 @@ void libAHLI_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, in
     unit lv_unit;
     bool lv_visibleChrono;
     bool lv_visibleContaminate;
-    int lv_slot1;
 
     // Automatic Variable Declarations
     int auto8F3ABC0D_ae;
@@ -420,10 +430,16 @@ void libAHLI_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, in
     if ((lv_foundSlot >= 0)) {
         if ((libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_foundSlot] > 1)) {
             libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_foundSlot] -= 1;
-            libNtve_gf_SetDialogItemText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCountLabel[lv_foundSlot], IntToText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_foundSlot]), libAHLI_gv_obs);
+            if ((lv_foundSlot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                libNtve_gf_SetDialogItemText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCountLabel[lv_foundSlot], IntToText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_foundSlot]), libAHLI_gv_obs);
+            }
+
             if (((UnitQueueGetProperty(lp_relatedUnit, c_unitQueuePropertyCount) < 2) || ((libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lp_relatedUnit, 1, 1) != (lp_item)) && (libNtve_gf_QueuedUnitTypeInTrainingQueueSlot(lp_relatedUnit, 2, 1) != (lp_item))))) {
                 UnitGroupRemove(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_foundSlot], lp_relatedUnit);
-                libNtve_gf_SetDialogItemUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_foundSlot], UnitGroupUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_foundSlot], (ModI(libAHLI_gv_productionTabGeneral.lv_selectionIndexTimed, UnitGroupCount(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_foundSlot], c_unitCountAll)) + 1)), libAHLI_gv_obs);
+                if ((lv_foundSlot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                    libNtve_gf_SetDialogItemUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_foundSlot], UnitGroupUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_foundSlot], (ModI(libAHLI_gv_productionTabGeneral.lv_selectionIndexTimed, UnitGroupCount(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_foundSlot], c_unitCountAll)) + 1)), libAHLI_gv_obs);
+                }
+
             }
 
             if ((UnitGroupHasUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_chronoBoosted, lp_relatedUnit) == true)) {
@@ -440,7 +456,11 @@ void libAHLI_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, in
 
                 }
                 if ((lv_visibleChrono == false)) {
-                    DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obs, false);
+                    libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsChronoBoosted[lv_slot] = false;
+                    if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                        DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoostedIcon[lv_slot], libAHLI_gv_obs, false);
+                    }
+
                 }
 
             }
@@ -459,7 +479,11 @@ void libAHLI_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, in
 
                 }
                 if ((lv_visibleContaminate == false)) {
-                    DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot], libAHLI_gv_obs, false);
+                    libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsContaminated[lv_slot] = false;
+                    if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                        DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminatedIcon[lv_slot], libAHLI_gv_obs, false);
+                    }
+
                 }
 
             }
@@ -469,25 +493,14 @@ void libAHLI_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, in
             autoE66D4B06_ae = (libAHLI_gv_productionTabPlayer[lp_player].lv_lastUsedSlot - 1);
             lv_slot = lv_foundSlot;
             for ( ; ( (autoE66D4B06_ai >= 0 && lv_slot <= autoE66D4B06_ae) || (autoE66D4B06_ai < 0 && lv_slot >= autoE66D4B06_ae) ) ; lv_slot += autoE66D4B06_ai ) {
-                lv_slot1 = (lv_slot + 1);
-                libAHLI_gf_ProductionTabSwapSlots(lp_player, lv_slot, lv_slot1);
+                libAHLI_gf_ProductionTabSwapSlots(lp_player, lv_slot, (lv_slot + 1));
                 if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
                     libNtve_gf_SetDialogItemText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCountLabel[lv_slot], IntToText(libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot]), libAHLI_gv_obs);
                     libNtve_gf_SetDialogItemImage(libAHLI_gv_productionTabPlayer[lp_player].lv_slotImage[lv_slot], libAHLI_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot], libAHLI_gv_obs);
                     libNtve_gf_SetDialogItemUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_slotUnitTargetFrame[lv_slot], UnitGroupUnit(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot], (ModI(libAHLI_gv_productionTabGeneral.lv_selectionIndexTimed, UnitGroupCount(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot], c_unitCountAll)) + 1)), libAHLI_gv_obs);
+                    DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoostedIcon[lv_slot], libAHLI_gv_obs, (libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsChronoBoosted[lv_slot]));
+                    DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminatedIcon[lv_slot], libAHLI_gv_obs, (libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsContaminated[lv_slot]));
                     libAHLI_gf_ProductionTabUpdateUICurrentProgressPercentAndTooltip(lp_player, lv_slot);
-                    if ((lv_slot < libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
-                        lv_visibleChrono = DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obsID);
-                        lv_visibleContaminate = DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot], libAHLI_gv_obsID);
-                        DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obs, (DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot1], libAHLI_gv_obsID)));
-                        DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot], libAHLI_gv_obs, (DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot1], libAHLI_gv_obsID)));
-                        DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot1], libAHLI_gv_obs, (lv_visibleChrono));
-                        DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot1], libAHLI_gv_obs, (lv_visibleContaminate));
-                    }
-                    else {
-                        DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obs, (DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot1], libAHLI_gv_obsID)));
-                        DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot], libAHLI_gv_obs, (DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot1], libAHLI_gv_obsID)));
-                    }
                 }
 
             }
@@ -496,12 +509,15 @@ void libAHLI_gf_ProductionTabRemoveProduction (int lp_player, string lp_item, in
             libAHLI_gv_productionTabPlayer[lp_player].lv_slotIconFile[lv_slot] = null;
             libAHLI_gv_productionTabPlayer[lp_player].lv_slotName[lv_slot] = null;
             libAHLI_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lv_slot] = 0.0;
+            libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsChronoBoosted[lv_slot] = false;
+            libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsContaminated[lv_slot] = false;
+            libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lv_slot] = 0;
             UnitGroupClear(libAHLI_gv_productionTabPlayer[lp_player].lv_slotSelection[lv_slot]);
             libAHLI_gv_productionTabPlayer[lp_player].lv_lastUsedSlot -= 1;
             if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
                 DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotPanel[lv_slot], libAHLI_gv_obs, false);
-                DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obs, false);
-                DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminated[lv_slot], libAHLI_gv_obs, false);
+                DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotChronoBoostedIcon[lv_slot], libAHLI_gv_obs, false);
+                DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lp_player].lv_slotContaminatedIcon[lv_slot], libAHLI_gv_obs, false);
             }
             else {
                 if ((lv_slot == libAHLI_gv_productionTabMAX_VISIBLE_SLOTS__1)) {
@@ -524,6 +540,8 @@ void libAHLI_gf_ProductionTabSwapSlots (int lp_player, int lp_slotA, int lp_slot
     bool lv_slotUseCurrentOrderProgress;
     int lv_slotCategory;
     fixed lv_slotBuildDurationMax;
+    bool lv_slotIsChronoBoosted;
+    bool lv_slotIsContaminated;
 
     // Automatic Variable Declarations
     // Variable Initialization
@@ -535,6 +553,8 @@ void libAHLI_gf_ProductionTabSwapSlots (int lp_player, int lp_slotA, int lp_slot
     lv_slotUseCurrentOrderProgress = libAHLI_gv_productionTabPlayer[lp_player].lv_slotUseCurrentOrderProgress[lp_slotA];
     lv_slotCategory = libAHLI_gv_productionTabPlayer[lp_player].lv_slotCategory[lp_slotA];
     lv_slotBuildDurationMax = libAHLI_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lp_slotA];
+    lv_slotIsChronoBoosted = libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsChronoBoosted[lp_slotA];
+    lv_slotIsContaminated = libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsContaminated[lp_slotA];
 
     // Implementation
     libAHLI_gv_productionTabPlayer[lp_player].lv_slotContent[lp_slotA] = libAHLI_gv_productionTabPlayer[lp_player].lv_slotContent[lp_slotB];
@@ -545,6 +565,8 @@ void libAHLI_gf_ProductionTabSwapSlots (int lp_player, int lp_slotA, int lp_slot
     libAHLI_gv_productionTabPlayer[lp_player].lv_slotUseCurrentOrderProgress[lp_slotA] = libAHLI_gv_productionTabPlayer[lp_player].lv_slotUseCurrentOrderProgress[lp_slotB];
     libAHLI_gv_productionTabPlayer[lp_player].lv_slotCategory[lp_slotA] = libAHLI_gv_productionTabPlayer[lp_player].lv_slotCategory[lp_slotB];
     libAHLI_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lp_slotA] = libAHLI_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lp_slotB];
+    libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsChronoBoosted[lp_slotA] = libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsChronoBoosted[lp_slotB];
+    libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsContaminated[lp_slotA] = libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsContaminated[lp_slotB];
     libAHLI_gv_productionTabPlayer[lp_player].lv_slotContent[lp_slotB] = lv_slotContent;
     libAHLI_gv_productionTabPlayer[lp_player].lv_slotIconFile[lp_slotB] = lv_slotIcon;
     libAHLI_gv_productionTabPlayer[lp_player].lv_slotCount[lp_slotB] = lv_slotCount;
@@ -553,6 +575,8 @@ void libAHLI_gf_ProductionTabSwapSlots (int lp_player, int lp_slotA, int lp_slot
     libAHLI_gv_productionTabPlayer[lp_player].lv_slotUseCurrentOrderProgress[lp_slotB] = lv_slotUseCurrentOrderProgress;
     libAHLI_gv_productionTabPlayer[lp_player].lv_slotCategory[lp_slotB] = lv_slotCategory;
     libAHLI_gv_productionTabPlayer[lp_player].lv_slotBuildDurationMax[lp_slotB] = lv_slotBuildDurationMax;
+    libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsChronoBoosted[lp_slotB] = lv_slotIsChronoBoosted;
+    libAHLI_gv_productionTabPlayer[lp_player].lv_slotIsContaminated[lp_slotB] = lv_slotIsContaminated;
 }
 
 fixed libAHLI_gf_ProductionTabGetMaxDurationOfConstruction (string lp_constructor, string lp_constructed, int lp_player) {
@@ -810,8 +834,9 @@ void libAHLI_gf_ProductionTabRegisterChronoBoost (unit lp_structure) {
             lv_slot = 0;
             for ( ; ( (autoA86411E9_ai >= 0 && lv_slot <= autoA86411E9_ae) || (autoA86411E9_ai < 0 && lv_slot >= autoA86411E9_ae) ) ; lv_slot += autoA86411E9_ai ) {
                 if ((libAHLI_gv_productionTabPlayer[lv_player].lv_slotContent[lv_slot] == (lv_boostedUpgradeOrUnit))) {
-                    if ((DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lv_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obsID) == false)) {
-                        DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lv_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obs, true);
+                    libAHLI_gv_productionTabPlayer[lv_player].lv_slotIsChronoBoosted[lv_slot] = true;
+                    if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                        DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lv_player].lv_slotChronoBoostedIcon[lv_slot], libAHLI_gv_obs, true);
                     }
 
                     return ;
@@ -859,11 +884,12 @@ void libAHLI_gf_ProductionTabUnregisterChronoBoost (unit lp_boostedStructure) {
             lv_slot = 0;
             for ( ; ( (autoB4BA23C9_ai >= 0 && lv_slot <= autoB4BA23C9_ae) || (autoB4BA23C9_ai < 0 && lv_slot >= autoB4BA23C9_ae) ) ; lv_slot += autoB4BA23C9_ai ) {
                 if ((libAHLI_gv_productionTabPlayer[lv_player].lv_slotContent[lv_slot] == (lv_boostedUpgradeOrUnit))) {
-                    if ((DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lv_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obsID) == true)) {
-                        DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lv_player].lv_slotChronoBoosted[lv_slot], libAHLI_gv_obs, false);
-                        return ;
+                    libAHLI_gv_productionTabPlayer[lv_player].lv_slotIsChronoBoosted[lv_slot] = false;
+                    if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                        DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lv_player].lv_slotChronoBoostedIcon[lv_slot], libAHLI_gv_obs, false);
                     }
 
+                    return ;
                 }
 
             }
@@ -904,8 +930,9 @@ void libAHLI_gf_ProductionTabRegisterContaminate (unit lp_haltedStructure) {
                     lv_slot = 0;
                     for ( ; ( (autoCE209592_ai >= 0 && lv_slot <= autoCE209592_ae) || (autoCE209592_ai < 0 && lv_slot >= autoCE209592_ae) ) ; lv_slot += autoCE209592_ai ) {
                         if ((libAHLI_gv_productionTabPlayer[lv_player].lv_slotContent[lv_slot] == (lv_haltedUpgradeOrUnit))) {
-                            if ((DialogControlIsVisible(libAHLI_gv_productionTabPlayer[lv_player].lv_slotContaminated[lv_slot], libAHLI_gv_obsID) == false)) {
-                                DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lv_player].lv_slotContaminated[lv_slot], libAHLI_gv_obs, true);
+                            libAHLI_gv_productionTabPlayer[lv_player].lv_slotIsContaminated[lv_slot] = true;
+                            if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                                DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lv_player].lv_slotContaminatedIcon[lv_slot], libAHLI_gv_obs, true);
                             }
 
                             break;
@@ -968,8 +995,12 @@ void libAHLI_gf_ProductionTabUnregisterContaminate (unit lp_haltedStructure) {
                     lv_slot = 0;
                     for ( ; ( (autoE8A8AE26_ai >= 0 && lv_slot <= autoE8A8AE26_ae) || (autoE8A8AE26_ai < 0 && lv_slot >= autoE8A8AE26_ae) ) ; lv_slot += autoE8A8AE26_ai ) {
                         if ((libAHLI_gv_productionTabPlayer[lv_player].lv_slotContent[lv_slot] == (lv_haltedUpgradeOrUnit))) {
-                            DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lv_player].lv_slotContaminated[lv_slot], libAHLI_gv_obs, false);
-                            return ;
+                            libAHLI_gv_productionTabPlayer[lv_player].lv_slotIsContaminated[lv_slot] = false;
+                            if ((lv_slot <= libAHLI_gv_productionTabMAX_VISIBLE_SLOTS)) {
+                                DialogControlSetVisible(libAHLI_gv_productionTabPlayer[lv_player].lv_slotContaminatedIcon[lv_slot], libAHLI_gv_obs, false);
+                            }
+
+                            break;
                         }
 
                     }
@@ -2535,10 +2566,10 @@ bool libAHLI_gt_ProductionTabInit_Func (bool testConds, bool runActions) {
         for ( ; ( (autoB1D95E6C_ai >= 0 && lv_slot <= autoB1D95E6C_ae) || (autoB1D95E6C_ai < 0 && lv_slot >= autoB1D95E6C_ae) ) ; lv_slot += autoB1D95E6C_ai ) {
             DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/Contaminated"));
             DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), false);
-            libAHLI_gv_productionTabPlayer[lv_player].lv_slotContaminated[lv_slot] = DialogControlLastCreated();
+            libAHLI_gv_productionTabPlayer[lv_player].lv_slotContaminatedIcon[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/ChronoBoosted"));
             DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), false);
-            libAHLI_gv_productionTabPlayer[lv_player].lv_slotChronoBoosted[lv_slot] = DialogControlLastCreated();
+            libAHLI_gv_productionTabPlayer[lv_player].lv_slotChronoBoostedIcon[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeImage, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/IconImage"));
             libAHLI_gv_productionTabPlayer[lv_player].lv_slotImage[lv_slot] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeLabel, ("UIContainer/FullscreenUpperContainer/LeaderPanel/ProductionFrame3/Player" + IntToString(lv_player) + "/ProdFrame/ProductionCountFrame" + IntToString(lv_slot) + "/NumberLabel"));
@@ -2556,6 +2587,7 @@ bool libAHLI_gt_ProductionTabInit_Func (bool testConds, bool runActions) {
         libAHLI_gv_productionTabPlayer[lv_player].lv_chronoBoosted = UnitGroupEmpty();
         libAHLI_gv_productionTabPlayer[lv_player].lv_contanimated = UnitGroupEmpty();
         libAHLI_gv_productionTabPlayer[lv_player].lv_ignoreArmingCompletedEvents = UnitGroupEmpty();
+        libAHLI_gv_productionTabPlayer[lv_player].lv_morphingUnitsWithoutMorphDelay = UnitGroupEmpty();
     }
     libAHLI_gf_ProductionTabUpdateUIProgressSelectionthreadedinfinite();
     return true;
@@ -2894,11 +2926,12 @@ bool libAHLI_gt_ProductionTabMorphStarted_Func (bool testConds, bool runActions)
         if ((CatalogFieldValueGet(c_gameCatalogAbil, (lv_ability), "Flags[" + IntToString(18) + "]", lv_player) == "1")) {
             lv_sourceUnitType = UnitGetType(lv_unit);
             lv_lastInfoArrayIndex = (CatalogFieldValueCount(c_gameCatalogAbil, lv_ability, "InfoArray", lv_player) - 1);
-            if (((lv_lastInfoArrayIndex == 0) || (lv_sourceUnitType != (CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(0) + "].Unit", lv_player))))) {
+            if (((lv_lastInfoArrayIndex == 0) || (UnitGroupHasUnit(libAHLI_gv_productionTabPlayer[lv_player].lv_morphingUnitsWithoutMorphDelay, lv_unit) == false))) {
+                if ((lv_lastInfoArrayIndex != 0)) {
+                    UnitGroupAdd(libAHLI_gv_productionTabPlayer[lv_player].lv_morphingUnitsWithoutMorphDelay, lv_unit);
+                }
+
                 lv_targetUnitType = CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "InfoArray[" + IntToString(lv_lastInfoArrayIndex) + "].Unit", lv_player);
-                TextExpressionSetToken("Param/Expression/lib_AHLI_04EC4953", "A", StringToText((lv_sourceUnitType)));
-                TextExpressionSetToken("Param/Expression/lib_AHLI_04EC4953", "B", StringToText(lv_targetUnitType));
-                TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_AHLI_04EC4953"), false);
                 if ((UnitTypeTestAttribute(lv_sourceUnitType, c_unitAttributeStructure) == true)) {
                     lv_productionType = libAHLI_ge_ProductionTabCategory_Structure;
                 }
@@ -2906,9 +2939,6 @@ bool libAHLI_gt_ProductionTabMorphStarted_Func (bool testConds, bool runActions)
                 libAHLI_gf_ProductionTabRegisterProduction(lv_player, lv_targetUnitType, lv_productionType, lv_unit, true, true, null, lv_abilCmd);
             }
             else {
-                TextExpressionSetToken("Param/Expression/lib_AHLI_B570FD3E", "A", StringToText((lv_sourceUnitType)));
-                TextExpressionSetToken("Param/Expression/lib_AHLI_B570FD3E", "B", IntToText(lv_lastInfoArrayIndex));
-                TriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_AHLI_B570FD3E"), false);
                 return false;
             }
         }
@@ -2964,6 +2994,10 @@ bool libAHLI_gt_ProductionTabMorphFinished_Func (bool testConds, bool runActions
                 }
 
                 libAHLI_gf_ProductionTabRemoveProduction(lv_player, lv_targetUnitType, lv_productionType, lv_unit);
+                if ((lv_lastInfoArrayIndex != 0)) {
+                    UnitGroupRemove(libAHLI_gv_productionTabPlayer[lv_player].lv_morphingUnitsWithoutMorphDelay, lv_unit);
+                }
+
             }
             else {
                 return false;
@@ -3021,6 +3055,10 @@ bool libAHLI_gt_ProductionTabMorphCanceled_Func (bool testConds, bool runActions
                 }
 
                 libAHLI_gf_ProductionTabRemoveProduction(lv_player, lv_targetUnitType, lv_productionType, lv_unit);
+                if ((lv_lastInfoArrayIndex != 0)) {
+                    UnitGroupRemove(libAHLI_gv_productionTabPlayer[lv_player].lv_morphingUnitsWithoutMorphDelay, lv_unit);
+                }
+
                 if (libAHLI_gv_battleReport.lv_battleActive) {
                     libAHLI_gf_BattleReportMorphCanceled((lv_targetUnitType), UnitGetType(lv_unit), lv_player, lv_ability);
                 }
