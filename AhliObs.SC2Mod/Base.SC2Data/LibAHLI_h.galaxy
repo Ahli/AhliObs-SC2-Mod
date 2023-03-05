@@ -196,6 +196,16 @@ struct libAHLI_gs_BattleReportSide {
     int lv_uiVespeneLabel;
 };
 
+struct libAHLI_gs_BattleStats {
+    bool lv_active;
+};
+
+struct libAHLI_gs_BattleStatsSide {
+    string[2] lv_unitType;
+    fixed lv_damageDealt;
+    fixed lv_damageDealtFriendlyFire;
+};
+
 // Variable Declarations
 playergroup libAHLI_gv_all_Players;
 playergroup libAHLI_gv_initial_Active_Players;
@@ -214,7 +224,9 @@ fixed libAHLI_gv_workersKilledNotificationsVisibleGameTime;
 libAHLI_gs_MapNotifications libAHLI_gv_mapNotifications;
 libAHLI_gs_MinimapFrustum libAHLI_gv_minimapFrustum;
 libAHLI_gs_BattleReport libAHLI_gv_battleReport;
-libAHLI_gs_BattleReportSide[2] libAHLI_gv_battleReportSideData;
+libAHLI_gs_BattleReportSide[2] libAHLI_gv_battleReportSide;
+libAHLI_gs_BattleStats libAHLI_gv_battleStats;
+libAHLI_gs_BattleStatsSide libAHLI_gv_battleStatsSide;
 
 // Function Declarations
 string libAHLI_gf_IconofProduction (string lp_item, bool lp_isUnit, int lp_player);

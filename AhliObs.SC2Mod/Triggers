@@ -4005,6 +4005,7 @@
             <Item Type="Category" Library="AHLI" Id="3BEE1E05"/>
             <Item Type="Category" Library="AHLI" Id="15831B74"/>
             <Item Type="Category" Library="AHLI" Id="A2460A54"/>
+            <Item Type="Category" Library="AHLI" Id="159FBCB0"/>
             <Item Type="Trigger" Library="AHLI" Id="0399CC46"/>
             <Item Type="Trigger" Library="AHLI" Id="12E3B86D"/>
         </Root>
@@ -77892,6 +77893,77 @@
                 <Type Value="struct"/>
                 <TypeElement Type="Structure" Library="AHLI" Id="4F586E7B"/>
                 <ArraySize Dim="0" Value="1"/>
+            </VariableType>
+        </Element>
+        <Element Type="Category" Id="159FBCB0">
+            <Item Type="Category" Library="AHLI" Id="E2B5A7FF"/>
+        </Element>
+        <Element Type="Category" Id="E2B5A7FF">
+            <Label Type="Label" Library="Ntve" Id="CE915C5A"/>
+            <Item Type="Structure" Library="AHLI" Id="96017ED5"/>
+            <Item Type="Variable" Library="AHLI" Id="D1B9AF63"/>
+            <Item Type="Structure" Library="AHLI" Id="82FB0B79"/>
+            <Item Type="Variable" Library="AHLI" Id="964EA805"/>
+        </Element>
+        <Element Type="Structure" Id="96017ED5">
+            <Variable Type="Variable" Library="AHLI" Id="44AD4B18"/>
+        </Element>
+        <Element Type="Variable" Id="44AD4B18">
+            <VariableType>
+                <Type Value="bool"/>
+            </VariableType>
+            <Value Type="Param" Library="AHLI" Id="C4B7A323"/>
+        </Element>
+        <Element Type="Param" Id="C4B7A323">
+            <Value>false</Value>
+            <ValueType Type="bool"/>
+        </Element>
+        <Element Type="Variable" Id="D1B9AF63">
+            <VariableType>
+                <Type Value="struct"/>
+                <TypeElement Type="Structure" Library="AHLI" Id="96017ED5"/>
+            </VariableType>
+        </Element>
+        <Element Type="Structure" Id="82FB0B79">
+            <Variable Type="Variable" Library="AHLI" Id="08E931DF"/>
+            <Variable Type="Variable" Library="AHLI" Id="350BFB91"/>
+            <Variable Type="Variable" Library="AHLI" Id="0BFAE830"/>
+        </Element>
+        <Element Type="Variable" Id="08E931DF">
+            <VariableType>
+                <Type Value="gamelink"/>
+                <GameType Value="Unit"/>
+                <ArraySize Dim="0" Value="1"/>
+            </VariableType>
+            <Value Type="Param" Library="AHLI" Id="5D636748"/>
+        </Element>
+        <Element Type="Param" Id="5D636748">
+            <Preset Type="PresetValue" Library="Ntve" Id="C9DCA6C0"/>
+        </Element>
+        <Element Type="Variable" Id="350BFB91">
+            <VariableType>
+                <Type Value="fixed"/>
+            </VariableType>
+            <Value Type="Param" Library="AHLI" Id="D953A60F"/>
+        </Element>
+        <Element Type="Param" Id="D953A60F">
+            <Value>0</Value>
+            <ValueType Type="fixed"/>
+        </Element>
+        <Element Type="Variable" Id="0BFAE830">
+            <VariableType>
+                <Type Value="fixed"/>
+            </VariableType>
+            <Value Type="Param" Library="AHLI" Id="5EEF8A70"/>
+        </Element>
+        <Element Type="Param" Id="5EEF8A70">
+            <Value>0</Value>
+            <ValueType Type="fixed"/>
+        </Element>
+        <Element Type="Variable" Id="964EA805">
+            <VariableType>
+                <Type Value="struct"/>
+                <TypeElement Type="Structure" Library="AHLI" Id="82FB0B79"/>
             </VariableType>
         </Element>
         <Element Type="Trigger" Id="0399CC46">
