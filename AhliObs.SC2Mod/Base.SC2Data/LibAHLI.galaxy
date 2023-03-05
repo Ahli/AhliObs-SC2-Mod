@@ -2141,6 +2141,8 @@ void libAHLI_gf_BattleReportUpdateUI () {
         PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealtTotal", lv_sumReal);
         PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealt", libAHLI_gv_battleReportSideData[0].lv_damageDealt);
         PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealt", libAHLI_gv_battleReportSideData[1].lv_damageDealt);
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealtDelta", (libAHLI_gv_battleReportSideData[0].lv_damageDealt - libAHLI_gv_battleReportSideData[1].lv_damageDealt));
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealtDelta", (libAHLI_gv_battleReportSideData[1].lv_damageDealt - libAHLI_gv_battleReportSideData[0].lv_damageDealt));
         libAHLI_gv_battleReport.lv_updateDueToDamage = false;
     }
 
@@ -2171,6 +2173,10 @@ void libAHLI_gf_BattleReportUpdateUI () {
         PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyed", libAHLI_gv_battleReportSideData[1].lv_resourcesDestroyed[0]);
         PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyed", libAHLI_gv_battleReportSideData[0].lv_resourcesDestroyed[1]);
         PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyed", libAHLI_gv_battleReportSideData[1].lv_resourcesDestroyed[1]);
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyedDelta", (libAHLI_gv_battleReportSideData[0].lv_resourcesDestroyed[0] - libAHLI_gv_battleReportSideData[1].lv_resourcesDestroyed[0]));
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyedDelta", (libAHLI_gv_battleReportSideData[1].lv_resourcesDestroyed[0] - libAHLI_gv_battleReportSideData[0].lv_resourcesDestroyed[0]));
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyedDelta", (libAHLI_gv_battleReportSideData[0].lv_resourcesDestroyed[1] - libAHLI_gv_battleReportSideData[1].lv_resourcesDestroyed[1]));
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyedDelta", (libAHLI_gv_battleReportSideData[1].lv_resourcesDestroyed[1] - libAHLI_gv_battleReportSideData[0].lv_resourcesDestroyed[1]));
         libAHLI_gv_battleReport.lv_updateDueToDeathResources = false;
     }
 

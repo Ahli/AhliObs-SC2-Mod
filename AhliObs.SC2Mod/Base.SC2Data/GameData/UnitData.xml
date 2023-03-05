@@ -3,17 +3,8 @@
     <CUnit id="AssimilatorRich">
         <LeaderAlias value="Assimilator"/>
     </CUnit>
-    <CUnit id="Carrier">
-        <ScoreMake value="540"/>
-        <ScoreKill value="540"/>
-    </CUnit>
     <CUnit id="ExtractorRich">
         <LeaderAlias value="Extractor"/>
-        <ScoreKill value="75"/>
-    </CUnit>
-    <CUnit id="Immortal">
-        <ScoreMake value="375"/>
-        <ScoreKill value="375"/>
     </CUnit>
     <CUnit id="KD8Charge">
         <LeaderAlias value=""/>
@@ -30,49 +21,13 @@
     <CUnit id="FactoryTechLab">
         <LeaderAlias value="TechLab"/>
     </CUnit>
-    <CUnit id="LurkerDenMP">
-        <ScoreMake value="250"/>
-        <ScoreKill value="300"/>
-    </CUnit>
-    <CUnit id="NydusCanal">
-        <ScoreMake value="150"/>
-        <ScoreKill value="150"/>
-    </CUnit>
-    <CUnit id="NydusNetwork">
-        <ScoreMake value="300"/>
-        <ScoreKill value="350"/>
-    </CUnit>
     <CUnit id="RefineryRich">
         <LeaderAlias value="Refinery"/>
     </CUnit>
-    <CUnit id="RoboticsBay">
-        <ScoreMake value="300"/>
-        <ScoreKill value="300"/>
-    </CUnit>
-    <CUnit id="RoboticsFacility">
-        <ScoreMake value="250"/>
-        <ScoreKill value="250"/>
-    </CUnit>
-    <CUnit id="ShieldBattery">
-        <ScoreMake value="100"/>
-        <ScoreKill value="100"/>
-    </CUnit>
     <CUnit id="StarportReactor">
         <LeaderAlias value="Reactor"/>
-        <CostCategory value="Technology"/>
     </CUnit>
     <CUnit id="StarportTechLab">
         <LeaderAlias value="TechLab"/>
-    </CUnit>
-    <CUnit id="Tempest">
-        <ScoreMake value="425"/>
-        <ScoreKill value="425"/>
-    </CUnit>
-    <CUnit id="WarpPrism">
-        <ScoreMake value="250"/>
-        <ScoreKill value="250"/>
-    </CUnit>
-    <CUnit id="WarpPrismPhasing">
-        <ScoreKill value="250"/>
     </CUnit>
 </Catalog>

@@ -71514,6 +71514,8 @@
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="81A52E4A"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="2E40C2A2"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="A4C67F24"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="57944AA9"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="BCA56DF3"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="B9D6FACE"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="3D434EE7"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="C8E1046A"/>
@@ -71949,6 +71951,138 @@
             <Value>1</Value>
             <ValueType Type="int"/>
         </Element>
+        <Element Type="FunctionCall" Id="57944AA9">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="15003AC6"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="AHLI" Id="726EF900"/>
+            <Parameter Type="Param" Library="AHLI" Id="98523494"/>
+            <Parameter Type="Param" Library="AHLI" Id="5A24C264"/>
+        </Element>
+        <Element Type="Param" Id="726EF900">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="273F3A2D"/>
+            <Variable Type="Variable" Library="AHLI" Id="5EB9CD9A"/>
+            <StructMember Type="Param" Library="AHLI" Id="C83B254B"/>
+        </Element>
+        <Element Type="Param" Id="C83B254B">
+            <Variable Type="Variable" Library="AHLI" Id="7C1BC9F5"/>
+            <Array Type="Param" Library="AHLI" Id="923AE00B"/>
+        </Element>
+        <Element Type="Param" Id="923AE00B">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="98523494">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="E5EA6FB2"/>
+            <Value>BattleReportDamageDealtDelta</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="ScoreValue"/>
+        </Element>
+        <Element Type="Param" Id="5A24C264">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="657771CB"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="0C2DE4AE"/>
+        </Element>
+        <Element Type="FunctionCall" Id="0C2DE4AE">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000129"/>
+            <Parameter Type="Param" Library="AHLI" Id="3282FFA7"/>
+            <Parameter Type="Param" Library="AHLI" Id="3272FC89"/>
+            <Parameter Type="Param" Library="AHLI" Id="DEB159FB"/>
+        </Element>
+        <Element Type="Param" Id="3282FFA7">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000209"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000086"/>
+        </Element>
+        <Element Type="Param" Id="3272FC89">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000210"/>
+            <Variable Type="Variable" Library="AHLI" Id="EBAF2D22"/>
+            <StructMember Type="Param" Library="AHLI" Id="569B9533"/>
+            <Array Type="Param" Library="AHLI" Id="C22AD68C"/>
+        </Element>
+        <Element Type="Param" Id="569B9533">
+            <Variable Type="Variable" Library="AHLI" Id="5069D83B"/>
+        </Element>
+        <Element Type="Param" Id="C22AD68C">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="DEB159FB">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000208"/>
+            <Variable Type="Variable" Library="AHLI" Id="EBAF2D22"/>
+            <StructMember Type="Param" Library="AHLI" Id="43E8D0F0"/>
+            <Array Type="Param" Library="AHLI" Id="DC9F11E0"/>
+        </Element>
+        <Element Type="Param" Id="43E8D0F0">
+            <Variable Type="Variable" Library="AHLI" Id="5069D83B"/>
+        </Element>
+        <Element Type="Param" Id="DC9F11E0">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="FunctionCall" Id="BCA56DF3">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="15003AC6"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="AHLI" Id="52D8AEDB"/>
+            <Parameter Type="Param" Library="AHLI" Id="2047E8B0"/>
+            <Parameter Type="Param" Library="AHLI" Id="2F41D6CE"/>
+        </Element>
+        <Element Type="Param" Id="52D8AEDB">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="273F3A2D"/>
+            <Variable Type="Variable" Library="AHLI" Id="5EB9CD9A"/>
+            <StructMember Type="Param" Library="AHLI" Id="5D561540"/>
+        </Element>
+        <Element Type="Param" Id="5D561540">
+            <Variable Type="Variable" Library="AHLI" Id="7C1BC9F5"/>
+            <Array Type="Param" Library="AHLI" Id="1EC2DDEC"/>
+        </Element>
+        <Element Type="Param" Id="1EC2DDEC">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="2047E8B0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="E5EA6FB2"/>
+            <Value>BattleReportDamageDealtDelta</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="ScoreValue"/>
+        </Element>
+        <Element Type="Param" Id="2F41D6CE">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="657771CB"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="43C488DB"/>
+        </Element>
+        <Element Type="FunctionCall" Id="43C488DB">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000129"/>
+            <Parameter Type="Param" Library="AHLI" Id="F1426D67"/>
+            <Parameter Type="Param" Library="AHLI" Id="EDFB7552"/>
+            <Parameter Type="Param" Library="AHLI" Id="6386A9AC"/>
+        </Element>
+        <Element Type="Param" Id="F1426D67">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000209"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000086"/>
+        </Element>
+        <Element Type="Param" Id="EDFB7552">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000210"/>
+            <Variable Type="Variable" Library="AHLI" Id="EBAF2D22"/>
+            <StructMember Type="Param" Library="AHLI" Id="7C9D0DDB"/>
+            <Array Type="Param" Library="AHLI" Id="2421F025"/>
+        </Element>
+        <Element Type="Param" Id="7C9D0DDB">
+            <Variable Type="Variable" Library="AHLI" Id="5069D83B"/>
+        </Element>
+        <Element Type="Param" Id="2421F025">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="6386A9AC">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000208"/>
+            <Variable Type="Variable" Library="AHLI" Id="EBAF2D22"/>
+            <StructMember Type="Param" Library="AHLI" Id="DD08B023"/>
+            <Array Type="Param" Library="AHLI" Id="7E918F69"/>
+        </Element>
+        <Element Type="Param" Id="DD08B023">
+            <Variable Type="Variable" Library="AHLI" Id="5069D83B"/>
+        </Element>
+        <Element Type="Param" Id="7E918F69">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
         <Element Type="FunctionCall" Id="B9D6FACE">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
@@ -72027,6 +72161,10 @@
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="9A8391E5"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="BB586210"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="2E667389"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="A12F04A6"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="7F523785"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="692B1A67"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="FA76F287"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="D7546237"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="D16D4BC5"/>
         </Element>
@@ -73005,6 +73143,310 @@
             <ValueType Type="int"/>
         </Element>
         <Element Type="Param" Id="0C6C2933">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="FunctionCall" Id="A12F04A6">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="15003AC6"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="AHLI" Id="EA2B25A5"/>
+            <Parameter Type="Param" Library="AHLI" Id="C20BFF8A"/>
+            <Parameter Type="Param" Library="AHLI" Id="491D0891"/>
+        </Element>
+        <Element Type="Param" Id="EA2B25A5">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="273F3A2D"/>
+            <Variable Type="Variable" Library="AHLI" Id="5EB9CD9A"/>
+            <StructMember Type="Param" Library="AHLI" Id="C437CF47"/>
+        </Element>
+        <Element Type="Param" Id="C437CF47">
+            <Variable Type="Variable" Library="AHLI" Id="7C1BC9F5"/>
+            <Array Type="Param" Library="AHLI" Id="CC3708B6"/>
+        </Element>
+        <Element Type="Param" Id="CC3708B6">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="C20BFF8A">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="E5EA6FB2"/>
+            <Value>BattleReportMineralsDestroyedDelta</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="ScoreValue"/>
+        </Element>
+        <Element Type="Param" Id="491D0891">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="657771CB"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="5F154869"/>
+        </Element>
+        <Element Type="FunctionCall" Id="5F154869">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000129"/>
+            <Parameter Type="Param" Library="AHLI" Id="436221AD"/>
+            <Parameter Type="Param" Library="AHLI" Id="E52FA5A0"/>
+            <Parameter Type="Param" Library="AHLI" Id="E6C2337B"/>
+        </Element>
+        <Element Type="Param" Id="436221AD">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000209"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000086"/>
+        </Element>
+        <Element Type="Param" Id="E52FA5A0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000210"/>
+            <Variable Type="Variable" Library="AHLI" Id="EBAF2D22"/>
+            <StructMember Type="Param" Library="AHLI" Id="DD329770"/>
+            <Array Type="Param" Library="AHLI" Id="387B53A9"/>
+        </Element>
+        <Element Type="Param" Id="DD329770">
+            <Variable Type="Variable" Library="AHLI" Id="FA32931E"/>
+            <Array Type="Param" Library="AHLI" Id="64C0E549"/>
+        </Element>
+        <Element Type="Param" Id="64C0E549">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="387B53A9">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="E6C2337B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000208"/>
+            <Variable Type="Variable" Library="AHLI" Id="EBAF2D22"/>
+            <StructMember Type="Param" Library="AHLI" Id="69A9856B"/>
+            <Array Type="Param" Library="AHLI" Id="32AC1C0A"/>
+        </Element>
+        <Element Type="Param" Id="69A9856B">
+            <Variable Type="Variable" Library="AHLI" Id="FA32931E"/>
+            <Array Type="Param" Library="AHLI" Id="E6D0AB20"/>
+        </Element>
+        <Element Type="Param" Id="E6D0AB20">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="32AC1C0A">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="FunctionCall" Id="7F523785">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="15003AC6"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="AHLI" Id="F6C616A3"/>
+            <Parameter Type="Param" Library="AHLI" Id="E519C983"/>
+            <Parameter Type="Param" Library="AHLI" Id="E2444492"/>
+        </Element>
+        <Element Type="Param" Id="F6C616A3">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="273F3A2D"/>
+            <Variable Type="Variable" Library="AHLI" Id="5EB9CD9A"/>
+            <StructMember Type="Param" Library="AHLI" Id="A9675A2F"/>
+        </Element>
+        <Element Type="Param" Id="A9675A2F">
+            <Variable Type="Variable" Library="AHLI" Id="7C1BC9F5"/>
+            <Array Type="Param" Library="AHLI" Id="3B2E5DA8"/>
+        </Element>
+        <Element Type="Param" Id="3B2E5DA8">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="E519C983">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="E5EA6FB2"/>
+            <Value>BattleReportMineralsDestroyedDelta</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="ScoreValue"/>
+        </Element>
+        <Element Type="Param" Id="E2444492">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="657771CB"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="4FDF510E"/>
+        </Element>
+        <Element Type="FunctionCall" Id="4FDF510E">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000129"/>
+            <Parameter Type="Param" Library="AHLI" Id="B3851A61"/>
+            <Parameter Type="Param" Library="AHLI" Id="39F97018"/>
+            <Parameter Type="Param" Library="AHLI" Id="3C323915"/>
+        </Element>
+        <Element Type="Param" Id="B3851A61">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000209"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000086"/>
+        </Element>
+        <Element Type="Param" Id="39F97018">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000210"/>
+            <Variable Type="Variable" Library="AHLI" Id="EBAF2D22"/>
+            <StructMember Type="Param" Library="AHLI" Id="96E64C7F"/>
+            <Array Type="Param" Library="AHLI" Id="D8993814"/>
+        </Element>
+        <Element Type="Param" Id="96E64C7F">
+            <Variable Type="Variable" Library="AHLI" Id="FA32931E"/>
+            <Array Type="Param" Library="AHLI" Id="3D4A326D"/>
+        </Element>
+        <Element Type="Param" Id="3D4A326D">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="D8993814">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="3C323915">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000208"/>
+            <Variable Type="Variable" Library="AHLI" Id="EBAF2D22"/>
+            <StructMember Type="Param" Library="AHLI" Id="EDD0042E"/>
+            <Array Type="Param" Library="AHLI" Id="508B9012"/>
+        </Element>
+        <Element Type="Param" Id="EDD0042E">
+            <Variable Type="Variable" Library="AHLI" Id="FA32931E"/>
+            <Array Type="Param" Library="AHLI" Id="C5D4827E"/>
+        </Element>
+        <Element Type="Param" Id="C5D4827E">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="508B9012">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="FunctionCall" Id="692B1A67">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="15003AC6"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="AHLI" Id="EF0FCA90"/>
+            <Parameter Type="Param" Library="AHLI" Id="FB03F1D2"/>
+            <Parameter Type="Param" Library="AHLI" Id="B5439B9D"/>
+        </Element>
+        <Element Type="Param" Id="EF0FCA90">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="273F3A2D"/>
+            <Variable Type="Variable" Library="AHLI" Id="5EB9CD9A"/>
+            <StructMember Type="Param" Library="AHLI" Id="67C5F6E2"/>
+        </Element>
+        <Element Type="Param" Id="67C5F6E2">
+            <Variable Type="Variable" Library="AHLI" Id="7C1BC9F5"/>
+            <Array Type="Param" Library="AHLI" Id="8EC5CD35"/>
+        </Element>
+        <Element Type="Param" Id="8EC5CD35">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="FB03F1D2">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="E5EA6FB2"/>
+            <Value>BattleReportVespeneDestroyedDelta</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="ScoreValue"/>
+        </Element>
+        <Element Type="Param" Id="B5439B9D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="657771CB"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="C95BCBF9"/>
+        </Element>
+        <Element Type="FunctionCall" Id="C95BCBF9">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000129"/>
+            <Parameter Type="Param" Library="AHLI" Id="78E38274"/>
+            <Parameter Type="Param" Library="AHLI" Id="311EB0E0"/>
+            <Parameter Type="Param" Library="AHLI" Id="EF8FBEF1"/>
+        </Element>
+        <Element Type="Param" Id="78E38274">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000209"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000086"/>
+        </Element>
+        <Element Type="Param" Id="311EB0E0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000210"/>
+            <Variable Type="Variable" Library="AHLI" Id="EBAF2D22"/>
+            <StructMember Type="Param" Library="AHLI" Id="2CE819CC"/>
+            <Array Type="Param" Library="AHLI" Id="65F40AB5"/>
+        </Element>
+        <Element Type="Param" Id="2CE819CC">
+            <Variable Type="Variable" Library="AHLI" Id="FA32931E"/>
+            <Array Type="Param" Library="AHLI" Id="63DCBF8D"/>
+        </Element>
+        <Element Type="Param" Id="63DCBF8D">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="65F40AB5">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="EF8FBEF1">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000208"/>
+            <Variable Type="Variable" Library="AHLI" Id="EBAF2D22"/>
+            <StructMember Type="Param" Library="AHLI" Id="AC9C0834"/>
+            <Array Type="Param" Library="AHLI" Id="F44C0956"/>
+        </Element>
+        <Element Type="Param" Id="AC9C0834">
+            <Variable Type="Variable" Library="AHLI" Id="FA32931E"/>
+            <Array Type="Param" Library="AHLI" Id="89910310"/>
+        </Element>
+        <Element Type="Param" Id="89910310">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="F44C0956">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="FunctionCall" Id="FA76F287">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="15003AC6"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="AHLI" Id="3A787658"/>
+            <Parameter Type="Param" Library="AHLI" Id="DE100FC7"/>
+            <Parameter Type="Param" Library="AHLI" Id="7BD0870A"/>
+        </Element>
+        <Element Type="Param" Id="3A787658">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="273F3A2D"/>
+            <Variable Type="Variable" Library="AHLI" Id="5EB9CD9A"/>
+            <StructMember Type="Param" Library="AHLI" Id="C96A8FBA"/>
+        </Element>
+        <Element Type="Param" Id="C96A8FBA">
+            <Variable Type="Variable" Library="AHLI" Id="7C1BC9F5"/>
+            <Array Type="Param" Library="AHLI" Id="7861E4BA"/>
+        </Element>
+        <Element Type="Param" Id="7861E4BA">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="DE100FC7">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="E5EA6FB2"/>
+            <Value>BattleReportVespeneDestroyedDelta</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="ScoreValue"/>
+        </Element>
+        <Element Type="Param" Id="7BD0870A">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="657771CB"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="18502F3A"/>
+        </Element>
+        <Element Type="FunctionCall" Id="18502F3A">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000129"/>
+            <Parameter Type="Param" Library="AHLI" Id="D44ECD9D"/>
+            <Parameter Type="Param" Library="AHLI" Id="72F286EC"/>
+            <Parameter Type="Param" Library="AHLI" Id="B2F6B176"/>
+        </Element>
+        <Element Type="Param" Id="D44ECD9D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000209"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000086"/>
+        </Element>
+        <Element Type="Param" Id="72F286EC">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000210"/>
+            <Variable Type="Variable" Library="AHLI" Id="EBAF2D22"/>
+            <StructMember Type="Param" Library="AHLI" Id="90A05533"/>
+            <Array Type="Param" Library="AHLI" Id="C78E946E"/>
+        </Element>
+        <Element Type="Param" Id="90A05533">
+            <Variable Type="Variable" Library="AHLI" Id="FA32931E"/>
+            <Array Type="Param" Library="AHLI" Id="32A6F193"/>
+        </Element>
+        <Element Type="Param" Id="32A6F193">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="C78E946E">
+            <Value>0</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="B2F6B176">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000208"/>
+            <Variable Type="Variable" Library="AHLI" Id="EBAF2D22"/>
+            <StructMember Type="Param" Library="AHLI" Id="050AEAA2"/>
+            <Array Type="Param" Library="AHLI" Id="39960A27"/>
+        </Element>
+        <Element Type="Param" Id="050AEAA2">
+            <Variable Type="Variable" Library="AHLI" Id="FA32931E"/>
+            <Array Type="Param" Library="AHLI" Id="68283F2F"/>
+        </Element>
+        <Element Type="Param" Id="68283F2F">
+            <Value>1</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="39960A27">
             <Value>1</Value>
             <ValueType Type="int"/>
         </Element>

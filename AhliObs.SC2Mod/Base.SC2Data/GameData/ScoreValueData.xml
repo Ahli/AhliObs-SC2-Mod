@@ -4,16 +4,19 @@
     <CScoreValueCustom id="PlayerStatus"/>
     <CScoreValueCustom id="VersusModePlayerSide"/>
     <CScoreValueCustom id="BattleReportMineralsDestroyed"/>
+    <CScoreValueCustom id="BattleReportMineralsDestroyedDelta"/>
     <CScoreValueCustom id="BattleReportMineralsDestroyedTotal"/>
     <CScoreValueCustom id="BattleReportMineralsDestroyedPercent">
         <Type value="Fixed"/>
     </CScoreValueCustom>
     <CScoreValueCustom id="BattleReportVespeneDestroyed"/>
+    <CScoreValueCustom id="BattleReportVespeneDestroyedDelta"/>
     <CScoreValueCustom id="BattleReportVespeneDestroyedTotal"/>
     <CScoreValueCustom id="BattleReportVespeneDestroyedPercent">
         <Type value="Fixed"/>
     </CScoreValueCustom>
     <CScoreValueCustom id="BattleReportDamageDealt"/>
+    <CScoreValueCustom id="BattleReportDamageDealtDelta"/>
     <CScoreValueCustom id="BattleReportDamageDealtTotal"/>
     <CScoreValueCustom id="BattleReportDamageDealtPercent">
         <Type value="Fixed"/>
