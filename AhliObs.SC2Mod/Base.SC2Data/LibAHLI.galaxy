@@ -4687,24 +4687,24 @@ bool libAHLI_gt_WorkersKilledNotificationsWorkerKilled_Func (bool testConds, boo
     // Variable Declarations
     int lv_deadUnitOwner;
     unit lv_deadUnit;
-    unit lv_killingUnit;
     string lv_unitType;
+    unit lv_killingUnit;
 
     // Automatic Variable Declarations
     // Variable Initialization
+    lv_killingUnit = libNtve_gf_KillingUnit();
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    if ((EventUnitDamageDeathCheck(c_deathTypeRemove) == false)) {
+    if (((EventUnitDamageDeathCheck(c_deathTypeRemove) == false) || (UnitGetType(lv_killingUnit) == "CommandCenterFlying"))) {
         lv_deadUnit = EventUnit();
         if ((UnitTestState(lv_deadUnit, c_unitStateHallucination) == false)) {
             lv_unitType = UnitGetType(lv_deadUnit);
             lv_deadUnitOwner = UnitGetOwner(lv_deadUnit);
             if (((lv_unitType == "Drone") || (lv_unitType == "Probe") || (lv_unitType == "SCV") || (lv_unitType == "DroneBurrowed")) && (libAHLI_gv_workersKilledNotifications.lv_itemPanel[lv_deadUnitOwner] != c_invalidDialogControlId)) {
-                lv_killingUnit = libNtve_gf_KillingUnit();
                 if ((libAHLI_gv_workersKilledNotifications.lv_slotStatus[lv_deadUnitOwner] == libAHLI_ge_WorkersKilledNotificationsSlotStatus_Visible)) {
                     libAHLI_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] = (libAHLI_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] + 1);
                 }

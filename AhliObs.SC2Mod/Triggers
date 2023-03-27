@@ -55457,12 +55457,13 @@
         <Element Type="Trigger" Id="1A113565">
             <Variable Type="Variable" Library="AHLI" Id="A9D28DD2"/>
             <Variable Type="Variable" Library="AHLI" Id="8DC91164"/>
-            <Variable Type="Variable" Library="AHLI" Id="9D02F0C3"/>
             <Variable Type="Variable" Library="AHLI" Id="259D5A92"/>
+            <Variable Type="Variable" Library="AHLI" Id="9D02F0C3"/>
             <Event Type="Comment" Library="AHLI" Id="7B942F18"/>
             <Event Type="FunctionCall" Library="AHLI" Id="519E837A"/>
             <Action Type="Comment" Library="AHLI" Id="37CDC909"/>
             <Action Type="FunctionCall" Library="AHLI" Id="C3CA6065"/>
+            <Action Type="FunctionCall" Library="AHLI" Id="85FC070B"/>
             <Action Type="FunctionCall" Library="AHLI" Id="98A65C71"/>
         </Element>
         <Element Type="Variable" Id="A9D28DD2">
@@ -55484,15 +55485,6 @@
         <Element Type="Param" Id="D992162F">
             <Preset Type="PresetValue" Library="Ntve" Id="D6EA4D09"/>
         </Element>
-        <Element Type="Variable" Id="9D02F0C3">
-            <VariableType>
-                <Type Value="unit"/>
-            </VariableType>
-            <Value Type="Param" Library="AHLI" Id="F50136C8"/>
-        </Element>
-        <Element Type="Param" Id="F50136C8">
-            <Preset Type="PresetValue" Library="Ntve" Id="D6EA4D09"/>
-        </Element>
         <Element Type="Variable" Id="259D5A92">
             <VariableType>
                 <Type Value="gamelink"/>
@@ -55502,6 +55494,18 @@
         </Element>
         <Element Type="Param" Id="18D5BFF2">
             <Preset Type="PresetValue" Library="Ntve" Id="C9DCA6C0"/>
+        </Element>
+        <Element Type="Variable" Id="9D02F0C3">
+            <VariableType>
+                <Type Value="unit"/>
+            </VariableType>
+            <Value Type="Param" Library="AHLI" Id="F50136C8"/>
+        </Element>
+        <Element Type="Param" Id="F50136C8">
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="1F431488"/>
+        </Element>
+        <Element Type="FunctionCall" Id="1F431488">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="ADB84019"/>
         </Element>
         <Element Type="Comment" Id="7B942F18">
             <Comment>
@@ -55533,8 +55537,9 @@
         <Element Type="FunctionCall" Id="C3CA6065">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="008FD974"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="E8946055"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="AB42CC4D"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="90F4D46D"/>
-            <FunctionCall Type="FunctionCall" Library="AHLI" Id="F329C7B1"/>
         </Element>
         <Element Type="FunctionCall" Id="008FD974">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
@@ -55552,6 +55557,96 @@
         </Element>
         <Element Type="FunctionCall" Id="C911309F">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000092"/>
+        </Element>
+        <Element Type="FunctionCall" Id="E8946055">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000133"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="F329C7B1"/>
+            <FunctionCall Type="Comment" Library="AHLI" Id="953ECE3A"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="015EBA77"/>
+        </Element>
+        <Element Type="FunctionCall" Id="F329C7B1">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001"/>
+            <Parameter Type="Param" Library="AHLI" Id="D584480F"/>
+            <Parameter Type="Param" Library="AHLI" Id="2059E713"/>
+            <Parameter Type="Param" Library="AHLI" Id="ABA004B4"/>
+        </Element>
+        <Element Type="Param" Id="D584480F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="705C083D"/>
+        </Element>
+        <Element Type="FunctionCall" Id="705C083D">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000243"/>
+            <Parameter Type="Param" Library="AHLI" Id="C84C62D9"/>
+        </Element>
+        <Element Type="Param" Id="C84C62D9">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="61805391"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000201"/>
+        </Element>
+        <Element Type="Param" Id="2059E713">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="ABA004B4">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>false</Value>
+            <ValueType Type="bool"/>
+        </Element>
+        <Element Type="Comment" Id="953ECE3A">
+            <Comment>
+                Flying Command Centers remove their cargo on death; but these workers need to be counted
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001"/>
+        </Element>
+        <Element Type="FunctionCall" Id="015EBA77">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001"/>
+            <Parameter Type="Param" Library="AHLI" Id="7AB629F0"/>
+            <Parameter Type="Param" Library="AHLI" Id="3443733D"/>
+            <Parameter Type="Param" Library="AHLI" Id="670067A1"/>
+        </Element>
+        <Element Type="Param" Id="7AB629F0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="6F4592B0"/>
+        </Element>
+        <Element Type="FunctionCall" Id="6F4592B0">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000079"/>
+            <Parameter Type="Param" Library="AHLI" Id="2AE64C93"/>
+        </Element>
+        <Element Type="Param" Id="2AE64C93">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000138"/>
+            <Variable Type="Variable" Library="AHLI" Id="9D02F0C3"/>
+        </Element>
+        <Element Type="Param" Id="3443733D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="670067A1">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>CommandCenterFlying</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Unit"/>
+        </Element>
+        <Element Type="FunctionCall" Id="AB42CC4D">
+            <Disabled/>
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000118"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005"/>
+            <Parameter Type="Param" Library="AHLI" Id="59A98073"/>
+            <Parameter Type="Param" Library="AHLI" Id="770B2575"/>
+            <Parameter Type="Param" Library="AHLI" Id="05643C1B"/>
+        </Element>
+        <Element Type="Param" Id="59A98073">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="C3CF50B0"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="AEB4446D"/>
+        </Element>
+        <Element Type="Param" Id="770B2575">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000187"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000071"/>
+        </Element>
+        <Element Type="Param" Id="05643C1B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000186"/>
+            <ValueType Type="text"/>
         </Element>
         <Element Type="FunctionCall" Id="90F4D46D">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
@@ -55641,7 +55736,6 @@
         <Element Type="FunctionCall" Id="81B089DE">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <FunctionCall Type="FunctionCall" Library="AHLI" Id="773E3404"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="1BD88806"/>
             <FunctionCall Type="Comment" Library="AHLI" Id="B244E99B"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="22F5C679"/>
@@ -55659,24 +55753,8 @@
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="EED3CF6F"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="A17E4ABF"/>
             <FunctionCall Type="Comment" Library="AHLI" Id="756F697D"/>
+            <FunctionCall Type="FunctionCall" Library="AHLI" Id="9BFB5EB3"/>
             <FunctionCall Type="FunctionCall" Library="AHLI" Id="73C15235"/>
-        </Element>
-        <Element Type="FunctionCall" Id="773E3404">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="AHLI" Id="3538917C"/>
-            <Parameter Type="Param" Library="AHLI" Id="4FC6BC8D"/>
-        </Element>
-        <Element Type="Param" Id="3538917C">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="AHLI" Id="9D02F0C3"/>
-        </Element>
-        <Element Type="Param" Id="4FC6BC8D">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="AHLI" Id="33C0FF7D"/>
-        </Element>
-        <Element Type="FunctionCall" Id="33C0FF7D">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="ADB84019"/>
         </Element>
         <Element Type="FunctionCall" Id="1BD88806">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000133"/>
@@ -56247,7 +56325,7 @@
         </Element>
         <Element Type="Comment" Id="74CE1CA8">
             <Comment>
-                ignore scout
+                ignore scout as first worker death
             </Comment>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
         </Element>
@@ -56431,6 +56509,26 @@
             </Comment>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
         </Element>
+        <Element Type="FunctionCall" Id="9BFB5EB3">
+            <Disabled/>
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000118"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="AHLI" Id="21B72476"/>
+            <Parameter Type="Param" Library="AHLI" Id="FB1F0182"/>
+            <Parameter Type="Param" Library="AHLI" Id="9096C42D"/>
+        </Element>
+        <Element Type="Param" Id="21B72476">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="C3CF50B0"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="AEB4446D"/>
+        </Element>
+        <Element Type="Param" Id="FB1F0182">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000187"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000071"/>
+        </Element>
+        <Element Type="Param" Id="9096C42D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000186"/>
+            <ValueType Type="text"/>
+        </Element>
         <Element Type="FunctionCall" Id="73C15235">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000139"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
@@ -56468,33 +56566,24 @@
             <Value>false</Value>
             <ValueType Type="bool"/>
         </Element>
-        <Element Type="FunctionCall" Id="F329C7B1">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
-            <Parameter Type="Param" Library="AHLI" Id="D584480F"/>
-            <Parameter Type="Param" Library="AHLI" Id="2059E713"/>
-            <Parameter Type="Param" Library="AHLI" Id="ABA004B4"/>
+        <Element Type="FunctionCall" Id="85FC070B">
+            <Disabled/>
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000118"/>
+            <Parameter Type="Param" Library="AHLI" Id="8C36CA8F"/>
+            <Parameter Type="Param" Library="AHLI" Id="98F91793"/>
+            <Parameter Type="Param" Library="AHLI" Id="F3882FA4"/>
         </Element>
-        <Element Type="Param" Id="D584480F">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
-            <FunctionCall Type="FunctionCall" Library="AHLI" Id="705C083D"/>
+        <Element Type="Param" Id="8C36CA8F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="C3CF50B0"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="AEB4446D"/>
         </Element>
-        <Element Type="FunctionCall" Id="705C083D">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000243"/>
-            <Parameter Type="Param" Library="AHLI" Id="C84C62D9"/>
+        <Element Type="Param" Id="98F91793">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000187"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000071"/>
         </Element>
-        <Element Type="Param" Id="C84C62D9">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="61805391"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="00000201"/>
-        </Element>
-        <Element Type="Param" Id="2059E713">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
-        </Element>
-        <Element Type="Param" Id="ABA004B4">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
-            <Value>false</Value>
-            <ValueType Type="bool"/>
+        <Element Type="Param" Id="F3882FA4">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000186"/>
+            <ValueType Type="text"/>
         </Element>
         <Element Type="FunctionCall" Id="98A65C71">
             <FunctionDef Type="FunctionDef" Library="AHLI" Id="01F23C90"/>
