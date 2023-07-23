@@ -18,6 +18,14 @@ The extension mod is available on Americas, Europe and Korean servers.
 
 
 ### All Changes compared to WCS GameHeart 1.25/Americas
+- **Game Hot Fixes:
+  - fixed Colossus Extended Thermal Lance upgrade granting +3 range instead of +2
+  - fixed Raven Interference Matrix not forcing Interceptors to return to the Carrier
+  - fixed an issue where the impact model of Interference Matrix was not displayed
+  - minor visual fixes:
+    - fixed some unit models not receiving outlines behind tall buildings/doodads
+    - fixed some tall doodads not causing units behind it to show their outlines
+    - removed blob shadows on doodads that players cannot see
 - **Changes**
   - Battle Report:
     - added Battle Reports based on nice__username's Observer Plus (powered by Shopify) extension mod
@@ -82,7 +90,8 @@ The extension mod is available on Americas, Europe and Korean servers.
     - fixed the last upgrade notification slot never being used
     - fixed having more than 50 upgrades causing further upgrades to not be displayed. Now the limit is 100 as previously intended
     - graph shortcuts are now disabled when not playing a 1vs1 instead of showing an empty graph dialog
-- **Optimizations**
+	- fixed Workers Killed Notification ignoring SCVs killed by shooting down a flying Command Center
+- **Performance Optimizations of SC2/GameHeart**
   - fixed performance issues of Battlecruiser script triggers created by Blizzard
     - the game will now use less CPU when issuing commands and when units execute abilities (global improvement for all units)
     - the BC's behavior did not change
