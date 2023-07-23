@@ -18,7 +18,7 @@ The extension mod is available on Americas, Europe and Korean servers.
 
 
 ### All Changes compared to WCS GameHeart 1.25/Americas
-- **Game Hot Fixes:
+- **Game Hot Fixes:**
   - fixed Colossus Extended Thermal Lance upgrade granting +3 range instead of +2
   - fixed Raven Interference Matrix not forcing Interceptors to return to the Carrier
   - fixed an issue where the impact model of Interference Matrix was not displayed
