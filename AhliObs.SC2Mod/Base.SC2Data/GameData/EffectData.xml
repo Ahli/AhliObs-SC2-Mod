@@ -8,4 +8,8 @@
     <CEffectDamage id="MULEFate">
         <Death value="Timeout"/>
     </CEffectDamage>
+    <!-- Hotfix -->
+    <CEffectLaunchMissile id="RavenScramblerMissileLM">
+        <FinishEffect value="RavenScramblerMissileABswitch"/>
+    </CEffectLaunchMissile>
 </Catalog>

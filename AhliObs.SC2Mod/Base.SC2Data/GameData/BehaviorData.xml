@@ -40,4 +40,8 @@
     <CBehaviorPowerUser id="PowerUserQueueSmall">
         <PowerStageArray index="1" LevelGainEffect="AHLI_PowerLevelGained" LevelLossEffect="AHLI_PowerLevelLost"/>
     </CBehaviorPowerUser>
+    <!-- HOTFIX -->
+    <CBehaviorBuff id="RavenScramblerMissileCarrier">
+        <ExpireEffect value=""/>
+    </CBehaviorBuff>
 </Catalog>

@@ -4,4 +4,9 @@
         <EditorCategories value="Race:Terran,UpgradeType:Talents"/>
         <LeaderAlias value=""/>
     </CUpgrade>
+    <CUpgrade id="ExtendedThermalLance">
+        <EffectArray index="0" Value="2"/>
+        <EffectArray index="1" Value="2"/>
+        <EffectArray Reference="Weapon,ThermalLances,MinScanRange" Value="2"/>
+    </CUpgrade>
 </Catalog>

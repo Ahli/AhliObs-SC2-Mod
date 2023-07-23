@@ -77995,6 +77995,7 @@
             <Item Type="Variable" Library="AHLI" Id="964EA805"/>
         </Element>
         <Element Type="Structure" Id="96017ED5">
+            <Disabled/>
             <Variable Type="Variable" Library="AHLI" Id="44AD4B18"/>
         </Element>
         <Element Type="Variable" Id="44AD4B18">
@@ -78008,12 +78009,14 @@
             <ValueType Type="bool"/>
         </Element>
         <Element Type="Variable" Id="D1B9AF63">
+            <Disabled/>
             <VariableType>
                 <Type Value="struct"/>
                 <TypeElement Type="Structure" Library="AHLI" Id="96017ED5"/>
             </VariableType>
         </Element>
         <Element Type="Structure" Id="82FB0B79">
+            <Disabled/>
             <Variable Type="Variable" Library="AHLI" Id="08E931DF"/>
             <Variable Type="Variable" Library="AHLI" Id="350BFB91"/>
             <Variable Type="Variable" Library="AHLI" Id="0BFAE830"/>
@@ -78050,6 +78053,7 @@
             <ValueType Type="fixed"/>
         </Element>
         <Element Type="Variable" Id="964EA805">
+            <Disabled/>
             <VariableType>
                 <Type Value="struct"/>
                 <TypeElement Type="Structure" Library="AHLI" Id="82FB0B79"/>
