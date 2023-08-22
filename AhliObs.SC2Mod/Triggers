@@ -24659,6 +24659,7 @@
             <Variable Type="Variable" Library="AHLI" Id="5B5FFB06"/>
         </Element>
         <Element Type="Trigger" Id="8FCFAFB7">
+            <Disabled/>
             <Event Type="FunctionCall" Library="AHLI" Id="B8FF6D13"/>
         </Element>
         <Element Type="FunctionCall" Id="B8FF6D13">

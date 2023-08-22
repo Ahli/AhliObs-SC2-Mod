@@ -3405,20 +3405,6 @@ void libAHLI_gt_ObserverUiAssistPlayerLeavesGameVictory_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: ObserverUiAssist - CreepPercentage
-//--------------------------------------------------------------------------------------------------
-bool libAHLI_gt_ObserverUiAssistCreepPercentage_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libAHLI_gt_ObserverUiAssistCreepPercentage_Init () {
-    libAHLI_gt_ObserverUiAssistCreepPercentage = TriggerCreate("libAHLI_gt_ObserverUiAssistCreepPercentage_Func");
-    TriggerAddEventTimePeriodic(libAHLI_gt_ObserverUiAssistCreepPercentage, 5.0, c_timeGame);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: ArchonMergeSaveResourceOffset
 //--------------------------------------------------------------------------------------------------
 bool libAHLI_gt_ArchonMergeSaveResourceOffset_Func (bool testConds, bool runActions) {
@@ -5352,7 +5338,6 @@ void libAHLI_InitTriggers () {
     libAHLI_gt_ObserverUiAssistPlayerLeavesGameDefeat_Init();
     libAHLI_gt_ObserverUiAssistPlayerLeavesGameTie_Init();
     libAHLI_gt_ObserverUiAssistPlayerLeavesGameVictory_Init();
-    libAHLI_gt_ObserverUiAssistCreepPercentage_Init();
     libAHLI_gt_ArchonMergeSaveResourceOffset_Init();
     libAHLI_gt_ArchonDuplicatedTemplarsDied_Init();
     libAHLI_gt_OverlordTransportMorphCompleted_Init();
