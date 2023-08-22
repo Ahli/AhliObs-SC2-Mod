@@ -19,13 +19,9 @@ The extension mod is available on Americas, Europe and Korean servers.
 
 ### All Changes compared to WCS GameHeart 1.25/Americas
 - **Game Hot Fixes:**
-  - fixed Colossus Extended Thermal Lance upgrade granting +3 range instead of +2
-  - fixed Raven Interference Matrix not forcing Interceptors to return to the Carrier
-  - fixed an issue where the impact model of Interference Matrix was not displayed
-  - minor visual fixes:
-    - fixed some unit models not receiving outlines behind tall buildings/doodads
-    - fixed some tall doodads not causing units behind it to show their outlines
-    - removed blob shadows on doodads that players cannot see
+  - fixed Orbital Command's landing preview model not being displayed
+  - fixed Shield Battery's hotkey menu containing two Recharge buttons
+  - fixed Thorn Lizzard's death model on low graphic settings
 - **Changes**
   - Battle Report:
     - added Battle Reports based on nice__username's Observer Plus (powered by Shopify) extension mod
