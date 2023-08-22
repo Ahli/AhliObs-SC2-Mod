@@ -464,6 +464,58 @@
                 <Action type="SetProperty" frame="FillImageR" visible="false"/>
             </State>
         </StateGroup>
+		
+		<Frame type="PlayerScoreValueFrame" name="DeltaL">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+			
+			<Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
+				<Anchor relative="$parent"/>
+				<ScoreValueLink val=""/>
+				
+				<Frame type="Label" name="Label">
+					<Anchor relative="$parent"/>
+					<Options val="NoWrapping|ScaleToPreventTruncation"/>
+					<IgnoreParentColor val="true"/>
+					<Style val="BattleReportComparisonDelta"/>
+					<Alpha val="0"/>
+				</Frame>
+			</Frame>
+		</Frame>
+		
+		<Frame type="PlayerScoreValueFrame" name="DeltaR">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			
+			<Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
+				<Anchor relative="$parent"/>
+				<ScoreValueLink val=""/>
+				
+				<Frame type="Label" name="Label">
+					<Anchor relative="$parent"/>
+					<Options val="NoWrapping|ScaleToPreventTruncation"/>
+					<IgnoreParentColor val="true"/>
+					<Style val="BattleReportComparisonDelta"/>
+					<Alpha val="0"/>
+				</Frame>
+			</Frame>
+		</Frame>
+        <StateGroup name="DeltaVis">
+            <State name="L">
+                <When type="Property" frame="ValueL" operator="GreaterThan" RealValue="50"/>
+                <Action type="SetProperty" frame="DeltaL/ScoreValueFrame0/Label" alpha="255"/>
+            </State>
+            <State name="R">
+                <When type="Property" frame="ValueL" operator="LessThan" RealValue="50"/>
+                <When type="Property" frame="ValueTotal" operator="NotEqual" RealValue="0"/>
+                <Action type="SetProperty" frame="DeltaR/ScoreValueFrame0/Label" alpha="255"/>
+            </State>
+        </StateGroup>
+		
     </Frame>
 
     <Frame type="PlayerScoreValueFrame" name="VersusModeSideDetectorTemplate">
@@ -1049,6 +1101,19 @@
                     <Frame type="Image" name="FillImageR">
                         <DesaturationColor val="{$BattleReport2/PlayerR/@Color}"/>
                     </Frame>
+					
+					<Frame type="PlayerScoreValueFrame" name="DeltaL">
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
+						<Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
+							<ScoreValueLink val="BattleReportDamageDealtDelta"/>
+						</Frame>
+                    </Frame>
+					<Frame type="PlayerScoreValueFrame" name="DeltaR">
+                        <PlayerId val="{$BattleReport2/PlayerR/@PlayerId}"/>
+						<Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
+							<ScoreValueLink val="BattleReportDamageDealtDelta"/>
+						</Frame>
+                    </Frame>
                 </Frame>
 
                 <Frame type="Frame" name="MineralsLostBarGraph" template="AHLI_BattleReport/ComparisonBarTemplate">
@@ -1077,6 +1142,19 @@
                     <Frame type="Image" name="FillImageR">
                         <DesaturationColor val="{$BattleReport2/PlayerR/@Color}"/>
                     </Frame>
+					
+					<Frame type="PlayerScoreValueFrame" name="DeltaL">
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
+						<Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
+							<ScoreValueLink val="BattleReportMineralsDestroyedDelta"/>
+						</Frame>
+                    </Frame>
+					<Frame type="PlayerScoreValueFrame" name="DeltaR">
+                        <PlayerId val="{$BattleReport2/PlayerR/@PlayerId}"/>
+						<Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
+							<ScoreValueLink val="BattleReportMineralsDestroyedDelta"/>
+						</Frame>
+                    </Frame>
                 </Frame>
 
                 <Frame type="Frame" name="GasLostBarGraph" template="AHLI_BattleReport/ComparisonBarTemplate">
@@ -1104,6 +1182,19 @@
 
                     <Frame type="Image" name="FillImageR">
                         <DesaturationColor val="{$BattleReport2/PlayerR/@Color}"/>
+                    </Frame>
+					
+					<Frame type="PlayerScoreValueFrame" name="DeltaL">
+                        <PlayerId val="{$BattleReport2/PlayerL/@PlayerId}"/>
+						<Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
+							<ScoreValueLink val="BattleReportVespeneDestroyedDelta"/>
+						</Frame>
+                    </Frame>
+					<Frame type="PlayerScoreValueFrame" name="DeltaR">
+                        <PlayerId val="{$BattleReport2/PlayerR/@PlayerId}"/>
+						<Frame type="ScoreValueLabelFrame" name="ScoreValueFrame0">
+							<ScoreValueLink val="BattleReportVespeneDestroyedDelta"/>
+						</Frame>
                     </Frame>
                 </Frame>
             </Frame>

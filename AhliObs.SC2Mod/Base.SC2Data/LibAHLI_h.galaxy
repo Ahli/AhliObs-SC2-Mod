@@ -214,7 +214,7 @@ fixed libAHLI_gv_workersKilledNotificationsVisibleGameTime;
 libAHLI_gs_MapNotifications libAHLI_gv_mapNotifications;
 libAHLI_gs_MinimapFrustum libAHLI_gv_minimapFrustum;
 libAHLI_gs_BattleReport libAHLI_gv_battleReport;
-libAHLI_gs_BattleReportSide[2] libAHLI_gv_battleReportSideData;
+libAHLI_gs_BattleReportSide[2] libAHLI_gv_battleReportSide;
 
 // Function Declarations
 string libAHLI_gf_IconofProduction (string lp_item, bool lp_isUnit, int lp_player);

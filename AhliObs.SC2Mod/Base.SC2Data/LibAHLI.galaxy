@@ -126,17 +126,17 @@ void libAHLI_InitVariables () {
     libAHLI_gv_battleReport.lv_uiBattleDurationLabel = c_invalidDialogControlId;
     libAHLI_gv_battleReport.lv_uiBattleActiveIndicator = c_invalidDialogControlId;
     for (init_i = 0; init_i <= 1; init_i += 1) {
-        libAHLI_gv_battleReportSideData[init_i].lv_killedUnitTypeLastUsedSlot = -1;
-        libAHLI_gv_battleReportSideData[init_i].lv_abilitiesCastedLastUsedSlot = -1;
+        libAHLI_gv_battleReportSide[init_i].lv_killedUnitTypeLastUsedSlot = -1;
+        libAHLI_gv_battleReportSide[init_i].lv_abilitiesCastedLastUsedSlot = -1;
         for (init_i1 = 0; init_i1 <= libAHLI_gv_battleReportMaxKilledUnitTypeSlot; init_i1 += 1) {
-            libAHLI_gv_battleReportSideData[init_i].lv_uiUnitTypeButton[init_i1] = c_invalidDialogControlId;
+            libAHLI_gv_battleReportSide[init_i].lv_uiUnitTypeButton[init_i1] = c_invalidDialogControlId;
         }
         for (init_i1 = 0; init_i1 <= libAHLI_gv_battleReportMaxAbilitySlot; init_i1 += 1) {
-            libAHLI_gv_battleReportSideData[init_i].lv_uiAbilityButton[init_i1] = c_invalidDialogControlId;
+            libAHLI_gv_battleReportSide[init_i].lv_uiAbilityButton[init_i1] = c_invalidDialogControlId;
         }
-        libAHLI_gv_battleReportSideData[init_i].lv_uiDamageLabel = c_invalidDialogControlId;
-        libAHLI_gv_battleReportSideData[init_i].lv_uiMineralsLabel = c_invalidDialogControlId;
-        libAHLI_gv_battleReportSideData[init_i].lv_uiVespeneLabel = c_invalidDialogControlId;
+        libAHLI_gv_battleReportSide[init_i].lv_uiDamageLabel = c_invalidDialogControlId;
+        libAHLI_gv_battleReportSide[init_i].lv_uiMineralsLabel = c_invalidDialogControlId;
+        libAHLI_gv_battleReportSide[init_i].lv_uiVespeneLabel = c_invalidDialogControlId;
     }
 }
 
@@ -2064,74 +2064,74 @@ void libAHLI_gf_BattleReportUpdateUI () {
 
     // Implementation
     if (((libAHLI_gv_battleReport.lv_updateDueToDeathOnlyLabels == true) || (libAHLI_gv_battleReport.lv_updateDueToDeathAll == true))) {
-        auto7E2F46BA_ae = libAHLI_gv_battleReportSideData[0].lv_killedUnitTypeLastUsedSlot;
+        auto7E2F46BA_ae = libAHLI_gv_battleReportSide[0].lv_killedUnitTypeLastUsedSlot;
         lv_i = 0;
         for ( ; ( (auto7E2F46BA_ai >= 0 && lv_i <= auto7E2F46BA_ae) || (auto7E2F46BA_ai < 0 && lv_i >= auto7E2F46BA_ae) ) ; lv_i += auto7E2F46BA_ai ) {
-            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSideData[0].lv_uiUnitTypeButton[lv_i], IntToText(libAHLI_gv_battleReportSideData[0].lv_killedUnitTypeCount[lv_i]), libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSide[0].lv_uiUnitTypeButton[lv_i], IntToText(libAHLI_gv_battleReportSide[0].lv_killedUnitTypeCount[lv_i]), libAHLI_gv_obs);
         }
-        autoF4594E09_ae = libAHLI_gv_battleReportSideData[1].lv_killedUnitTypeLastUsedSlot;
+        autoF4594E09_ae = libAHLI_gv_battleReportSide[1].lv_killedUnitTypeLastUsedSlot;
         lv_i = 0;
         for ( ; ( (autoF4594E09_ai >= 0 && lv_i <= autoF4594E09_ae) || (autoF4594E09_ai < 0 && lv_i >= autoF4594E09_ae) ) ; lv_i += autoF4594E09_ai ) {
-            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSideData[1].lv_uiUnitTypeButton[lv_i], IntToText(libAHLI_gv_battleReportSideData[1].lv_killedUnitTypeCount[lv_i]), libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSide[1].lv_uiUnitTypeButton[lv_i], IntToText(libAHLI_gv_battleReportSide[1].lv_killedUnitTypeCount[lv_i]), libAHLI_gv_obs);
         }
         libAHLI_gv_battleReport.lv_updateDueToDeathOnlyLabels = false;
     }
 
     if ((libAHLI_gv_battleReport.lv_updateDueToDeathAll == true)) {
-        autoA015D1F4_ae = libAHLI_gv_battleReportSideData[0].lv_killedUnitTypeLastUsedSlot;
+        autoA015D1F4_ae = libAHLI_gv_battleReportSide[0].lv_killedUnitTypeLastUsedSlot;
         lv_i = 0;
         for ( ; ( (autoA015D1F4_ai >= 0 && lv_i <= autoA015D1F4_ae) || (autoA015D1F4_ai < 0 && lv_i >= autoA015D1F4_ae) ) ; lv_i += autoA015D1F4_ai ) {
-            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSideData[0].lv_uiUnitTypeButton[lv_i], libAHLI_gv_battleReportSideData[0].lv_killedUnitTypeIcon[lv_i], libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSideData[0].lv_uiUnitTypeButton[lv_i], libAHLI_gv_battleReportSideData[0].lv_killedUnitTypeIcon[lv_i], libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSideData[0].lv_uiUnitTypeButton[lv_i], libAHLI_gv_battleReportSideData[0].lv_killedUnitTypeName[lv_i], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSide[0].lv_uiUnitTypeButton[lv_i], libAHLI_gv_battleReportSide[0].lv_killedUnitTypeIcon[lv_i], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSide[0].lv_uiUnitTypeButton[lv_i], libAHLI_gv_battleReportSide[0].lv_killedUnitTypeIcon[lv_i], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSide[0].lv_uiUnitTypeButton[lv_i], libAHLI_gv_battleReportSide[0].lv_killedUnitTypeName[lv_i], libAHLI_gv_obs);
         }
-        auto4212D67E_ae = libAHLI_gv_battleReportSideData[1].lv_killedUnitTypeLastUsedSlot;
+        auto4212D67E_ae = libAHLI_gv_battleReportSide[1].lv_killedUnitTypeLastUsedSlot;
         lv_i = 0;
         for ( ; ( (auto4212D67E_ai >= 0 && lv_i <= auto4212D67E_ae) || (auto4212D67E_ai < 0 && lv_i >= auto4212D67E_ae) ) ; lv_i += auto4212D67E_ai ) {
-            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSideData[1].lv_uiUnitTypeButton[lv_i], libAHLI_gv_battleReportSideData[1].lv_killedUnitTypeIcon[lv_i], libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSideData[1].lv_uiUnitTypeButton[lv_i], libAHLI_gv_battleReportSideData[1].lv_killedUnitTypeIcon[lv_i], libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSideData[1].lv_uiUnitTypeButton[lv_i], libAHLI_gv_battleReportSideData[1].lv_killedUnitTypeName[lv_i], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSide[1].lv_uiUnitTypeButton[lv_i], libAHLI_gv_battleReportSide[1].lv_killedUnitTypeIcon[lv_i], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSide[1].lv_uiUnitTypeButton[lv_i], libAHLI_gv_battleReportSide[1].lv_killedUnitTypeIcon[lv_i], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSide[1].lv_uiUnitTypeButton[lv_i], libAHLI_gv_battleReportSide[1].lv_killedUnitTypeName[lv_i], libAHLI_gv_obs);
         }
         libAHLI_gv_battleReport.lv_updateDueToDeathAll = false;
     }
 
     if (((libAHLI_gv_battleReport.lv_updateDueToAbilityOnlyLabels == true) || (libAHLI_gv_battleReport.lv_updateDueToAbilityAll == true))) {
-        autoB80AC4D7_ae = libAHLI_gv_battleReportSideData[0].lv_abilitiesCastedLastUsedSlot;
+        autoB80AC4D7_ae = libAHLI_gv_battleReportSide[0].lv_abilitiesCastedLastUsedSlot;
         lv_i = 0;
         for ( ; ( (autoB80AC4D7_ai >= 0 && lv_i <= autoB80AC4D7_ae) || (autoB80AC4D7_ai < 0 && lv_i >= autoB80AC4D7_ae) ) ; lv_i += autoB80AC4D7_ai ) {
-            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSideData[0].lv_uiAbilityButton[lv_i], IntToText(libAHLI_gv_battleReportSideData[0].lv_abilitiesCastedCount[lv_i]), libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSide[0].lv_uiAbilityButton[lv_i], IntToText(libAHLI_gv_battleReportSide[0].lv_abilitiesCastedCount[lv_i]), libAHLI_gv_obs);
         }
-        autoCF687230_ae = libAHLI_gv_battleReportSideData[1].lv_abilitiesCastedLastUsedSlot;
+        autoCF687230_ae = libAHLI_gv_battleReportSide[1].lv_abilitiesCastedLastUsedSlot;
         lv_i = 0;
         for ( ; ( (autoCF687230_ai >= 0 && lv_i <= autoCF687230_ae) || (autoCF687230_ai < 0 && lv_i >= autoCF687230_ae) ) ; lv_i += autoCF687230_ai ) {
-            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSideData[1].lv_uiAbilityButton[lv_i], IntToText(libAHLI_gv_battleReportSideData[1].lv_abilitiesCastedCount[lv_i]), libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSide[1].lv_uiAbilityButton[lv_i], IntToText(libAHLI_gv_battleReportSide[1].lv_abilitiesCastedCount[lv_i]), libAHLI_gv_obs);
         }
         libAHLI_gv_battleReport.lv_updateDueToAbilityOnlyLabels = false;
     }
 
     if ((libAHLI_gv_battleReport.lv_updateDueToAbilityAll == true)) {
-        auto7E4C022F_ae = libAHLI_gv_battleReportSideData[0].lv_abilitiesCastedLastUsedSlot;
+        auto7E4C022F_ae = libAHLI_gv_battleReportSide[0].lv_abilitiesCastedLastUsedSlot;
         lv_i = 0;
         for ( ; ( (auto7E4C022F_ai >= 0 && lv_i <= auto7E4C022F_ae) || (auto7E4C022F_ai < 0 && lv_i >= auto7E4C022F_ae) ) ; lv_i += auto7E4C022F_ai ) {
-            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSideData[0].lv_uiAbilityButton[lv_i], libAHLI_gv_battleReportSideData[0].lv_abilitiesCastedIcon[lv_i], libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSideData[0].lv_uiAbilityButton[lv_i], libAHLI_gv_battleReportSideData[0].lv_abilitiesCastedIcon[lv_i], libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSideData[0].lv_uiAbilityButton[lv_i], libAHLI_gv_battleReportSideData[0].lv_abilitiesCastedName[lv_i], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSide[0].lv_uiAbilityButton[lv_i], libAHLI_gv_battleReportSide[0].lv_abilitiesCastedIcon[lv_i], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSide[0].lv_uiAbilityButton[lv_i], libAHLI_gv_battleReportSide[0].lv_abilitiesCastedIcon[lv_i], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSide[0].lv_uiAbilityButton[lv_i], libAHLI_gv_battleReportSide[0].lv_abilitiesCastedName[lv_i], libAHLI_gv_obs);
         }
-        auto2388C6E5_ae = libAHLI_gv_battleReportSideData[1].lv_abilitiesCastedLastUsedSlot;
+        auto2388C6E5_ae = libAHLI_gv_battleReportSide[1].lv_abilitiesCastedLastUsedSlot;
         lv_i = 0;
         for ( ; ( (auto2388C6E5_ai >= 0 && lv_i <= auto2388C6E5_ae) || (auto2388C6E5_ai < 0 && lv_i >= auto2388C6E5_ae) ) ; lv_i += auto2388C6E5_ai ) {
-            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSideData[1].lv_uiAbilityButton[lv_i], libAHLI_gv_battleReportSideData[1].lv_abilitiesCastedIcon[lv_i], libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSideData[1].lv_uiAbilityButton[lv_i], libAHLI_gv_battleReportSideData[1].lv_abilitiesCastedIcon[lv_i], libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSideData[1].lv_uiAbilityButton[lv_i], libAHLI_gv_battleReportSideData[1].lv_abilitiesCastedName[lv_i], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSide[1].lv_uiAbilityButton[lv_i], libAHLI_gv_battleReportSide[1].lv_abilitiesCastedIcon[lv_i], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSide[1].lv_uiAbilityButton[lv_i], libAHLI_gv_battleReportSide[1].lv_abilitiesCastedIcon[lv_i], libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSide[1].lv_uiAbilityButton[lv_i], libAHLI_gv_battleReportSide[1].lv_abilitiesCastedName[lv_i], libAHLI_gv_obs);
         }
         libAHLI_gv_battleReport.lv_updateDueToAbilityAll = false;
     }
 
     if ((libAHLI_gv_battleReport.lv_updateDueToDamage == true)) {
-        lv_sumReal = (libAHLI_gv_battleReportSideData[0].lv_damageDealt + libAHLI_gv_battleReportSideData[1].lv_damageDealt);
+        lv_sumReal = (libAHLI_gv_battleReportSide[0].lv_damageDealt + libAHLI_gv_battleReportSide[1].lv_damageDealt);
         if ((lv_sumReal != 0.0)) {
-            PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealtPercent", ((libAHLI_gv_battleReportSideData[0].lv_damageDealt / lv_sumReal) * 100.0));
-            PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealtPercent", ((libAHLI_gv_battleReportSideData[1].lv_damageDealt / lv_sumReal) * 100.0));
+            PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealtPercent", ((libAHLI_gv_battleReportSide[0].lv_damageDealt / lv_sumReal) * 100.0));
+            PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealtPercent", ((libAHLI_gv_battleReportSide[1].lv_damageDealt / lv_sumReal) * 100.0));
         }
         else {
             PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealtPercent", 0.0);
@@ -2139,16 +2139,18 @@ void libAHLI_gf_BattleReportUpdateUI () {
         }
         PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealtTotal", lv_sumReal);
         PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealtTotal", lv_sumReal);
-        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealt", libAHLI_gv_battleReportSideData[0].lv_damageDealt);
-        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealt", libAHLI_gv_battleReportSideData[1].lv_damageDealt);
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealt", libAHLI_gv_battleReportSide[0].lv_damageDealt);
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealt", libAHLI_gv_battleReportSide[1].lv_damageDealt);
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportDamageDealtDelta", (libAHLI_gv_battleReportSide[0].lv_damageDealt - libAHLI_gv_battleReportSide[1].lv_damageDealt));
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportDamageDealtDelta", (libAHLI_gv_battleReportSide[1].lv_damageDealt - libAHLI_gv_battleReportSide[0].lv_damageDealt));
         libAHLI_gv_battleReport.lv_updateDueToDamage = false;
     }
 
     if ((libAHLI_gv_battleReport.lv_updateDueToDeathResources == true)) {
-        lv_sumInt = (libAHLI_gv_battleReportSideData[0].lv_resourcesDestroyed[0] + libAHLI_gv_battleReportSideData[1].lv_resourcesDestroyed[0]);
+        lv_sumInt = (libAHLI_gv_battleReportSide[0].lv_resourcesDestroyed[0] + libAHLI_gv_battleReportSide[1].lv_resourcesDestroyed[0]);
         if ((lv_sumInt != 0)) {
-            PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyedPercent", ((libAHLI_gv_battleReportSideData[0].lv_resourcesDestroyed[0] / IntToFixed(lv_sumInt)) * 100.0));
-            PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyedPercent", ((libAHLI_gv_battleReportSideData[1].lv_resourcesDestroyed[0] / IntToFixed(lv_sumInt)) * 100.0));
+            PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyedPercent", ((libAHLI_gv_battleReportSide[0].lv_resourcesDestroyed[0] / IntToFixed(lv_sumInt)) * 100.0));
+            PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyedPercent", ((libAHLI_gv_battleReportSide[1].lv_resourcesDestroyed[0] / IntToFixed(lv_sumInt)) * 100.0));
         }
         else {
             PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyedPercent", 0.0);
@@ -2156,10 +2158,10 @@ void libAHLI_gf_BattleReportUpdateUI () {
         }
         PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyedTotal", lv_sumInt);
         PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyedTotal", lv_sumInt);
-        lv_sumInt = (libAHLI_gv_battleReportSideData[0].lv_resourcesDestroyed[1] + libAHLI_gv_battleReportSideData[1].lv_resourcesDestroyed[1]);
+        lv_sumInt = (libAHLI_gv_battleReportSide[0].lv_resourcesDestroyed[1] + libAHLI_gv_battleReportSide[1].lv_resourcesDestroyed[1]);
         if ((lv_sumInt != 0)) {
-            PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyedPercent", ((libAHLI_gv_battleReportSideData[0].lv_resourcesDestroyed[1] / IntToFixed(lv_sumInt)) * 100.0));
-            PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyedPercent", ((libAHLI_gv_battleReportSideData[1].lv_resourcesDestroyed[1] / IntToFixed(lv_sumInt)) * 100.0));
+            PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyedPercent", ((libAHLI_gv_battleReportSide[0].lv_resourcesDestroyed[1] / IntToFixed(lv_sumInt)) * 100.0));
+            PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyedPercent", ((libAHLI_gv_battleReportSide[1].lv_resourcesDestroyed[1] / IntToFixed(lv_sumInt)) * 100.0));
         }
         else {
             PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyedPercent", 0.0);
@@ -2167,41 +2169,45 @@ void libAHLI_gf_BattleReportUpdateUI () {
         }
         PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyedTotal", lv_sumInt);
         PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyedTotal", lv_sumInt);
-        PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyed", libAHLI_gv_battleReportSideData[0].lv_resourcesDestroyed[0]);
-        PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyed", libAHLI_gv_battleReportSideData[1].lv_resourcesDestroyed[0]);
-        PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyed", libAHLI_gv_battleReportSideData[0].lv_resourcesDestroyed[1]);
-        PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyed", libAHLI_gv_battleReportSideData[1].lv_resourcesDestroyed[1]);
+        PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyed", libAHLI_gv_battleReportSide[0].lv_resourcesDestroyed[0]);
+        PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyed", libAHLI_gv_battleReportSide[1].lv_resourcesDestroyed[0]);
+        PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyed", libAHLI_gv_battleReportSide[0].lv_resourcesDestroyed[1]);
+        PlayerScoreValueSetFromInt(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyed", libAHLI_gv_battleReportSide[1].lv_resourcesDestroyed[1]);
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportMineralsDestroyedDelta", (libAHLI_gv_battleReportSide[0].lv_resourcesDestroyed[0] - libAHLI_gv_battleReportSide[1].lv_resourcesDestroyed[0]));
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportMineralsDestroyedDelta", (libAHLI_gv_battleReportSide[1].lv_resourcesDestroyed[0] - libAHLI_gv_battleReportSide[0].lv_resourcesDestroyed[0]));
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[0], "BattleReportVespeneDestroyedDelta", (libAHLI_gv_battleReportSide[0].lv_resourcesDestroyed[1] - libAHLI_gv_battleReportSide[1].lv_resourcesDestroyed[1]));
+        PlayerScoreValueSetFromFixed(libAHLI_gv_battleReport.lv_playerIdSide[1], "BattleReportVespeneDestroyedDelta", (libAHLI_gv_battleReportSide[1].lv_resourcesDestroyed[1] - libAHLI_gv_battleReportSide[0].lv_resourcesDestroyed[1]));
         libAHLI_gv_battleReport.lv_updateDueToDeathResources = false;
     }
 
     if ((libAHLI_gv_battleReport.lv_resetUnusedSlots == true)) {
-        lv_i = (libAHLI_gv_battleReportSideData[0].lv_killedUnitTypeLastUsedSlot + 1);
+        lv_i = (libAHLI_gv_battleReportSide[0].lv_killedUnitTypeLastUsedSlot + 1);
         for ( ; ( (autoD0681C78_ai >= 0 && lv_i <= autoD0681C78_ae) || (autoD0681C78_ai < 0 && lv_i >= autoD0681C78_ae) ) ; lv_i += autoD0681C78_ai ) {
-            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSideData[0].lv_uiUnitTypeButton[lv_i], null, libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSideData[0].lv_uiUnitTypeButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSideData[0].lv_uiUnitTypeButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSideData[0].lv_uiUnitTypeButton[lv_i], null, libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSide[0].lv_uiUnitTypeButton[lv_i], null, libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSide[0].lv_uiUnitTypeButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSide[0].lv_uiUnitTypeButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSide[0].lv_uiUnitTypeButton[lv_i], null, libAHLI_gv_obs);
         }
-        lv_i = (libAHLI_gv_battleReportSideData[1].lv_killedUnitTypeLastUsedSlot + 1);
+        lv_i = (libAHLI_gv_battleReportSide[1].lv_killedUnitTypeLastUsedSlot + 1);
         for ( ; ( (auto0AAA4E73_ai >= 0 && lv_i <= auto0AAA4E73_ae) || (auto0AAA4E73_ai < 0 && lv_i >= auto0AAA4E73_ae) ) ; lv_i += auto0AAA4E73_ai ) {
-            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSideData[1].lv_uiUnitTypeButton[lv_i], null, libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSideData[1].lv_uiUnitTypeButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSideData[1].lv_uiUnitTypeButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSideData[1].lv_uiUnitTypeButton[lv_i], null, libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSide[1].lv_uiUnitTypeButton[lv_i], null, libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSide[1].lv_uiUnitTypeButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSide[1].lv_uiUnitTypeButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSide[1].lv_uiUnitTypeButton[lv_i], null, libAHLI_gv_obs);
         }
-        lv_i = (libAHLI_gv_battleReportSideData[0].lv_abilitiesCastedLastUsedSlot + 1);
+        lv_i = (libAHLI_gv_battleReportSide[0].lv_abilitiesCastedLastUsedSlot + 1);
         for ( ; ( (auto9FFC5773_ai >= 0 && lv_i <= auto9FFC5773_ae) || (auto9FFC5773_ai < 0 && lv_i >= auto9FFC5773_ae) ) ; lv_i += auto9FFC5773_ai ) {
-            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSideData[0].lv_uiAbilityButton[lv_i], null, libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSideData[0].lv_uiAbilityButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSideData[0].lv_uiAbilityButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSideData[0].lv_uiAbilityButton[lv_i], null, libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSide[0].lv_uiAbilityButton[lv_i], null, libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSide[0].lv_uiAbilityButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSide[0].lv_uiAbilityButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSide[0].lv_uiAbilityButton[lv_i], null, libAHLI_gv_obs);
         }
-        lv_i = (libAHLI_gv_battleReportSideData[1].lv_abilitiesCastedLastUsedSlot + 1);
+        lv_i = (libAHLI_gv_battleReportSide[1].lv_abilitiesCastedLastUsedSlot + 1);
         for ( ; ( (auto1B54F350_ai >= 0 && lv_i <= auto1B54F350_ae) || (auto1B54F350_ai < 0 && lv_i >= auto1B54F350_ae) ) ; lv_i += auto1B54F350_ai ) {
-            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSideData[1].lv_uiAbilityButton[lv_i], null, libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSideData[1].lv_uiAbilityButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSideData[1].lv_uiAbilityButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
-            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSideData[1].lv_uiAbilityButton[lv_i], null, libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemText(libAHLI_gv_battleReportSide[1].lv_uiAbilityButton[lv_i], null, libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage(libAHLI_gv_battleReportSide[1].lv_uiAbilityButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemImage2(libAHLI_gv_battleReportSide[1].lv_uiAbilityButton[lv_i], "Assets\\Textures\\black.dds", libAHLI_gv_obs);
+            libNtve_gf_SetDialogItemTooltip(libAHLI_gv_battleReportSide[1].lv_uiAbilityButton[lv_i], null, libAHLI_gv_obs);
         }
         libAHLI_gv_battleReport.lv_resetUnusedSlots = false;
     }
@@ -2217,7 +2223,7 @@ void libAHLI_gf_BattleReportResetBattleEndingTimer () {
 void libAHLI_gf_BattleReportIncrementDamage (int lp_sideIndex, fixed lp_damage) {
     // Automatic Variable Declarations
     // Implementation
-    libAHLI_gv_battleReportSideData[lp_sideIndex].lv_damageDealt += lp_damage;
+    libAHLI_gv_battleReportSide[lp_sideIndex].lv_damageDealt += lp_damage;
 }
 
 void libAHLI_gf_BattleReportIncrementAbilityUsage (int lp_sideIndex, abilcmd lp_abilityCommand) {
@@ -2232,7 +2238,7 @@ void libAHLI_gf_BattleReportIncrementAbilityUsage (int lp_sideIndex, abilcmd lp_
     const int autoC63ED29B_ai = 1;
 
     // Variable Initialization
-    lv_lastUsedSlot = libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedLastUsedSlot;
+    lv_lastUsedSlot = libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedLastUsedSlot;
     lv_abilityCmd = lp_abilityCommand;
 
     // Implementation
@@ -2248,8 +2254,8 @@ void libAHLI_gf_BattleReportIncrementAbilityUsage (int lp_sideIndex, abilcmd lp_
     autoC63ED29B_ae = lv_lastUsedSlot;
     lv_slot = 0;
     for ( ; ( (autoC63ED29B_ai >= 0 && lv_slot <= autoC63ED29B_ae) || (autoC63ED29B_ai < 0 && lv_slot >= autoC63ED29B_ae) ) ; lv_slot += autoC63ED29B_ai ) {
-        if ((lv_abilityCmd == libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCasted[lv_slot])) {
-            libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedCount[lv_slot] += 1;
+        if ((lv_abilityCmd == libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCasted[lv_slot])) {
+            libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedCount[lv_slot] += 1;
             libAHLI_gv_battleReport.lv_updateDueToAbilityOnlyLabels = true;
             return ;
         }
@@ -2257,63 +2263,63 @@ void libAHLI_gf_BattleReportIncrementAbilityUsage (int lp_sideIndex, abilcmd lp_
     }
     if ((lv_lastUsedSlot < libAHLI_gv_battleReportMaxAbilitySlot)) {
         lv_lastUsedSlot += 1;
-        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCasted[lv_lastUsedSlot] = lv_abilityCmd;
-        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedCount[lv_lastUsedSlot] = 1;
-        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedLastUsedSlot += 1;
+        libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCasted[lv_lastUsedSlot] = lv_abilityCmd;
+        libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedCount[lv_lastUsedSlot] = 1;
+        libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedLastUsedSlot += 1;
         libAHLI_gv_battleReport.lv_updateDueToAbilityAll = true;
         lv_ability = (AbilityCommandGetAbility(lp_abilityCommand));
         if ((lv_abilityCmd == AbilityCommand("Stimpack", 0))) {
-            libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-terran-stimpack-color.dds";
-            libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Abil/Name/Stimpack");
+            libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-terran-stimpack-color.dds";
+            libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Abil/Name/Stimpack");
         }
         else {
             if ((lv_abilityCmd == AbilityCommand("BuildAutoTurret", 0))) {
-                libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-building-terran-autoturret.dds";
-                libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Unit/Name/AutoTurret");
+                libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-building-terran-autoturret.dds";
+                libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Unit/Name/AutoTurret");
             }
             else {
                 if ((lv_abilityCmd == AbilityCommand("HallucinationArchon", 0))) {
-                    libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-protoss-hallucination-color.dds";
-                    libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/Hallucination");
+                    libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-protoss-hallucination-color.dds";
+                    libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/Hallucination");
                 }
                 else {
                     if ((lv_abilityCmd == AbilityCommand("OracleWeapon", 0))) {
-                        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-protoss-oraclepulsarcannonon.dds";
-                        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/OracleWeaponOn");
+                        libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-protoss-oraclepulsarcannonon.dds";
+                        libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/OracleWeaponOn");
                     }
                     else {
                         if ((lv_abilityCmd == AbilityCommand("Yoink", 0))) {
-                            libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-zerg-abduct.dds";
-                            libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/FaceEmbrace");
+                            libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-zerg-abduct.dds";
+                            libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/FaceEmbrace");
                         }
                         else {
                             if ((lv_abilityCmd == AbilityCommand("OracleStasisTrapBuild", 0))) {
-                                libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-protoss-oracle-stasisward.dds";
-                                libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/OracleBuildStasisTrap");
+                                libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-protoss-oracle-stasisward.dds";
+                                libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/OracleBuildStasisTrap");
                             }
                             else {
                                 if ((lv_abilityCmd == AbilityCommand("TacNukeStrike", 0))) {
-                                    libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-terran-nuclearstrike-color.dds";
-                                    libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/NukeCalldown");
+                                    libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-terran-nuclearstrike-color.dds";
+                                    libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/NukeCalldown");
                                 }
                                 else {
                                     if ((lv_abilityCmd == AbilityCommand("ViperConsumeStructure", 0))) {
-                                        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-zerg-consume.dds";
-                                        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/ViperConsume");
+                                        libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-ability-zerg-consume.dds";
+                                        libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/ViperConsume");
                                     }
                                     else {
                                         if ((lv_abilityCmd == AbilityCommand("SpawnLocustsTargeted", 0))) {
-                                            libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-unit-zerg-locust.dds";
-                                            libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/SwarmHost");
+                                            libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\btn-unit-zerg-locust.dds";
+                                            libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal("Button/Name/SwarmHost");
                                         }
                                         else {
                                             if ((CatalogEntryIsValid(c_gameCatalogButton, lv_ability) == true)) {
-                                                libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = (CatalogFieldValueGet(c_gameCatalogButton, lv_ability, "Icon", libAHLI_gv_obsID));
-                                                libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal(CatalogFieldValueGet(c_gameCatalogButton, lv_ability, "Name", c_playerAny));
+                                                libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = (CatalogFieldValueGet(c_gameCatalogButton, lv_ability, "Icon", libAHLI_gv_obsID));
+                                                libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringExternal(CatalogFieldValueGet(c_gameCatalogButton, lv_ability, "Name", c_playerAny));
                                             }
                                             else {
-                                                libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\ui_ingame_help_techtree_questionmark.dds";
-                                                libAHLI_gv_battleReportSideData[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringToText(lv_ability);
+                                                libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedIcon[lv_lastUsedSlot] = "Assets\\Textures\\ui_ingame_help_techtree_questionmark.dds";
+                                                libAHLI_gv_battleReportSide[lp_sideIndex].lv_abilitiesCastedName[lv_lastUsedSlot] = StringToText(lv_ability);
                                                 TextExpressionSetToken("Param/Expression/lib_AHLI_D0C21B3A", "A", StringToText(lv_ability));
                                                 TriggerDebugOutput(2, TextExpressionAssemble("Param/Expression/lib_AHLI_D0C21B3A"), false);
                                             }
@@ -2342,14 +2348,14 @@ void libAHLI_gf_BattleReportIncrementUnitTypeKill (int lp_sideIndex, string lp_u
     const int auto72559EE2_ai = 1;
 
     // Variable Initialization
-    lv_lastUsedSlot = libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitTypeLastUsedSlot;
+    lv_lastUsedSlot = libAHLI_gv_battleReportSide[lp_sideIndex].lv_killedUnitTypeLastUsedSlot;
 
     // Implementation
     auto72559EE2_ae = lv_lastUsedSlot;
     lv_slot = 0;
     for ( ; ( (auto72559EE2_ai >= 0 && lv_slot <= auto72559EE2_ae) || (auto72559EE2_ai < 0 && lv_slot >= auto72559EE2_ae) ) ; lv_slot += auto72559EE2_ai ) {
-        if ((lp_unitType == libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitType[lv_slot])) {
-            libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitTypeCount[lv_slot] += 1;
+        if ((lp_unitType == libAHLI_gv_battleReportSide[lp_sideIndex].lv_killedUnitType[lv_slot])) {
+            libAHLI_gv_battleReportSide[lp_sideIndex].lv_killedUnitTypeCount[lv_slot] += 1;
             libAHLI_gv_battleReport.lv_updateDueToDeathOnlyLabels = true;
             return ;
         }
@@ -2357,12 +2363,12 @@ void libAHLI_gf_BattleReportIncrementUnitTypeKill (int lp_sideIndex, string lp_u
     }
     if ((lv_lastUsedSlot < libAHLI_gv_battleReportMaxKilledUnitTypeSlot)) {
         lv_lastUsedSlot += 1;
-        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitType[lv_lastUsedSlot] = lp_unitType;
-        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitTypeCount[lv_lastUsedSlot] = 1;
-        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitTypeLastUsedSlot += 1;
+        libAHLI_gv_battleReportSide[lp_sideIndex].lv_killedUnitType[lv_lastUsedSlot] = lp_unitType;
+        libAHLI_gv_battleReportSide[lp_sideIndex].lv_killedUnitTypeCount[lv_lastUsedSlot] = 1;
+        libAHLI_gv_battleReportSide[lp_sideIndex].lv_killedUnitTypeLastUsedSlot += 1;
         libAHLI_gv_battleReport.lv_updateDueToDeathAll = true;
-        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitTypeIcon[lv_lastUsedSlot] = libAHLI_gf_IconofUnit(lp_unitType, libAHLI_gv_battleReport.lv_playerIdSide[lp_sideIndex]);
-        libAHLI_gv_battleReportSideData[lp_sideIndex].lv_killedUnitTypeName[lv_lastUsedSlot] = UnitTypeGetName(lp_unitType);
+        libAHLI_gv_battleReportSide[lp_sideIndex].lv_killedUnitTypeIcon[lv_lastUsedSlot] = libAHLI_gf_IconofUnit(lp_unitType, libAHLI_gv_battleReport.lv_playerIdSide[lp_sideIndex]);
+        libAHLI_gv_battleReportSide[lp_sideIndex].lv_killedUnitTypeName[lv_lastUsedSlot] = UnitTypeGetName(lp_unitType);
     }
     else {
         TriggerDebugOutput(2, StringExternal("Param/Value/lib_AHLI_68308F77"), false);
@@ -2372,8 +2378,8 @@ void libAHLI_gf_BattleReportIncrementUnitTypeKill (int lp_sideIndex, string lp_u
 void libAHLI_gf_BattleReportIncrementResourceDamage (int lp_sideIndex, int lp_minerals, int lp_vespene) {
     // Automatic Variable Declarations
     // Implementation
-    libAHLI_gv_battleReportSideData[lp_sideIndex].lv_resourcesDestroyed[0] += lp_minerals;
-    libAHLI_gv_battleReportSideData[lp_sideIndex].lv_resourcesDestroyed[1] += lp_vespene;
+    libAHLI_gv_battleReportSide[lp_sideIndex].lv_resourcesDestroyed[0] += lp_minerals;
+    libAHLI_gv_battleReportSide[lp_sideIndex].lv_resourcesDestroyed[1] += lp_vespene;
     libAHLI_gv_battleReport.lv_updateDueToDeathResources = true;
 }
 
@@ -2411,27 +2417,27 @@ void libAHLI_gf_BattleReportClearBattleData () {
     // Implementation
     lv_sideIndex = 0;
     for ( ; ( (autoAE618F83_ai >= 0 && lv_sideIndex <= autoAE618F83_ae) || (autoAE618F83_ai < 0 && lv_sideIndex >= autoAE618F83_ae) ) ; lv_sideIndex += autoAE618F83_ai ) {
-        auto2F363717_ae = libAHLI_gv_battleReportSideData[lv_sideIndex].lv_abilitiesCastedLastUsedSlot;
+        auto2F363717_ae = libAHLI_gv_battleReportSide[lv_sideIndex].lv_abilitiesCastedLastUsedSlot;
         lv_slot = 0;
         for ( ; ( (auto2F363717_ai >= 0 && lv_slot <= auto2F363717_ae) || (auto2F363717_ai < 0 && lv_slot >= auto2F363717_ae) ) ; lv_slot += auto2F363717_ai ) {
-            libAHLI_gv_battleReportSideData[lv_sideIndex].lv_abilitiesCasted[lv_slot] = null;
-            libAHLI_gv_battleReportSideData[lv_sideIndex].lv_abilitiesCastedCount[lv_slot] = 0;
-            libAHLI_gv_battleReportSideData[lv_sideIndex].lv_abilitiesCastedIcon[lv_slot] = null;
-            libAHLI_gv_battleReportSideData[lv_sideIndex].lv_abilitiesCastedName[lv_slot] = null;
+            libAHLI_gv_battleReportSide[lv_sideIndex].lv_abilitiesCasted[lv_slot] = null;
+            libAHLI_gv_battleReportSide[lv_sideIndex].lv_abilitiesCastedCount[lv_slot] = 0;
+            libAHLI_gv_battleReportSide[lv_sideIndex].lv_abilitiesCastedIcon[lv_slot] = null;
+            libAHLI_gv_battleReportSide[lv_sideIndex].lv_abilitiesCastedName[lv_slot] = null;
         }
-        libAHLI_gv_battleReportSideData[lv_sideIndex].lv_abilitiesCastedLastUsedSlot = -1;
-        auto1F623BDA_ae = libAHLI_gv_battleReportSideData[lv_sideIndex].lv_killedUnitTypeLastUsedSlot;
+        libAHLI_gv_battleReportSide[lv_sideIndex].lv_abilitiesCastedLastUsedSlot = -1;
+        auto1F623BDA_ae = libAHLI_gv_battleReportSide[lv_sideIndex].lv_killedUnitTypeLastUsedSlot;
         lv_slot = 0;
         for ( ; ( (auto1F623BDA_ai >= 0 && lv_slot <= auto1F623BDA_ae) || (auto1F623BDA_ai < 0 && lv_slot >= auto1F623BDA_ae) ) ; lv_slot += auto1F623BDA_ai ) {
-            libAHLI_gv_battleReportSideData[lv_sideIndex].lv_killedUnitType[lv_slot] = null;
-            libAHLI_gv_battleReportSideData[lv_sideIndex].lv_killedUnitTypeCount[lv_slot] = 0;
-            libAHLI_gv_battleReportSideData[lv_sideIndex].lv_killedUnitTypeIcon[lv_slot] = null;
-            libAHLI_gv_battleReportSideData[lv_sideIndex].lv_killedUnitTypeName[lv_slot] = null;
+            libAHLI_gv_battleReportSide[lv_sideIndex].lv_killedUnitType[lv_slot] = null;
+            libAHLI_gv_battleReportSide[lv_sideIndex].lv_killedUnitTypeCount[lv_slot] = 0;
+            libAHLI_gv_battleReportSide[lv_sideIndex].lv_killedUnitTypeIcon[lv_slot] = null;
+            libAHLI_gv_battleReportSide[lv_sideIndex].lv_killedUnitTypeName[lv_slot] = null;
         }
-        libAHLI_gv_battleReportSideData[lv_sideIndex].lv_killedUnitTypeLastUsedSlot = -1;
-        libAHLI_gv_battleReportSideData[lv_sideIndex].lv_damageDealt = 0.0;
-        libAHLI_gv_battleReportSideData[lv_sideIndex].lv_resourcesDestroyed[0] = 0;
-        libAHLI_gv_battleReportSideData[lv_sideIndex].lv_resourcesDestroyed[1] = 0;
+        libAHLI_gv_battleReportSide[lv_sideIndex].lv_killedUnitTypeLastUsedSlot = -1;
+        libAHLI_gv_battleReportSide[lv_sideIndex].lv_damageDealt = 0.0;
+        libAHLI_gv_battleReportSide[lv_sideIndex].lv_resourcesDestroyed[0] = 0;
+        libAHLI_gv_battleReportSide[lv_sideIndex].lv_resourcesDestroyed[1] = 0;
     }
     libAHLI_gv_battleReport.lv_battleGameTimeDuration = 0;
 }
@@ -4681,24 +4687,24 @@ bool libAHLI_gt_WorkersKilledNotificationsWorkerKilled_Func (bool testConds, boo
     // Variable Declarations
     int lv_deadUnitOwner;
     unit lv_deadUnit;
-    unit lv_killingUnit;
     string lv_unitType;
+    unit lv_killingUnit;
 
     // Automatic Variable Declarations
     // Variable Initialization
+    lv_killingUnit = libNtve_gf_KillingUnit();
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    if ((EventUnitDamageDeathCheck(c_deathTypeRemove) == false)) {
+    if (((EventUnitDamageDeathCheck(c_deathTypeRemove) == false) || (UnitGetType(lv_killingUnit) == "CommandCenterFlying"))) {
         lv_deadUnit = EventUnit();
         if ((UnitTestState(lv_deadUnit, c_unitStateHallucination) == false)) {
             lv_unitType = UnitGetType(lv_deadUnit);
             lv_deadUnitOwner = UnitGetOwner(lv_deadUnit);
             if (((lv_unitType == "Drone") || (lv_unitType == "Probe") || (lv_unitType == "SCV") || (lv_unitType == "DroneBurrowed")) && (libAHLI_gv_workersKilledNotifications.lv_itemPanel[lv_deadUnitOwner] != c_invalidDialogControlId)) {
-                lv_killingUnit = libNtve_gf_KillingUnit();
                 if ((libAHLI_gv_workersKilledNotifications.lv_slotStatus[lv_deadUnitOwner] == libAHLI_ge_WorkersKilledNotificationsSlotStatus_Visible)) {
                     libAHLI_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] = (libAHLI_gv_workersKilledNotifications.lv_intKilledAmount[lv_deadUnitOwner] + 1);
                 }
@@ -5022,19 +5028,19 @@ bool libAHLI_gt_BattleReportInitialization_Func (bool testConds, bool runActions
         for ( ; ( (auto90DBBF1F_ai >= 0 && lv_i <= auto90DBBF1F_ae) || (auto90DBBF1F_ai < 0 && lv_i >= auto90DBBF1F_ae) ) ; lv_i += auto90DBBF1F_ai ) {
             DialogControlHookupStandard(c_triggerControlTypeButton, ("UIContainer/FullscreenUpperContainer/BattleReport2/ButtonsL/UnitButtons/Unit" + IntToString(lv_i)));
             libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), null, libAHLI_gv_obs);
-            libAHLI_gv_battleReportSideData[0].lv_uiUnitTypeButton[lv_i] = DialogControlLastCreated();
+            libAHLI_gv_battleReportSide[0].lv_uiUnitTypeButton[lv_i] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeButton, ("UIContainer/FullscreenUpperContainer/BattleReport2/ButtonsR/UnitButtons/Unit" + IntToString(lv_i)));
             libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), null, libAHLI_gv_obs);
-            libAHLI_gv_battleReportSideData[1].lv_uiUnitTypeButton[lv_i] = DialogControlLastCreated();
+            libAHLI_gv_battleReportSide[1].lv_uiUnitTypeButton[lv_i] = DialogControlLastCreated();
         }
         lv_i = 0;
         for ( ; ( (auto3089C34C_ai >= 0 && lv_i <= auto3089C34C_ae) || (auto3089C34C_ai < 0 && lv_i >= auto3089C34C_ae) ) ; lv_i += auto3089C34C_ai ) {
             DialogControlHookupStandard(c_triggerControlTypeButton, ("UIContainer/FullscreenUpperContainer/BattleReport2/ButtonsL/AbilityButtons/Abil" + IntToString(lv_i)));
             libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), null, libAHLI_gv_obs);
-            libAHLI_gv_battleReportSideData[0].lv_uiAbilityButton[lv_i] = DialogControlLastCreated();
+            libAHLI_gv_battleReportSide[0].lv_uiAbilityButton[lv_i] = DialogControlLastCreated();
             DialogControlHookupStandard(c_triggerControlTypeButton, ("UIContainer/FullscreenUpperContainer/BattleReport2/ButtonsR/AbilityButtons/Abil" + IntToString(lv_i)));
             libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), null, libAHLI_gv_obs);
-            libAHLI_gv_battleReportSideData[1].lv_uiAbilityButton[lv_i] = DialogControlLastCreated();
+            libAHLI_gv_battleReportSide[1].lv_uiAbilityButton[lv_i] = DialogControlLastCreated();
         }
     }
     else {
@@ -5076,7 +5082,7 @@ bool libAHLI_gt_BattleReportUnitIsDamaged_Func (bool testConds, bool runActions)
                 libAHLI_gv_battleReport.lv_resetBattleEndingTimer = true;
             }
             libAHLI_gv_battleReport.lv_updateDueToDamage = true;
-            libAHLI_gv_battleReportSideData[lv_opposingSideIndex].lv_damageDealt += EventUnitDamageAmount();
+            libAHLI_gv_battleReportSide[lv_opposingSideIndex].lv_damageDealt += EventUnitDamageAmount();
         }
         else {
             return false;

@@ -18,6 +18,10 @@ The extension mod is available on Americas, Europe and Korean servers.
 
 
 ### All Changes compared to WCS GameHeart 1.25/Americas
+- **Game Hot Fixes:**
+  - fixed Orbital Command's landing preview model not being displayed
+  - fixed Shield Battery's hotkey menu containing two Recharge buttons
+  - fixed Thorn Lizzard's death model on low graphic settings
 - **Changes**
   - Battle Report:
     - added Battle Reports based on nice__username's Observer Plus (powered by Shopify) extension mod
@@ -71,11 +75,6 @@ The extension mod is available on Americas, Europe and Korean servers.
       - Overlords with Ventral Sacs and Overseers made from them will report its actual resource worth on death
         - this was 25/25 too low
       - Archons will report their actual resource worth on death instead of assuming the Archon was created by one HT and one DT
-    - corrected score amount of Upgrades to match resource costs:
-      - Cloaking Field, Hyperflight Rotors, Infernal Pre-Igniter, Drilling Claws, Smart Servos, Tunneling Claws, Charge, Extended Thermal Lance, Flux Vanes
-    - corrected produce and kill score of the following units to match resource costs:
-      - Immortal, Warp Prism, Tempest Shield Battery, Robotics Facility, Robotics Bay, Nydus Worm, Nydus Network, Lurker Den
-      - corrected produce score type of Reactor build by a Starport
   - WCS GameHeart:
     - fixed Dark Shrine not showing upgrades in research on a tag
     - fixed potential bug when worker is killed at the same time as that player's notification timer expires resulting in a hidden notification and subsequently resulting in a wrong displayed count when the next one is killed
@@ -87,7 +86,8 @@ The extension mod is available on Americas, Europe and Korean servers.
     - fixed the last upgrade notification slot never being used
     - fixed having more than 50 upgrades causing further upgrades to not be displayed. Now the limit is 100 as previously intended
     - graph shortcuts are now disabled when not playing a 1vs1 instead of showing an empty graph dialog
-- **Optimizations**
+	- fixed Workers Killed Notification ignoring SCVs killed by shooting down a flying Command Center
+- **Performance Optimizations of SC2/GameHeart**
   - fixed performance issues of Battlecruiser script triggers created by Blizzard
     - the game will now use less CPU when issuing commands and when units execute abilities (global improvement for all units)
     - the BC's behavior did not change
