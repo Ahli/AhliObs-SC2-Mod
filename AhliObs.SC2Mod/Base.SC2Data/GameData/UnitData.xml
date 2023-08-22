@@ -6,9 +6,6 @@
     <CUnit id="ExtractorRich">
         <LeaderAlias value="Extractor"/>
     </CUnit>
-    <CUnit id="KD8Charge">
-        <LeaderAlias value=""/>
-    </CUnit>
     <CUnit id="BarracksReactor">
         <LeaderAlias value="Reactor"/>
     </CUnit>
@@ -23,6 +20,11 @@
     </CUnit>
     <CUnit id="RefineryRich">
         <LeaderAlias value="Refinery"/>
+    </CUnit>
+    <CUnit id="ShieldBattery">
+        <CardLayouts index="0">
+            <LayoutButtons index="0" AbilCmd="ShieldBatteryRechargeEx5,Execute" Row="0"/>
+        </CardLayouts>
     </CUnit>
     <CUnit id="StarportReactor">
         <LeaderAlias value="Reactor"/>

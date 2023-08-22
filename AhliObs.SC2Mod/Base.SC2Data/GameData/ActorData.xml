@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
-    <CActorUnit id="DroneBurrowed" parent="GenericUnitStandard">
-        <UnitIcon value="Assets\Textures\btn-unit-zerg-drone.dds"/>
-    </CActorUnit>
     <CActorUnit id="Egg">
         <CustomUnitStatusFrame value="AHLI_ProductionStatusBars/ProductionStatusEgg"/>
         <CustomUnitStatusOffset value="8,40"/>
@@ -252,55 +249,11 @@
         <CustomUnitStatusOffset value="0,105"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
-    <CActorUnit id="CollapsiblePurifierTowerDiagonal">
-        <ModelFlags index="OutlineOccluder" value="1"/>
-    </CActorUnit>
-    <CActorUnit id="CollapsibleRockTower">
-        <ModelFlags index="OutlineOccluder" value="1"/>
-    </CActorUnit>
-    <CActorUnit id="CollapsibleRockTowerDiagonal">
-        <ModelFlags index="OutlineOccluder" value="1"/>
-    </CActorUnit>
-    <CActorUnit id="CollapsibleRockTowerRampLeft">
-        <ModelFlags index="OutlineOccluder" value="1"/>
-    </CActorUnit>
-    <CActorUnit id="CollapsibleRockTowerRampLeftGreen">
-        <ModelFlags index="OutlineOccluder" value="1"/>
-    </CActorUnit>
-    <CActorUnit id="CollapsibleRockTowerRampRight">
-        <ModelFlags index="OutlineOccluder" value="1"/>
-    </CActorUnit>
-    <CActorUnit id="CollapsibleRockTowerRampRightGreen">
-        <ModelFlags index="OutlineOccluder" value="1"/>
-    </CActorUnit>
-    <CActorUnit id="GhostNova">
-        <ModelFlags index="OutlineEmitter" value="1"/>
-    </CActorUnit>
-    <CActorUnit id="LiberatorAGMorphModel">
-        <ModelFlags index="OutlineEmitter" value="1"/>
-    </CActorUnit>
-    <CActorUnit id="LiberatorMorphModel">
-        <ModelFlags index="OutlineEmitter" value="1"/>
-    </CActorUnit>
-    <CActorUnit id="WolfStatue">
-        <UnitFlags index="ShowBlobShadow" value="0"/>
-    </CActorUnit>
-    <CActorUnit id="XelNagaHealingShrine">
-        <UnitFlags index="ShowBlobShadow" value="0"/>
-    </CActorUnit>
-    <CActorUnit id="DestructibleGarage">
-        <UnitFlags index="ShowBlobShadow" value="0"/>
-    </CActorUnit>
-    <CActorUnit id="DestructibleGarageLarge">
-        <UnitFlags index="ShowBlobShadow" value="0"/>
-    </CActorUnit>
-    <CActorUnit id="Ice2x2NonConjoined">
-        <UnitFlags index="ShowBlobShadow" value="0"/>
-    </CActorUnit>
-    <CActorUnit id="GlobeStatue">
-        <UnitFlags index="ShowBlobShadow" value="0"/>
-    </CActorUnit>
-    <CActorUnit id="DestructibleBullhornLights">
-        <UnitFlags index="ShowBlobShadow" value="0"/>
+    <CActorModel id="PlaceholderModelOrbitalCommand" parent="PlaceholderModelStaticPosition">
+        <On Terms="ActorCreation; ModelIsLowQuality" Send="AnimGroupApply B {} {} Instant"/>
+        <On Terms="ActorCreation; ModelIsLowQuality" Send="AnimSetPausedAll"/>
+    </CActorModel>
+    <CActorUnit id="ThornLizard">
+        <DeathArray index="Normal" ModelLink="ThornLizardDeath"/>
     </CActorUnit>
 </Catalog>
