@@ -23,7 +23,12 @@
     </CUnit>
     <CUnit id="ShieldBattery">
         <CardLayouts index="0">
-            <LayoutButtons index="0" AbilCmd="ShieldBatteryRechargeEx5,Execute" Row="0"/>
+            <LayoutButtons index="0" Face="Stop" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons index="1" Face="CancelBuilding" AbilCmd="BuildInProgress,Cancel" Row="2" Column="4"/>
+            <LayoutButtons index="2" Face="ShieldBatteryRecharge" AbilCmd="ShieldBatteryRechargeEx5,Execute" Row="0" Column="0"/>
+            <LayoutButtons Face="ShieldBatteryRecharge" AbilCmd="ShieldBatteryRechargeEx5,Execute" Row="0" Column="0"/>
+            <LayoutButtons Face="CancelBuilding" Type="AbilCmd" AbilCmd="BuildInProgress,Cancel" Row="2" Column="4"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
         </CardLayouts>
     </CUnit>
     <CUnit id="StarportReactor">
