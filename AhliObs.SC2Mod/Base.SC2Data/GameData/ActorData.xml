@@ -249,11 +249,4 @@
         <CustomUnitStatusOffset value="0,105"/>
         <CustomUnitStatusAttachment value="Ref_Origin"/>
     </CActorUnit>
-    <CActorModel id="PlaceholderModelOrbitalCommand" parent="PlaceholderModelStaticPosition">
-        <On Terms="ActorCreation; ModelIsLowQuality" Send="AnimGroupApply B {} {} Instant"/>
-        <On Terms="ActorCreation; ModelIsLowQuality" Send="AnimSetPausedAll"/>
-    </CActorModel>
-    <CActorUnit id="ThornLizard">
-        <DeathArray index="Normal" ModelLink="ThornLizardDeath"/>
-    </CActorUnit>
 </Catalog>
