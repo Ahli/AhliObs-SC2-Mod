@@ -19,8 +19,8 @@
 
             <Frame type="Label" name="LogoLabel">
                 <Anchor relative="$parent"/>
-                <IgnoreParentColor val="True"/>
-                <Visible val="False"/>
+                <IgnoreParentColor val="true"/>
+                <Visible val="false"/>
             </Frame>
         </Frame>
 
@@ -42,7 +42,7 @@
             </State>
         </StateGroup>
 
-        <Frame type="BlurFrame" name="Blur">
+        <Frame type="Frame" name="Blur">
             <Anchor relative="$parent"/>
 
             <Frame type="Image" name="Header">
@@ -129,7 +129,7 @@
             <Color val="255,255,255,255"/>
             <RenderPriority val="511"/>
             <Texture val="color_accents\battleReportBtn.dds"/>
-            <Desaturated val="True"/>
+            <Desaturated val="true"/>
         </Frame>
 
         <!-- Blur -->
@@ -146,7 +146,7 @@
                 <Height val="24"/>
                 <Color val="255,0,0,0"/>
                 <Alpha val="128"/>
-                <Visible val="False"/>
+                <Visible val="false"/>
             </Frame>
         </Frame>
 
@@ -424,7 +424,7 @@
             <Anchor relative="$parent"/>
             <AcceptsMouse val="false"/>
             <UseFillContainer val="true"/>
-            <Vertical val="False"/>
+            <Vertical val="false"/>
             <MinValue val="0"/>
             <!--<MaxValue val="{$parent/ValueTotal/@RealValue}"/>
                    This has issues when MaxValue was 0
@@ -442,7 +442,10 @@
                     <Anchor relative="$parent/$parent"/>
                     <Texture val="Assets\Textures\ui_mission_leaderboard_healthbar_red.dds"/>
                     <TextureType val="Border"/>
-                    <Desaturated val="True"/>
+                    <Desaturated val="true"/>
+					<Blur val="true"/>
+					<BlurAmount val="0.5"/>
+					<Alpha val="224"/>
                 </Frame>
             </Frame>
         </Frame>
@@ -454,7 +457,10 @@
             <Anchor side="Left" relative="$parent/ProgressBarL/FillImageContainer" pos="Max" offset="0"/>
             <Texture val="Assets\Textures\ui_mission_leaderboard_healthbar_red.dds"/>
             <TextureType val="Border"/>
-            <Desaturated val="True"/>
+            <Desaturated val="true"/>
+			<Blur val="true"/>
+			<BlurAmount val="0.5"/>
+			<Alpha val="224"/>
         </Frame>
 
         <StateGroup name="ValueTotalState">
@@ -542,7 +548,7 @@
             <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
             <Width val="790"/>
             <Handle val="BattleReport2"/>
-            <Visible val="False"/>
+            <Visible val="false"/>
 
             <Frame type="Frame" name="Background" template="StandardExtendedExperienceTemplates/StandardSizeExtendedExperienceTemplate">
                 <Anchor side="Bottom" relative="$parent/ButtonsL" pos="Max" offset="40"/>
@@ -551,13 +557,13 @@
                     <Visible val="false"/>
                 </Frame>
                 <Frame type="Image" name="ScanlinesLeft">
-                    <Unclipped val="True"/>
+                    <Unclipped val="true"/>
                 </Frame>
                 <Frame type="Image" name="ScanlinesRight">
-                    <Unclipped val="True"/>
+                    <Unclipped val="true"/>
                 </Frame>
                 <Frame type="Frame" name="BackgroundContainer">
-                    <Unclipped val="True"/>
+                    <Unclipped val="true"/>
                 </Frame>
                 <Frame type="Frame" name="AnchorFrame">
                     <Anchor side="Top" relative="$parent/$parent" pos="Min" offset="0"/>
@@ -904,7 +910,7 @@
                     <Anchor side="Left" relative="$parent/PlayerRaceIcon" pos="Max" offset="5"/>
                 </Frame>
 
-                <Frame type="BlurFrame" name="Blur">
+                <Frame type="Frame" name="Blur">
                     <Frame type="Image" name="Header">
                         <Texture val="color_accents\ui_battlenet_glues_standardtabs_righttab_mask.dds"/>
                     </Frame>
@@ -1069,11 +1075,8 @@
                 <Anchor side="Right" relative="$parent" pos="Max" offset="-15"/>
             </Frame>
 
-            <Frame type="BlurFrame" name="GraphsFrame">
+            <Frame type="Frame" name="GraphsFrame">
                 <Anchor relative="$parent"/>
-                <BlurAmount val="0.5"/>
-                <RenderType val="LDR"/>
-                <Alpha val="224"/>
 
                 <Frame type="Frame" name="DamageDealtBarGraph" template="AHLI_BattleReport/ComparisonBarTemplate">
                     <Anchor side="Top" relative="$parent/$parent/SubtitlesFrame/DmgLabel" pos="Max" offset="5"/>
@@ -1280,8 +1283,8 @@
                     <Key type="Curve" time="0.125" value="30" inout="Slow,Linear"/>
                 </Controller>
                 <Controller type="Visibility" end="Pause" frame="$BattleReport2">
-                    <Key type="Bool" time="0" value="True"/>
-                    <Key type="Bool" time="0.125" value="False"/>
+                    <Key type="Bool" time="0" value="true"/>
+                    <Key type="Bool" time="0.125" value="false"/>
                 </Controller>
             </Animation>
         </Frame>
